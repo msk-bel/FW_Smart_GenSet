@@ -4,9 +4,11 @@
 #include "stm8s.h"
 #include "board.h"
 #include "bluetooth.h"
+#include "cloudService.h"
 
 //#define DEBUG_ON
 void ms_send_cmd(uint8_t *cmd, uint8_t length);
+void ms_send_cmd_TCP(uint8_t *cmd, uint8_t length);
 void mevris_uartSendByte(uint8_t data , uint8_t type);
 void mevris_uartSendMultiBytes(uint8_t * , uint8_t, uint8_t );
 bool mevris_uartReceiveMultiBytes(uint8_t*);

@@ -36,7 +36,7 @@
 
 /* Public functions ----------------------------------------------------------*/
 
-char response_buffer[75];
+@near uint8_t response_buffer[100] = "";
 uint16_t timeout = 0;
 uint8_t OK;
 uint8_t cloud_gps_data_flag = 0;
@@ -58,7 +58,7 @@ void systemSetup(void)
 	clearBuffer();
 }
 
-void main()
+void main(void)
 {
 	systemSetup();
 
@@ -70,7 +70,7 @@ void main()
 		gettemp1();
 		gettemp2();
 		getFuelLevel();
-		sendDataToCloud();
+		//sendDataToCloud();
 
 		// while ( getTics() - previousTics < uartTimout)
 		//{
@@ -387,66 +387,6 @@ int GSM_DOWNLOAD(void)
 		return 0;
 	}
 }
-
-/*int GSM_HTTP_STATUS(void)
-{
-	//todo: 200 takes too long to receive more than 6 sec , handle this and other status codes from server
-	//one way is too to a sms debug commands which sets a flag and in turn timeout is increased for debugging
-	//601 network error (we face when gprs not connected)
-	//603 DNS error ( we face when server is down)
-	//200 timeout is bigger, it needs to be handled
-	volatile uint16_t http_status_timeout = 30000, while_timeout = 65000; //30k approx 1 sec, 150k about 5 sec
-	uint8_t r = 0;
-	char *ret2;
-	const char status_ok[] = "200";
-	const char network_error[] = "601";
-	volatile char http_status_response_buffer[32]; //32
-
-	/*keep this comment
-for(r=0;r<100;r++)
-	{
-	  while (UART1_GetFlagStatus (UART1_FLAG_RXNE) == FALSE && (--http_status_timeout > 0));
-		http_status_response_buffer[r]=UART1_ReceiveData8();
-		http_status_timeout=10000;
-	}
-	
-	*/
-/*	http_status_response_buffer[0] = '0';
-	while (http_status_response_buffer[0] != 'H' && (--while_timeout > 0)) //add timeout
-	{
-		while (UART1_GetFlagStatus(UART1_FLAG_RXNE) == FALSE && (--http_status_timeout > 0))
-			;
-		http_status_response_buffer[0] = UART1_ReceiveData8();
-		http_status_timeout = 10000;
-	}
-	for (r = 1; r < 32; r++)
-
-	{
-		while (UART1_GetFlagStatus(UART1_FLAG_RXNE) == FALSE && (--http_status_timeout > 0))
-			;
-
-		http_status_response_buffer[r] = UART1_ReceiveData8();
-		http_status_timeout = 10000;
-	}
-
-	ret2 = strstr(http_status_response_buffer, status_ok);
-	nop();
-
-	if (ret2)
-	{
-
-		return 1;
-	}
-
-	ret2 = strstr(http_status_response_buffer, network_error);
-	if (ret2)
-	{
-
-		return 2;
-	}
-
-	return 0; //if error
-}*/
 
 int GSM_OK_FAST(void)
 {

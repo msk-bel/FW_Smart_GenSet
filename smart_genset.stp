@@ -61,7 +61,7 @@ String.100.2=STM8 Cosmic
 String.100.3=ST7 Metrowerks V1.1
 String.100.4=Raisonance
 String.101.0=STM8 Cosmic
-String.102.0=C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8
+String.102.0=
 String.103.0=
 String.104.0=Hstm8
 String.105.0=Lib
@@ -142,7 +142,7 @@ String.100.2=STM8 Cosmic
 String.100.3=ST7 Metrowerks V1.1
 String.100.4=Raisonance
 String.101.0=STM8 Cosmic
-String.102.0=C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8
+String.102.0=
 String.103.0=
 String.104.0=Hstm8
 String.105.0=Lib
@@ -315,6 +315,11 @@ Next=Root.Source Files.src\metering.c
 [Root.Source Files.src\metering.c]
 ElemType=File
 PathName=src\metering.c
+Next=Root.Source Files.src\mqtt_protocol.c
+
+[Root.Source Files.src\mqtt_protocol.c]
+ElemType=File
+PathName=src\mqtt_protocol.c
 Next=Root.Source Files.src\simcom.c
 
 [Root.Source Files.src\simcom.c]
@@ -497,6 +502,11 @@ Next=Root.Include Files.inc\metering.h
 [Root.Include Files.inc\metering.h]
 ElemType=File
 PathName=inc\metering.h
+Next=Root.Include Files.inc\mqtt_protocol.h
+
+[Root.Include Files.inc\mqtt_protocol.h]
+ElemType=File
+PathName=inc\mqtt_protocol.h
 Next=Root.Include Files.inc\simcom.h
 
 [Root.Include Files.inc\simcom.h]

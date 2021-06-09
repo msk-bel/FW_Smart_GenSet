@@ -605,30 +605,30 @@
 1313                     ; 173 }
 1316  048f 5b08          	addw	sp,#8
 1317  0491 81            	ret
-1413                     	xdef	_Watt_Phase3
-1414                     	xdef	_Watt_Phase2
-1415                     	xdef	_Watt_Phase1
-1416                     	xdef	_Ampere_Phase3
-1417                     	xdef	_Ampere_Phase2
-1418                     	xdef	_Ampere_Phase1
-1419                     	xdef	_Voltage_Phase3
-1420                     	xdef	_Voltage_Phase2
-1421                     	xdef	_Voltage_Phase1
-1422                     	xref.b	_checkByte
-1423                     	xref.b	_powerCalibrationFactor3
-1424                     	xref.b	_currentCalibrationFactor3
-1425                     	xref.b	_voltageCalibrationFactor3
-1426                     	xref.b	_voltageCalibrationFactor2
-1427                     	xref.b	_voltageCalibrationFactor1
-1428                     	xdef	_calcWatt3
-1429                     	xdef	_calcWatt2
-1430                     	xdef	_calcWatt1
-1431                     	xdef	_calcAmp3
-1432                     	xdef	_calcAmp2
-1433                     	xdef	_calcAmp1
-1434                     	xdef	_calcVolt3
-1435                     	xdef	_calcVolt2
-1436                     	xdef	_calcVolt1
+1413                     	xref.b	_checkByte
+1414                     	xref.b	_powerCalibrationFactor3
+1415                     	xref.b	_currentCalibrationFactor3
+1416                     	xref.b	_voltageCalibrationFactor3
+1417                     	xref.b	_voltageCalibrationFactor2
+1418                     	xref.b	_voltageCalibrationFactor1
+1419                     	xdef	_calcWatt3
+1420                     	xdef	_calcWatt2
+1421                     	xdef	_calcWatt1
+1422                     	xdef	_calcAmp3
+1423                     	xdef	_calcAmp2
+1424                     	xdef	_calcAmp1
+1425                     	xdef	_calcVolt3
+1426                     	xdef	_calcVolt2
+1427                     	xdef	_calcVolt1
+1428                     	xdef	_Watt_Phase3
+1429                     	xdef	_Ampere_Phase3
+1430                     	xdef	_Voltage_Phase3
+1431                     	xdef	_Watt_Phase2
+1432                     	xdef	_Ampere_Phase2
+1433                     	xdef	_Voltage_Phase2
+1434                     	xdef	_Watt_Phase1
+1435                     	xdef	_Ampere_Phase1
+1436                     	xdef	_Voltage_Phase1
 1437                     .const:	section	.text
 1438  0000               L572:
 1439  0000 4c604e99      	dc.w	19552,20121

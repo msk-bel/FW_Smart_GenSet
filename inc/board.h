@@ -106,8 +106,8 @@ void UARTSetup(uint32_t , UARTCONFIG);
 #define GPRS_CheckStaus1 "AT+SAPBR=2,1"
 #define GPRS_CheckStaus2 "AT+SAPBR=4,1"
 #define TCP_SHUTDOWN "AT+CIPSHUT" //	Shut Down All TCP Connections and Have to Restart again while setting context
-#define	TCP_SET_CONN_SINGLE "AT+CIPMUX=0" //For Single Connection to server
-#define	TCP_MODE_TRANSPARENT_OFF "AT+CIPMODE=0"	//For TCP Non-Transparent Mode (Has to send CIPSEND Command to send data)
+#define	TCP_SINGLE_CONN_MODE "AT+CIPMUX=0" //For Single Connection to server
+#define	TCP_NON_TRANSPARENT_MODE "AT+CIPMODE=0"	//For TCP Non-Transparent Mode (Has to send CIPSEND Command to send data)
 #define TCP_MODE_RESPONSE_NORMAL "AT+CIPQSEND=0" // Module will respond "SEND OK" for successful TCP Transfer to Remote server
 #define TCP_MODE_SEND_PROMPT_ECHO "AT+CIPSPRT=1" // Module will echo '>' on CIPSEND and "SEND OK" on Successfull data transfer
 #define TCP_MODE_REMOTE_IP_PORT_ON "AT+CIPSRIP=1" // MOdule will prompt "RECV FROM:<IP ADDRESS>:<PORT>" on getting data from remote server
@@ -115,6 +115,9 @@ void UARTSetup(uint32_t , UARTCONFIG);
 #define TCP_SAVE_CONTEXT "AT+CIPSCONT" // Module will save TCP/IP Context(configuration)
 #define TCP_SET_APN "AT+CSTT=\"zongwap\""
 #define TCP_START_WIRELESS_CONN	"AT+CIICR" //Module will Start Wireless Connection, responds "OK" if done
+#define startTCP_CMD "AT+CIPSTART=\"TCP\",\"mqtt.mevris.io\",\"3881\""
+#define TCP_SEND_VARIABLE_LENGTH "AT+CIPSEND" //AT+CIPSEND= expects 0x1A to know end of data
+#define TCP_GET_STATUS "AT+CIPSTATUS" //Module will return status of TCP Connection
 #define HTTPINIT "AT+HTTPINIT"
 #define HTTP_URL "AT+HTTPPARA=\"URL\",\"http://ptsv2.com/t/d9bxi-1612442037/post\""
 #define HTTP_ACTION "AT+HTTPACTION=1"
