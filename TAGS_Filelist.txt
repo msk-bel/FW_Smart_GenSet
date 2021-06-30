@@ -1,0 +1,53 @@
+main.c
+src\bluetooth.c
+src\board.c
+src\cloudservice.c
+src\getadc.c
+src\metering.c
+src\mqtt_protocol.c
+src\simcom.c
+src\stm8s_adc2.c
+src\stm8s_clk.c
+src\stm8s_delay.c
+src\stm8s_exti.c
+src\stm8s_flash.c
+src\stm8s_gpio.c
+src\stm8s_it.c
+src\stm8s_itc.c
+src\stm8s_iwdg.c
+src\stm8s_tim1.c
+src\stm8s_tim2.c
+src\stm8s_uart1.c
+src\uart_service.c
+src\vipe_calculation.c
+stm8_interrupt_vector.c
+inc\bluetooth.h
+inc\board.h
+inc\cloudservice.h
+inc\getadc.h
+inc\main.h
+inc\metering.h
+inc\mqtt_protocol.h
+inc\simcom.h
+inc\stm8s.h
+inc\stm8s_adc2.h
+inc\stm8s_clk.h
+inc\stm8s_conf.h
+inc\stm8s_delay.h
+inc\stm8s_exti.h
+inc\stm8s_flash.h
+inc\stm8s_gpio.h
+inc\stm8s_it.h
+inc\stm8s_itc.h
+inc\stm8s_iwdg.h
+inc\stm8s_tim1.h
+inc\stm8s_tim2.h
+inc\stm8s_uart1.h
+inc\uart_service.h
+inc\vipe_calculation.h
+c:\program files (x86)\cosmic\fse_compilers\cxstm8\hstm8\math.h
+c:\program files (x86)\cosmic\fse_compilers\cxstm8\hstm8\mods0.h
+c:\program files (x86)\cosmic\fse_compilers\cxstm8\hstm8\stdbool.h
+c:\program files (x86)\cosmic\fse_compilers\cxstm8\hstm8\stdio.h
+c:\program files (x86)\cosmic\fse_compilers\cxstm8\hstm8\stdlib.h
+c:\program files (x86)\cosmic\fse_compilers\cxstm8\hstm8\string.h
