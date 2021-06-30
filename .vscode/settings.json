@@ -1,7 +1,0 @@
-{
-    "C_Cpp.errorSquiggles": "Disabled",
-    "files.associations": {
-        "vipe_calculation.h": "c",
-        "bluetooth.h": "c"
-    }
-}
