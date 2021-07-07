@@ -21,15 +21,15 @@ void calcWatt1(uint32_t wattPeriod1);
 void calcWatt2(uint32_t wattPeriod2);
 void calcWatt3(uint32_t wattPeriod3);
 
-extern uint8_t voltageCalibrationFactor1;
-extern uint8_t voltageCalibrationFactor2;
-extern uint8_t voltageCalibrationFactor3;
-extern uint8_t currentCalibrationFactor1;
-extern uint8_t currentCalibrationFactor2;
-extern uint8_t currentCalibrationFactor3;
-extern uint8_t powerCalibrationFactor1;
-extern uint8_t powerCalibrationFactor2;
-extern uint8_t powerCalibrationFactor3;
+extern uint16_t voltageCalibrationFactor1;
+extern uint16_t voltageCalibrationFactor2;
+extern uint16_t voltageCalibrationFactor3;
+extern uint16_t currentCalibrationFactor1;
+extern uint16_t currentCalibrationFactor2;
+extern uint16_t currentCalibrationFactor3;
+extern uint16_t powerCalibrationFactor1;
+extern uint16_t powerCalibrationFactor2;
+extern uint16_t powerCalibrationFactor3;
 extern uint8_t checkByte;
 
 #endif

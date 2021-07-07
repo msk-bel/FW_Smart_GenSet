@@ -384,6 +384,33 @@ void getIMEI(void)
 // }
 
 //Added By Saqib
+// bool bSendDataOverTCP_sub(uint8_t *Data, uint8_t unLength)
+// {
+//     uint8_t timeout = 0;
+//     uint8_t tempData[15] = "";
+//     uint8_t temp1[3] = "";
+//     vClearBuffer(tempData, 15);
+//     strcpy(tempData, "AT+CIPSEND=");
+//     vClearBuffer(temp1,3);
+//     sprintf(temp1, "%d", (uint16_t)unLength);
+//     strcat(tempData,temp1);
+//     ms_send_cmd(tempData, strlen((const char *)tempData));
+//     delay_ms(100);
+//     ms_send_cmd_TCP(Data, unLength);
+//     delay_ms(200);
+
+//     while (!strstr(response_buffer, "SEND") && (++timeout != 100))
+//         delay_ms(100);
+//     if (strstr(response_buffer, "SEND OK"))
+//     {
+//         return TRUE;
+//     }
+//     else
+//     {
+//         return FALSE;
+//     }
+// }
+
 void vHandle_MQTT(void)
 {
     uint8_t unLength = 0;
@@ -397,7 +424,7 @@ void vHandle_MQTT(void)
         if (unMQTTCounter == 0 /*&& !bCONNACK_Recieved*/)
         {
             vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
-            unLength = (uint8_t)ulMQTT_Connect(aunPushed_Data, punGet_Client_ID() /*, FALSE, FALSE, FALSE, FALSE, TRUE, eQOS_0, NULL, NULL, NULL, NULL*/);
+            unLength = (uint8_t)ulMQTT_Connect(aunPushed_Data, aunMQTT_ClientID/*punGet_Client_ID()*/ /*, FALSE, FALSE, FALSE, FALSE, TRUE, eQOS_0, NULL, NULL, NULL, NULL*/);
             if (bSendDataOverTCP(aunPushed_Data, unLength))
                 unMQTTCounter++;
             unMQQT_PingCounter = 0;
@@ -405,19 +432,21 @@ void vHandle_MQTT(void)
         else if (unMQTTCounter == 1)
         {
             vClearBuffer(aunPushed_Data, MEVRIS_RECV_DATA_MAX_SIZE);
-            unLength = (uint8_t)ulMQTT_Subscribe(aunPushed_Data, punGet_Command_Topic() /*, eQOS_0, 1*/);
+            unLength = (uint8_t)ulMQTT_Subscribe(aunPushed_Data, aunMQTT_Subscribe_Topic/*punGet_Command_Topic()*/ /*, eQOS_0, 1*/);
             if (bSendDataOverTCP(aunPushed_Data, unLength))
                 unMQTTCounter++;
             unMQQT_PingCounter = 0;
         }
         else if (unMQTTCounter == 2)
         {
+            delay_ms(100);
             vMevris_Send_IMEI();
             unMQTTCounter++;
             unMQQT_PingCounter = 0;
         }
         else if (unMQTTCounter == 3)
         {
+            delay_ms(100);
             vMevris_Send_Version();
             unMQTTCounter++;
             unMQQT_PingCounter = 0;
@@ -483,10 +512,19 @@ void vInit_MQTT(void)
     delay_ms(1000);
 }
 
+
 bool bSendDataOverTCP(uint8_t *Data, uint8_t unLength)
 {
     uint8_t timeout = 0;
-    ms_send_cmd(TCP_SEND_VARIABLE_LENGTH, strlen((const char *)TCP_SEND_VARIABLE_LENGTH));
+    uint8_t tempData[15] = "";
+    uint8_t temp1[5] = "";
+    vClearBuffer(tempData, 15);
+    strcpy(tempData, "AT+CIPSEND=");
+    vClearBuffer(temp1,5);
+    sprintf(temp1, "%d", (uint16_t)unLength);
+    strcat(tempData,temp1);
+    // ms_send_cmd(TCP_SEND_VARIABLE_LENGTH, strlen((const char *)TCP_SEND_VARIABLE_LENGTH));
+    ms_send_cmd(tempData, strlen((const char *)tempData));
     delay_ms(100);
     ms_send_cmd_TCP(Data, unLength);
     delay_ms(200);
@@ -698,6 +736,11 @@ void vPrintStickerInfo(void)
                     ;
                 UART1_SendData8('\r');
                 delay_ms(100);
+                //
+                punGet_Client_ID();
+                punGet_Command_Topic();
+                punGet_Event_Topic();
+                //
                 ModuleResponding = TRUE;
                 IMEIRecievedOKFlag = 1;
             }

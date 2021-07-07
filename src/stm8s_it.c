@@ -28,9 +28,9 @@ extern uint32_t powerPeriod3; /* defined in metering.c */
 extern @near uint32_t Watt_Phase1;//Added by Saqib
 extern @near uint32_t Watt_Phase2;//Added by Saqib
 extern @near uint32_t Watt_Phase3;//Added by Saqib
-extern uint8_t powerCalibrationFactor1;
-extern uint8_t powerCalibrationFactor2;
-extern uint8_t powerCalibrationFactor3;
+//extern uint8_t powerCalibrationFactor1;
+//extern uint8_t powerCalibrationFactor2;
+//extern uint8_t powerCalibrationFactor3;
 extern char response_buffer[];
 bool power1ReadFlag = false;
 bool power2ReadFlag = false;

@@ -33,24 +33,24 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-void vMevris_Send_IMEI(void); //Added By Saqib
-void vMevris_Send_Version(void);//Added By Saqib
-void vMevris_Send_SIM_Number(void);//Added By Saqib
-void vMevris_Send_Location(void);//Added By Saqib
+void vMevris_Send_IMEI(void);       //Added By Saqib
+void vMevris_Send_Version(void);    //Added By Saqib
+void vMevris_Send_SIM_Number(void); //Added By Saqib
+void vMevris_Send_Location(void);   //Added By Saqib
 // void vMevris_Send_Phase1(void);//Added By Saqib
 // void vMevris_Send_Phase2(void);//Added By Saqib
 // void vMevris_Send_Phase3(void);//Added By Saqib
-void vMevris_Send_BatteryVolt(void);//Added By Saqib
-void vMevris_Send_RadiatorTemp(void);//Added By Saqib
-void vMevris_Send_EngineTemp(void);//Added By Saqib
-void vMevris_Send_FuelLevel(void);//Added By Saqib
-void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, uint32_t Ampere);//Added By Saqib
+void vMevris_Send_BatteryVolt(void);                                                             //Added By Saqib
+void vMevris_Send_RadiatorTemp(void);                                                            //Added By Saqib
+void vMevris_Send_EngineTemp(void);                                                              //Added By Saqib
+void vMevris_Send_FuelLevel(void);                                                               //Added By Saqib
+void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, uint32_t Ampere); //Added By Saqib
 /* Public functions ----------------------------------------------------------*/
 
 @near uint8_t aunPushed_Data[MEVRIS_SEND_DATA_MAX_SIZE] = "";
 @near uint8_t aunMQTT_ClientID[20] = "gen123456789012345";
-@near uint8_t aunMQTT_Subscribe_Topic[24] = "sc1/123456789012345/cmd";
-@near uint8_t aunMQTT_Publish_Topic[24] = "sc1/123456789012345/evt";
+@near uint8_t aunMQTT_Subscribe_Topic[30] = "sc2/123456789012345/command";
+@near uint8_t aunMQTT_Publish_Topic[30] = "sc2/123456789012345/event";
 bool bCONNACK_Recieved = FALSE;
 extern @near uint8_t response_buffer[100];
 extern uint8_t IMEIRecievedOKFlag;
@@ -65,7 +65,7 @@ void sendDataToCloud(void)
     //->Commented by Saqib
     // stringLength = createStringToSend(informationString);
     // vMevris_Send_IMEI();
-    tempCounter++;  //Added by Saqib
+    tempCounter++; //Added by Saqib
     if (tempCounter >= 3)
     {
         eTCP_Status = enGet_TCP_Status();
@@ -130,7 +130,6 @@ void sendDataToCloud(void)
         }
     }
 }
-
 
 // void vMevris_Send_sensorData()
 // {
@@ -335,7 +334,7 @@ void sendDataToCloud(void)
 
 void vHandleMevris_MQTT_Recv_Data(void)
 {
-    uint8_t localBuffer[20];
+    uint8_t localBuffer[30];
     uint8_t *ptr;
     uint8_t i = 0, j;
     uint8_t unLength = 0;
@@ -362,9 +361,9 @@ void vHandleMevris_MQTT_Recv_Data(void)
             //            ptr = strstr(response_buffer, MQTT_INBOUND_TOPIC_FOOTER);
             if (*(ptr + i) == '{')
             {
-                vClearBuffer(localBuffer, 20);
+                vClearBuffer(localBuffer, 30);
                 j = 0;
-                while (*(ptr + i) != '\r' && j < 19)
+                while (*(ptr + i) != '\r' && j < 29)
                 {
                     localBuffer[j++] = *(ptr + i);
                     unLength++;
@@ -380,44 +379,41 @@ void vHandleMevris_MQTT_Recv_Data(void)
 
 void vHandleMevrisRecievedData(uint8_t *Data, uint8_t unLength)
 {
+    uint8_t i, j;
+    uint8_t *ret;
     // Example Data[] = "{1,1,RUN}"
-
-    if (Data[0] == '{')
+    // if (Data[0] == '{')
+    // {
+    //     if (Data[1] = '1')
+    //     {
+    //         ms_send_cmd("are you there", strlen((const char *)"are you there"));
+    //         vMevris_Send_IMEI();
+    //     }
+    // }
+    if (strstr(Data, "\"info\"")) //Example "{"info":"imei"}"
     {
-        // ms_send_cmd("inside if for {", strlen((const char *)"inside if for {"))
-        //switch (Data[1])
-        // {
-        //case eCommand_IMEI:
-
-        if (Data[1] = '1')
+        if (strstr(Data, "\"imei\""))
         {
-            ms_send_cmd("are you there", strlen((const char *)"are you there"));
-
             vMevris_Send_IMEI();
-
-        } //break;
-        //case eCommand_SIM_Number:
-        //vMevris_Send_SIM_Number();
-        //    break;
-        //case eCommand_Location:
-        //gps_data(!SEND_GPS_VIA_SMS);
-        //vMevris_Send_Location();
-        //  break;
-        //case eCommand_Bike_State:
-        //if(strstr(Data, "RUN"))
-        // {
-        //    vStartBike();
-        //}
-        //else if(strstr(Data, "STOP"))
-        //{
-        //  vStopBike();
-        //}
-        //vMevris_Send_BikeState();
-        // break;
-        //default:
-        //  break;
-        // }
+        }
     }
+    // else if (strstr(Data, "\"key\""))
+    // {
+    //     i = 0;
+    //     ret = strstr(Data, "\"key\":");
+    //     while (*(ret + i) != ':' && i < 8)
+    //     {
+    //         i++;
+    //     }
+    //     i++;
+    //     i++;
+    //     vClearBuffer(PASS_KEY, strlen((const char*)PASS_KEY));
+    //     for (j = 0; j < 8; j++)
+    //     {
+    //         PASS_KEY[j] = *(ret + i);
+    //         i++;
+    //     }
+    // }
 }
 
 uint8_t *punGet_Client_ID(void)
@@ -443,12 +439,13 @@ uint8_t *punGet_Command_Topic(void)
     //        aunMQTT_Subscribe_Topic[i+4] = aunIMEI[i];
     //    }
     //	aunMQTT_Subscribe_Topic[i+4] = '\0';
-    vClearBuffer(aunMQTT_Subscribe_Topic, 24);
+    vClearBuffer(aunMQTT_Subscribe_Topic, 30);
     strcpy(aunMQTT_Subscribe_Topic, MQTT_TOPIC_HEADER);
     strcat(aunMQTT_Subscribe_Topic, "/");
     strcat(aunMQTT_Subscribe_Topic, aunIMEI);
     strcat(aunMQTT_Subscribe_Topic, "/");
     strcat(aunMQTT_Subscribe_Topic, MQTT_INBOUND_TOPIC_FOOTER);
+
     return aunMQTT_Subscribe_Topic;
 }
 
@@ -460,7 +457,7 @@ uint8_t *punGet_Event_Topic(void)
     //        aunMQTT_Publish_Topic[i+4] = aunIMEI[i];
     //    }
     //	aunMQTT_Publish_Topic[i+4] = '\0';
-    vClearBuffer(aunMQTT_Publish_Topic, 24);
+    vClearBuffer(aunMQTT_Publish_Topic, 30);
     strcpy(aunMQTT_Publish_Topic, MQTT_TOPIC_HEADER);
     strcat(aunMQTT_Publish_Topic, "/");
     strcat(aunMQTT_Publish_Topic, aunIMEI);
@@ -470,19 +467,18 @@ uint8_t *punGet_Event_Topic(void)
     return aunMQTT_Publish_Topic;
 }
 
-
 //-> Added by Saqib from here to end of file
 void vMevris_Send_IMEI(void)
 {
-    uint8_t localBuffer[30] = "{\"IMEI\":\"123456789012345\"}";
+    uint8_t localBuffer[30] = "{\"imei\":\"123456789012345\"}";
     uint8_t unSendDataLength = 0;
     vClearBuffer(localBuffer, 30);
-    strcpy(localBuffer, "{\"IMEI\":\"");
+    strcpy(localBuffer, "{\"imei\":\"");
     strcat(localBuffer, aunIMEI);
     strcat(localBuffer, "\"}");
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               punGet_Event_Topic(),
+                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
 }
@@ -522,30 +518,30 @@ void vMevris_Send_IMEI(void)
 
 void vMevris_Send_Version()
 {
-    uint8_t localBuffer[35] = "{\"FW\":\"2.4.010\",\"HW\":\"0.0.001\"}";
+    uint8_t localBuffer[35] = "{\"fw\":\"2.4.010\",\"hw\":\"0.0.001\"}";
     uint8_t unSendDataLength = 0;
     vClearBuffer(localBuffer, 35);
-    strcpy(localBuffer, "{\"FW\":\"");
-    strcat(localBuffer, /*"2.4.010"*/Firmware_Version);
-    strcat(localBuffer, "\",\"HW\":\"");
-    strcat(localBuffer, /*"0.0.001"*/Hardware_Version);
+    strcpy(localBuffer, "{\"fw\":\"");
+    strcat(localBuffer, /*"2.4.010"*/ Firmware_Version);
+    strcat(localBuffer, "\",\"hw\":\"");
+    strcat(localBuffer, /*"0.0.001"*/ Hardware_Version);
     strcat(localBuffer, "\"}");
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               punGet_Event_Topic(),
+                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
 }
 
 void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, uint32_t Ampere)
 {
-    uint8_t localBuffer[55] = "{\"P1\":\"123456890.23\",\"V1\":\"123.56\",\"I1\":\"12345.78\"}";
+    uint8_t localBuffer[75] = "{\"power1\":\"123456890.23\",\"voltage1\":\"123.56\",\"current1\":\"12345.78\"}";
     uint8_t unSendDataLength = 0;
     uint8_t temp1[12] = "";
     uint8_t phase_num[3] = "";
     vClearBuffer(localBuffer, 55);
     sprintf(phase_num, "%d", (uint16_t)phase_number);
-    strcpy(localBuffer, "{\"P");
+    strcpy(localBuffer, "{\"power");
     strcat(localBuffer, phase_num);
     strcat(localBuffer, "\":\"");
     sprintf(temp1, "%ld", Watt / 100);
@@ -554,7 +550,7 @@ void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, u
     sprintf(temp1, "%ld", Watt % 100);
     strcat(localBuffer, temp1);
 
-    strcat(localBuffer, "\",\"V");
+    strcat(localBuffer, "\",\"voltage");
     strcat(localBuffer, phase_num);
     strcat(localBuffer, "\":\"");
     sprintf(temp1, "%ld", Voltage / 100);
@@ -563,7 +559,7 @@ void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, u
     sprintf(temp1, "%ld", Voltage % 100);
     strcat(localBuffer, temp1);
 
-    strcat(localBuffer, "\",\"I");
+    strcat(localBuffer, "\",\"current");
     strcat(localBuffer, phase_num);
     strcat(localBuffer, "\":\"");
     sprintf(temp1, "%ld", Ampere / 100);
@@ -575,7 +571,7 @@ void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, u
 
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               punGet_Event_Topic(),
+                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
 }
@@ -690,11 +686,11 @@ void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, u
 
 void vMevris_Send_BatteryVolt()
 {
-    uint8_t localBuffer[30] = "{\"BATTERY\":\"123456.89\"}";
+    uint8_t localBuffer[30] = "{\"battery\":\"123456.89\"}";
     uint8_t unSendDataLength = 0;
     uint8_t temp1[10] = "";
     vClearBuffer(localBuffer, 30);
-    strcpy(localBuffer, "{\"BATTERY\":\"");
+    strcpy(localBuffer, "{\"battery\":\"");
     // sprintf(temp1, "%ld", batVolt);
     sprintf(temp1, "%ld", batVolt / 100);
     strcat(localBuffer, temp1);
@@ -704,19 +700,19 @@ void vMevris_Send_BatteryVolt()
     strcat(localBuffer, "\"}");
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               punGet_Event_Topic(),
+                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
 }
 
 void vMevris_Send_RadiatorTemp()
 {
-    uint8_t localBuffer[30] = "{\"T-RADIATOR\":\"123456.89\"}";
+    uint8_t localBuffer[40] = "{\"RadiatorTemperature\":\"123456.89\"}";
     uint8_t unSendDataLength = 0;
     uint8_t temp1[15] = "";
     uint32_t myVar = 0;
-    vClearBuffer(localBuffer, 30);
-    strcpy(localBuffer, "{\"T-RADIATOR\":\"");
+    vClearBuffer(localBuffer, 40);
+    strcpy(localBuffer, "{\"RadiatorTemperature\":\"");
     myVar = (uint32_t)(Temperature1 * 100);
     sprintf(temp1, "%ld", myVar / 100);
     strcat(localBuffer, temp1);
@@ -727,19 +723,19 @@ void vMevris_Send_RadiatorTemp()
     strcat(localBuffer, "\"}");
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               punGet_Event_Topic(),
+                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
 }
 
 void vMevris_Send_EngineTemp()
 {
-    uint8_t localBuffer[30] = "{\"T-ENGINE\":\"123456.89\"}";
+    uint8_t localBuffer[40] = "{\"EngineTemperature\":\"123456.89\"}";
     uint8_t unSendDataLength = 0;
     uint8_t temp1[15] = "";
     uint32_t myVar = 0;
-    vClearBuffer(localBuffer, 30);
-    strcpy(localBuffer, "{\"T-ENGINE\":\"");
+    vClearBuffer(localBuffer, 40);
+    strcpy(localBuffer, "{\"EngineTemperature\":\"");
     myVar = (uint32_t)(Temperature2 * 100);
     sprintf(temp1, "%ld", myVar / 100);
     strcat(localBuffer, temp1);
@@ -750,24 +746,24 @@ void vMevris_Send_EngineTemp()
     strcat(localBuffer, "\"}");
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               punGet_Event_Topic(),
+                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
 }
 
 void vMevris_Send_FuelLevel()
 {
-    uint8_t localBuffer[30] = "{\"FUEL\":\"123456.89\"}";
+    uint8_t localBuffer[30] = "{\"fuel\":\"123456.89\"}";
     uint8_t unSendDataLength = 0;
     uint8_t temp1[10] = "";
     vClearBuffer(localBuffer, 30);
-    strcpy(localBuffer, "{\"FUEL\":\"");
+    strcpy(localBuffer, "{\"fuel\":\"");
     sprintf(temp1, "%ld", Fuellevel);
     strcat(localBuffer, temp1);
     strcat(localBuffer, "\"}");
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               punGet_Event_Topic(),
+                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
 }

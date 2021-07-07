@@ -34,19 +34,20 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 void SetPortD7AsTim1_Ch4(void);
-
+uint16_t ReadFlashWord(uint32_t address);
+void WriteFlashWord(uint16_t data, uint32_t address);
 /* Public functions ----------------------------------------------------------*/
 
 uint8_t checkByte;
-uint8_t voltageCalibrationFactor1;
-uint8_t voltageCalibrationFactor2;
-uint8_t voltageCalibrationFactor3;
-uint8_t currentCalibrationFactor1;
-uint8_t currentCalibrationFactor2;
-uint8_t currentCalibrationFactor3;
-uint8_t powerCalibrationFactor1;
-uint8_t powerCalibrationFactor2;
-uint8_t powerCalibrationFactor3;
+uint16_t voltageCalibrationFactor1;
+uint16_t voltageCalibrationFactor2;
+uint16_t voltageCalibrationFactor3;
+uint16_t currentCalibrationFactor1;
+uint16_t currentCalibrationFactor2;
+uint16_t currentCalibrationFactor3;
+uint16_t powerCalibrationFactor1;
+uint16_t powerCalibrationFactor2;
+uint16_t powerCalibrationFactor3;
 bool checkit = 0;
 void systemInit(void)
 {
@@ -269,19 +270,47 @@ void EEPROMSetup(void)
 	FLASH_DeInit();
 }
 
+uint16_t ReadFlashWord(uint32_t address)
+{
+	uint16_t result = 0;
+	result = (FLASH_ReadByte(address+1) & 0x00FF);
+	result <<= 8;
+	result |= (FLASH_ReadByte(address) & 0x00FF);
+	return result;
+}
+
+void WriteFlashWord(uint16_t data, uint32_t address)
+{
+		FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		FLASH_ProgramByte(address, (data & 0xFF));
+		FLASH_ProgramByte(address+1, ((data >> 8) & 0xFF));
+		FLASH_Lock(FLASH_MEMTYPE_DATA);
+}
+
 void getCalibration()
 {
+	// checkByte = FLASH_ReadByte(CheckByte);
+	// voltageCalibrationFactor1 = FLASH_ReadByte(V1CabFab);
+	// voltageCalibrationFactor2 = FLASH_ReadByte(V2CabFab);
+	// voltageCalibrationFactor3 = FLASH_ReadByte(V3CabFab);
+	// currentCalibrationFactor1 = FLASH_ReadByte(I1CabFab);
+	// currentCalibrationFactor2 = FLASH_ReadByte(I2CabFab);
+	// currentCalibrationFactor3 = FLASH_ReadByte(I3CabFab);
+	// powerCalibrationFactor1 = FLASH_ReadByte(P1CabFab);
+	// powerCalibrationFactor3 = FLASH_ReadByte(P3CabFab);
+	// powerCalibrationFactor2 = FLASH_ReadByte(P2CabFab);
+	uint8_t temp;
 	checkByte = FLASH_ReadByte(CheckByte);
-	voltageCalibrationFactor1 = FLASH_ReadByte(V1CabFab);
-	voltageCalibrationFactor2 = FLASH_ReadByte(V2CabFab);
-	voltageCalibrationFactor3 = FLASH_ReadByte(V3CabFab);
-	currentCalibrationFactor1 = FLASH_ReadByte(I1CabFab);
-	currentCalibrationFactor2 = FLASH_ReadByte(I2CabFab);
-	currentCalibrationFactor3 = FLASH_ReadByte(I3CabFab);
-	powerCalibrationFactor1 = FLASH_ReadByte(P1CabFab);
-	powerCalibrationFactor3 = FLASH_ReadByte(P3CabFab);
-	powerCalibrationFactor2 = FLASH_ReadByte(P2CabFab);
+	voltageCalibrationFactor1 	= ReadFlashWord(V1CabFab);
+	voltageCalibrationFactor2 	= ReadFlashWord(V2CabFab);
+	voltageCalibrationFactor3 	= ReadFlashWord(V3CabFab);
+	currentCalibrationFactor1 	= ReadFlashWord(I1CabFab);	currentCalibrationFactor2 	= ReadFlashWord(I2CabFab);
+	currentCalibrationFactor3 	= ReadFlashWord(I3CabFab);
+	powerCalibrationFactor1 	= ReadFlashWord(P1CabFab);
+	powerCalibrationFactor2 	= ReadFlashWord(P2CabFab);
+	powerCalibrationFactor3 	= ReadFlashWord(P3CabFab);
 }
+
 
 /*
 ===============================================================

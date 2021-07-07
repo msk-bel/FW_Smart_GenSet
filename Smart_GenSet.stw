@@ -10,3 +10,6 @@ Dependencies=
 ActiveProject=smart_genset
 ActiveConfig=Debug
 AddSortedElements=1
+[Batch Build]
+Debug=smart_genset
+Release=smart_genset

@@ -48,7 +48,7 @@
  109  0002 a4bf          	and	a,#191
  110  0004 88            	push	a
  111  0005 86            	pop	cc
- 112       0000000c      OFST:	set	12
+ 112       00000008      OFST:	set	8
  113  0006 3b0002        	push	c_x+2
  114  0009 be00          	ldw	x,c_x
  115  000b 89            	pushw	x
@@ -59,7 +59,7 @@
  120  0014 89            	pushw	x
  121  0015 be00          	ldw	x,c_lreg
  122  0017 89            	pushw	x
- 123  0018 520c          	subw	sp,#12
+ 123  0018 5208          	subw	sp,#8
  126                     ; 78   voltCurrent1OverflowCount++;
  128  001a 3c00          	inc	_voltCurrent1OverflowCount
  129                     ; 79   voltCurrent2OverflowCount++;//Added by Saqib
@@ -68,903 +68,873 @@
  134  001e b614          	ld	a,_powerAccumulateCount
  135  0020 a13b          	cp	a,#59
  136  0022 2404          	jruge	L01
- 137  0024 acc801c8      	jpf	L12
+ 137  0024 ac8c018c      	jpf	L12
  138  0028               L01:
  139                     ; 83     if (powerPeriod1 != 0)
  141  0028 ae0000        	ldw	x,#_powerPeriod1
  142  002b cd0000        	call	c_lzmp
- 144  002e 2604          	jrne	L21
- 145  0030 acb200b2      	jpf	L32
- 146  0034               L21:
- 147                     ; 85       storeEnergyPhase1 = storeEnergyPhase1 + ((float)(powerMultiplier * powerCalibrationFactor1) / powerPeriod1) * powerAccumulateTime;
- 149  0034 ae0000        	ldw	x,#_powerPeriod1
- 150  0037 cd0000        	call	c_ltor
- 152  003a cd0000        	call	c_ultof
- 154  003d 96            	ldw	x,sp
- 155  003e 1c0009        	addw	x,#OFST-3
- 156  0041 cd0000        	call	c_rtol
- 159  0044 b600          	ld	a,_powerCalibrationFactor1
- 160  0046 5f            	clrw	x
- 161  0047 97            	ld	xl,a
- 162  0048 cd0000        	call	c_itof
- 164  004b 96            	ldw	x,sp
- 165  004c 1c0005        	addw	x,#OFST-7
- 166  004f cd0000        	call	c_rtol
- 169  0052 ae0008        	ldw	x,#L13
- 170  0055 cd0000        	call	c_ltor
- 172  0058 96            	ldw	x,sp
- 173  0059 1c0005        	addw	x,#OFST-7
- 174  005c cd0000        	call	c_fmul
- 176  005f 96            	ldw	x,sp
- 177  0060 1c0009        	addw	x,#OFST-3
- 178  0063 cd0000        	call	c_fdiv
- 180  0066 ae0004        	ldw	x,#L14
- 181  0069 cd0000        	call	c_fmul
- 183  006c 96            	ldw	x,sp
- 184  006d 1c0001        	addw	x,#OFST-11
- 185  0070 cd0000        	call	c_rtol
- 188  0073 ae0008        	ldw	x,#_storeEnergyPhase1
- 189  0076 cd0000        	call	c_ltor
- 191  0079 cd0000        	call	c_ultof
- 193  007c 96            	ldw	x,sp
- 194  007d 1c0001        	addw	x,#OFST-11
- 195  0080 cd0000        	call	c_fadd
- 197  0083 cd0000        	call	c_ftol
- 199  0086 ae0008        	ldw	x,#_storeEnergyPhase1
- 200  0089 cd0000        	call	c_rtol
- 202                     ; 87       if ((storeEnergyPhase1 >= energyResolution))
- 204  008c ae0008        	ldw	x,#_storeEnergyPhase1
- 205  008f cd0000        	call	c_ltor
- 207  0092 ae0000        	ldw	x,#L6
- 208  0095 cd0000        	call	c_lcmp
- 210  0098 2518          	jrult	L32
- 211                     ; 89         energyPhase1++;
- 213  009a ae0010        	ldw	x,#_energyPhase1
- 214  009d a601          	ld	a,#1
- 215  009f cd0000        	call	c_lgadc
- 217                     ; 90         storeEnergyPhase1 = storeEnergyPhase1 - energyResolution;
- 219  00a2 ae5100        	ldw	x,#20736
- 220  00a5 bf02          	ldw	c_lreg+2,x
- 221  00a7 ae0225        	ldw	x,#549
- 222  00aa bf00          	ldw	c_lreg,x
- 223  00ac ae0008        	ldw	x,#_storeEnergyPhase1
- 224  00af cd0000        	call	c_lgsub
- 226  00b2               L32:
- 227                     ; 94     if (powerPeriod2 != 0)
- 229  00b2 ae0000        	ldw	x,#_powerPeriod2
- 230  00b5 cd0000        	call	c_lzmp
- 232  00b8 2604          	jrne	L41
- 233  00ba ac3c013c      	jpf	L74
- 234  00be               L41:
- 235                     ; 96       storeEnergyPhase2 = storeEnergyPhase2 + ((float)(powerMultiplier * powerCalibrationFactor2) / powerPeriod2) * powerAccumulateTime;
- 237  00be ae0000        	ldw	x,#_powerPeriod2
- 238  00c1 cd0000        	call	c_ltor
- 240  00c4 cd0000        	call	c_ultof
- 242  00c7 96            	ldw	x,sp
- 243  00c8 1c0009        	addw	x,#OFST-3
- 244  00cb cd0000        	call	c_rtol
- 247  00ce b600          	ld	a,_powerCalibrationFactor2
- 248  00d0 5f            	clrw	x
- 249  00d1 97            	ld	xl,a
- 250  00d2 cd0000        	call	c_itof
- 252  00d5 96            	ldw	x,sp
- 253  00d6 1c0005        	addw	x,#OFST-7
- 254  00d9 cd0000        	call	c_rtol
- 257  00dc ae0008        	ldw	x,#L13
- 258  00df cd0000        	call	c_ltor
- 260  00e2 96            	ldw	x,sp
- 261  00e3 1c0005        	addw	x,#OFST-7
- 262  00e6 cd0000        	call	c_fmul
- 264  00e9 96            	ldw	x,sp
- 265  00ea 1c0009        	addw	x,#OFST-3
- 266  00ed cd0000        	call	c_fdiv
- 268  00f0 ae0004        	ldw	x,#L14
- 269  00f3 cd0000        	call	c_fmul
- 271  00f6 96            	ldw	x,sp
- 272  00f7 1c0001        	addw	x,#OFST-11
- 273  00fa cd0000        	call	c_rtol
- 276  00fd ae000c        	ldw	x,#_storeEnergyPhase2
- 277  0100 cd0000        	call	c_ltor
- 279  0103 cd0000        	call	c_ultof
- 281  0106 96            	ldw	x,sp
- 282  0107 1c0001        	addw	x,#OFST-11
- 283  010a cd0000        	call	c_fadd
- 285  010d cd0000        	call	c_ftol
- 287  0110 ae000c        	ldw	x,#_storeEnergyPhase2
- 288  0113 cd0000        	call	c_rtol
- 290                     ; 98       if ((storeEnergyPhase2 >= energyResolution))
- 292  0116 ae000c        	ldw	x,#_storeEnergyPhase2
- 293  0119 cd0000        	call	c_ltor
- 295  011c ae0000        	ldw	x,#L6
- 296  011f cd0000        	call	c_lcmp
- 298  0122 2518          	jrult	L74
- 299                     ; 100         energyPhase2++;
- 301  0124 ae000c        	ldw	x,#_energyPhase2
- 302  0127 a601          	ld	a,#1
- 303  0129 cd0000        	call	c_lgadc
- 305                     ; 101         storeEnergyPhase2 = storeEnergyPhase2 - energyResolution;
- 307  012c ae5100        	ldw	x,#20736
- 308  012f bf02          	ldw	c_lreg+2,x
- 309  0131 ae0225        	ldw	x,#549
- 310  0134 bf00          	ldw	c_lreg,x
- 311  0136 ae000c        	ldw	x,#_storeEnergyPhase2
- 312  0139 cd0000        	call	c_lgsub
- 314  013c               L74:
- 315                     ; 105     if (powerPeriod3 != 0)
- 317  013c ae0000        	ldw	x,#_powerPeriod3
- 318  013f cd0000        	call	c_lzmp
- 320  0142 2604          	jrne	L61
- 321  0144 acc601c6      	jpf	L35
- 322  0148               L61:
- 323                     ; 107       storeEnergyPhase3 = storeEnergyPhase3 + ((float)(powerMultiplier * powerCalibrationFactor3) / powerPeriod3) * powerAccumulateTime;
- 325  0148 ae0000        	ldw	x,#_powerPeriod3
- 326  014b cd0000        	call	c_ltor
- 328  014e cd0000        	call	c_ultof
- 330  0151 96            	ldw	x,sp
- 331  0152 1c0009        	addw	x,#OFST-3
- 332  0155 cd0000        	call	c_rtol
- 335  0158 b600          	ld	a,_powerCalibrationFactor3
- 336  015a 5f            	clrw	x
- 337  015b 97            	ld	xl,a
- 338  015c cd0000        	call	c_itof
- 340  015f 96            	ldw	x,sp
- 341  0160 1c0005        	addw	x,#OFST-7
- 342  0163 cd0000        	call	c_rtol
- 345  0166 ae0008        	ldw	x,#L13
- 346  0169 cd0000        	call	c_ltor
- 348  016c 96            	ldw	x,sp
- 349  016d 1c0005        	addw	x,#OFST-7
- 350  0170 cd0000        	call	c_fmul
- 352  0173 96            	ldw	x,sp
- 353  0174 1c0009        	addw	x,#OFST-3
- 354  0177 cd0000        	call	c_fdiv
- 356  017a ae0004        	ldw	x,#L14
- 357  017d cd0000        	call	c_fmul
- 359  0180 96            	ldw	x,sp
- 360  0181 1c0001        	addw	x,#OFST-11
- 361  0184 cd0000        	call	c_rtol
- 364  0187 ae0010        	ldw	x,#_storeEnergyPhase3
- 365  018a cd0000        	call	c_ltor
- 367  018d cd0000        	call	c_ultof
- 369  0190 96            	ldw	x,sp
- 370  0191 1c0001        	addw	x,#OFST-11
- 371  0194 cd0000        	call	c_fadd
- 373  0197 cd0000        	call	c_ftol
- 375  019a ae0010        	ldw	x,#_storeEnergyPhase3
- 376  019d cd0000        	call	c_rtol
- 378                     ; 109       if ((storeEnergyPhase3 >= energyResolution))
- 380  01a0 ae0010        	ldw	x,#_storeEnergyPhase3
- 381  01a3 cd0000        	call	c_ltor
- 383  01a6 ae0000        	ldw	x,#L6
- 384  01a9 cd0000        	call	c_lcmp
- 386  01ac 2518          	jrult	L35
- 387                     ; 111         energyPhase3++;
- 389  01ae ae0008        	ldw	x,#_energyPhase3
- 390  01b1 a601          	ld	a,#1
- 391  01b3 cd0000        	call	c_lgadc
- 393                     ; 112         storeEnergyPhase3 = storeEnergyPhase3 - energyResolution;
- 395  01b6 ae5100        	ldw	x,#20736
- 396  01b9 bf02          	ldw	c_lreg+2,x
- 397  01bb ae0225        	ldw	x,#549
- 398  01be bf00          	ldw	c_lreg,x
- 399  01c0 ae0010        	ldw	x,#_storeEnergyPhase3
- 400  01c3 cd0000        	call	c_lgsub
- 402  01c6               L35:
- 403                     ; 116     powerAccumulateCount = 0;
- 405  01c6 3f14          	clr	_powerAccumulateCount
- 406  01c8               L12:
- 407                     ; 119   if (power1OverflowCount < powerOverflowCountMax)
- 409  01c8 b603          	ld	a,_power1OverflowCount
- 410  01ca a164          	cp	a,#100
- 411  01cc 2404          	jruge	L75
- 412                     ; 121     power1OverflowCount++;
- 414  01ce 3c03          	inc	_power1OverflowCount
- 416  01d0 201a          	jra	L16
- 417  01d2               L75:
- 418                     ; 125     powerPeriod1 = 0;
- 420  01d2 ae0000        	ldw	x,#0
- 421  01d5 bf02          	ldw	_powerPeriod1+2,x
- 422  01d7 ae0000        	ldw	x,#0
- 423  01da bf00          	ldw	_powerPeriod1,x
- 424                     ; 126     Watt_Phase1 = 0; // Added By Saqib
- 426  01dc ae0000        	ldw	x,#0
- 427  01df cf0002        	ldw	_Watt_Phase1+2,x
- 428  01e2 ae0000        	ldw	x,#0
- 429  01e5 cf0000        	ldw	_Watt_Phase1,x
- 430                     ; 127     power1ReadFlag = false;
- 432  01e8 72110000      	bres	_power1ReadFlag
- 433  01ec               L16:
- 434                     ; 133   if (power2OverflowCount < powerOverflowCountMax)
- 436  01ec b604          	ld	a,_power2OverflowCount
- 437  01ee a164          	cp	a,#100
- 438  01f0 2404          	jruge	L36
- 439                     ; 135     power2OverflowCount++;
- 441  01f2 3c04          	inc	_power2OverflowCount
- 443  01f4 201a          	jra	L56
- 444  01f6               L36:
- 445                     ; 139     powerPeriod2 = 0;
- 447  01f6 ae0000        	ldw	x,#0
- 448  01f9 bf02          	ldw	_powerPeriod2+2,x
- 449  01fb ae0000        	ldw	x,#0
- 450  01fe bf00          	ldw	_powerPeriod2,x
- 451                     ; 140     power2ReadFlag = false;
- 453  0200 72110001      	bres	_power2ReadFlag
- 454                     ; 141     Watt_Phase2 = 0; // Added By Saqib
- 456  0204 ae0000        	ldw	x,#0
- 457  0207 cf0002        	ldw	_Watt_Phase2+2,x
- 458  020a ae0000        	ldw	x,#0
- 459  020d cf0000        	ldw	_Watt_Phase2,x
- 460  0210               L56:
- 461                     ; 147   powerAccumulateCount++;
- 463  0210 3c14          	inc	_powerAccumulateCount
- 464                     ; 151   TIM1_ClearITPendingBit(TIM1_IT_UPDATE);
- 466  0212 a601          	ld	a,#1
- 467  0214 cd0000        	call	_TIM1_ClearITPendingBit
- 469                     ; 152   TIM1_ClearFlag(TIM1_FLAG_UPDATE);
- 471  0217 ae0001        	ldw	x,#1
- 472  021a cd0000        	call	_TIM1_ClearFlag
- 474                     ; 153 }
- 477  021d 5b0c          	addw	sp,#12
- 478  021f 85            	popw	x
- 479  0220 bf00          	ldw	c_lreg,x
- 480  0222 85            	popw	x
- 481  0223 bf02          	ldw	c_lreg+2,x
- 482  0225 85            	popw	x
- 483  0226 bf00          	ldw	c_y,x
- 484  0228 320002        	pop	c_y+2
- 485  022b 85            	popw	x
- 486  022c bf00          	ldw	c_x,x
- 487  022e 320002        	pop	c_x+2
- 488  0231 80            	iret
- 519                     ; 155 void TIM2_UPD_IRQHandler(void) //to control power,voltage,current overflow counter
- 519                     ; 156 {
- 520                     	switch	.text
- 521  0232               f_TIM2_UPD_IRQHandler:
- 523  0232 8a            	push	cc
- 524  0233 84            	pop	a
- 525  0234 a4bf          	and	a,#191
- 526  0236 88            	push	a
- 527  0237 86            	pop	cc
- 528  0238 3b0002        	push	c_x+2
- 529  023b be00          	ldw	x,c_x
- 530  023d 89            	pushw	x
- 531  023e 3b0002        	push	c_y+2
- 532  0241 be00          	ldw	x,c_y
- 533  0243 89            	pushw	x
- 536                     ; 157   ticsOverflowCounter++;
- 538  0244 ae0000        	ldw	x,#_ticsOverflowCounter
- 539  0247 a601          	ld	a,#1
- 540  0249 cd0000        	call	c_lgadc
- 542                     ; 159   if (power3OverflowCount < powerOverflowCountMax)
- 544  024c b605          	ld	a,_power3OverflowCount
- 545  024e a164          	cp	a,#100
- 546  0250 2404          	jruge	L77
- 547                     ; 161     power3OverflowCount++;
- 549  0252 3c05          	inc	_power3OverflowCount
- 551  0254 201a          	jra	L101
- 552  0256               L77:
- 553                     ; 165     powerPeriod3 = 0;
- 555  0256 ae0000        	ldw	x,#0
- 556  0259 bf02          	ldw	_powerPeriod3+2,x
- 557  025b ae0000        	ldw	x,#0
- 558  025e bf00          	ldw	_powerPeriod3,x
- 559                     ; 166     Watt_Phase3 = 0; // Added By Saqib
- 561  0260 ae0000        	ldw	x,#0
- 562  0263 cf0002        	ldw	_Watt_Phase3+2,x
- 563  0266 ae0000        	ldw	x,#0
- 564  0269 cf0000        	ldw	_Watt_Phase3,x
- 565                     ; 167     power3ReadFlag = false;
- 567  026c 72110002      	bres	_power3ReadFlag
- 568  0270               L101:
- 569                     ; 173   voltCurrent3OverflowCount++;
- 571  0270 3c02          	inc	_voltCurrent3OverflowCount
- 572                     ; 175   TIM2_ClearITPendingBit(TIM2_IT_UPDATE);
- 574  0272 a601          	ld	a,#1
- 575  0274 cd0000        	call	_TIM2_ClearITPendingBit
- 577                     ; 176   TIM2_ClearFlag(TIM2_FLAG_UPDATE);
- 579  0277 ae0001        	ldw	x,#1
- 580  027a cd0000        	call	_TIM2_ClearFlag
- 582                     ; 177 }
- 585  027d 85            	popw	x
- 586  027e bf00          	ldw	c_y,x
- 587  0280 320002        	pop	c_y+2
- 588  0283 85            	popw	x
- 589  0284 bf00          	ldw	c_x,x
- 590  0286 320002        	pop	c_x+2
- 591  0289 80            	iret
- 593                     	switch	.ubsct
- 594  0000               L301_powerEndTime:
- 595  0000 0000          	ds.b	2
- 596  0002               L501_power3StartTime:
- 597  0002 0000          	ds.b	2
- 677                     ; 186 void TIM2_CCP_IRQHandler(void)
- 677                     ; 187 {
- 678                     	switch	.text
- 679  028a               f_TIM2_CCP_IRQHandler:
- 681  028a 8a            	push	cc
- 682  028b 84            	pop	a
- 683  028c a4bf          	and	a,#191
- 684  028e 88            	push	a
- 685  028f 86            	pop	cc
- 686       00000009      OFST:	set	9
- 687  0290 3b0002        	push	c_x+2
- 688  0293 be00          	ldw	x,c_x
- 689  0295 89            	pushw	x
- 690  0296 3b0002        	push	c_y+2
- 691  0299 be00          	ldw	x,c_y
- 692  029b 89            	pushw	x
- 693  029c be02          	ldw	x,c_lreg+2
- 694  029e 89            	pushw	x
- 695  029f be00          	ldw	x,c_lreg
- 696  02a1 89            	pushw	x
- 697  02a2 5209          	subw	sp,#9
- 700                     ; 195   timer2Ch1_ITStatus = TIM2_GetITStatus(TIM2_IT_CC1);
- 702  02a4 a602          	ld	a,#2
- 703  02a6 cd0000        	call	_TIM2_GetITStatus
- 705  02a9 6b09          	ld	(OFST+0,sp),a
- 707                     ; 197   if (timer2Ch1_ITStatus == SET)
- 709  02ab 7b09          	ld	a,(OFST+0,sp)
- 710  02ad a101          	cp	a,#1
- 711  02af 2663          	jrne	L541
- 712                     ; 199     powerEndTime = TIM2_GetCapture1(); /* Read Timer value on Input Capture event */
- 714  02b1 cd0000        	call	_TIM2_GetCapture1
- 716  02b4 bf00          	ldw	L301_powerEndTime,x
- 717                     ; 201     if (power3ReadFlag == true) /* Avoid Calculation on first capture */
- 719                     	btst	_power3ReadFlag
- 720  02bb 2442          	jruge	L741
- 721                     ; 203       powerPeriod3 = timer2MaxCount * power3OverflowCount - power3StartTime + powerEndTime;
- 723  02bd be00          	ldw	x,L301_powerEndTime
- 724  02bf cd0000        	call	c_uitolx
- 726  02c2 96            	ldw	x,sp
- 727  02c3 1c0005        	addw	x,#OFST-4
- 728  02c6 cd0000        	call	c_rtol
- 731  02c9 be02          	ldw	x,L501_power3StartTime
- 732  02cb cd0000        	call	c_uitolx
- 734  02ce 96            	ldw	x,sp
- 735  02cf 1c0001        	addw	x,#OFST-8
- 736  02d2 cd0000        	call	c_rtol
- 739  02d5 b605          	ld	a,_power3OverflowCount
- 740  02d7 5f            	clrw	x
- 741  02d8 97            	ld	xl,a
- 742  02d9 90aeffff      	ldw	y,#65535
- 743  02dd cd0000        	call	c_umul
- 745  02e0 96            	ldw	x,sp
- 746  02e1 1c0001        	addw	x,#OFST-8
- 747  02e4 cd0000        	call	c_lsub
- 749  02e7 96            	ldw	x,sp
- 750  02e8 1c0005        	addw	x,#OFST-4
- 751  02eb cd0000        	call	c_ladd
- 753  02ee ae0000        	ldw	x,#_powerPeriod3
- 754  02f1 cd0000        	call	c_rtol
- 756                     ; 204       calcWatt3(powerPeriod3);
- 758  02f4 be02          	ldw	x,_powerPeriod3+2
- 759  02f6 89            	pushw	x
- 760  02f7 be00          	ldw	x,_powerPeriod3
- 761  02f9 89            	pushw	x
- 762  02fa cd0000        	call	_calcWatt3
- 764  02fd 5b04          	addw	sp,#4
- 765  02ff               L741:
- 766                     ; 224     power3StartTime = powerEndTime;
- 768  02ff be00          	ldw	x,L301_powerEndTime
- 769  0301 bf02          	ldw	L501_power3StartTime,x
- 770                     ; 225     power3OverflowCount = 0;
- 772  0303 3f05          	clr	_power3OverflowCount
- 773                     ; 226     power3ReadFlag = true;
- 775  0305 72100002      	bset	_power3ReadFlag
- 776                     ; 227     TIM2_ClearITPendingBit(TIM2_IT_CC1);
- 778  0309 a602          	ld	a,#2
- 779  030b cd0000        	call	_TIM2_ClearITPendingBit
- 781                     ; 228     TIM2_ClearFlag(TIM2_FLAG_CC1);
- 783  030e ae0002        	ldw	x,#2
- 784  0311 cd0000        	call	_TIM2_ClearFlag
- 786  0314               L541:
- 787                     ; 230 }
- 790  0314 5b09          	addw	sp,#9
- 791  0316 85            	popw	x
- 792  0317 bf00          	ldw	c_lreg,x
- 793  0319 85            	popw	x
- 794  031a bf02          	ldw	c_lreg+2,x
- 795  031c 85            	popw	x
- 796  031d bf00          	ldw	c_y,x
- 797  031f 320002        	pop	c_y+2
- 798  0322 85            	popw	x
- 799  0323 bf00          	ldw	c_x,x
- 800  0325 320002        	pop	c_x+2
- 801  0328 80            	iret
- 803                     	switch	.ubsct
- 804  0004               L351_power2StartTime:
- 805  0004 0000          	ds.b	2
- 806  0006               L151_power1StartTime:
- 807  0006 0000          	ds.b	2
- 891                     ; 240 void TIM1_CCP_IRQHandler(void)
- 891                     ; 241 {
- 892                     	switch	.text
- 893  0329               f_TIM1_CCP_IRQHandler:
- 895  0329 8a            	push	cc
- 896  032a 84            	pop	a
- 897  032b a4bf          	and	a,#191
- 898  032d 88            	push	a
- 899  032e 86            	pop	cc
- 900       0000000b      OFST:	set	11
- 901  032f 3b0002        	push	c_x+2
- 902  0332 be00          	ldw	x,c_x
- 903  0334 89            	pushw	x
- 904  0335 3b0002        	push	c_y+2
- 905  0338 be00          	ldw	x,c_y
- 906  033a 89            	pushw	x
- 907  033b be02          	ldw	x,c_lreg+2
- 908  033d 89            	pushw	x
- 909  033e be00          	ldw	x,c_lreg
- 910  0340 89            	pushw	x
- 911  0341 520b          	subw	sp,#11
- 914                     ; 248   timer1Ch1_ITStatus = TIM1_GetITStatus(TIM1_IT_CC1);
- 916  0343 a602          	ld	a,#2
- 917  0345 cd0000        	call	_TIM1_GetITStatus
- 919  0348 6b09          	ld	(OFST-2,sp),a
- 921                     ; 249   if (timer1Ch1_ITStatus == SET)
- 923  034a 7b09          	ld	a,(OFST-2,sp)
- 924  034c a101          	cp	a,#1
- 925  034e 2663          	jrne	L312
- 926                     ; 251     powerEndTime = TIM1_GetCapture1();
- 928  0350 cd0000        	call	_TIM1_GetCapture1
- 930  0353 1f0a          	ldw	(OFST-1,sp),x
- 932                     ; 253     if (power1ReadFlag == true) /* Avoid Calculation on first capture */
- 934                     	btst	_power1ReadFlag
- 935  035a 2442          	jruge	L512
- 936                     ; 255       powerPeriod1 = ((timer1MaxCount * power1OverflowCount) - power1StartTime) + powerEndTime;
- 938  035c 1e0a          	ldw	x,(OFST-1,sp)
- 939  035e cd0000        	call	c_uitolx
- 941  0361 96            	ldw	x,sp
- 942  0362 1c0005        	addw	x,#OFST-6
- 943  0365 cd0000        	call	c_rtol
- 946  0368 be06          	ldw	x,L151_power1StartTime
- 947  036a cd0000        	call	c_uitolx
- 949  036d 96            	ldw	x,sp
- 950  036e 1c0001        	addw	x,#OFST-10
- 951  0371 cd0000        	call	c_rtol
- 954  0374 b603          	ld	a,_power1OverflowCount
- 955  0376 5f            	clrw	x
- 956  0377 97            	ld	xl,a
- 957  0378 90aeffff      	ldw	y,#65535
- 958  037c cd0000        	call	c_umul
- 960  037f 96            	ldw	x,sp
- 961  0380 1c0001        	addw	x,#OFST-10
- 962  0383 cd0000        	call	c_lsub
- 964  0386 96            	ldw	x,sp
- 965  0387 1c0005        	addw	x,#OFST-6
- 966  038a cd0000        	call	c_ladd
- 968  038d ae0000        	ldw	x,#_powerPeriod1
- 969  0390 cd0000        	call	c_rtol
- 971                     ; 256       calcWatt1(powerPeriod1);//Added by Saqib
- 973  0393 be02          	ldw	x,_powerPeriod1+2
- 974  0395 89            	pushw	x
- 975  0396 be00          	ldw	x,_powerPeriod1
- 976  0398 89            	pushw	x
- 977  0399 cd0000        	call	_calcWatt1
- 979  039c 5b04          	addw	sp,#4
- 980  039e               L512:
- 981                     ; 262     power1StartTime = powerEndTime;
- 983  039e 1e0a          	ldw	x,(OFST-1,sp)
- 984  03a0 bf06          	ldw	L151_power1StartTime,x
- 985                     ; 263     power1OverflowCount = 0;
- 987  03a2 3f03          	clr	_power1OverflowCount
- 988                     ; 264     power1ReadFlag = true;
- 990  03a4 72100000      	bset	_power1ReadFlag
- 991                     ; 265     TIM1_ClearITPendingBit(TIM1_IT_CC1);
- 993  03a8 a602          	ld	a,#2
- 994  03aa cd0000        	call	_TIM1_ClearITPendingBit
- 996                     ; 266     TIM1_ClearFlag(TIM1_FLAG_CC1);
- 998  03ad ae0002        	ldw	x,#2
- 999  03b0 cd0000        	call	_TIM1_ClearFlag
-1001  03b3               L312:
-1002                     ; 269   timer1Ch3_ITStatus = TIM1_GetITStatus(/*TIM1_IT_CC2*/TIM1_IT_CC3); /* Interrupt status check */
-1004  03b3 a608          	ld	a,#8
-1005  03b5 cd0000        	call	_TIM1_GetITStatus
-1007  03b8 6b09          	ld	(OFST-2,sp),a
-1009                     ; 271   if (timer1Ch3_ITStatus == SET)
-1011  03ba 7b09          	ld	a,(OFST-2,sp)
-1012  03bc a101          	cp	a,#1
-1013  03be 2663          	jrne	L712
-1014                     ; 273     powerEndTime = TIM1_GetCapture3();
-1016  03c0 cd0000        	call	_TIM1_GetCapture3
-1018  03c3 1f0a          	ldw	(OFST-1,sp),x
-1020                     ; 275     if (power2ReadFlag == true) /* Avoid Calculation on first capture */
-1022                     	btst	_power2ReadFlag
-1023  03ca 2442          	jruge	L122
-1024                     ; 277       powerPeriod2 = timer1MaxCount * power2OverflowCount - power2StartTime + powerEndTime;
-1026  03cc 1e0a          	ldw	x,(OFST-1,sp)
-1027  03ce cd0000        	call	c_uitolx
-1029  03d1 96            	ldw	x,sp
-1030  03d2 1c0005        	addw	x,#OFST-6
-1031  03d5 cd0000        	call	c_rtol
-1034  03d8 be04          	ldw	x,L351_power2StartTime
-1035  03da cd0000        	call	c_uitolx
-1037  03dd 96            	ldw	x,sp
-1038  03de 1c0001        	addw	x,#OFST-10
-1039  03e1 cd0000        	call	c_rtol
-1042  03e4 b604          	ld	a,_power2OverflowCount
-1043  03e6 5f            	clrw	x
-1044  03e7 97            	ld	xl,a
-1045  03e8 90aeffff      	ldw	y,#65535
-1046  03ec cd0000        	call	c_umul
-1048  03ef 96            	ldw	x,sp
-1049  03f0 1c0001        	addw	x,#OFST-10
-1050  03f3 cd0000        	call	c_lsub
-1052  03f6 96            	ldw	x,sp
-1053  03f7 1c0005        	addw	x,#OFST-6
-1054  03fa cd0000        	call	c_ladd
-1056  03fd ae0000        	ldw	x,#_powerPeriod2
-1057  0400 cd0000        	call	c_rtol
-1059                     ; 278       calcWatt2(powerPeriod2);//Added by Saqib
-1061  0403 be02          	ldw	x,_powerPeriod2+2
-1062  0405 89            	pushw	x
-1063  0406 be00          	ldw	x,_powerPeriod2
-1064  0408 89            	pushw	x
-1065  0409 cd0000        	call	_calcWatt2
-1067  040c 5b04          	addw	sp,#4
-1068  040e               L122:
-1069                     ; 284     power2StartTime = powerEndTime;
-1071  040e 1e0a          	ldw	x,(OFST-1,sp)
-1072  0410 bf04          	ldw	L351_power2StartTime,x
-1073                     ; 285     power2OverflowCount = 0;
-1075  0412 3f04          	clr	_power2OverflowCount
-1076                     ; 286     power2ReadFlag = true;
-1078  0414 72100001      	bset	_power2ReadFlag
-1079                     ; 287     TIM1_ClearITPendingBit(TIM1_IT_CC3);
-1081  0418 a608          	ld	a,#8
-1082  041a cd0000        	call	_TIM1_ClearITPendingBit
-1084                     ; 288     TIM1_ClearFlag(TIM1_FLAG_CC3);
-1086  041d ae0008        	ldw	x,#8
-1087  0420 cd0000        	call	_TIM1_ClearFlag
-1089  0423               L712:
-1090                     ; 290 }
-1093  0423 5b0b          	addw	sp,#11
-1094  0425 85            	popw	x
-1095  0426 bf00          	ldw	c_lreg,x
-1096  0428 85            	popw	x
-1097  0429 bf02          	ldw	c_lreg+2,x
-1098  042b 85            	popw	x
-1099  042c bf00          	ldw	c_y,x
-1100  042e 320002        	pop	c_y+2
-1101  0431 85            	popw	x
-1102  0432 bf00          	ldw	c_x,x
-1103  0434 320002        	pop	c_x+2
-1104  0437 80            	iret
-1142                     ; 292 @svlreg void UART1_RCV_IRQHandler(void) // recieve data intrrupt
-1142                     ; 293 {
-1143                     	switch	.text
-1144  0438               f_UART1_RCV_IRQHandler:
-1146  0438 8a            	push	cc
-1147  0439 84            	pop	a
-1148  043a a4bf          	and	a,#191
-1149  043c 88            	push	a
-1150  043d 86            	pop	cc
-1151       00000001      OFST:	set	1
-1152  043e 3b0002        	push	c_x+2
-1153  0441 be00          	ldw	x,c_x
-1154  0443 89            	pushw	x
-1155  0444 3b0002        	push	c_y+2
-1156  0447 be00          	ldw	x,c_y
-1157  0449 89            	pushw	x
-1158  044a be02          	ldw	x,c_lreg+2
-1159  044c 89            	pushw	x
-1160  044d be00          	ldw	x,c_lreg
-1161  044f 89            	pushw	x
-1162  0450 88            	push	a
-1165                     ; 294   if (UART1_GetFlagStatus(UART1_FLAG_RXNE)) // If Data is Recieved, this clears
-1167  0451 ae0020        	ldw	x,#32
-1168  0454 cd0000        	call	_UART1_GetFlagStatus
-1170  0457 4d            	tnz	a
-1171  0458 2703          	jreq	L142
-1172                     ; 296     vSerialRecieveISR();
-1174  045a cd0000        	call	_vSerialRecieveISR
-1176  045d               L142:
-1177                     ; 300   if (UART1_GetFlagStatus(UART1_FLAG_IDLE)) // If Data is Recieved, this clears
-1179  045d ae0010        	ldw	x,#16
-1180  0460 cd0000        	call	_UART1_GetFlagStatus
-1182  0463 4d            	tnz	a
-1183  0464 2706          	jreq	L342
-1184                     ; 302     uint8_t temp = UART1_ReceiveData8(); // This will clear IDLE Flag
-1186  0466 cd0000        	call	_UART1_ReceiveData8
-1188                     ; 303     vHandleDataRecvUARTviaISR();
-1190  0469 cd0000        	call	_vHandleDataRecvUARTviaISR
-1192  046c               L342:
-1193                     ; 305 }
-1196  046c 84            	pop	a
-1197  046d 85            	popw	x
-1198  046e bf00          	ldw	c_lreg,x
-1199  0470 85            	popw	x
-1200  0471 bf02          	ldw	c_lreg+2,x
-1201  0473 85            	popw	x
-1202  0474 bf00          	ldw	c_y,x
-1203  0476 320002        	pop	c_y+2
-1204  0479 85            	popw	x
-1205  047a bf00          	ldw	c_x,x
-1206  047c 320002        	pop	c_x+2
-1207  047f 80            	iret
-1232                     ; 307 @svlreg void EXTI_PORTD_IRQHandler(void)
-1232                     ; 308 {
-1233                     	switch	.text
-1234  0480               f_EXTI_PORTD_IRQHandler:
-1236  0480 8a            	push	cc
-1237  0481 84            	pop	a
-1238  0482 a4bf          	and	a,#191
-1239  0484 88            	push	a
-1240  0485 86            	pop	cc
-1241  0486 3b0002        	push	c_x+2
-1242  0489 be00          	ldw	x,c_x
-1243  048b 89            	pushw	x
-1244  048c 3b0002        	push	c_y+2
-1245  048f be00          	ldw	x,c_y
-1246  0491 89            	pushw	x
-1247  0492 be02          	ldw	x,c_lreg+2
-1248  0494 89            	pushw	x
-1249  0495 be00          	ldw	x,c_lreg
-1250  0497 89            	pushw	x
-1253                     ; 311   if (checkit == 1)
-1255  0498 b600          	ld	a,_checkit
-1256  049a a101          	cp	a,#1
-1257  049c 2607          	jrne	L552
-1258                     ; 331     sms_receive();
-1260  049e cd0000        	call	_sms_receive
-1262                     ; 332     checkit = 1;
-1264  04a1 35010000      	mov	_checkit,#1
-1265  04a5               L552:
-1266                     ; 335 }
-1269  04a5 85            	popw	x
-1270  04a6 bf00          	ldw	c_lreg,x
-1271  04a8 85            	popw	x
-1272  04a9 bf02          	ldw	c_lreg+2,x
-1273  04ab 85            	popw	x
-1274  04ac bf00          	ldw	c_y,x
-1275  04ae 320002        	pop	c_y+2
-1276  04b1 85            	popw	x
-1277  04b2 bf00          	ldw	c_x,x
-1278  04b4 320002        	pop	c_x+2
-1279  04b7 80            	iret
-1302                     ; 345 INTERRUPT_HANDLER(NonHandledInterrupt, 25)
-1302                     ; 346 {
-1303                     	switch	.text
-1304  04b8               f_NonHandledInterrupt:
-1308                     ; 350 }
-1311  04b8 80            	iret
-1333                     ; 358 INTERRUPT_HANDLER_TRAP(TRAP_IRQHandler)
-1333                     ; 359 {
-1334                     	switch	.text
-1335  04b9               f_TRAP_IRQHandler:
-1339                     ; 363 }
-1342  04b9 80            	iret
-1364                     ; 370 INTERRUPT_HANDLER(TLI_IRQHandler, 0)
-1364                     ; 371 
-1364                     ; 372 {
-1365                     	switch	.text
-1366  04ba               f_TLI_IRQHandler:
-1370                     ; 376 }
-1373  04ba 80            	iret
-1395                     ; 383 INTERRUPT_HANDLER(AWU_IRQHandler, 1)
-1395                     ; 384 {
-1396                     	switch	.text
-1397  04bb               f_AWU_IRQHandler:
-1401                     ; 388 }
-1404  04bb 80            	iret
-1426                     ; 395 INTERRUPT_HANDLER(CLK_IRQHandler, 2)
-1426                     ; 396 {
-1427                     	switch	.text
-1428  04bc               f_CLK_IRQHandler:
-1432                     ; 400 }
-1435  04bc 80            	iret
-1458                     ; 421 INTERRUPT_HANDLER(EXTI_PORTB_IRQHandler, 4)
-1458                     ; 422 {
-1459                     	switch	.text
-1460  04bd               f_EXTI_PORTB_IRQHandler:
-1464                     ; 426 }
-1467  04bd 80            	iret
-1490                     ; 433 INTERRUPT_HANDLER(EXTI_PORTC_IRQHandler, 5)
-1490                     ; 434 {
-1491                     	switch	.text
-1492  04be               f_EXTI_PORTC_IRQHandler:
-1496                     ; 438 }
-1499  04be 80            	iret
-1522                     ; 457 INTERRUPT_HANDLER(EXTI_PORTE_IRQHandler, 7)
-1522                     ; 458 {
-1523                     	switch	.text
-1524  04bf               f_EXTI_PORTE_IRQHandler:
-1528                     ; 462 }
-1531  04bf 80            	iret
-1553                     ; 509 INTERRUPT_HANDLER(SPI_IRQHandler, 10)
-1553                     ; 510 {
-1554                     	switch	.text
-1555  04c0               f_SPI_IRQHandler:
-1559                     ; 514 }
-1562  04c0 80            	iret
-1585                     ; 521 INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_BRK_IRQHandler, 11)
-1585                     ; 522 {
-1586                     	switch	.text
-1587  04c1               f_TIM1_UPD_OVF_TRG_BRK_IRQHandler:
-1591                     ; 526 }
-1594  04c1 80            	iret
-1617                     ; 533 INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
-1617                     ; 534 {
-1618                     	switch	.text
-1619  04c2               f_TIM1_CAP_COM_IRQHandler:
-1623                     ; 538 }
-1626  04c2 80            	iret
-1649                     ; 571 INTERRUPT_HANDLER(TIM2_UPD_OVF_BRK_IRQHandler, 13)
-1649                     ; 572 {
-1650                     	switch	.text
-1651  04c3               f_TIM2_UPD_OVF_BRK_IRQHandler:
-1655                     ; 576 }
-1658  04c3 80            	iret
-1681                     ; 583 INTERRUPT_HANDLER(TIM2_CAP_COM_IRQHandler, 14)
-1681                     ; 584 {
-1682                     	switch	.text
-1683  04c4               f_TIM2_CAP_COM_IRQHandler:
-1687                     ; 588 }
-1690  04c4 80            	iret
-1713                     ; 598 INTERRUPT_HANDLER(TIM3_UPD_OVF_BRK_IRQHandler, 15)
-1713                     ; 599 {
-1714                     	switch	.text
-1715  04c5               f_TIM3_UPD_OVF_BRK_IRQHandler:
-1719                     ; 603 }
-1722  04c5 80            	iret
-1745                     ; 610 INTERRUPT_HANDLER(TIM3_CAP_COM_IRQHandler, 16)
-1745                     ; 611 {
-1746                     	switch	.text
-1747  04c6               f_TIM3_CAP_COM_IRQHandler:
-1751                     ; 615 }
-1754  04c6 80            	iret
-1777                     ; 625 INTERRUPT_HANDLER(UART1_TX_IRQHandler, 17)
-1777                     ; 626 {
-1778                     	switch	.text
-1779  04c7               f_UART1_TX_IRQHandler:
-1783                     ; 630 }
-1786  04c7 80            	iret
-1809                     ; 637 INTERRUPT_HANDLER(UART1_RX_IRQHandler, 18)
-1809                     ; 638 {
-1810                     	switch	.text
-1811  04c8               f_UART1_RX_IRQHandler:
-1815                     ; 642 }
-1818  04c8 80            	iret
-1840                     ; 676 INTERRUPT_HANDLER(I2C_IRQHandler, 19)
-1840                     ; 677 {
-1841                     	switch	.text
-1842  04c9               f_I2C_IRQHandler:
-1846                     ; 681 }
-1849  04c9 80            	iret
-1872                     ; 715 INTERRUPT_HANDLER(UART3_TX_IRQHandler, 20)
-1872                     ; 716 {
-1873                     	switch	.text
-1874  04ca               f_UART3_TX_IRQHandler:
-1878                     ; 720 }
-1881  04ca 80            	iret
-1904                     ; 727 INTERRUPT_HANDLER(UART3_RX_IRQHandler, 21)
-1904                     ; 728 {
-1905                     	switch	.text
-1906  04cb               f_UART3_RX_IRQHandler:
-1910                     ; 732 }
-1913  04cb 80            	iret
-1935                     ; 741 INTERRUPT_HANDLER(ADC2_IRQHandler, 22)
-1935                     ; 742 {
-1936                     	switch	.text
-1937  04cc               f_ADC2_IRQHandler:
-1941                     ; 746 }
-1944  04cc 80            	iret
-1967                     ; 781 INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
-1967                     ; 782 {
-1968                     	switch	.text
-1969  04cd               f_TIM4_UPD_OVF_IRQHandler:
-1973                     ; 786 }
-1976  04cd 80            	iret
-1999                     ; 794 INTERRUPT_HANDLER(EEPROM_EEC_IRQHandler, 24)
-1999                     ; 795 {
-2000                     	switch	.text
-2001  04ce               f_EEPROM_EEC_IRQHandler:
-2005                     ; 799 }
-2008  04ce 80            	iret
-2196                     	xdef	_powerAccumulateCount
-2197                     	xdef	_storeEnergyPhase3
-2198                     	xdef	_storeEnergyPhase2
-2199                     	xdef	_storeEnergyPhase1
-2200                     	switch	.ubsct
-2201  0008               _energyPhase3:
-2202  0008 00000000      	ds.b	4
-2203                     	xdef	_energyPhase3
-2204  000c               _energyPhase2:
-2205  000c 00000000      	ds.b	4
-2206                     	xdef	_energyPhase2
-2207  0010               _energyPhase1:
-2208  0010 00000000      	ds.b	4
-2209                     	xdef	_energyPhase1
-2210                     	xref.b	_ticsOverflowCounter
-2211                     	xdef	_uartDataReadytoRead
-2212                     	xdef	_timeoutForUART
-2213                     	xdef	_power3ReadFlag
-2214                     	xdef	_power2ReadFlag
-2215                     	xdef	_power1ReadFlag
-2216                     	xref.b	_powerPeriod3
-2217                     	xref.b	_powerPeriod2
-2218                     	xref.b	_powerPeriod1
-2219                     	xdef	_power3OverflowCount
-2220                     	xdef	_power2OverflowCount
-2221                     	xdef	_power1OverflowCount
-2222                     	xref	_sms_receive
-2223                     	xdef	_voltCurrent3OverflowCount
-2224                     	xdef	_voltCurrent2OverflowCount
-2225                     	xdef	_voltCurrent1OverflowCount
-2226                     	xref.b	_powerCalibrationFactor3
-2227                     	xref.b	_powerCalibrationFactor2
-2228                     	xref.b	_powerCalibrationFactor1
-2229                     	xref	_calcWatt3
-2230                     	xref	_calcWatt2
-2231                     	xref	_calcWatt1
-2232                     	xref	_vHandleDataRecvUARTviaISR
-2233                     	xref	_vSerialRecieveISR
-2234                     	xref	_Watt_Phase3
-2235                     	xref	_Watt_Phase2
-2236                     	xref	_Watt_Phase1
-2237                     	xref.b	_checkit
-2238                     	xdef	f_EEPROM_EEC_IRQHandler
-2239                     	xdef	f_TIM4_UPD_OVF_IRQHandler
-2240                     	xdef	f_ADC2_IRQHandler
-2241                     	xdef	f_UART3_TX_IRQHandler
-2242                     	xdef	f_UART3_RX_IRQHandler
-2243                     	xdef	f_I2C_IRQHandler
-2244                     	xdef	f_UART1_RX_IRQHandler
-2245                     	xdef	f_UART1_TX_IRQHandler
-2246                     	xdef	f_TIM3_CAP_COM_IRQHandler
-2247                     	xdef	f_TIM3_UPD_OVF_BRK_IRQHandler
-2248                     	xdef	f_TIM2_CAP_COM_IRQHandler
-2249                     	xdef	f_TIM2_UPD_OVF_BRK_IRQHandler
-2250                     	xdef	f_TIM1_UPD_OVF_TRG_BRK_IRQHandler
-2251                     	xdef	f_TIM1_CAP_COM_IRQHandler
-2252                     	xdef	f_SPI_IRQHandler
-2253                     	xdef	f_EXTI_PORTE_IRQHandler
-2254                     	xdef	f_EXTI_PORTC_IRQHandler
-2255                     	xdef	f_EXTI_PORTB_IRQHandler
-2256                     	xdef	f_CLK_IRQHandler
-2257                     	xdef	f_AWU_IRQHandler
-2258                     	xdef	f_TLI_IRQHandler
-2259                     	xdef	f_TRAP_IRQHandler
-2260                     	xdef	f_NonHandledInterrupt
-2261                     	xref	_UART1_GetFlagStatus
-2262                     	xref	_UART1_ReceiveData8
-2263                     	xref	_TIM2_ClearITPendingBit
-2264                     	xref	_TIM2_GetITStatus
-2265                     	xref	_TIM2_ClearFlag
-2266                     	xref	_TIM2_GetCapture1
-2267                     	xref	_TIM1_ClearITPendingBit
-2268                     	xref	_TIM1_GetITStatus
-2269                     	xref	_TIM1_ClearFlag
-2270                     	xref	_TIM1_GetCapture3
-2271                     	xref	_TIM1_GetCapture1
-2272                     	xdef	f_EXTI_PORTD_IRQHandler
-2273                     	xdef	f_UART1_RCV_IRQHandler
-2274                     	xdef	f_TIM1_CCP_IRQHandler
-2275                     	xdef	f_TIM1_IRQHandler
-2276                     	xdef	f_TIM2_CCP_IRQHandler
-2277                     	xdef	f_TIM2_UPD_IRQHandler
-2278                     	switch	.const
-2279  0004               L14:
-2280  0004 3ff34506      	dc.w	16371,17670
-2281  0008               L13:
-2282  0008 4c604e99      	dc.w	19552,20121
-2283                     	xref.b	c_lreg
-2284                     	xref.b	c_x
-2285                     	xref.b	c_y
-2305                     	xref	c_ladd
-2306                     	xref	c_lsub
-2307                     	xref	c_uitolx
-2308                     	xref	c_umul
-2309                     	xref	c_lgsub
-2310                     	xref	c_lgadc
-2311                     	xref	c_lcmp
-2312                     	xref	c_ftol
-2313                     	xref	c_fadd
-2314                     	xref	c_fdiv
-2315                     	xref	c_fmul
-2316                     	xref	c_rtol
-2317                     	xref	c_itof
-2318                     	xref	c_ultof
-2319                     	xref	c_ltor
-2320                     	xref	c_lzmp
-2321                     	end
+ 144  002e 276e          	jreq	L32
+ 145                     ; 85       storeEnergyPhase1 = storeEnergyPhase1 + ((float)(powerMultiplier * powerCalibrationFactor1) / powerPeriod1) * powerAccumulateTime;
+ 147  0030 ae0000        	ldw	x,#_powerPeriod1
+ 148  0033 cd0000        	call	c_ltor
+ 150  0036 cd0000        	call	c_ultof
+ 152  0039 96            	ldw	x,sp
+ 153  003a 1c0005        	addw	x,#OFST-3
+ 154  003d cd0000        	call	c_rtol
+ 157  0040 be00          	ldw	x,_powerCalibrationFactor1
+ 158  0042 cd0000        	call	c_uitof
+ 160  0045 ae0008        	ldw	x,#L13
+ 161  0048 cd0000        	call	c_fmul
+ 163  004b 96            	ldw	x,sp
+ 164  004c 1c0005        	addw	x,#OFST-3
+ 165  004f cd0000        	call	c_fdiv
+ 167  0052 ae0004        	ldw	x,#L14
+ 168  0055 cd0000        	call	c_fmul
+ 170  0058 96            	ldw	x,sp
+ 171  0059 1c0001        	addw	x,#OFST-7
+ 172  005c cd0000        	call	c_rtol
+ 175  005f ae0008        	ldw	x,#_storeEnergyPhase1
+ 176  0062 cd0000        	call	c_ltor
+ 178  0065 cd0000        	call	c_ultof
+ 180  0068 96            	ldw	x,sp
+ 181  0069 1c0001        	addw	x,#OFST-7
+ 182  006c cd0000        	call	c_fadd
+ 184  006f cd0000        	call	c_ftol
+ 186  0072 ae0008        	ldw	x,#_storeEnergyPhase1
+ 187  0075 cd0000        	call	c_rtol
+ 189                     ; 87       if ((storeEnergyPhase1 >= energyResolution))
+ 191  0078 ae0008        	ldw	x,#_storeEnergyPhase1
+ 192  007b cd0000        	call	c_ltor
+ 194  007e ae0000        	ldw	x,#L6
+ 195  0081 cd0000        	call	c_lcmp
+ 197  0084 2518          	jrult	L32
+ 198                     ; 89         energyPhase1++;
+ 200  0086 ae0010        	ldw	x,#_energyPhase1
+ 201  0089 a601          	ld	a,#1
+ 202  008b cd0000        	call	c_lgadc
+ 204                     ; 90         storeEnergyPhase1 = storeEnergyPhase1 - energyResolution;
+ 206  008e ae5100        	ldw	x,#20736
+ 207  0091 bf02          	ldw	c_lreg+2,x
+ 208  0093 ae0225        	ldw	x,#549
+ 209  0096 bf00          	ldw	c_lreg,x
+ 210  0098 ae0008        	ldw	x,#_storeEnergyPhase1
+ 211  009b cd0000        	call	c_lgsub
+ 213  009e               L32:
+ 214                     ; 94     if (powerPeriod2 != 0)
+ 216  009e ae0000        	ldw	x,#_powerPeriod2
+ 217  00a1 cd0000        	call	c_lzmp
+ 219  00a4 276e          	jreq	L74
+ 220                     ; 96       storeEnergyPhase2 = storeEnergyPhase2 + ((float)(powerMultiplier * powerCalibrationFactor2) / powerPeriod2) * powerAccumulateTime;
+ 222  00a6 ae0000        	ldw	x,#_powerPeriod2
+ 223  00a9 cd0000        	call	c_ltor
+ 225  00ac cd0000        	call	c_ultof
+ 227  00af 96            	ldw	x,sp
+ 228  00b0 1c0005        	addw	x,#OFST-3
+ 229  00b3 cd0000        	call	c_rtol
+ 232  00b6 be00          	ldw	x,_powerCalibrationFactor2
+ 233  00b8 cd0000        	call	c_uitof
+ 235  00bb ae0008        	ldw	x,#L13
+ 236  00be cd0000        	call	c_fmul
+ 238  00c1 96            	ldw	x,sp
+ 239  00c2 1c0005        	addw	x,#OFST-3
+ 240  00c5 cd0000        	call	c_fdiv
+ 242  00c8 ae0004        	ldw	x,#L14
+ 243  00cb cd0000        	call	c_fmul
+ 245  00ce 96            	ldw	x,sp
+ 246  00cf 1c0001        	addw	x,#OFST-7
+ 247  00d2 cd0000        	call	c_rtol
+ 250  00d5 ae000c        	ldw	x,#_storeEnergyPhase2
+ 251  00d8 cd0000        	call	c_ltor
+ 253  00db cd0000        	call	c_ultof
+ 255  00de 96            	ldw	x,sp
+ 256  00df 1c0001        	addw	x,#OFST-7
+ 257  00e2 cd0000        	call	c_fadd
+ 259  00e5 cd0000        	call	c_ftol
+ 261  00e8 ae000c        	ldw	x,#_storeEnergyPhase2
+ 262  00eb cd0000        	call	c_rtol
+ 264                     ; 98       if ((storeEnergyPhase2 >= energyResolution))
+ 266  00ee ae000c        	ldw	x,#_storeEnergyPhase2
+ 267  00f1 cd0000        	call	c_ltor
+ 269  00f4 ae0000        	ldw	x,#L6
+ 270  00f7 cd0000        	call	c_lcmp
+ 272  00fa 2518          	jrult	L74
+ 273                     ; 100         energyPhase2++;
+ 275  00fc ae000c        	ldw	x,#_energyPhase2
+ 276  00ff a601          	ld	a,#1
+ 277  0101 cd0000        	call	c_lgadc
+ 279                     ; 101         storeEnergyPhase2 = storeEnergyPhase2 - energyResolution;
+ 281  0104 ae5100        	ldw	x,#20736
+ 282  0107 bf02          	ldw	c_lreg+2,x
+ 283  0109 ae0225        	ldw	x,#549
+ 284  010c bf00          	ldw	c_lreg,x
+ 285  010e ae000c        	ldw	x,#_storeEnergyPhase2
+ 286  0111 cd0000        	call	c_lgsub
+ 288  0114               L74:
+ 289                     ; 105     if (powerPeriod3 != 0)
+ 291  0114 ae0000        	ldw	x,#_powerPeriod3
+ 292  0117 cd0000        	call	c_lzmp
+ 294  011a 276e          	jreq	L35
+ 295                     ; 107       storeEnergyPhase3 = storeEnergyPhase3 + ((float)(powerMultiplier * powerCalibrationFactor3) / powerPeriod3) * powerAccumulateTime;
+ 297  011c ae0000        	ldw	x,#_powerPeriod3
+ 298  011f cd0000        	call	c_ltor
+ 300  0122 cd0000        	call	c_ultof
+ 302  0125 96            	ldw	x,sp
+ 303  0126 1c0005        	addw	x,#OFST-3
+ 304  0129 cd0000        	call	c_rtol
+ 307  012c be00          	ldw	x,_powerCalibrationFactor3
+ 308  012e cd0000        	call	c_uitof
+ 310  0131 ae0008        	ldw	x,#L13
+ 311  0134 cd0000        	call	c_fmul
+ 313  0137 96            	ldw	x,sp
+ 314  0138 1c0005        	addw	x,#OFST-3
+ 315  013b cd0000        	call	c_fdiv
+ 317  013e ae0004        	ldw	x,#L14
+ 318  0141 cd0000        	call	c_fmul
+ 320  0144 96            	ldw	x,sp
+ 321  0145 1c0001        	addw	x,#OFST-7
+ 322  0148 cd0000        	call	c_rtol
+ 325  014b ae0010        	ldw	x,#_storeEnergyPhase3
+ 326  014e cd0000        	call	c_ltor
+ 328  0151 cd0000        	call	c_ultof
+ 330  0154 96            	ldw	x,sp
+ 331  0155 1c0001        	addw	x,#OFST-7
+ 332  0158 cd0000        	call	c_fadd
+ 334  015b cd0000        	call	c_ftol
+ 336  015e ae0010        	ldw	x,#_storeEnergyPhase3
+ 337  0161 cd0000        	call	c_rtol
+ 339                     ; 109       if ((storeEnergyPhase3 >= energyResolution))
+ 341  0164 ae0010        	ldw	x,#_storeEnergyPhase3
+ 342  0167 cd0000        	call	c_ltor
+ 344  016a ae0000        	ldw	x,#L6
+ 345  016d cd0000        	call	c_lcmp
+ 347  0170 2518          	jrult	L35
+ 348                     ; 111         energyPhase3++;
+ 350  0172 ae0008        	ldw	x,#_energyPhase3
+ 351  0175 a601          	ld	a,#1
+ 352  0177 cd0000        	call	c_lgadc
+ 354                     ; 112         storeEnergyPhase3 = storeEnergyPhase3 - energyResolution;
+ 356  017a ae5100        	ldw	x,#20736
+ 357  017d bf02          	ldw	c_lreg+2,x
+ 358  017f ae0225        	ldw	x,#549
+ 359  0182 bf00          	ldw	c_lreg,x
+ 360  0184 ae0010        	ldw	x,#_storeEnergyPhase3
+ 361  0187 cd0000        	call	c_lgsub
+ 363  018a               L35:
+ 364                     ; 116     powerAccumulateCount = 0;
+ 366  018a 3f14          	clr	_powerAccumulateCount
+ 367  018c               L12:
+ 368                     ; 119   if (power1OverflowCount < powerOverflowCountMax)
+ 370  018c b603          	ld	a,_power1OverflowCount
+ 371  018e a164          	cp	a,#100
+ 372  0190 2404          	jruge	L75
+ 373                     ; 121     power1OverflowCount++;
+ 375  0192 3c03          	inc	_power1OverflowCount
+ 377  0194 201a          	jra	L16
+ 378  0196               L75:
+ 379                     ; 125     powerPeriod1 = 0;
+ 381  0196 ae0000        	ldw	x,#0
+ 382  0199 bf02          	ldw	_powerPeriod1+2,x
+ 383  019b ae0000        	ldw	x,#0
+ 384  019e bf00          	ldw	_powerPeriod1,x
+ 385                     ; 126     Watt_Phase1 = 0; // Added By Saqib
+ 387  01a0 ae0000        	ldw	x,#0
+ 388  01a3 cf0002        	ldw	_Watt_Phase1+2,x
+ 389  01a6 ae0000        	ldw	x,#0
+ 390  01a9 cf0000        	ldw	_Watt_Phase1,x
+ 391                     ; 127     power1ReadFlag = false;
+ 393  01ac 72110000      	bres	_power1ReadFlag
+ 394  01b0               L16:
+ 395                     ; 133   if (power2OverflowCount < powerOverflowCountMax)
+ 397  01b0 b604          	ld	a,_power2OverflowCount
+ 398  01b2 a164          	cp	a,#100
+ 399  01b4 2404          	jruge	L36
+ 400                     ; 135     power2OverflowCount++;
+ 402  01b6 3c04          	inc	_power2OverflowCount
+ 404  01b8 201a          	jra	L56
+ 405  01ba               L36:
+ 406                     ; 139     powerPeriod2 = 0;
+ 408  01ba ae0000        	ldw	x,#0
+ 409  01bd bf02          	ldw	_powerPeriod2+2,x
+ 410  01bf ae0000        	ldw	x,#0
+ 411  01c2 bf00          	ldw	_powerPeriod2,x
+ 412                     ; 140     power2ReadFlag = false;
+ 414  01c4 72110001      	bres	_power2ReadFlag
+ 415                     ; 141     Watt_Phase2 = 0; // Added By Saqib
+ 417  01c8 ae0000        	ldw	x,#0
+ 418  01cb cf0002        	ldw	_Watt_Phase2+2,x
+ 419  01ce ae0000        	ldw	x,#0
+ 420  01d1 cf0000        	ldw	_Watt_Phase2,x
+ 421  01d4               L56:
+ 422                     ; 147   powerAccumulateCount++;
+ 424  01d4 3c14          	inc	_powerAccumulateCount
+ 425                     ; 151   TIM1_ClearITPendingBit(TIM1_IT_UPDATE);
+ 427  01d6 a601          	ld	a,#1
+ 428  01d8 cd0000        	call	_TIM1_ClearITPendingBit
+ 430                     ; 152   TIM1_ClearFlag(TIM1_FLAG_UPDATE);
+ 432  01db ae0001        	ldw	x,#1
+ 433  01de cd0000        	call	_TIM1_ClearFlag
+ 435                     ; 153 }
+ 438  01e1 5b08          	addw	sp,#8
+ 439  01e3 85            	popw	x
+ 440  01e4 bf00          	ldw	c_lreg,x
+ 441  01e6 85            	popw	x
+ 442  01e7 bf02          	ldw	c_lreg+2,x
+ 443  01e9 85            	popw	x
+ 444  01ea bf00          	ldw	c_y,x
+ 445  01ec 320002        	pop	c_y+2
+ 446  01ef 85            	popw	x
+ 447  01f0 bf00          	ldw	c_x,x
+ 448  01f2 320002        	pop	c_x+2
+ 449  01f5 80            	iret
+ 480                     ; 155 void TIM2_UPD_IRQHandler(void) //to control power,voltage,current overflow counter
+ 480                     ; 156 {
+ 481                     	switch	.text
+ 482  01f6               f_TIM2_UPD_IRQHandler:
+ 484  01f6 8a            	push	cc
+ 485  01f7 84            	pop	a
+ 486  01f8 a4bf          	and	a,#191
+ 487  01fa 88            	push	a
+ 488  01fb 86            	pop	cc
+ 489  01fc 3b0002        	push	c_x+2
+ 490  01ff be00          	ldw	x,c_x
+ 491  0201 89            	pushw	x
+ 492  0202 3b0002        	push	c_y+2
+ 493  0205 be00          	ldw	x,c_y
+ 494  0207 89            	pushw	x
+ 497                     ; 157   ticsOverflowCounter++;
+ 499  0208 ae0000        	ldw	x,#_ticsOverflowCounter
+ 500  020b a601          	ld	a,#1
+ 501  020d cd0000        	call	c_lgadc
+ 503                     ; 159   if (power3OverflowCount < powerOverflowCountMax)
+ 505  0210 b605          	ld	a,_power3OverflowCount
+ 506  0212 a164          	cp	a,#100
+ 507  0214 2404          	jruge	L77
+ 508                     ; 161     power3OverflowCount++;
+ 510  0216 3c05          	inc	_power3OverflowCount
+ 512  0218 201a          	jra	L101
+ 513  021a               L77:
+ 514                     ; 165     powerPeriod3 = 0;
+ 516  021a ae0000        	ldw	x,#0
+ 517  021d bf02          	ldw	_powerPeriod3+2,x
+ 518  021f ae0000        	ldw	x,#0
+ 519  0222 bf00          	ldw	_powerPeriod3,x
+ 520                     ; 166     Watt_Phase3 = 0; // Added By Saqib
+ 522  0224 ae0000        	ldw	x,#0
+ 523  0227 cf0002        	ldw	_Watt_Phase3+2,x
+ 524  022a ae0000        	ldw	x,#0
+ 525  022d cf0000        	ldw	_Watt_Phase3,x
+ 526                     ; 167     power3ReadFlag = false;
+ 528  0230 72110002      	bres	_power3ReadFlag
+ 529  0234               L101:
+ 530                     ; 173   voltCurrent3OverflowCount++;
+ 532  0234 3c02          	inc	_voltCurrent3OverflowCount
+ 533                     ; 175   TIM2_ClearITPendingBit(TIM2_IT_UPDATE);
+ 535  0236 a601          	ld	a,#1
+ 536  0238 cd0000        	call	_TIM2_ClearITPendingBit
+ 538                     ; 176   TIM2_ClearFlag(TIM2_FLAG_UPDATE);
+ 540  023b ae0001        	ldw	x,#1
+ 541  023e cd0000        	call	_TIM2_ClearFlag
+ 543                     ; 177 }
+ 546  0241 85            	popw	x
+ 547  0242 bf00          	ldw	c_y,x
+ 548  0244 320002        	pop	c_y+2
+ 549  0247 85            	popw	x
+ 550  0248 bf00          	ldw	c_x,x
+ 551  024a 320002        	pop	c_x+2
+ 552  024d 80            	iret
+ 554                     	switch	.ubsct
+ 555  0000               L301_powerEndTime:
+ 556  0000 0000          	ds.b	2
+ 557  0002               L501_power3StartTime:
+ 558  0002 0000          	ds.b	2
+ 638                     ; 186 void TIM2_CCP_IRQHandler(void)
+ 638                     ; 187 {
+ 639                     	switch	.text
+ 640  024e               f_TIM2_CCP_IRQHandler:
+ 642  024e 8a            	push	cc
+ 643  024f 84            	pop	a
+ 644  0250 a4bf          	and	a,#191
+ 645  0252 88            	push	a
+ 646  0253 86            	pop	cc
+ 647       00000009      OFST:	set	9
+ 648  0254 3b0002        	push	c_x+2
+ 649  0257 be00          	ldw	x,c_x
+ 650  0259 89            	pushw	x
+ 651  025a 3b0002        	push	c_y+2
+ 652  025d be00          	ldw	x,c_y
+ 653  025f 89            	pushw	x
+ 654  0260 be02          	ldw	x,c_lreg+2
+ 655  0262 89            	pushw	x
+ 656  0263 be00          	ldw	x,c_lreg
+ 657  0265 89            	pushw	x
+ 658  0266 5209          	subw	sp,#9
+ 661                     ; 195   timer2Ch1_ITStatus = TIM2_GetITStatus(TIM2_IT_CC1);
+ 663  0268 a602          	ld	a,#2
+ 664  026a cd0000        	call	_TIM2_GetITStatus
+ 666  026d 6b09          	ld	(OFST+0,sp),a
+ 668                     ; 197   if (timer2Ch1_ITStatus == SET)
+ 670  026f 7b09          	ld	a,(OFST+0,sp)
+ 671  0271 a101          	cp	a,#1
+ 672  0273 2663          	jrne	L541
+ 673                     ; 199     powerEndTime = TIM2_GetCapture1(); /* Read Timer value on Input Capture event */
+ 675  0275 cd0000        	call	_TIM2_GetCapture1
+ 677  0278 bf00          	ldw	L301_powerEndTime,x
+ 678                     ; 201     if (power3ReadFlag == true) /* Avoid Calculation on first capture */
+ 680                     	btst	_power3ReadFlag
+ 681  027f 2442          	jruge	L741
+ 682                     ; 203       powerPeriod3 = timer2MaxCount * power3OverflowCount - power3StartTime + powerEndTime;
+ 684  0281 be00          	ldw	x,L301_powerEndTime
+ 685  0283 cd0000        	call	c_uitolx
+ 687  0286 96            	ldw	x,sp
+ 688  0287 1c0005        	addw	x,#OFST-4
+ 689  028a cd0000        	call	c_rtol
+ 692  028d be02          	ldw	x,L501_power3StartTime
+ 693  028f cd0000        	call	c_uitolx
+ 695  0292 96            	ldw	x,sp
+ 696  0293 1c0001        	addw	x,#OFST-8
+ 697  0296 cd0000        	call	c_rtol
+ 700  0299 b605          	ld	a,_power3OverflowCount
+ 701  029b 5f            	clrw	x
+ 702  029c 97            	ld	xl,a
+ 703  029d 90aeffff      	ldw	y,#65535
+ 704  02a1 cd0000        	call	c_umul
+ 706  02a4 96            	ldw	x,sp
+ 707  02a5 1c0001        	addw	x,#OFST-8
+ 708  02a8 cd0000        	call	c_lsub
+ 710  02ab 96            	ldw	x,sp
+ 711  02ac 1c0005        	addw	x,#OFST-4
+ 712  02af cd0000        	call	c_ladd
+ 714  02b2 ae0000        	ldw	x,#_powerPeriod3
+ 715  02b5 cd0000        	call	c_rtol
+ 717                     ; 204       calcWatt3(powerPeriod3);
+ 719  02b8 be02          	ldw	x,_powerPeriod3+2
+ 720  02ba 89            	pushw	x
+ 721  02bb be00          	ldw	x,_powerPeriod3
+ 722  02bd 89            	pushw	x
+ 723  02be cd0000        	call	_calcWatt3
+ 725  02c1 5b04          	addw	sp,#4
+ 726  02c3               L741:
+ 727                     ; 224     power3StartTime = powerEndTime;
+ 729  02c3 be00          	ldw	x,L301_powerEndTime
+ 730  02c5 bf02          	ldw	L501_power3StartTime,x
+ 731                     ; 225     power3OverflowCount = 0;
+ 733  02c7 3f05          	clr	_power3OverflowCount
+ 734                     ; 226     power3ReadFlag = true;
+ 736  02c9 72100002      	bset	_power3ReadFlag
+ 737                     ; 227     TIM2_ClearITPendingBit(TIM2_IT_CC1);
+ 739  02cd a602          	ld	a,#2
+ 740  02cf cd0000        	call	_TIM2_ClearITPendingBit
+ 742                     ; 228     TIM2_ClearFlag(TIM2_FLAG_CC1);
+ 744  02d2 ae0002        	ldw	x,#2
+ 745  02d5 cd0000        	call	_TIM2_ClearFlag
+ 747  02d8               L541:
+ 748                     ; 230 }
+ 751  02d8 5b09          	addw	sp,#9
+ 752  02da 85            	popw	x
+ 753  02db bf00          	ldw	c_lreg,x
+ 754  02dd 85            	popw	x
+ 755  02de bf02          	ldw	c_lreg+2,x
+ 756  02e0 85            	popw	x
+ 757  02e1 bf00          	ldw	c_y,x
+ 758  02e3 320002        	pop	c_y+2
+ 759  02e6 85            	popw	x
+ 760  02e7 bf00          	ldw	c_x,x
+ 761  02e9 320002        	pop	c_x+2
+ 762  02ec 80            	iret
+ 764                     	switch	.ubsct
+ 765  0004               L351_power2StartTime:
+ 766  0004 0000          	ds.b	2
+ 767  0006               L151_power1StartTime:
+ 768  0006 0000          	ds.b	2
+ 852                     ; 240 void TIM1_CCP_IRQHandler(void)
+ 852                     ; 241 {
+ 853                     	switch	.text
+ 854  02ed               f_TIM1_CCP_IRQHandler:
+ 856  02ed 8a            	push	cc
+ 857  02ee 84            	pop	a
+ 858  02ef a4bf          	and	a,#191
+ 859  02f1 88            	push	a
+ 860  02f2 86            	pop	cc
+ 861       0000000b      OFST:	set	11
+ 862  02f3 3b0002        	push	c_x+2
+ 863  02f6 be00          	ldw	x,c_x
+ 864  02f8 89            	pushw	x
+ 865  02f9 3b0002        	push	c_y+2
+ 866  02fc be00          	ldw	x,c_y
+ 867  02fe 89            	pushw	x
+ 868  02ff be02          	ldw	x,c_lreg+2
+ 869  0301 89            	pushw	x
+ 870  0302 be00          	ldw	x,c_lreg
+ 871  0304 89            	pushw	x
+ 872  0305 520b          	subw	sp,#11
+ 875                     ; 248   timer1Ch1_ITStatus = TIM1_GetITStatus(TIM1_IT_CC1);
+ 877  0307 a602          	ld	a,#2
+ 878  0309 cd0000        	call	_TIM1_GetITStatus
+ 880  030c 6b09          	ld	(OFST-2,sp),a
+ 882                     ; 249   if (timer1Ch1_ITStatus == SET)
+ 884  030e 7b09          	ld	a,(OFST-2,sp)
+ 885  0310 a101          	cp	a,#1
+ 886  0312 2663          	jrne	L312
+ 887                     ; 251     powerEndTime = TIM1_GetCapture1();
+ 889  0314 cd0000        	call	_TIM1_GetCapture1
+ 891  0317 1f0a          	ldw	(OFST-1,sp),x
+ 893                     ; 253     if (power1ReadFlag == true) /* Avoid Calculation on first capture */
+ 895                     	btst	_power1ReadFlag
+ 896  031e 2442          	jruge	L512
+ 897                     ; 255       powerPeriod1 = ((timer1MaxCount * power1OverflowCount) - power1StartTime) + powerEndTime;
+ 899  0320 1e0a          	ldw	x,(OFST-1,sp)
+ 900  0322 cd0000        	call	c_uitolx
+ 902  0325 96            	ldw	x,sp
+ 903  0326 1c0005        	addw	x,#OFST-6
+ 904  0329 cd0000        	call	c_rtol
+ 907  032c be06          	ldw	x,L151_power1StartTime
+ 908  032e cd0000        	call	c_uitolx
+ 910  0331 96            	ldw	x,sp
+ 911  0332 1c0001        	addw	x,#OFST-10
+ 912  0335 cd0000        	call	c_rtol
+ 915  0338 b603          	ld	a,_power1OverflowCount
+ 916  033a 5f            	clrw	x
+ 917  033b 97            	ld	xl,a
+ 918  033c 90aeffff      	ldw	y,#65535
+ 919  0340 cd0000        	call	c_umul
+ 921  0343 96            	ldw	x,sp
+ 922  0344 1c0001        	addw	x,#OFST-10
+ 923  0347 cd0000        	call	c_lsub
+ 925  034a 96            	ldw	x,sp
+ 926  034b 1c0005        	addw	x,#OFST-6
+ 927  034e cd0000        	call	c_ladd
+ 929  0351 ae0000        	ldw	x,#_powerPeriod1
+ 930  0354 cd0000        	call	c_rtol
+ 932                     ; 256       calcWatt1(powerPeriod1);//Added by Saqib
+ 934  0357 be02          	ldw	x,_powerPeriod1+2
+ 935  0359 89            	pushw	x
+ 936  035a be00          	ldw	x,_powerPeriod1
+ 937  035c 89            	pushw	x
+ 938  035d cd0000        	call	_calcWatt1
+ 940  0360 5b04          	addw	sp,#4
+ 941  0362               L512:
+ 942                     ; 262     power1StartTime = powerEndTime;
+ 944  0362 1e0a          	ldw	x,(OFST-1,sp)
+ 945  0364 bf06          	ldw	L151_power1StartTime,x
+ 946                     ; 263     power1OverflowCount = 0;
+ 948  0366 3f03          	clr	_power1OverflowCount
+ 949                     ; 264     power1ReadFlag = true;
+ 951  0368 72100000      	bset	_power1ReadFlag
+ 952                     ; 265     TIM1_ClearITPendingBit(TIM1_IT_CC1);
+ 954  036c a602          	ld	a,#2
+ 955  036e cd0000        	call	_TIM1_ClearITPendingBit
+ 957                     ; 266     TIM1_ClearFlag(TIM1_FLAG_CC1);
+ 959  0371 ae0002        	ldw	x,#2
+ 960  0374 cd0000        	call	_TIM1_ClearFlag
+ 962  0377               L312:
+ 963                     ; 269   timer1Ch3_ITStatus = TIM1_GetITStatus(/*TIM1_IT_CC2*/TIM1_IT_CC3); /* Interrupt status check */
+ 965  0377 a608          	ld	a,#8
+ 966  0379 cd0000        	call	_TIM1_GetITStatus
+ 968  037c 6b09          	ld	(OFST-2,sp),a
+ 970                     ; 271   if (timer1Ch3_ITStatus == SET)
+ 972  037e 7b09          	ld	a,(OFST-2,sp)
+ 973  0380 a101          	cp	a,#1
+ 974  0382 2663          	jrne	L712
+ 975                     ; 273     powerEndTime = TIM1_GetCapture3();
+ 977  0384 cd0000        	call	_TIM1_GetCapture3
+ 979  0387 1f0a          	ldw	(OFST-1,sp),x
+ 981                     ; 275     if (power2ReadFlag == true) /* Avoid Calculation on first capture */
+ 983                     	btst	_power2ReadFlag
+ 984  038e 2442          	jruge	L122
+ 985                     ; 277       powerPeriod2 = timer1MaxCount * power2OverflowCount - power2StartTime + powerEndTime;
+ 987  0390 1e0a          	ldw	x,(OFST-1,sp)
+ 988  0392 cd0000        	call	c_uitolx
+ 990  0395 96            	ldw	x,sp
+ 991  0396 1c0005        	addw	x,#OFST-6
+ 992  0399 cd0000        	call	c_rtol
+ 995  039c be04          	ldw	x,L351_power2StartTime
+ 996  039e cd0000        	call	c_uitolx
+ 998  03a1 96            	ldw	x,sp
+ 999  03a2 1c0001        	addw	x,#OFST-10
+1000  03a5 cd0000        	call	c_rtol
+1003  03a8 b604          	ld	a,_power2OverflowCount
+1004  03aa 5f            	clrw	x
+1005  03ab 97            	ld	xl,a
+1006  03ac 90aeffff      	ldw	y,#65535
+1007  03b0 cd0000        	call	c_umul
+1009  03b3 96            	ldw	x,sp
+1010  03b4 1c0001        	addw	x,#OFST-10
+1011  03b7 cd0000        	call	c_lsub
+1013  03ba 96            	ldw	x,sp
+1014  03bb 1c0005        	addw	x,#OFST-6
+1015  03be cd0000        	call	c_ladd
+1017  03c1 ae0000        	ldw	x,#_powerPeriod2
+1018  03c4 cd0000        	call	c_rtol
+1020                     ; 278       calcWatt2(powerPeriod2);//Added by Saqib
+1022  03c7 be02          	ldw	x,_powerPeriod2+2
+1023  03c9 89            	pushw	x
+1024  03ca be00          	ldw	x,_powerPeriod2
+1025  03cc 89            	pushw	x
+1026  03cd cd0000        	call	_calcWatt2
+1028  03d0 5b04          	addw	sp,#4
+1029  03d2               L122:
+1030                     ; 284     power2StartTime = powerEndTime;
+1032  03d2 1e0a          	ldw	x,(OFST-1,sp)
+1033  03d4 bf04          	ldw	L351_power2StartTime,x
+1034                     ; 285     power2OverflowCount = 0;
+1036  03d6 3f04          	clr	_power2OverflowCount
+1037                     ; 286     power2ReadFlag = true;
+1039  03d8 72100001      	bset	_power2ReadFlag
+1040                     ; 287     TIM1_ClearITPendingBit(TIM1_IT_CC3);
+1042  03dc a608          	ld	a,#8
+1043  03de cd0000        	call	_TIM1_ClearITPendingBit
+1045                     ; 288     TIM1_ClearFlag(TIM1_FLAG_CC3);
+1047  03e1 ae0008        	ldw	x,#8
+1048  03e4 cd0000        	call	_TIM1_ClearFlag
+1050  03e7               L712:
+1051                     ; 290 }
+1054  03e7 5b0b          	addw	sp,#11
+1055  03e9 85            	popw	x
+1056  03ea bf00          	ldw	c_lreg,x
+1057  03ec 85            	popw	x
+1058  03ed bf02          	ldw	c_lreg+2,x
+1059  03ef 85            	popw	x
+1060  03f0 bf00          	ldw	c_y,x
+1061  03f2 320002        	pop	c_y+2
+1062  03f5 85            	popw	x
+1063  03f6 bf00          	ldw	c_x,x
+1064  03f8 320002        	pop	c_x+2
+1065  03fb 80            	iret
+1103                     ; 292 @svlreg void UART1_RCV_IRQHandler(void) // recieve data intrrupt
+1103                     ; 293 {
+1104                     	switch	.text
+1105  03fc               f_UART1_RCV_IRQHandler:
+1107  03fc 8a            	push	cc
+1108  03fd 84            	pop	a
+1109  03fe a4bf          	and	a,#191
+1110  0400 88            	push	a
+1111  0401 86            	pop	cc
+1112       00000001      OFST:	set	1
+1113  0402 3b0002        	push	c_x+2
+1114  0405 be00          	ldw	x,c_x
+1115  0407 89            	pushw	x
+1116  0408 3b0002        	push	c_y+2
+1117  040b be00          	ldw	x,c_y
+1118  040d 89            	pushw	x
+1119  040e be02          	ldw	x,c_lreg+2
+1120  0410 89            	pushw	x
+1121  0411 be00          	ldw	x,c_lreg
+1122  0413 89            	pushw	x
+1123  0414 88            	push	a
+1126                     ; 294   if (UART1_GetFlagStatus(UART1_FLAG_RXNE)) // If Data is Recieved, this clears
+1128  0415 ae0020        	ldw	x,#32
+1129  0418 cd0000        	call	_UART1_GetFlagStatus
+1131  041b 4d            	tnz	a
+1132  041c 2703          	jreq	L142
+1133                     ; 296     vSerialRecieveISR();
+1135  041e cd0000        	call	_vSerialRecieveISR
+1137  0421               L142:
+1138                     ; 300   if (UART1_GetFlagStatus(UART1_FLAG_IDLE)) // If Data is Recieved, this clears
+1140  0421 ae0010        	ldw	x,#16
+1141  0424 cd0000        	call	_UART1_GetFlagStatus
+1143  0427 4d            	tnz	a
+1144  0428 2706          	jreq	L342
+1145                     ; 302     uint8_t temp = UART1_ReceiveData8(); // This will clear IDLE Flag
+1147  042a cd0000        	call	_UART1_ReceiveData8
+1149                     ; 303     vHandleDataRecvUARTviaISR();
+1151  042d cd0000        	call	_vHandleDataRecvUARTviaISR
+1153  0430               L342:
+1154                     ; 305 }
+1157  0430 84            	pop	a
+1158  0431 85            	popw	x
+1159  0432 bf00          	ldw	c_lreg,x
+1160  0434 85            	popw	x
+1161  0435 bf02          	ldw	c_lreg+2,x
+1162  0437 85            	popw	x
+1163  0438 bf00          	ldw	c_y,x
+1164  043a 320002        	pop	c_y+2
+1165  043d 85            	popw	x
+1166  043e bf00          	ldw	c_x,x
+1167  0440 320002        	pop	c_x+2
+1168  0443 80            	iret
+1193                     ; 307 @svlreg void EXTI_PORTD_IRQHandler(void)
+1193                     ; 308 {
+1194                     	switch	.text
+1195  0444               f_EXTI_PORTD_IRQHandler:
+1197  0444 8a            	push	cc
+1198  0445 84            	pop	a
+1199  0446 a4bf          	and	a,#191
+1200  0448 88            	push	a
+1201  0449 86            	pop	cc
+1202  044a 3b0002        	push	c_x+2
+1203  044d be00          	ldw	x,c_x
+1204  044f 89            	pushw	x
+1205  0450 3b0002        	push	c_y+2
+1206  0453 be00          	ldw	x,c_y
+1207  0455 89            	pushw	x
+1208  0456 be02          	ldw	x,c_lreg+2
+1209  0458 89            	pushw	x
+1210  0459 be00          	ldw	x,c_lreg
+1211  045b 89            	pushw	x
+1214                     ; 311   if (checkit == 1)
+1216  045c b600          	ld	a,_checkit
+1217  045e a101          	cp	a,#1
+1218  0460 2607          	jrne	L552
+1219                     ; 331     sms_receive();
+1221  0462 cd0000        	call	_sms_receive
+1223                     ; 332     checkit = 1;
+1225  0465 35010000      	mov	_checkit,#1
+1226  0469               L552:
+1227                     ; 335 }
+1230  0469 85            	popw	x
+1231  046a bf00          	ldw	c_lreg,x
+1232  046c 85            	popw	x
+1233  046d bf02          	ldw	c_lreg+2,x
+1234  046f 85            	popw	x
+1235  0470 bf00          	ldw	c_y,x
+1236  0472 320002        	pop	c_y+2
+1237  0475 85            	popw	x
+1238  0476 bf00          	ldw	c_x,x
+1239  0478 320002        	pop	c_x+2
+1240  047b 80            	iret
+1263                     ; 345 INTERRUPT_HANDLER(NonHandledInterrupt, 25)
+1263                     ; 346 {
+1264                     	switch	.text
+1265  047c               f_NonHandledInterrupt:
+1269                     ; 350 }
+1272  047c 80            	iret
+1294                     ; 358 INTERRUPT_HANDLER_TRAP(TRAP_IRQHandler)
+1294                     ; 359 {
+1295                     	switch	.text
+1296  047d               f_TRAP_IRQHandler:
+1300                     ; 363 }
+1303  047d 80            	iret
+1325                     ; 370 INTERRUPT_HANDLER(TLI_IRQHandler, 0)
+1325                     ; 371 
+1325                     ; 372 {
+1326                     	switch	.text
+1327  047e               f_TLI_IRQHandler:
+1331                     ; 376 }
+1334  047e 80            	iret
+1356                     ; 383 INTERRUPT_HANDLER(AWU_IRQHandler, 1)
+1356                     ; 384 {
+1357                     	switch	.text
+1358  047f               f_AWU_IRQHandler:
+1362                     ; 388 }
+1365  047f 80            	iret
+1387                     ; 395 INTERRUPT_HANDLER(CLK_IRQHandler, 2)
+1387                     ; 396 {
+1388                     	switch	.text
+1389  0480               f_CLK_IRQHandler:
+1393                     ; 400 }
+1396  0480 80            	iret
+1419                     ; 421 INTERRUPT_HANDLER(EXTI_PORTB_IRQHandler, 4)
+1419                     ; 422 {
+1420                     	switch	.text
+1421  0481               f_EXTI_PORTB_IRQHandler:
+1425                     ; 426 }
+1428  0481 80            	iret
+1451                     ; 433 INTERRUPT_HANDLER(EXTI_PORTC_IRQHandler, 5)
+1451                     ; 434 {
+1452                     	switch	.text
+1453  0482               f_EXTI_PORTC_IRQHandler:
+1457                     ; 438 }
+1460  0482 80            	iret
+1483                     ; 457 INTERRUPT_HANDLER(EXTI_PORTE_IRQHandler, 7)
+1483                     ; 458 {
+1484                     	switch	.text
+1485  0483               f_EXTI_PORTE_IRQHandler:
+1489                     ; 462 }
+1492  0483 80            	iret
+1514                     ; 509 INTERRUPT_HANDLER(SPI_IRQHandler, 10)
+1514                     ; 510 {
+1515                     	switch	.text
+1516  0484               f_SPI_IRQHandler:
+1520                     ; 514 }
+1523  0484 80            	iret
+1546                     ; 521 INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_BRK_IRQHandler, 11)
+1546                     ; 522 {
+1547                     	switch	.text
+1548  0485               f_TIM1_UPD_OVF_TRG_BRK_IRQHandler:
+1552                     ; 526 }
+1555  0485 80            	iret
+1578                     ; 533 INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
+1578                     ; 534 {
+1579                     	switch	.text
+1580  0486               f_TIM1_CAP_COM_IRQHandler:
+1584                     ; 538 }
+1587  0486 80            	iret
+1610                     ; 571 INTERRUPT_HANDLER(TIM2_UPD_OVF_BRK_IRQHandler, 13)
+1610                     ; 572 {
+1611                     	switch	.text
+1612  0487               f_TIM2_UPD_OVF_BRK_IRQHandler:
+1616                     ; 576 }
+1619  0487 80            	iret
+1642                     ; 583 INTERRUPT_HANDLER(TIM2_CAP_COM_IRQHandler, 14)
+1642                     ; 584 {
+1643                     	switch	.text
+1644  0488               f_TIM2_CAP_COM_IRQHandler:
+1648                     ; 588 }
+1651  0488 80            	iret
+1674                     ; 598 INTERRUPT_HANDLER(TIM3_UPD_OVF_BRK_IRQHandler, 15)
+1674                     ; 599 {
+1675                     	switch	.text
+1676  0489               f_TIM3_UPD_OVF_BRK_IRQHandler:
+1680                     ; 603 }
+1683  0489 80            	iret
+1706                     ; 610 INTERRUPT_HANDLER(TIM3_CAP_COM_IRQHandler, 16)
+1706                     ; 611 {
+1707                     	switch	.text
+1708  048a               f_TIM3_CAP_COM_IRQHandler:
+1712                     ; 615 }
+1715  048a 80            	iret
+1738                     ; 625 INTERRUPT_HANDLER(UART1_TX_IRQHandler, 17)
+1738                     ; 626 {
+1739                     	switch	.text
+1740  048b               f_UART1_TX_IRQHandler:
+1744                     ; 630 }
+1747  048b 80            	iret
+1770                     ; 637 INTERRUPT_HANDLER(UART1_RX_IRQHandler, 18)
+1770                     ; 638 {
+1771                     	switch	.text
+1772  048c               f_UART1_RX_IRQHandler:
+1776                     ; 642 }
+1779  048c 80            	iret
+1801                     ; 676 INTERRUPT_HANDLER(I2C_IRQHandler, 19)
+1801                     ; 677 {
+1802                     	switch	.text
+1803  048d               f_I2C_IRQHandler:
+1807                     ; 681 }
+1810  048d 80            	iret
+1833                     ; 715 INTERRUPT_HANDLER(UART3_TX_IRQHandler, 20)
+1833                     ; 716 {
+1834                     	switch	.text
+1835  048e               f_UART3_TX_IRQHandler:
+1839                     ; 720 }
+1842  048e 80            	iret
+1865                     ; 727 INTERRUPT_HANDLER(UART3_RX_IRQHandler, 21)
+1865                     ; 728 {
+1866                     	switch	.text
+1867  048f               f_UART3_RX_IRQHandler:
+1871                     ; 732 }
+1874  048f 80            	iret
+1896                     ; 741 INTERRUPT_HANDLER(ADC2_IRQHandler, 22)
+1896                     ; 742 {
+1897                     	switch	.text
+1898  0490               f_ADC2_IRQHandler:
+1902                     ; 746 }
+1905  0490 80            	iret
+1928                     ; 781 INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
+1928                     ; 782 {
+1929                     	switch	.text
+1930  0491               f_TIM4_UPD_OVF_IRQHandler:
+1934                     ; 786 }
+1937  0491 80            	iret
+1960                     ; 794 INTERRUPT_HANDLER(EEPROM_EEC_IRQHandler, 24)
+1960                     ; 795 {
+1961                     	switch	.text
+1962  0492               f_EEPROM_EEC_IRQHandler:
+1966                     ; 799 }
+1969  0492 80            	iret
+2157                     	xdef	_powerAccumulateCount
+2158                     	xdef	_storeEnergyPhase3
+2159                     	xdef	_storeEnergyPhase2
+2160                     	xdef	_storeEnergyPhase1
+2161                     	switch	.ubsct
+2162  0008               _energyPhase3:
+2163  0008 00000000      	ds.b	4
+2164                     	xdef	_energyPhase3
+2165  000c               _energyPhase2:
+2166  000c 00000000      	ds.b	4
+2167                     	xdef	_energyPhase2
+2168  0010               _energyPhase1:
+2169  0010 00000000      	ds.b	4
+2170                     	xdef	_energyPhase1
+2171                     	xref.b	_ticsOverflowCounter
+2172                     	xdef	_uartDataReadytoRead
+2173                     	xdef	_timeoutForUART
+2174                     	xdef	_power3ReadFlag
+2175                     	xdef	_power2ReadFlag
+2176                     	xdef	_power1ReadFlag
+2177                     	xref.b	_powerPeriod3
+2178                     	xref.b	_powerPeriod2
+2179                     	xref.b	_powerPeriod1
+2180                     	xdef	_power3OverflowCount
+2181                     	xdef	_power2OverflowCount
+2182                     	xdef	_power1OverflowCount
+2183                     	xref	_sms_receive
+2184                     	xdef	_voltCurrent3OverflowCount
+2185                     	xdef	_voltCurrent2OverflowCount
+2186                     	xdef	_voltCurrent1OverflowCount
+2187                     	xref.b	_powerCalibrationFactor3
+2188                     	xref.b	_powerCalibrationFactor2
+2189                     	xref.b	_powerCalibrationFactor1
+2190                     	xref	_calcWatt3
+2191                     	xref	_calcWatt2
+2192                     	xref	_calcWatt1
+2193                     	xref	_vHandleDataRecvUARTviaISR
+2194                     	xref	_vSerialRecieveISR
+2195                     	xref	_Watt_Phase3
+2196                     	xref	_Watt_Phase2
+2197                     	xref	_Watt_Phase1
+2198                     	xref.b	_checkit
+2199                     	xdef	f_EEPROM_EEC_IRQHandler
+2200                     	xdef	f_TIM4_UPD_OVF_IRQHandler
+2201                     	xdef	f_ADC2_IRQHandler
+2202                     	xdef	f_UART3_TX_IRQHandler
+2203                     	xdef	f_UART3_RX_IRQHandler
+2204                     	xdef	f_I2C_IRQHandler
+2205                     	xdef	f_UART1_RX_IRQHandler
+2206                     	xdef	f_UART1_TX_IRQHandler
+2207                     	xdef	f_TIM3_CAP_COM_IRQHandler
+2208                     	xdef	f_TIM3_UPD_OVF_BRK_IRQHandler
+2209                     	xdef	f_TIM2_CAP_COM_IRQHandler
+2210                     	xdef	f_TIM2_UPD_OVF_BRK_IRQHandler
+2211                     	xdef	f_TIM1_UPD_OVF_TRG_BRK_IRQHandler
+2212                     	xdef	f_TIM1_CAP_COM_IRQHandler
+2213                     	xdef	f_SPI_IRQHandler
+2214                     	xdef	f_EXTI_PORTE_IRQHandler
+2215                     	xdef	f_EXTI_PORTC_IRQHandler
+2216                     	xdef	f_EXTI_PORTB_IRQHandler
+2217                     	xdef	f_CLK_IRQHandler
+2218                     	xdef	f_AWU_IRQHandler
+2219                     	xdef	f_TLI_IRQHandler
+2220                     	xdef	f_TRAP_IRQHandler
+2221                     	xdef	f_NonHandledInterrupt
+2222                     	xref	_UART1_GetFlagStatus
+2223                     	xref	_UART1_ReceiveData8
+2224                     	xref	_TIM2_ClearITPendingBit
+2225                     	xref	_TIM2_GetITStatus
+2226                     	xref	_TIM2_ClearFlag
+2227                     	xref	_TIM2_GetCapture1
+2228                     	xref	_TIM1_ClearITPendingBit
+2229                     	xref	_TIM1_GetITStatus
+2230                     	xref	_TIM1_ClearFlag
+2231                     	xref	_TIM1_GetCapture3
+2232                     	xref	_TIM1_GetCapture1
+2233                     	xdef	f_EXTI_PORTD_IRQHandler
+2234                     	xdef	f_UART1_RCV_IRQHandler
+2235                     	xdef	f_TIM1_CCP_IRQHandler
+2236                     	xdef	f_TIM1_IRQHandler
+2237                     	xdef	f_TIM2_CCP_IRQHandler
+2238                     	xdef	f_TIM2_UPD_IRQHandler
+2239                     	switch	.const
+2240  0004               L14:
+2241  0004 3ff34506      	dc.w	16371,17670
+2242  0008               L13:
+2243  0008 4c604e99      	dc.w	19552,20121
+2244                     	xref.b	c_lreg
+2245                     	xref.b	c_x
+2246                     	xref.b	c_y
+2266                     	xref	c_ladd
+2267                     	xref	c_lsub
+2268                     	xref	c_uitolx
+2269                     	xref	c_umul
+2270                     	xref	c_lgsub
+2271                     	xref	c_lgadc
+2272                     	xref	c_lcmp
+2273                     	xref	c_ftol
+2274                     	xref	c_fadd
+2275                     	xref	c_fdiv
+2276                     	xref	c_rtol
+2277                     	xref	c_fmul
+2278                     	xref	c_uitof
+2279                     	xref	c_ultof
+2280                     	xref	c_ltor
+2281                     	xref	c_lzmp
+2282                     	end

@@ -75,7 +75,6 @@ void main(void)
 						   // while ( getTics() - previousTics < uartTimout)
 						   //{
 						   //	IWDG_ReloadCounter();
-		
 	}
 }
 
@@ -86,7 +85,7 @@ void sms_receive(void)
 	// uint8_t check_cmnd[10];
 	uint8_t temp1[10] = "";
 	uint8_t calibrationFactor[4];
-	uint8_t value;
+	uint16_t value;
 	uint8_t i;
 	uint8_t j;
 	uint8_t m;
@@ -145,6 +144,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(CheckByte, 'A');//Earlier
 		FLASH_ProgramByte(CheckByte, 'B'); //Changed by Saqib
 		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	if (strstr(uart_buffer, "CALIBRATION DONE"))
@@ -153,6 +153,7 @@ void sms_receive(void)
 		FLASH_Unlock(FLASH_MEMTYPE_DATA);
 		FLASH_ProgramByte(CheckByte, 'A');
 		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	if (strstr(uart_buffer, "V1CalFac = "))
@@ -166,9 +167,12 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		voltageCalibrationFactor1 = value; //Added By saqib, earlier not present
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(V1CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(V1CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(V1CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, V1CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	else if (strstr(uart_buffer, "V2CalFac = "))
@@ -182,9 +186,13 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		voltageCalibrationFactor2 = value; //Added By saqib, earlier not present
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(V2CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(V2CabFab, value);
+		// FLASH_ProgramByte(V2CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(V2CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, V2CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	else if (strstr(uart_buffer, "V3CalFac = "))
@@ -198,9 +206,13 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		voltageCalibrationFactor3 = value;
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(V3CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(V3CabFab, value);
+		// FLASH_ProgramByte(V3CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(V3CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, V3CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	else if (strstr(uart_buffer, "I1CalFac = "))
@@ -214,9 +226,13 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		currentCalibrationFactor1 = value; //Added By saqib, earlier not present
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(I1CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(I1CabFab, value);
+		// FLASH_ProgramByte(I1CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(I1CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, I1CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	else if (strstr(uart_buffer, "I2CalFac = "))
@@ -230,9 +246,13 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		currentCalibrationFactor2 = value; //Added By saqib, earlier not present
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(I2CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(I2CabFab, value);
+		// FLASH_ProgramByte(I2CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(I2CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, I2CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	else if (strstr(uart_buffer, "I3CalFac = "))
@@ -246,9 +266,13 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		currentCalibrationFactor3 = value;
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(I3CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(I3CabFab, value);
+		// FLASH_ProgramByte(I3CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(I3CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, I3CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	else if (strstr(uart_buffer, "P1CalFac = "))
@@ -262,9 +286,13 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		powerCalibrationFactor1 = value; //Added By saqib, earlier not present
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(P1CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(P1CabFab, value);
+		// FLASH_ProgramByte(P1CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(P1CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, P1CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	else if (strstr(uart_buffer, "P2CalFac = "))
@@ -278,9 +306,13 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		powerCalibrationFactor2 = value; //Added By saqib, earlier not present
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(P2CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(P2CabFab, value);
+		// FLASH_ProgramByte(P2CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(P2CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, P2CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
 
 	else if (strstr(uart_buffer, "P3CalFac = "))
@@ -294,11 +326,16 @@ void sms_receive(void)
 		calibrationFactor[n] = '\0';
 		value = atoi(calibrationFactor);
 		powerCalibrationFactor3 = value;
-		FLASH_Unlock(FLASH_MEMTYPE_DATA);
-		FLASH_ProgramByte(P3CabFab, value);
-		FLASH_Lock(FLASH_MEMTYPE_DATA);
+		// FLASH_Unlock(FLASH_MEMTYPE_DATA);
+		// FLASH_ProgramByte(P3CabFab, value);
+		// FLASH_ProgramByte(P3CabFab_LSB, (value & 0xFF));
+		// FLASH_ProgramByte(P3CabFab_MSB, ((value >> 8) & 0xFF));
+		// FLASH_ProgramWord()
+		// FLASH_Lock(FLASH_MEMTYPE_DATA);
+		WriteFlashWord(value, P3CabFab);
+		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	}
-
+	// bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	if (strstr(uart_buffer, "CURRENT1"))
 	{
 		sendSMSCurrent(Ampere_Phase1, cell_num); //Changed by Saqib

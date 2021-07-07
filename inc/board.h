@@ -16,16 +16,35 @@ typedef enum {
 
 enum
 {
-    V1CabFab = 0x4000,
-    V2CabFab = 0x4001,
-    V3CabFab = 0x4002,
-    I1CabFab = 0x4003,
-    I2CabFab = 0x4004,
-    I3CabFab = 0x4005,
-    P1CabFab = 0x4006,
-    P2CabFab = 0x4007,
-    P3CabFab = 0x4008,
-    CheckByte = 0x4009
+    // V1CabFab_LSB = 0x4000,//0x4000
+    // V1CabFab_MSB = 0x4001,
+    V1CabFab = 0x4000,  
+    // V2CabFab_LSB = 0x4002,//0x4001
+    // V2CabFab_MSB = 0x4003,
+    V2CabFab = 0x4004,
+    // V3CabFab_LSB = 0x4004,//0x4002
+    // V3CabFab_MSB = 0x4005,
+    V3CabFab = 0x4008,
+    // I1CabFab_LSB = 0x4006,//0x4003
+    // I1CabFab_MSB = 0x4007,
+    I1CabFab = 0x400C,
+    // I2CabFab_LSB = 0x4008,//0x4004
+    // I2CabFab_MSB = 0x4009,
+    I2CabFab = 0x4010,
+    // I3CabFab_LSB = 0x400A,//0x4005
+    // I3CabFab_MSB = 0x400B,
+    I3CabFab = 0x4014,
+    // P1CabFab_LSB = 0x400C,//0x4006
+    // P1CabFab_MSB = 0x400D,
+    P1CabFab = 0x4018,
+    // P2CabFab_LSB = 0x400E,//0x4007
+    // P2CabFab_MSB = 0x400F,
+    P2CabFab = 0x401C,
+    // P3CabFab_LSB = 0x4010,//0x4008
+    // P3CabFab_MSB = 0x4011,
+    P3CabFab = 0x4020,
+
+    CheckByte = 0x4025//0x4009
 };
 
 void clockSetup(void);
@@ -38,6 +57,7 @@ void EXTI_setup(void);
 void getCalibration(void);
 void ADCSetup(void);
 void UARTSetup(uint32_t , UARTCONFIG);
+void WriteFlashWord(uint16_t data, uint32_t address);
 extern bool checkit;
 #define stm8s
 #define timer2MaxCount 65535
@@ -118,6 +138,7 @@ extern bool checkit;
 #define TCP_START_WIRELESS_CONN	"AT+CIICR" //Module will Start Wireless Connection, responds "OK" if done
 #define startTCP_CMD "AT+CIPSTART=\"TCP\",\"mqtt.mevris.io\",\"3881\""
 #define TCP_SEND_VARIABLE_LENGTH "AT+CIPSEND" //AT+CIPSEND= expects 0x1A to know end of data
+#define TCP_SEND_FIXED_LENGTH "AT+CIPSEND=" //AT+CIPSEND= expects 0x1A to know end of data
 #define TCP_GET_STATUS "AT+CIPSTATUS" //Module will return status of TCP Connection
 #define HTTPINIT "AT+HTTPINIT"
 #define HTTP_URL "AT+HTTPPARA=\"URL\",\"http://ptsv2.com/t/d9bxi-1612442037/post\""

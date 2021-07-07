@@ -13,9 +13,9 @@
 
 #define MEVRIS_SEND_DATA_MAX_SIZE 100
 #define MEVRIS_RECV_DATA_MAX_SIZE 70
-#define MQTT_TOPIC_HEADER "sc2"		//For Genset, "sc1" for CDI
-#define MQTT_INBOUND_TOPIC_FOOTER "cmd"
-#define MQTT_OUTBOUND_TOPIC_FOOTER "evt"
+#define MQTT_TOPIC_HEADER 			"sc2"		//For Genset, "sc1" for CDI
+#define MQTT_INBOUND_TOPIC_FOOTER 	"command" //"command" 
+#define MQTT_OUTBOUND_TOPIC_FOOTER 	"event"
 
 typedef enum COMMAND_TYPE_ENUM
 {
@@ -69,4 +69,7 @@ extern @near uint32_t Fuellevel;
 extern @near float Temperature1;
 extern @near float Temperature2;
 
+extern @near uint8_t aunMQTT_ClientID[20];
+extern @near uint8_t aunMQTT_Subscribe_Topic[30];
+extern @near uint8_t aunMQTT_Publish_Topic[30];
 #endif
