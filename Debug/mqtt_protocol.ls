@@ -1,6 +1,6 @@
    1                     ; C Compiler for STM8 (COSMIC Software)
-   2                     ; Parser V4.12.1 - 30 Jun 2020
-   3                     ; Generator (Limited) V4.4.12 - 02 Jul 2020
+   2                     ; Parser V4.11.10 - 06 Jul 2017
+   3                     ; Generator (Limited) V4.4.7 - 05 Oct 2017
   14                     	bsct
   15  0000               L3_buffer:
   16  0000 00            	dc.b	0
@@ -149,7 +149,7 @@
  366  00ce 02            	rlwa	x,a
  368                     ; 170 	for ( j = 0; j < i; j++)
  370  00cf 0f10          	clr	(OFST+0,sp)
- 373  00d1 2033          	jra	L521
+ 373  00d1 2036          	jra	L521
  374  00d3               L121:
  375                     ; 172 		punBuffer[ulTotalPacketLength++] = *(ptr + j);
  377  00d3 1e11          	ldw	x,(OFST+1,sp)
@@ -168,1418 +168,1478 @@
  396  00f0 1c0001        	addw	x,#OFST-15
  397  00f3 cd0000        	call	c_ladd
  399  00f6 be02          	ldw	x,c_lreg+2
- 400  00f8 7b10          	ld	a,(OFST+0,sp)
- 401  00fa 905f          	clrw	y
- 402  00fc 9097          	ld	yl,a
- 403  00fe 72f909        	addw	y,(OFST-7,sp)
- 404  0101 90f6          	ld	a,(y)
- 405  0103 f7            	ld	(x),a
- 406                     ; 170 	for ( j = 0; j < i; j++)
- 408  0104 0c10          	inc	(OFST+0,sp)
- 410  0106               L521:
- 413  0106 7b10          	ld	a,(OFST+0,sp)
- 414  0108 110b          	cp	a,(OFST-5,sp)
- 415  010a 25c7          	jrult	L121
- 416                     ; 175     i = strlen( ( const char* )PROTOCOL_NAME);
- 418  010c a604          	ld	a,#4
- 419  010e 6b0b          	ld	(OFST-5,sp),a
- 421                     ; 176 	punBuffer[ulTotalPacketLength++] = (i >> 8) & 0xFF;	//Variable Header:  Protocol Name Length Most Significant Byte
- 423  0110 1e11          	ldw	x,(OFST+1,sp)
- 424  0112 cd0000        	call	c_uitolx
- 426  0115 96            	ldw	x,sp
- 427  0116 1c0001        	addw	x,#OFST-15
- 428  0119 cd0000        	call	c_rtol
- 431  011c 96            	ldw	x,sp
- 432  011d 1c000c        	addw	x,#OFST-4
- 433  0120 cd0000        	call	c_ltor
- 435  0123 96            	ldw	x,sp
- 436  0124 1c000c        	addw	x,#OFST-4
- 437  0127 a601          	ld	a,#1
- 438  0129 cd0000        	call	c_lgadc
- 441  012c 96            	ldw	x,sp
- 442  012d 1c0001        	addw	x,#OFST-15
- 443  0130 cd0000        	call	c_ladd
- 445  0133 be02          	ldw	x,c_lreg+2
- 446  0135 7f            	clr	(x)
- 447                     ; 177 	punBuffer[ulTotalPacketLength++] = (i >> 0) & 0xFF;	//Variable Header:  Protocol Name Length Least Significant Byte
- 449  0136 1e11          	ldw	x,(OFST+1,sp)
- 450  0138 cd0000        	call	c_uitolx
- 452  013b 96            	ldw	x,sp
- 453  013c 1c0001        	addw	x,#OFST-15
- 454  013f cd0000        	call	c_rtol
- 457  0142 96            	ldw	x,sp
- 458  0143 1c000c        	addw	x,#OFST-4
- 459  0146 cd0000        	call	c_ltor
- 461  0149 96            	ldw	x,sp
- 462  014a 1c000c        	addw	x,#OFST-4
- 463  014d a601          	ld	a,#1
- 464  014f cd0000        	call	c_lgadc
- 467  0152 96            	ldw	x,sp
- 468  0153 1c0001        	addw	x,#OFST-15
- 469  0156 cd0000        	call	c_ladd
- 471  0159 be02          	ldw	x,c_lreg+2
- 472  015b 7b0b          	ld	a,(OFST-5,sp)
- 473  015d a4ff          	and	a,#255
- 474  015f f7            	ld	(x),a
- 475                     ; 178 	for (j = 0; j < i; j++)
- 477  0160 0f10          	clr	(OFST+0,sp)
- 480  0162 2032          	jra	L531
- 481  0164               L131:
- 482                     ; 180         punBuffer[ulTotalPacketLength++] = (uint8_t)PROTOCOL_NAME[j];
- 484  0164 1e11          	ldw	x,(OFST+1,sp)
- 485  0166 cd0000        	call	c_uitolx
- 487  0169 96            	ldw	x,sp
- 488  016a 1c0001        	addw	x,#OFST-15
- 489  016d cd0000        	call	c_rtol
- 492  0170 96            	ldw	x,sp
- 493  0171 1c000c        	addw	x,#OFST-4
- 494  0174 cd0000        	call	c_ltor
- 496  0177 96            	ldw	x,sp
- 497  0178 1c000c        	addw	x,#OFST-4
- 498  017b a601          	ld	a,#1
- 499  017d cd0000        	call	c_lgadc
- 502  0180 96            	ldw	x,sp
- 503  0181 1c0001        	addw	x,#OFST-15
- 504  0184 cd0000        	call	c_ladd
- 506  0187 be02          	ldw	x,c_lreg+2
- 507  0189 7b10          	ld	a,(OFST+0,sp)
- 508  018b 905f          	clrw	y
- 509  018d 9097          	ld	yl,a
- 510  018f 90d60000      	ld	a,(L141,y)
- 511  0193 f7            	ld	(x),a
- 512                     ; 178 	for (j = 0; j < i; j++)
- 514  0194 0c10          	inc	(OFST+0,sp)
- 516  0196               L531:
- 519  0196 7b10          	ld	a,(OFST+0,sp)
- 520  0198 110b          	cp	a,(OFST-5,sp)
- 521  019a 25c8          	jrult	L131
- 522                     ; 187 	punBuffer[ulTotalPacketLength++] = 0x04;	//Variable Header:  Protocol Level: which is fixed Level-4
- 524  019c 1e11          	ldw	x,(OFST+1,sp)
- 525  019e cd0000        	call	c_uitolx
- 527  01a1 96            	ldw	x,sp
- 528  01a2 1c0001        	addw	x,#OFST-15
- 529  01a5 cd0000        	call	c_rtol
- 532  01a8 96            	ldw	x,sp
- 533  01a9 1c000c        	addw	x,#OFST-4
- 534  01ac cd0000        	call	c_ltor
- 536  01af 96            	ldw	x,sp
- 537  01b0 1c000c        	addw	x,#OFST-4
- 538  01b3 a601          	ld	a,#1
- 539  01b5 cd0000        	call	c_lgadc
- 542  01b8 96            	ldw	x,sp
- 543  01b9 1c0001        	addw	x,#OFST-15
- 544  01bc cd0000        	call	c_ladd
- 546  01bf be02          	ldw	x,c_lreg+2
- 547  01c1 a604          	ld	a,#4
- 548  01c3 f7            	ld	(x),a
- 549                     ; 199 	punBuffer[ulTotalPacketLength++] = 0x02;
- 551  01c4 1e11          	ldw	x,(OFST+1,sp)
- 552  01c6 cd0000        	call	c_uitolx
- 554  01c9 96            	ldw	x,sp
- 555  01ca 1c0001        	addw	x,#OFST-15
- 556  01cd cd0000        	call	c_rtol
- 559  01d0 96            	ldw	x,sp
- 560  01d1 1c000c        	addw	x,#OFST-4
- 561  01d4 cd0000        	call	c_ltor
- 563  01d7 96            	ldw	x,sp
- 564  01d8 1c000c        	addw	x,#OFST-4
- 565  01db a601          	ld	a,#1
- 566  01dd cd0000        	call	c_lgadc
- 569  01e0 96            	ldw	x,sp
- 570  01e1 1c0001        	addw	x,#OFST-15
- 571  01e4 cd0000        	call	c_ladd
- 573  01e7 be02          	ldw	x,c_lreg+2
- 574  01e9 a602          	ld	a,#2
- 575  01eb f7            	ld	(x),a
- 576                     ; 200 	punBuffer[ulTotalPacketLength++] = ((uint16_t)KEEP_ALIVE_TIMEOUT	>> 8)	&	0xFF;	////Variable Header:  Keep Alive Most Significant Byte
- 578  01ec 1e11          	ldw	x,(OFST+1,sp)
- 579  01ee cd0000        	call	c_uitolx
- 581  01f1 96            	ldw	x,sp
- 582  01f2 1c0001        	addw	x,#OFST-15
- 583  01f5 cd0000        	call	c_rtol
- 586  01f8 96            	ldw	x,sp
- 587  01f9 1c000c        	addw	x,#OFST-4
- 588  01fc cd0000        	call	c_ltor
- 590  01ff 96            	ldw	x,sp
- 591  0200 1c000c        	addw	x,#OFST-4
- 592  0203 a601          	ld	a,#1
- 593  0205 cd0000        	call	c_lgadc
- 596  0208 96            	ldw	x,sp
- 597  0209 1c0001        	addw	x,#OFST-15
- 598  020c cd0000        	call	c_ladd
- 600  020f be02          	ldw	x,c_lreg+2
- 601  0211 7f            	clr	(x)
- 602                     ; 201 	punBuffer[ulTotalPacketLength++] = ((uint16_t)KEEP_ALIVE_TIMEOUT	>> 0)	&	0xFF;	////Variable Header:  Keep Alive Least Significant Byte
- 604  0212 1e11          	ldw	x,(OFST+1,sp)
- 605  0214 cd0000        	call	c_uitolx
- 607  0217 96            	ldw	x,sp
- 608  0218 1c0001        	addw	x,#OFST-15
- 609  021b cd0000        	call	c_rtol
- 612  021e 96            	ldw	x,sp
- 613  021f 1c000c        	addw	x,#OFST-4
- 614  0222 cd0000        	call	c_ltor
- 616  0225 96            	ldw	x,sp
- 617  0226 1c000c        	addw	x,#OFST-4
- 618  0229 a601          	ld	a,#1
- 619  022b cd0000        	call	c_lgadc
- 622  022e 96            	ldw	x,sp
- 623  022f 1c0001        	addw	x,#OFST-15
- 624  0232 cd0000        	call	c_ladd
- 626  0235 be02          	ldw	x,c_lreg+2
- 627  0237 a63c          	ld	a,#60
- 628  0239 f7            	ld	(x),a
- 629                     ; 205 	ptr = (uint8_t *)punEncodeLength(strlen( ( const char* )punClientIdentifier));
- 631  023a 1e15          	ldw	x,(OFST+5,sp)
- 632  023c cd0000        	call	_strlen
- 634  023f cd0000        	call	c_uitolx
- 636  0242 be02          	ldw	x,c_lreg+2
- 637  0244 89            	pushw	x
- 638  0245 be00          	ldw	x,c_lreg
- 639  0247 89            	pushw	x
- 640  0248 cd0000        	call	_punEncodeLength
- 642  024b 5b04          	addw	sp,#4
- 643  024d 1f09          	ldw	(OFST-7,sp),x
- 645                     ; 206 	i = strlen( ( const char* )ptr);
- 647  024f 1e09          	ldw	x,(OFST-7,sp)
- 648  0251 cd0000        	call	_strlen
- 650  0254 01            	rrwa	x,a
- 651  0255 6b0b          	ld	(OFST-5,sp),a
- 652  0257 02            	rlwa	x,a
- 654                     ; 207 	if(i < 2)
- 656  0258 7b0b          	ld	a,(OFST-5,sp)
- 657  025a a102          	cp	a,#2
- 658  025c 2452          	jruge	L341
- 659                     ; 209 		punBuffer[ulTotalPacketLength++] = 0;
- 661  025e 1e11          	ldw	x,(OFST+1,sp)
- 662  0260 cd0000        	call	c_uitolx
- 664  0263 96            	ldw	x,sp
- 665  0264 1c0001        	addw	x,#OFST-15
- 666  0267 cd0000        	call	c_rtol
- 669  026a 96            	ldw	x,sp
- 670  026b 1c000c        	addw	x,#OFST-4
- 671  026e cd0000        	call	c_ltor
- 673  0271 96            	ldw	x,sp
- 674  0272 1c000c        	addw	x,#OFST-4
- 675  0275 a601          	ld	a,#1
- 676  0277 cd0000        	call	c_lgadc
- 679  027a 96            	ldw	x,sp
- 680  027b 1c0001        	addw	x,#OFST-15
- 681  027e cd0000        	call	c_ladd
- 683  0281 be02          	ldw	x,c_lreg+2
- 684  0283 7f            	clr	(x)
- 685                     ; 210 		punBuffer[ulTotalPacketLength++] = *(ptr);
- 687  0284 1e11          	ldw	x,(OFST+1,sp)
- 688  0286 cd0000        	call	c_uitolx
- 690  0289 96            	ldw	x,sp
- 691  028a 1c0001        	addw	x,#OFST-15
- 692  028d cd0000        	call	c_rtol
- 695  0290 96            	ldw	x,sp
- 696  0291 1c000c        	addw	x,#OFST-4
- 697  0294 cd0000        	call	c_ltor
- 699  0297 96            	ldw	x,sp
- 700  0298 1c000c        	addw	x,#OFST-4
- 701  029b a601          	ld	a,#1
- 702  029d cd0000        	call	c_lgadc
- 705  02a0 96            	ldw	x,sp
- 706  02a1 1c0001        	addw	x,#OFST-15
- 707  02a4 cd0000        	call	c_ladd
- 709  02a7 be02          	ldw	x,c_lreg+2
- 710  02a9 1609          	ldw	y,(OFST-7,sp)
- 711  02ab 90f6          	ld	a,(y)
- 712  02ad f7            	ld	(x),a
- 714  02ae 2055          	jra	L541
- 715  02b0               L341:
- 716                     ; 214 		punBuffer[ulTotalPacketLength++] = *(ptr);
- 718  02b0 1e11          	ldw	x,(OFST+1,sp)
- 719  02b2 cd0000        	call	c_uitolx
- 721  02b5 96            	ldw	x,sp
- 722  02b6 1c0001        	addw	x,#OFST-15
- 723  02b9 cd0000        	call	c_rtol
- 726  02bc 96            	ldw	x,sp
- 727  02bd 1c000c        	addw	x,#OFST-4
- 728  02c0 cd0000        	call	c_ltor
- 730  02c3 96            	ldw	x,sp
- 731  02c4 1c000c        	addw	x,#OFST-4
- 732  02c7 a601          	ld	a,#1
- 733  02c9 cd0000        	call	c_lgadc
- 736  02cc 96            	ldw	x,sp
- 737  02cd 1c0001        	addw	x,#OFST-15
- 738  02d0 cd0000        	call	c_ladd
- 740  02d3 be02          	ldw	x,c_lreg+2
- 741  02d5 1609          	ldw	y,(OFST-7,sp)
- 742  02d7 90f6          	ld	a,(y)
- 743  02d9 f7            	ld	(x),a
- 744                     ; 215 		punBuffer[ulTotalPacketLength++] = *(ptr+1);
- 746  02da 1e11          	ldw	x,(OFST+1,sp)
- 747  02dc cd0000        	call	c_uitolx
- 749  02df 96            	ldw	x,sp
- 750  02e0 1c0001        	addw	x,#OFST-15
- 751  02e3 cd0000        	call	c_rtol
- 754  02e6 96            	ldw	x,sp
- 755  02e7 1c000c        	addw	x,#OFST-4
- 756  02ea cd0000        	call	c_ltor
- 758  02ed 96            	ldw	x,sp
- 759  02ee 1c000c        	addw	x,#OFST-4
- 760  02f1 a601          	ld	a,#1
- 761  02f3 cd0000        	call	c_lgadc
- 764  02f6 96            	ldw	x,sp
- 765  02f7 1c0001        	addw	x,#OFST-15
- 766  02fa cd0000        	call	c_ladd
- 768  02fd be02          	ldw	x,c_lreg+2
- 769  02ff 1609          	ldw	y,(OFST-7,sp)
- 770  0301 90e601        	ld	a,(1,y)
- 771  0304 f7            	ld	(x),a
- 772  0305               L541:
- 773                     ; 217 	i = strlen( ( const char* )punClientIdentifier);
- 775  0305 1e15          	ldw	x,(OFST+5,sp)
- 776  0307 cd0000        	call	_strlen
- 778  030a 01            	rrwa	x,a
- 779  030b 6b0b          	ld	(OFST-5,sp),a
- 780  030d 02            	rlwa	x,a
- 782                     ; 218 	for ( j = 0; j < i; j++)
- 784  030e 0f10          	clr	(OFST+0,sp)
- 787  0310 2033          	jra	L351
- 788  0312               L741:
- 789                     ; 220 		punBuffer[ulTotalPacketLength++] = punClientIdentifier[j];
- 791  0312 1e11          	ldw	x,(OFST+1,sp)
- 792  0314 cd0000        	call	c_uitolx
- 794  0317 96            	ldw	x,sp
- 795  0318 1c0001        	addw	x,#OFST-15
- 796  031b cd0000        	call	c_rtol
- 799  031e 96            	ldw	x,sp
- 800  031f 1c000c        	addw	x,#OFST-4
- 801  0322 cd0000        	call	c_ltor
- 803  0325 96            	ldw	x,sp
- 804  0326 1c000c        	addw	x,#OFST-4
- 805  0329 a601          	ld	a,#1
- 806  032b cd0000        	call	c_lgadc
- 809  032e 96            	ldw	x,sp
- 810  032f 1c0001        	addw	x,#OFST-15
- 811  0332 cd0000        	call	c_ladd
- 813  0335 be02          	ldw	x,c_lreg+2
- 814  0337 7b10          	ld	a,(OFST+0,sp)
- 815  0339 905f          	clrw	y
- 816  033b 9097          	ld	yl,a
- 817  033d 72f915        	addw	y,(OFST+5,sp)
- 818  0340 90f6          	ld	a,(y)
- 819  0342 f7            	ld	(x),a
- 820                     ; 218 	for ( j = 0; j < i; j++)
- 822  0343 0c10          	inc	(OFST+0,sp)
- 824  0345               L351:
- 827  0345 7b10          	ld	a,(OFST+0,sp)
- 828  0347 110b          	cp	a,(OFST-5,sp)
- 829  0349 25c7          	jrult	L741
- 830                     ; 298 	punBuffer[ulTotalPacketLength]	=	'\0';
- 832  034b 1e11          	ldw	x,(OFST+1,sp)
- 833  034d 72fb0e        	addw	x,(OFST-2,sp)
- 834  0350 7f            	clr	(x)
- 835                     ; 300 	return ulTotalPacketLength;
- 837  0351 96            	ldw	x,sp
- 838  0352 1c000c        	addw	x,#OFST-4
- 839  0355 cd0000        	call	c_ltor
- 843  0358 5b12          	addw	sp,#18
- 844  035a 81            	ret
-1149                     ; 303 uint32_t ulMQTT_Publish ( uint8_t *punBuffer, uint8_t *punTopic, uint8_t *punMessage/*, enMQTT_CTRL_PKT_FLAGS ePublishFlags*/ )
-1149                     ; 304 {
-1150                     	switch	.text
-1151  035b               _ulMQTT_Publish:
-1153  035b 89            	pushw	x
-1154  035c 5210          	subw	sp,#16
-1155       00000010      OFST:	set	16
-1158                     ; 305 	uint32_t ulTotalPacketLength	= 0;
-1160  035e ae0000        	ldw	x,#0
-1161  0361 1f0d          	ldw	(OFST-3,sp),x
-1162  0363 ae0000        	ldw	x,#0
-1163  0366 1f0b          	ldw	(OFST-5,sp),x
-1165                     ; 306 	uint32_t ulRemainingLength		= 0;
-1167  0368 ae0000        	ldw	x,#0
-1168  036b 1f07          	ldw	(OFST-9,sp),x
-1169  036d ae0000        	ldw	x,#0
-1170  0370 1f05          	ldw	(OFST-11,sp),x
-1172                     ; 307 	uint8_t i = 0, j = 0, *ptr;
-1176                     ; 309 	enum MQTT_CTRL_PKT_FLAGS_ENUM ePublishFlags = eCTRL_PKT_FLAG_PUBLISH_D0_0_R0;
-1178  0372 0f0f          	clr	(OFST-1,sp)
-1180                     ; 313 	punBuffer[ulTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_PUBLISH & 0xF) << 4 ) & 0xF0) | (( (uint8_t)ePublishFlags & 0x0F) );
-1182  0374 1e11          	ldw	x,(OFST+1,sp)
-1183  0376 cd0000        	call	c_uitolx
-1185  0379 96            	ldw	x,sp
-1186  037a 1c0001        	addw	x,#OFST-15
-1187  037d cd0000        	call	c_rtol
-1190  0380 96            	ldw	x,sp
-1191  0381 1c000b        	addw	x,#OFST-5
-1192  0384 cd0000        	call	c_ltor
-1194  0387 96            	ldw	x,sp
-1195  0388 1c000b        	addw	x,#OFST-5
-1196  038b a601          	ld	a,#1
-1197  038d cd0000        	call	c_lgadc
-1200  0390 96            	ldw	x,sp
-1201  0391 1c0001        	addw	x,#OFST-15
-1202  0394 cd0000        	call	c_ladd
-1204  0397 be02          	ldw	x,c_lreg+2
-1205  0399 a630          	ld	a,#48
-1206  039b f7            	ld	(x),a
-1207                     ; 316 	ulRemainingLength	+=	2;	//Variable Header: Topic Name Length size in 2 Bytes
-1209  039c 96            	ldw	x,sp
-1210  039d 1c0005        	addw	x,#OFST-11
-1211  03a0 a602          	ld	a,#2
-1212  03a2 cd0000        	call	c_lgadc
-1215                     ; 317 	ulRemainingLength	+=	strlen( ( const char* )punTopic);	//Variable Header: Topic Name
-1217  03a5 1e15          	ldw	x,(OFST+5,sp)
-1218  03a7 cd0000        	call	_strlen
-1220  03aa cd0000        	call	c_uitolx
-1222  03ad 96            	ldw	x,sp
-1223  03ae 1c0005        	addw	x,#OFST-11
-1224  03b1 cd0000        	call	c_lgadd
-1227                     ; 318 	if( (ePublishFlags & 0x06) != 0 )	// Check if QOS-1 or QOS-2 is selected
-1229  03b4 7b0f          	ld	a,(OFST-1,sp)
-1230  03b6 a506          	bcp	a,#6
-1231  03b8 2709          	jreq	L713
-1232                     ; 320 		ulRemainingLength	+=	2;	//Variable Header: Packet Identifier Length which is 2 Bytes
-1234  03ba 96            	ldw	x,sp
-1235  03bb 1c0005        	addw	x,#OFST-11
-1236  03be a602          	ld	a,#2
-1237  03c0 cd0000        	call	c_lgadc
-1240  03c3               L713:
-1241                     ; 322 	ulRemainingLength	+=	strlen( ( const char* )punMessage);	//Payload: Message Length in Bytes
-1243  03c3 1e17          	ldw	x,(OFST+7,sp)
-1244  03c5 cd0000        	call	_strlen
-1246  03c8 cd0000        	call	c_uitolx
-1248  03cb 96            	ldw	x,sp
-1249  03cc 1c0005        	addw	x,#OFST-11
-1250  03cf cd0000        	call	c_lgadd
-1253                     ; 325 	ptr = (uint8_t *)punEncodeLength(ulRemainingLength);
-1255  03d2 1e07          	ldw	x,(OFST-9,sp)
-1256  03d4 89            	pushw	x
-1257  03d5 1e07          	ldw	x,(OFST-9,sp)
-1258  03d7 89            	pushw	x
-1259  03d8 cd0000        	call	_punEncodeLength
-1261  03db 5b04          	addw	sp,#4
-1262  03dd 1f09          	ldw	(OFST-7,sp),x
-1264                     ; 326 	i = strlen( ( const char* )ptr);
-1266  03df 1e09          	ldw	x,(OFST-7,sp)
-1267  03e1 cd0000        	call	_strlen
-1269  03e4 01            	rrwa	x,a
-1270  03e5 6b0f          	ld	(OFST-1,sp),a
-1271  03e7 02            	rlwa	x,a
-1273                     ; 327 	for ( j = 0; j < i; j++)
-1275  03e8 0f10          	clr	(OFST+0,sp)
-1278  03ea 2033          	jra	L523
-1279  03ec               L123:
-1280                     ; 329 		punBuffer[ulTotalPacketLength++] = *(ptr + j);
-1282  03ec 1e11          	ldw	x,(OFST+1,sp)
-1283  03ee cd0000        	call	c_uitolx
-1285  03f1 96            	ldw	x,sp
-1286  03f2 1c0001        	addw	x,#OFST-15
-1287  03f5 cd0000        	call	c_rtol
-1290  03f8 96            	ldw	x,sp
-1291  03f9 1c000b        	addw	x,#OFST-5
-1292  03fc cd0000        	call	c_ltor
-1294  03ff 96            	ldw	x,sp
-1295  0400 1c000b        	addw	x,#OFST-5
-1296  0403 a601          	ld	a,#1
-1297  0405 cd0000        	call	c_lgadc
-1300  0408 96            	ldw	x,sp
-1301  0409 1c0001        	addw	x,#OFST-15
-1302  040c cd0000        	call	c_ladd
-1304  040f be02          	ldw	x,c_lreg+2
-1305  0411 7b10          	ld	a,(OFST+0,sp)
-1306  0413 905f          	clrw	y
-1307  0415 9097          	ld	yl,a
-1308  0417 72f909        	addw	y,(OFST-7,sp)
-1309  041a 90f6          	ld	a,(y)
-1310  041c f7            	ld	(x),a
-1311                     ; 327 	for ( j = 0; j < i; j++)
-1313  041d 0c10          	inc	(OFST+0,sp)
-1315  041f               L523:
-1318  041f 7b10          	ld	a,(OFST+0,sp)
-1319  0421 110f          	cp	a,(OFST-1,sp)
-1320  0423 25c7          	jrult	L123
-1321                     ; 332 	ptr = (uint8_t *)punEncodeLength(strlen( ( const char* )punTopic));
-1323  0425 1e15          	ldw	x,(OFST+5,sp)
-1324  0427 cd0000        	call	_strlen
-1326  042a cd0000        	call	c_uitolx
-1328  042d be02          	ldw	x,c_lreg+2
-1329  042f 89            	pushw	x
-1330  0430 be00          	ldw	x,c_lreg
-1331  0432 89            	pushw	x
-1332  0433 cd0000        	call	_punEncodeLength
-1334  0436 5b04          	addw	sp,#4
-1335  0438 1f09          	ldw	(OFST-7,sp),x
-1337                     ; 333 	i = strlen( ( const char* )ptr);
-1339  043a 1e09          	ldw	x,(OFST-7,sp)
-1340  043c cd0000        	call	_strlen
-1342  043f 01            	rrwa	x,a
-1343  0440 6b0f          	ld	(OFST-1,sp),a
-1344  0442 02            	rlwa	x,a
-1346                     ; 334 	if(i < 2)
-1348  0443 7b0f          	ld	a,(OFST-1,sp)
-1349  0445 a102          	cp	a,#2
-1350  0447 2452          	jruge	L133
-1351                     ; 336 		punBuffer[ulTotalPacketLength++] = 0;
-1353  0449 1e11          	ldw	x,(OFST+1,sp)
-1354  044b cd0000        	call	c_uitolx
-1356  044e 96            	ldw	x,sp
-1357  044f 1c0001        	addw	x,#OFST-15
-1358  0452 cd0000        	call	c_rtol
-1361  0455 96            	ldw	x,sp
-1362  0456 1c000b        	addw	x,#OFST-5
-1363  0459 cd0000        	call	c_ltor
-1365  045c 96            	ldw	x,sp
-1366  045d 1c000b        	addw	x,#OFST-5
-1367  0460 a601          	ld	a,#1
-1368  0462 cd0000        	call	c_lgadc
-1371  0465 96            	ldw	x,sp
-1372  0466 1c0001        	addw	x,#OFST-15
-1373  0469 cd0000        	call	c_ladd
-1375  046c be02          	ldw	x,c_lreg+2
-1376  046e 7f            	clr	(x)
-1377                     ; 337 		punBuffer[ulTotalPacketLength++] = *(ptr);
-1379  046f 1e11          	ldw	x,(OFST+1,sp)
-1380  0471 cd0000        	call	c_uitolx
-1382  0474 96            	ldw	x,sp
-1383  0475 1c0001        	addw	x,#OFST-15
-1384  0478 cd0000        	call	c_rtol
-1387  047b 96            	ldw	x,sp
-1388  047c 1c000b        	addw	x,#OFST-5
-1389  047f cd0000        	call	c_ltor
-1391  0482 96            	ldw	x,sp
-1392  0483 1c000b        	addw	x,#OFST-5
-1393  0486 a601          	ld	a,#1
-1394  0488 cd0000        	call	c_lgadc
-1397  048b 96            	ldw	x,sp
-1398  048c 1c0001        	addw	x,#OFST-15
-1399  048f cd0000        	call	c_ladd
-1401  0492 be02          	ldw	x,c_lreg+2
-1402  0494 1609          	ldw	y,(OFST-7,sp)
-1403  0496 90f6          	ld	a,(y)
-1404  0498 f7            	ld	(x),a
-1406  0499 2055          	jra	L333
-1407  049b               L133:
-1408                     ; 341 		punBuffer[ulTotalPacketLength++] = *(ptr);
-1410  049b 1e11          	ldw	x,(OFST+1,sp)
-1411  049d cd0000        	call	c_uitolx
-1413  04a0 96            	ldw	x,sp
-1414  04a1 1c0001        	addw	x,#OFST-15
-1415  04a4 cd0000        	call	c_rtol
-1418  04a7 96            	ldw	x,sp
-1419  04a8 1c000b        	addw	x,#OFST-5
-1420  04ab cd0000        	call	c_ltor
-1422  04ae 96            	ldw	x,sp
-1423  04af 1c000b        	addw	x,#OFST-5
-1424  04b2 a601          	ld	a,#1
-1425  04b4 cd0000        	call	c_lgadc
-1428  04b7 96            	ldw	x,sp
-1429  04b8 1c0001        	addw	x,#OFST-15
-1430  04bb cd0000        	call	c_ladd
-1432  04be be02          	ldw	x,c_lreg+2
-1433  04c0 1609          	ldw	y,(OFST-7,sp)
-1434  04c2 90f6          	ld	a,(y)
-1435  04c4 f7            	ld	(x),a
-1436                     ; 342 		punBuffer[ulTotalPacketLength++] = *(ptr+1);
-1438  04c5 1e11          	ldw	x,(OFST+1,sp)
-1439  04c7 cd0000        	call	c_uitolx
-1441  04ca 96            	ldw	x,sp
-1442  04cb 1c0001        	addw	x,#OFST-15
-1443  04ce cd0000        	call	c_rtol
-1446  04d1 96            	ldw	x,sp
-1447  04d2 1c000b        	addw	x,#OFST-5
-1448  04d5 cd0000        	call	c_ltor
-1450  04d8 96            	ldw	x,sp
-1451  04d9 1c000b        	addw	x,#OFST-5
-1452  04dc a601          	ld	a,#1
-1453  04de cd0000        	call	c_lgadc
-1456  04e1 96            	ldw	x,sp
-1457  04e2 1c0001        	addw	x,#OFST-15
-1458  04e5 cd0000        	call	c_ladd
-1460  04e8 be02          	ldw	x,c_lreg+2
-1461  04ea 1609          	ldw	y,(OFST-7,sp)
-1462  04ec 90e601        	ld	a,(1,y)
-1463  04ef f7            	ld	(x),a
-1464  04f0               L333:
-1465                     ; 344 	i = strlen( ( const char* )punTopic);
-1467  04f0 1e15          	ldw	x,(OFST+5,sp)
-1468  04f2 cd0000        	call	_strlen
-1470  04f5 01            	rrwa	x,a
-1471  04f6 6b0f          	ld	(OFST-1,sp),a
-1472  04f8 02            	rlwa	x,a
-1474                     ; 345 	for ( j = 0; j < i; j++)
-1476  04f9 0f10          	clr	(OFST+0,sp)
-1479  04fb 2033          	jra	L143
-1480  04fd               L533:
-1481                     ; 347 		punBuffer[ulTotalPacketLength++] = punTopic[j];
-1483  04fd 1e11          	ldw	x,(OFST+1,sp)
-1484  04ff cd0000        	call	c_uitolx
-1486  0502 96            	ldw	x,sp
-1487  0503 1c0001        	addw	x,#OFST-15
-1488  0506 cd0000        	call	c_rtol
-1491  0509 96            	ldw	x,sp
-1492  050a 1c000b        	addw	x,#OFST-5
-1493  050d cd0000        	call	c_ltor
-1495  0510 96            	ldw	x,sp
-1496  0511 1c000b        	addw	x,#OFST-5
-1497  0514 a601          	ld	a,#1
-1498  0516 cd0000        	call	c_lgadc
-1501  0519 96            	ldw	x,sp
-1502  051a 1c0001        	addw	x,#OFST-15
-1503  051d cd0000        	call	c_ladd
-1505  0520 be02          	ldw	x,c_lreg+2
-1506  0522 7b10          	ld	a,(OFST+0,sp)
-1507  0524 905f          	clrw	y
-1508  0526 9097          	ld	yl,a
-1509  0528 72f915        	addw	y,(OFST+5,sp)
-1510  052b 90f6          	ld	a,(y)
-1511  052d f7            	ld	(x),a
-1512                     ; 345 	for ( j = 0; j < i; j++)
-1514  052e 0c10          	inc	(OFST+0,sp)
-1516  0530               L143:
-1519  0530 7b10          	ld	a,(OFST+0,sp)
-1520  0532 110f          	cp	a,(OFST-1,sp)
-1521  0534 25c7          	jrult	L533
-1522                     ; 357 	i = strlen( ( const char* )punMessage);
-1524  0536 1e17          	ldw	x,(OFST+7,sp)
-1525  0538 cd0000        	call	_strlen
-1527  053b 01            	rrwa	x,a
-1528  053c 6b0f          	ld	(OFST-1,sp),a
-1529  053e 02            	rlwa	x,a
-1531                     ; 358 	for ( j = 0; j < i; j++)
-1533  053f 0f10          	clr	(OFST+0,sp)
-1536  0541 2033          	jra	L153
-1537  0543               L543:
-1538                     ; 360 		punBuffer[ulTotalPacketLength++] = punMessage[j];
-1540  0543 1e11          	ldw	x,(OFST+1,sp)
-1541  0545 cd0000        	call	c_uitolx
-1543  0548 96            	ldw	x,sp
-1544  0549 1c0001        	addw	x,#OFST-15
-1545  054c cd0000        	call	c_rtol
-1548  054f 96            	ldw	x,sp
-1549  0550 1c000b        	addw	x,#OFST-5
-1550  0553 cd0000        	call	c_ltor
-1552  0556 96            	ldw	x,sp
-1553  0557 1c000b        	addw	x,#OFST-5
-1554  055a a601          	ld	a,#1
-1555  055c cd0000        	call	c_lgadc
-1558  055f 96            	ldw	x,sp
-1559  0560 1c0001        	addw	x,#OFST-15
-1560  0563 cd0000        	call	c_ladd
-1562  0566 be02          	ldw	x,c_lreg+2
-1563  0568 7b10          	ld	a,(OFST+0,sp)
-1564  056a 905f          	clrw	y
-1565  056c 9097          	ld	yl,a
-1566  056e 72f917        	addw	y,(OFST+7,sp)
-1567  0571 90f6          	ld	a,(y)
-1568  0573 f7            	ld	(x),a
-1569                     ; 358 	for ( j = 0; j < i; j++)
-1571  0574 0c10          	inc	(OFST+0,sp)
-1573  0576               L153:
-1576  0576 7b10          	ld	a,(OFST+0,sp)
-1577  0578 110f          	cp	a,(OFST-1,sp)
-1578  057a 25c7          	jrult	L543
-1579                     ; 363 	punBuffer[ulTotalPacketLength]	=	'\0';
-1581  057c 1e11          	ldw	x,(OFST+1,sp)
-1582  057e 72fb0d        	addw	x,(OFST-3,sp)
-1583  0581 7f            	clr	(x)
-1584                     ; 365 	return ulTotalPacketLength;
-1586  0582 96            	ldw	x,sp
-1587  0583 1c000b        	addw	x,#OFST-5
-1588  0586 cd0000        	call	c_ltor
-1592  0589 5b12          	addw	sp,#18
-1593  058b 81            	ret
-1740                     ; 368 uint32_t ulMQTT_Subscribe ( uint8_t *punBuffer, uint8_t *punTopic/*, enMQTT_QOS eQOS, uint16_t udPacketIdentifier*/ )
-1740                     ; 369 {
-1741                     	switch	.text
-1742  058c               _ulMQTT_Subscribe:
-1744  058c 89            	pushw	x
-1745  058d 5213          	subw	sp,#19
-1746       00000013      OFST:	set	19
-1749                     ; 370 	uint32_t ulTotalPacketLength	= 0;
-1751  058f ae0000        	ldw	x,#0
-1752  0592 1f11          	ldw	(OFST-2,sp),x
-1753  0594 ae0000        	ldw	x,#0
-1754  0597 1f0f          	ldw	(OFST-4,sp),x
-1756                     ; 371 	uint32_t ulRemainingLength		= 0;
-1758  0599 ae0000        	ldw	x,#0
-1759  059c 1f0a          	ldw	(OFST-9,sp),x
-1760  059e ae0000        	ldw	x,#0
-1761  05a1 1f08          	ldw	(OFST-11,sp),x
-1763                     ; 372 	uint8_t i = 0, j = 0, *ptr;
-1767                     ; 374 	uint16_t udPacketIdentifier = 1;
-1769  05a3 ae0001        	ldw	x,#1
-1770  05a6 1f06          	ldw	(OFST-13,sp),x
-1772                     ; 375 	enum MQTT_QOS_ENUM eQOS = eQOS_0;
-1774  05a8 0f05          	clr	(OFST-14,sp)
-1776                     ; 377 	punBuffer[ulTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_SUBSCRIBE & 0xF) << 4 ) & 0xF0) | (( (uint8_t)eCTRL_PKT_FLAG_SUBSCRIBE & 0x0F) );
-1778  05aa 1e14          	ldw	x,(OFST+1,sp)
-1779  05ac cd0000        	call	c_uitolx
-1781  05af 96            	ldw	x,sp
-1782  05b0 1c0001        	addw	x,#OFST-18
-1783  05b3 cd0000        	call	c_rtol
-1786  05b6 96            	ldw	x,sp
-1787  05b7 1c000f        	addw	x,#OFST-4
-1788  05ba cd0000        	call	c_ltor
-1790  05bd 96            	ldw	x,sp
-1791  05be 1c000f        	addw	x,#OFST-4
-1792  05c1 a601          	ld	a,#1
-1793  05c3 cd0000        	call	c_lgadc
-1796  05c6 96            	ldw	x,sp
-1797  05c7 1c0001        	addw	x,#OFST-18
-1798  05ca cd0000        	call	c_ladd
-1800  05cd be02          	ldw	x,c_lreg+2
-1801  05cf a682          	ld	a,#130
-1802  05d1 f7            	ld	(x),a
-1803                     ; 380 	ulRemainingLength	+=	2;	//Variable Header: Packet Identifier of fixed 2 Bytes
-1805  05d2 96            	ldw	x,sp
-1806  05d3 1c0008        	addw	x,#OFST-11
-1807  05d6 a602          	ld	a,#2
-1808  05d8 cd0000        	call	c_lgadc
-1811                     ; 381 	ulRemainingLength	+=	2;	//Payload: Topic Name Length which is 2 Bytes
-1813  05db 96            	ldw	x,sp
-1814  05dc 1c0008        	addw	x,#OFST-11
-1815  05df a602          	ld	a,#2
-1816  05e1 cd0000        	call	c_lgadc
-1819                     ; 382 	ulRemainingLength	+=	strlen( ( const char* )punTopic);;	//Payload: Topic Name Length
-1821  05e4 1e18          	ldw	x,(OFST+5,sp)
-1822  05e6 cd0000        	call	_strlen
-1824  05e9 cd0000        	call	c_uitolx
-1826  05ec 96            	ldw	x,sp
-1827  05ed 1c0008        	addw	x,#OFST-11
-1828  05f0 cd0000        	call	c_lgadd
-1831                     ; 383 	ulRemainingLength	+=	1;	//Payload: Requested QOS Byte
-1834  05f3 96            	ldw	x,sp
-1835  05f4 1c0008        	addw	x,#OFST-11
-1836  05f7 a601          	ld	a,#1
-1837  05f9 cd0000        	call	c_lgadc
-1840                     ; 386 	ptr = (uint8_t *)punEncodeLength(ulRemainingLength);
-1842  05fc 1e0a          	ldw	x,(OFST-9,sp)
-1843  05fe 89            	pushw	x
-1844  05ff 1e0a          	ldw	x,(OFST-9,sp)
-1845  0601 89            	pushw	x
-1846  0602 cd0000        	call	_punEncodeLength
-1848  0605 5b04          	addw	sp,#4
-1849  0607 1f0c          	ldw	(OFST-7,sp),x
-1851                     ; 387 	i = strlen( ( const char* )ptr);
-1853  0609 1e0c          	ldw	x,(OFST-7,sp)
-1854  060b cd0000        	call	_strlen
-1856  060e 01            	rrwa	x,a
-1857  060f 6b0e          	ld	(OFST-5,sp),a
-1858  0611 02            	rlwa	x,a
-1860                     ; 388 	for ( j = 0; j < i; j++)
-1862  0612 0f13          	clr	(OFST+0,sp)
-1865  0614 2033          	jra	L354
-1866  0616               L744:
-1867                     ; 390 		punBuffer[ulTotalPacketLength++] = *(ptr + j);
-1869  0616 1e14          	ldw	x,(OFST+1,sp)
-1870  0618 cd0000        	call	c_uitolx
-1872  061b 96            	ldw	x,sp
-1873  061c 1c0001        	addw	x,#OFST-18
-1874  061f cd0000        	call	c_rtol
-1877  0622 96            	ldw	x,sp
-1878  0623 1c000f        	addw	x,#OFST-4
-1879  0626 cd0000        	call	c_ltor
-1881  0629 96            	ldw	x,sp
-1882  062a 1c000f        	addw	x,#OFST-4
-1883  062d a601          	ld	a,#1
-1884  062f cd0000        	call	c_lgadc
-1887  0632 96            	ldw	x,sp
-1888  0633 1c0001        	addw	x,#OFST-18
-1889  0636 cd0000        	call	c_ladd
-1891  0639 be02          	ldw	x,c_lreg+2
-1892  063b 7b13          	ld	a,(OFST+0,sp)
-1893  063d 905f          	clrw	y
-1894  063f 9097          	ld	yl,a
-1895  0641 72f90c        	addw	y,(OFST-7,sp)
-1896  0644 90f6          	ld	a,(y)
-1897  0646 f7            	ld	(x),a
-1898                     ; 388 	for ( j = 0; j < i; j++)
-1900  0647 0c13          	inc	(OFST+0,sp)
-1902  0649               L354:
-1905  0649 7b13          	ld	a,(OFST+0,sp)
-1906  064b 110e          	cp	a,(OFST-5,sp)
-1907  064d 25c7          	jrult	L744
-1908                     ; 394 	punBuffer[ulTotalPacketLength++]	=	( udPacketIdentifier	>>	8 ) & 0xFF;	// Most Significant Byte
-1910  064f 1e14          	ldw	x,(OFST+1,sp)
-1911  0651 cd0000        	call	c_uitolx
-1913  0654 96            	ldw	x,sp
-1914  0655 1c0001        	addw	x,#OFST-18
-1915  0658 cd0000        	call	c_rtol
-1918  065b 96            	ldw	x,sp
-1919  065c 1c000f        	addw	x,#OFST-4
-1920  065f cd0000        	call	c_ltor
-1922  0662 96            	ldw	x,sp
-1923  0663 1c000f        	addw	x,#OFST-4
-1924  0666 a601          	ld	a,#1
-1925  0668 cd0000        	call	c_lgadc
-1928  066b 96            	ldw	x,sp
-1929  066c 1c0001        	addw	x,#OFST-18
-1930  066f cd0000        	call	c_ladd
-1932  0672 be02          	ldw	x,c_lreg+2
-1933  0674 7b06          	ld	a,(OFST-13,sp)
-1934  0676 f7            	ld	(x),a
-1935                     ; 395 	punBuffer[ulTotalPacketLength++]	=	( udPacketIdentifier	>>	0 ) & 0xFF;	// Least Significant Byte
-1937  0677 1e14          	ldw	x,(OFST+1,sp)
-1938  0679 cd0000        	call	c_uitolx
-1940  067c 96            	ldw	x,sp
-1941  067d 1c0001        	addw	x,#OFST-18
-1942  0680 cd0000        	call	c_rtol
-1945  0683 96            	ldw	x,sp
-1946  0684 1c000f        	addw	x,#OFST-4
-1947  0687 cd0000        	call	c_ltor
-1949  068a 96            	ldw	x,sp
-1950  068b 1c000f        	addw	x,#OFST-4
-1951  068e a601          	ld	a,#1
-1952  0690 cd0000        	call	c_lgadc
-1955  0693 96            	ldw	x,sp
-1956  0694 1c0001        	addw	x,#OFST-18
-1957  0697 cd0000        	call	c_ladd
-1959  069a be02          	ldw	x,c_lreg+2
-1960  069c 7b07          	ld	a,(OFST-12,sp)
-1961  069e a4ff          	and	a,#255
-1962  06a0 f7            	ld	(x),a
-1963                     ; 398 	ptr = (uint8_t *)punEncodeLength(strlen( ( const char* )punTopic));
-1965  06a1 1e18          	ldw	x,(OFST+5,sp)
-1966  06a3 cd0000        	call	_strlen
-1968  06a6 cd0000        	call	c_uitolx
-1970  06a9 be02          	ldw	x,c_lreg+2
-1971  06ab 89            	pushw	x
-1972  06ac be00          	ldw	x,c_lreg
-1973  06ae 89            	pushw	x
-1974  06af cd0000        	call	_punEncodeLength
-1976  06b2 5b04          	addw	sp,#4
-1977  06b4 1f0c          	ldw	(OFST-7,sp),x
-1979                     ; 399 	i = strlen( ( const char* )ptr);
-1981  06b6 1e0c          	ldw	x,(OFST-7,sp)
-1982  06b8 cd0000        	call	_strlen
-1984  06bb 01            	rrwa	x,a
-1985  06bc 6b0e          	ld	(OFST-5,sp),a
-1986  06be 02            	rlwa	x,a
-1988                     ; 400 	if(i < 2)
-1990  06bf 7b0e          	ld	a,(OFST-5,sp)
-1991  06c1 a102          	cp	a,#2
-1992  06c3 2452          	jruge	L754
-1993                     ; 402 		punBuffer[ulTotalPacketLength++] = 0;
-1995  06c5 1e14          	ldw	x,(OFST+1,sp)
-1996  06c7 cd0000        	call	c_uitolx
-1998  06ca 96            	ldw	x,sp
-1999  06cb 1c0001        	addw	x,#OFST-18
-2000  06ce cd0000        	call	c_rtol
-2003  06d1 96            	ldw	x,sp
-2004  06d2 1c000f        	addw	x,#OFST-4
-2005  06d5 cd0000        	call	c_ltor
-2007  06d8 96            	ldw	x,sp
-2008  06d9 1c000f        	addw	x,#OFST-4
-2009  06dc a601          	ld	a,#1
-2010  06de cd0000        	call	c_lgadc
-2013  06e1 96            	ldw	x,sp
-2014  06e2 1c0001        	addw	x,#OFST-18
-2015  06e5 cd0000        	call	c_ladd
-2017  06e8 be02          	ldw	x,c_lreg+2
-2018  06ea 7f            	clr	(x)
-2019                     ; 403 		punBuffer[ulTotalPacketLength++] = *(ptr);
-2021  06eb 1e14          	ldw	x,(OFST+1,sp)
-2022  06ed cd0000        	call	c_uitolx
-2024  06f0 96            	ldw	x,sp
-2025  06f1 1c0001        	addw	x,#OFST-18
-2026  06f4 cd0000        	call	c_rtol
-2029  06f7 96            	ldw	x,sp
-2030  06f8 1c000f        	addw	x,#OFST-4
-2031  06fb cd0000        	call	c_ltor
-2033  06fe 96            	ldw	x,sp
-2034  06ff 1c000f        	addw	x,#OFST-4
-2035  0702 a601          	ld	a,#1
-2036  0704 cd0000        	call	c_lgadc
-2039  0707 96            	ldw	x,sp
-2040  0708 1c0001        	addw	x,#OFST-18
-2041  070b cd0000        	call	c_ladd
-2043  070e be02          	ldw	x,c_lreg+2
-2044  0710 160c          	ldw	y,(OFST-7,sp)
-2045  0712 90f6          	ld	a,(y)
-2046  0714 f7            	ld	(x),a
-2048  0715 2055          	jra	L164
-2049  0717               L754:
-2050                     ; 407 		punBuffer[ulTotalPacketLength++] = *(ptr);
-2052  0717 1e14          	ldw	x,(OFST+1,sp)
-2053  0719 cd0000        	call	c_uitolx
-2055  071c 96            	ldw	x,sp
-2056  071d 1c0001        	addw	x,#OFST-18
-2057  0720 cd0000        	call	c_rtol
-2060  0723 96            	ldw	x,sp
-2061  0724 1c000f        	addw	x,#OFST-4
-2062  0727 cd0000        	call	c_ltor
-2064  072a 96            	ldw	x,sp
-2065  072b 1c000f        	addw	x,#OFST-4
-2066  072e a601          	ld	a,#1
-2067  0730 cd0000        	call	c_lgadc
-2070  0733 96            	ldw	x,sp
-2071  0734 1c0001        	addw	x,#OFST-18
-2072  0737 cd0000        	call	c_ladd
-2074  073a be02          	ldw	x,c_lreg+2
-2075  073c 160c          	ldw	y,(OFST-7,sp)
-2076  073e 90f6          	ld	a,(y)
-2077  0740 f7            	ld	(x),a
-2078                     ; 408 		punBuffer[ulTotalPacketLength++] = *(ptr+1);
-2080  0741 1e14          	ldw	x,(OFST+1,sp)
-2081  0743 cd0000        	call	c_uitolx
-2083  0746 96            	ldw	x,sp
-2084  0747 1c0001        	addw	x,#OFST-18
-2085  074a cd0000        	call	c_rtol
-2088  074d 96            	ldw	x,sp
-2089  074e 1c000f        	addw	x,#OFST-4
-2090  0751 cd0000        	call	c_ltor
-2092  0754 96            	ldw	x,sp
-2093  0755 1c000f        	addw	x,#OFST-4
-2094  0758 a601          	ld	a,#1
-2095  075a cd0000        	call	c_lgadc
-2098  075d 96            	ldw	x,sp
-2099  075e 1c0001        	addw	x,#OFST-18
-2100  0761 cd0000        	call	c_ladd
-2102  0764 be02          	ldw	x,c_lreg+2
-2103  0766 160c          	ldw	y,(OFST-7,sp)
-2104  0768 90e601        	ld	a,(1,y)
-2105  076b f7            	ld	(x),a
-2106  076c               L164:
-2107                     ; 410 	i = strlen( ( const char* )punTopic);
-2109  076c 1e18          	ldw	x,(OFST+5,sp)
-2110  076e cd0000        	call	_strlen
-2112  0771 01            	rrwa	x,a
-2113  0772 6b0e          	ld	(OFST-5,sp),a
-2114  0774 02            	rlwa	x,a
-2116                     ; 411 	for ( j = 0; j < i; j++)
-2118  0775 0f13          	clr	(OFST+0,sp)
-2121  0777 2033          	jra	L764
-2122  0779               L364:
-2123                     ; 413 		punBuffer[ulTotalPacketLength++] = punTopic[j];
-2125  0779 1e14          	ldw	x,(OFST+1,sp)
-2126  077b cd0000        	call	c_uitolx
-2128  077e 96            	ldw	x,sp
-2129  077f 1c0001        	addw	x,#OFST-18
-2130  0782 cd0000        	call	c_rtol
-2133  0785 96            	ldw	x,sp
-2134  0786 1c000f        	addw	x,#OFST-4
-2135  0789 cd0000        	call	c_ltor
-2137  078c 96            	ldw	x,sp
-2138  078d 1c000f        	addw	x,#OFST-4
-2139  0790 a601          	ld	a,#1
-2140  0792 cd0000        	call	c_lgadc
-2143  0795 96            	ldw	x,sp
-2144  0796 1c0001        	addw	x,#OFST-18
-2145  0799 cd0000        	call	c_ladd
-2147  079c be02          	ldw	x,c_lreg+2
-2148  079e 7b13          	ld	a,(OFST+0,sp)
-2149  07a0 905f          	clrw	y
-2150  07a2 9097          	ld	yl,a
-2151  07a4 72f918        	addw	y,(OFST+5,sp)
-2152  07a7 90f6          	ld	a,(y)
-2153  07a9 f7            	ld	(x),a
-2154                     ; 411 	for ( j = 0; j < i; j++)
-2156  07aa 0c13          	inc	(OFST+0,sp)
-2158  07ac               L764:
-2161  07ac 7b13          	ld	a,(OFST+0,sp)
-2162  07ae 110e          	cp	a,(OFST-5,sp)
-2163  07b0 25c7          	jrult	L364
-2164                     ; 417 	punBuffer[ulTotalPacketLength++]	=	((uint8_t)eQOS & 0x03);	//	Requested QOS, where bits[1:0] is QOS, and bits[7:2] are reserved 0
-2166  07b2 1e14          	ldw	x,(OFST+1,sp)
-2167  07b4 cd0000        	call	c_uitolx
-2169  07b7 96            	ldw	x,sp
-2170  07b8 1c0001        	addw	x,#OFST-18
-2171  07bb cd0000        	call	c_rtol
-2174  07be 96            	ldw	x,sp
-2175  07bf 1c000f        	addw	x,#OFST-4
-2176  07c2 cd0000        	call	c_ltor
-2178  07c5 96            	ldw	x,sp
-2179  07c6 1c000f        	addw	x,#OFST-4
-2180  07c9 a601          	ld	a,#1
-2181  07cb cd0000        	call	c_lgadc
-2184  07ce 96            	ldw	x,sp
-2185  07cf 1c0001        	addw	x,#OFST-18
-2186  07d2 cd0000        	call	c_ladd
-2188  07d5 be02          	ldw	x,c_lreg+2
-2189  07d7 7b05          	ld	a,(OFST-14,sp)
-2190  07d9 a403          	and	a,#3
-2191  07db f7            	ld	(x),a
-2192                     ; 419 	punBuffer[ulTotalPacketLength]	=	'\0';
-2194  07dc 1e14          	ldw	x,(OFST+1,sp)
-2195  07de 72fb11        	addw	x,(OFST-2,sp)
-2196  07e1 7f            	clr	(x)
-2197                     ; 421 	return ulTotalPacketLength;
-2199  07e2 96            	ldw	x,sp
-2200  07e3 1c000f        	addw	x,#OFST-4
-2201  07e6 cd0000        	call	c_ltor
-2205  07e9 5b15          	addw	sp,#21
-2206  07eb 81            	ret
-2309                     ; 424 uint32_t ulMQTT_UnSubscribe ( uint8_t *punBuffer, uint8_t *punTopic/*, uint16_t udPacketIdentifier */)
-2309                     ; 425 {
-2310                     	switch	.text
-2311  07ec               _ulMQTT_UnSubscribe:
-2313  07ec 89            	pushw	x
-2314  07ed 5212          	subw	sp,#18
-2315       00000012      OFST:	set	18
-2318                     ; 426 	uint32_t ulTotalPacketLength	= 0;
-2320  07ef ae0000        	ldw	x,#0
-2321  07f2 1f10          	ldw	(OFST-2,sp),x
-2322  07f4 ae0000        	ldw	x,#0
-2323  07f7 1f0e          	ldw	(OFST-4,sp),x
-2325                     ; 427 	uint32_t ulRemainingLength		= 0;
-2327  07f9 ae0000        	ldw	x,#0
-2328  07fc 1f09          	ldw	(OFST-9,sp),x
-2329  07fe ae0000        	ldw	x,#0
-2330  0801 1f07          	ldw	(OFST-11,sp),x
-2332                     ; 428 	uint8_t i = 0, j = 0, *ptr;
-2336                     ; 430 	uint16_t udPacketIdentifier = 1;
-2338  0803 ae0001        	ldw	x,#1
-2339  0806 1f05          	ldw	(OFST-13,sp),x
-2341                     ; 432 	punBuffer[ulTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_UNSUBSCRIBE & 0xF) << 4 ) & 0xF0) | (( (uint8_t)eCTRL_PKT_FLAG_UNSUBSCRIBE & 0x0F) );
-2343  0808 1e13          	ldw	x,(OFST+1,sp)
-2344  080a cd0000        	call	c_uitolx
-2346  080d 96            	ldw	x,sp
-2347  080e 1c0001        	addw	x,#OFST-17
-2348  0811 cd0000        	call	c_rtol
-2351  0814 96            	ldw	x,sp
-2352  0815 1c000e        	addw	x,#OFST-4
-2353  0818 cd0000        	call	c_ltor
-2355  081b 96            	ldw	x,sp
-2356  081c 1c000e        	addw	x,#OFST-4
-2357  081f a601          	ld	a,#1
-2358  0821 cd0000        	call	c_lgadc
-2361  0824 96            	ldw	x,sp
-2362  0825 1c0001        	addw	x,#OFST-17
-2363  0828 cd0000        	call	c_ladd
-2365  082b be02          	ldw	x,c_lreg+2
-2366  082d a6a2          	ld	a,#162
-2367  082f f7            	ld	(x),a
-2368                     ; 435 	ulRemainingLength	+=	2;	//Variable Header: Packet Identifier of fixed 2 Bytes
-2370  0830 96            	ldw	x,sp
-2371  0831 1c0007        	addw	x,#OFST-11
-2372  0834 a602          	ld	a,#2
-2373  0836 cd0000        	call	c_lgadc
-2376                     ; 436 	ulRemainingLength	+=	2;	//Payload: Topic Name Length which is 2 Bytes
-2378  0839 96            	ldw	x,sp
-2379  083a 1c0007        	addw	x,#OFST-11
-2380  083d a602          	ld	a,#2
-2381  083f cd0000        	call	c_lgadc
-2384                     ; 437 	ulRemainingLength	+=	strlen( ( const char* )punTopic);;	//Payload: Topic Name Length
-2386  0842 1e17          	ldw	x,(OFST+5,sp)
-2387  0844 cd0000        	call	_strlen
-2389  0847 cd0000        	call	c_uitolx
-2391  084a 96            	ldw	x,sp
-2392  084b 1c0007        	addw	x,#OFST-11
-2393  084e cd0000        	call	c_lgadd
-2396                     ; 440 	ptr = (uint8_t *)punEncodeLength(ulRemainingLength);
-2399  0851 1e09          	ldw	x,(OFST-9,sp)
-2400  0853 89            	pushw	x
-2401  0854 1e09          	ldw	x,(OFST-9,sp)
-2402  0856 89            	pushw	x
-2403  0857 cd0000        	call	_punEncodeLength
-2405  085a 5b04          	addw	sp,#4
-2406  085c 1f0b          	ldw	(OFST-7,sp),x
-2408                     ; 441 	i = strlen( ( const char* )ptr);
-2410  085e 1e0b          	ldw	x,(OFST-7,sp)
-2411  0860 cd0000        	call	_strlen
-2413  0863 01            	rrwa	x,a
-2414  0864 6b0d          	ld	(OFST-5,sp),a
-2415  0866 02            	rlwa	x,a
-2417                     ; 442 	for ( j = 0; j < i; j++)
-2419  0867 0f12          	clr	(OFST+0,sp)
-2422  0869 2033          	jra	L155
-2423  086b               L545:
-2424                     ; 444 		punBuffer[ulTotalPacketLength++] = *(ptr + j);
-2426  086b 1e13          	ldw	x,(OFST+1,sp)
-2427  086d cd0000        	call	c_uitolx
-2429  0870 96            	ldw	x,sp
-2430  0871 1c0001        	addw	x,#OFST-17
-2431  0874 cd0000        	call	c_rtol
-2434  0877 96            	ldw	x,sp
-2435  0878 1c000e        	addw	x,#OFST-4
-2436  087b cd0000        	call	c_ltor
-2438  087e 96            	ldw	x,sp
-2439  087f 1c000e        	addw	x,#OFST-4
-2440  0882 a601          	ld	a,#1
-2441  0884 cd0000        	call	c_lgadc
-2444  0887 96            	ldw	x,sp
-2445  0888 1c0001        	addw	x,#OFST-17
-2446  088b cd0000        	call	c_ladd
-2448  088e be02          	ldw	x,c_lreg+2
-2449  0890 7b12          	ld	a,(OFST+0,sp)
-2450  0892 905f          	clrw	y
-2451  0894 9097          	ld	yl,a
-2452  0896 72f90b        	addw	y,(OFST-7,sp)
-2453  0899 90f6          	ld	a,(y)
-2454  089b f7            	ld	(x),a
-2455                     ; 442 	for ( j = 0; j < i; j++)
-2457  089c 0c12          	inc	(OFST+0,sp)
-2459  089e               L155:
-2462  089e 7b12          	ld	a,(OFST+0,sp)
-2463  08a0 110d          	cp	a,(OFST-5,sp)
-2464  08a2 25c7          	jrult	L545
-2465                     ; 448 	punBuffer[ulTotalPacketLength++]	=	( udPacketIdentifier	>>	8 ) & 0xFF;	// Most Significant Byte
-2467  08a4 1e13          	ldw	x,(OFST+1,sp)
-2468  08a6 cd0000        	call	c_uitolx
-2470  08a9 96            	ldw	x,sp
-2471  08aa 1c0001        	addw	x,#OFST-17
-2472  08ad cd0000        	call	c_rtol
-2475  08b0 96            	ldw	x,sp
-2476  08b1 1c000e        	addw	x,#OFST-4
-2477  08b4 cd0000        	call	c_ltor
-2479  08b7 96            	ldw	x,sp
-2480  08b8 1c000e        	addw	x,#OFST-4
-2481  08bb a601          	ld	a,#1
-2482  08bd cd0000        	call	c_lgadc
-2485  08c0 96            	ldw	x,sp
-2486  08c1 1c0001        	addw	x,#OFST-17
-2487  08c4 cd0000        	call	c_ladd
-2489  08c7 be02          	ldw	x,c_lreg+2
-2490  08c9 7b05          	ld	a,(OFST-13,sp)
-2491  08cb f7            	ld	(x),a
-2492                     ; 449 	punBuffer[ulTotalPacketLength++]	=	( udPacketIdentifier	>>	0 ) & 0xFF;	// Least Significant Byte
-2494  08cc 1e13          	ldw	x,(OFST+1,sp)
-2495  08ce cd0000        	call	c_uitolx
-2497  08d1 96            	ldw	x,sp
-2498  08d2 1c0001        	addw	x,#OFST-17
-2499  08d5 cd0000        	call	c_rtol
-2502  08d8 96            	ldw	x,sp
-2503  08d9 1c000e        	addw	x,#OFST-4
-2504  08dc cd0000        	call	c_ltor
-2506  08df 96            	ldw	x,sp
-2507  08e0 1c000e        	addw	x,#OFST-4
-2508  08e3 a601          	ld	a,#1
-2509  08e5 cd0000        	call	c_lgadc
-2512  08e8 96            	ldw	x,sp
-2513  08e9 1c0001        	addw	x,#OFST-17
-2514  08ec cd0000        	call	c_ladd
-2516  08ef be02          	ldw	x,c_lreg+2
-2517  08f1 7b06          	ld	a,(OFST-12,sp)
-2518  08f3 a4ff          	and	a,#255
-2519  08f5 f7            	ld	(x),a
-2520                     ; 452 	ptr = (uint8_t *)punEncodeLength(strlen( ( const char* )punTopic));
-2522  08f6 1e17          	ldw	x,(OFST+5,sp)
-2523  08f8 cd0000        	call	_strlen
-2525  08fb cd0000        	call	c_uitolx
-2527  08fe be02          	ldw	x,c_lreg+2
-2528  0900 89            	pushw	x
-2529  0901 be00          	ldw	x,c_lreg
-2530  0903 89            	pushw	x
-2531  0904 cd0000        	call	_punEncodeLength
-2533  0907 5b04          	addw	sp,#4
-2534  0909 1f0b          	ldw	(OFST-7,sp),x
-2536                     ; 453 	i = strlen( ( const char* )ptr);
-2538  090b 1e0b          	ldw	x,(OFST-7,sp)
-2539  090d cd0000        	call	_strlen
-2541  0910 01            	rrwa	x,a
-2542  0911 6b0d          	ld	(OFST-5,sp),a
-2543  0913 02            	rlwa	x,a
-2545                     ; 454 	if(i < 2)
-2547  0914 7b0d          	ld	a,(OFST-5,sp)
-2548  0916 a102          	cp	a,#2
-2549  0918 2452          	jruge	L555
-2550                     ; 456 		punBuffer[ulTotalPacketLength++] = 0;
-2552  091a 1e13          	ldw	x,(OFST+1,sp)
-2553  091c cd0000        	call	c_uitolx
-2555  091f 96            	ldw	x,sp
-2556  0920 1c0001        	addw	x,#OFST-17
-2557  0923 cd0000        	call	c_rtol
-2560  0926 96            	ldw	x,sp
-2561  0927 1c000e        	addw	x,#OFST-4
-2562  092a cd0000        	call	c_ltor
-2564  092d 96            	ldw	x,sp
-2565  092e 1c000e        	addw	x,#OFST-4
-2566  0931 a601          	ld	a,#1
-2567  0933 cd0000        	call	c_lgadc
-2570  0936 96            	ldw	x,sp
-2571  0937 1c0001        	addw	x,#OFST-17
-2572  093a cd0000        	call	c_ladd
-2574  093d be02          	ldw	x,c_lreg+2
-2575  093f 7f            	clr	(x)
-2576                     ; 457 		punBuffer[ulTotalPacketLength++] = *(ptr);
-2578  0940 1e13          	ldw	x,(OFST+1,sp)
-2579  0942 cd0000        	call	c_uitolx
-2581  0945 96            	ldw	x,sp
-2582  0946 1c0001        	addw	x,#OFST-17
-2583  0949 cd0000        	call	c_rtol
-2586  094c 96            	ldw	x,sp
-2587  094d 1c000e        	addw	x,#OFST-4
-2588  0950 cd0000        	call	c_ltor
-2590  0953 96            	ldw	x,sp
-2591  0954 1c000e        	addw	x,#OFST-4
-2592  0957 a601          	ld	a,#1
-2593  0959 cd0000        	call	c_lgadc
-2596  095c 96            	ldw	x,sp
-2597  095d 1c0001        	addw	x,#OFST-17
-2598  0960 cd0000        	call	c_ladd
-2600  0963 be02          	ldw	x,c_lreg+2
-2601  0965 160b          	ldw	y,(OFST-7,sp)
-2602  0967 90f6          	ld	a,(y)
-2603  0969 f7            	ld	(x),a
-2605  096a 2055          	jra	L755
-2606  096c               L555:
-2607                     ; 461 		punBuffer[ulTotalPacketLength++] = *(ptr);
-2609  096c 1e13          	ldw	x,(OFST+1,sp)
-2610  096e cd0000        	call	c_uitolx
-2612  0971 96            	ldw	x,sp
-2613  0972 1c0001        	addw	x,#OFST-17
-2614  0975 cd0000        	call	c_rtol
-2617  0978 96            	ldw	x,sp
-2618  0979 1c000e        	addw	x,#OFST-4
-2619  097c cd0000        	call	c_ltor
-2621  097f 96            	ldw	x,sp
-2622  0980 1c000e        	addw	x,#OFST-4
-2623  0983 a601          	ld	a,#1
-2624  0985 cd0000        	call	c_lgadc
-2627  0988 96            	ldw	x,sp
-2628  0989 1c0001        	addw	x,#OFST-17
-2629  098c cd0000        	call	c_ladd
-2631  098f be02          	ldw	x,c_lreg+2
-2632  0991 160b          	ldw	y,(OFST-7,sp)
-2633  0993 90f6          	ld	a,(y)
-2634  0995 f7            	ld	(x),a
-2635                     ; 462 		punBuffer[ulTotalPacketLength++] = *(ptr+1);
-2637  0996 1e13          	ldw	x,(OFST+1,sp)
-2638  0998 cd0000        	call	c_uitolx
-2640  099b 96            	ldw	x,sp
-2641  099c 1c0001        	addw	x,#OFST-17
-2642  099f cd0000        	call	c_rtol
-2645  09a2 96            	ldw	x,sp
-2646  09a3 1c000e        	addw	x,#OFST-4
-2647  09a6 cd0000        	call	c_ltor
-2649  09a9 96            	ldw	x,sp
-2650  09aa 1c000e        	addw	x,#OFST-4
-2651  09ad a601          	ld	a,#1
-2652  09af cd0000        	call	c_lgadc
-2655  09b2 96            	ldw	x,sp
-2656  09b3 1c0001        	addw	x,#OFST-17
-2657  09b6 cd0000        	call	c_ladd
-2659  09b9 be02          	ldw	x,c_lreg+2
-2660  09bb 160b          	ldw	y,(OFST-7,sp)
-2661  09bd 90e601        	ld	a,(1,y)
-2662  09c0 f7            	ld	(x),a
-2663  09c1               L755:
-2664                     ; 464 	i = strlen( ( const char* )punTopic);
-2666  09c1 1e17          	ldw	x,(OFST+5,sp)
-2667  09c3 cd0000        	call	_strlen
-2669  09c6 01            	rrwa	x,a
-2670  09c7 6b0d          	ld	(OFST-5,sp),a
-2671  09c9 02            	rlwa	x,a
-2673                     ; 465 	for ( j = 0; j < i; j++)
-2675  09ca 0f12          	clr	(OFST+0,sp)
-2678  09cc 2033          	jra	L565
-2679  09ce               L165:
-2680                     ; 467 		punBuffer[ulTotalPacketLength++] = punTopic[j];
-2682  09ce 1e13          	ldw	x,(OFST+1,sp)
-2683  09d0 cd0000        	call	c_uitolx
-2685  09d3 96            	ldw	x,sp
-2686  09d4 1c0001        	addw	x,#OFST-17
-2687  09d7 cd0000        	call	c_rtol
-2690  09da 96            	ldw	x,sp
-2691  09db 1c000e        	addw	x,#OFST-4
-2692  09de cd0000        	call	c_ltor
-2694  09e1 96            	ldw	x,sp
-2695  09e2 1c000e        	addw	x,#OFST-4
-2696  09e5 a601          	ld	a,#1
-2697  09e7 cd0000        	call	c_lgadc
-2700  09ea 96            	ldw	x,sp
-2701  09eb 1c0001        	addw	x,#OFST-17
-2702  09ee cd0000        	call	c_ladd
-2704  09f1 be02          	ldw	x,c_lreg+2
-2705  09f3 7b12          	ld	a,(OFST+0,sp)
-2706  09f5 905f          	clrw	y
-2707  09f7 9097          	ld	yl,a
-2708  09f9 72f917        	addw	y,(OFST+5,sp)
-2709  09fc 90f6          	ld	a,(y)
-2710  09fe f7            	ld	(x),a
-2711                     ; 465 	for ( j = 0; j < i; j++)
-2713  09ff 0c12          	inc	(OFST+0,sp)
-2715  0a01               L565:
-2718  0a01 7b12          	ld	a,(OFST+0,sp)
-2719  0a03 110d          	cp	a,(OFST-5,sp)
-2720  0a05 25c7          	jrult	L165
-2721                     ; 470 	punBuffer[ulTotalPacketLength]	=	'\0';
-2723  0a07 1e13          	ldw	x,(OFST+1,sp)
-2724  0a09 72fb10        	addw	x,(OFST-2,sp)
-2725  0a0c 7f            	clr	(x)
-2726                     ; 472 	return ulTotalPacketLength;
-2728  0a0d 96            	ldw	x,sp
-2729  0a0e 1c000e        	addw	x,#OFST-4
-2730  0a11 cd0000        	call	c_ltor
-2734  0a14 5b14          	addw	sp,#20
-2735  0a16 81            	ret
-2789                     ; 475 uint8_t unMQTT_PingRequest ( uint8_t *punBuffer )
-2789                     ; 476 {
-2790                     	switch	.text
-2791  0a17               _unMQTT_PingRequest:
-2793  0a17 89            	pushw	x
-2794  0a18 89            	pushw	x
-2795       00000002      OFST:	set	2
-2798                     ; 477 	uint8_t unTotalPacketLength	= 0;
-2800  0a19 0f02          	clr	(OFST+0,sp)
-2802                     ; 478 	uint8_t unRemainingLength	= 0;
-2804                     ; 481 	punBuffer[unTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_PINGREQ & 0xF) << 4 ) & 0xF0) | ( ((uint8_t)eCTRL_PKT_FLAG_PINGREQ & 0x0F) );
-2806  0a1b 7b02          	ld	a,(OFST+0,sp)
-2807  0a1d 97            	ld	xl,a
-2808  0a1e 0c02          	inc	(OFST+0,sp)
-2810  0a20 9f            	ld	a,xl
-2811  0a21 5f            	clrw	x
-2812  0a22 97            	ld	xl,a
-2813  0a23 72fb03        	addw	x,(OFST+1,sp)
-2814  0a26 a6c0          	ld	a,#192
-2815  0a28 f7            	ld	(x),a
-2816                     ; 483 	punBuffer[unTotalPacketLength++] = unRemainingLength;
-2818  0a29 7b02          	ld	a,(OFST+0,sp)
-2819  0a2b 97            	ld	xl,a
-2820  0a2c 0c02          	inc	(OFST+0,sp)
-2822  0a2e 9f            	ld	a,xl
-2823  0a2f 5f            	clrw	x
-2824  0a30 97            	ld	xl,a
-2825  0a31 72fb03        	addw	x,(OFST+1,sp)
-2826  0a34 7f            	clr	(x)
-2827                     ; 485 	punBuffer[unTotalPacketLength]	=	'\0';
-2829  0a35 7b02          	ld	a,(OFST+0,sp)
-2830  0a37 5f            	clrw	x
-2831  0a38 97            	ld	xl,a
-2832  0a39 72fb03        	addw	x,(OFST+1,sp)
-2833  0a3c 7f            	clr	(x)
-2834                     ; 487 	return unTotalPacketLength;
-2836  0a3d 7b02          	ld	a,(OFST+0,sp)
-2839  0a3f 5b04          	addw	sp,#4
-2840  0a41 81            	ret
-2894                     ; 490 uint8_t unMQTT_Disconnect ( uint8_t *punBuffer )
-2894                     ; 491 {
-2895                     	switch	.text
-2896  0a42               _unMQTT_Disconnect:
-2898  0a42 89            	pushw	x
-2899  0a43 89            	pushw	x
-2900       00000002      OFST:	set	2
-2903                     ; 492 	uint8_t unTotalPacketLength	= 0;
-2905  0a44 0f02          	clr	(OFST+0,sp)
-2907                     ; 493 	uint8_t unRemainingLength	= 0;
-2909                     ; 496 	punBuffer[unTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_DISCONNECT & 0xF) << 4 ) & 0xF0) | ( ((uint8_t)eCTRL_PKT_FLAG_DISCONNECT & 0x0F) );
-2911  0a46 7b02          	ld	a,(OFST+0,sp)
-2912  0a48 97            	ld	xl,a
-2913  0a49 0c02          	inc	(OFST+0,sp)
-2915  0a4b 9f            	ld	a,xl
-2916  0a4c 5f            	clrw	x
-2917  0a4d 97            	ld	xl,a
-2918  0a4e 72fb03        	addw	x,(OFST+1,sp)
-2919  0a51 a6e0          	ld	a,#224
-2920  0a53 f7            	ld	(x),a
-2921                     ; 498 	punBuffer[unTotalPacketLength++] = unRemainingLength;
-2923  0a54 7b02          	ld	a,(OFST+0,sp)
-2924  0a56 97            	ld	xl,a
-2925  0a57 0c02          	inc	(OFST+0,sp)
-2927  0a59 9f            	ld	a,xl
-2928  0a5a 5f            	clrw	x
-2929  0a5b 97            	ld	xl,a
-2930  0a5c 72fb03        	addw	x,(OFST+1,sp)
-2931  0a5f 7f            	clr	(x)
-2932                     ; 500 	punBuffer[unTotalPacketLength]	=	'\0';
-2934  0a60 7b02          	ld	a,(OFST+0,sp)
-2935  0a62 5f            	clrw	x
-2936  0a63 97            	ld	xl,a
-2937  0a64 72fb03        	addw	x,(OFST+1,sp)
-2938  0a67 7f            	clr	(x)
-2939                     ; 502 	return unTotalPacketLength;
-2941  0a68 7b02          	ld	a,(OFST+0,sp)
-2944  0a6a 5b04          	addw	sp,#4
-2945  0a6c 81            	ret
-3007                     ; 664 uint32_t ulDecodedLength (uint8_t * punLength)
-3007                     ; 665 {
-3008                     	switch	.text
-3009  0a6d               _ulDecodedLength:
-3011  0a6d 89            	pushw	x
-3012  0a6e 520d          	subw	sp,#13
-3013       0000000d      OFST:	set	13
-3016                     ; 666   uint32_t multiplier = 1;
-3018  0a70 ae0001        	ldw	x,#1
-3019  0a73 1f0b          	ldw	(OFST-2,sp),x
-3020  0a75 ae0000        	ldw	x,#0
-3021  0a78 1f09          	ldw	(OFST-4,sp),x
-3023                     ; 667   uint32_t value = 0;
-3025  0a7a ae0000        	ldw	x,#0
-3026  0a7d 1f07          	ldw	(OFST-6,sp),x
-3027  0a7f ae0000        	ldw	x,#0
-3028  0a82 1f05          	ldw	(OFST-8,sp),x
-3030                     ; 668   uint8_t  i = 0;
-3032  0a84 0f0d          	clr	(OFST+0,sp)
-3034  0a86               L776:
-3035                     ; 672         value += (punLength[i] & 0x7F) * multiplier;
-3037  0a86 7b0d          	ld	a,(OFST+0,sp)
-3038  0a88 5f            	clrw	x
-3039  0a89 97            	ld	xl,a
-3040  0a8a 72fb0e        	addw	x,(OFST+1,sp)
-3041  0a8d f6            	ld	a,(x)
-3042  0a8e a47f          	and	a,#127
-3043  0a90 b703          	ld	c_lreg+3,a
-3044  0a92 3f02          	clr	c_lreg+2
-3045  0a94 3f01          	clr	c_lreg+1
-3046  0a96 3f00          	clr	c_lreg
-3047  0a98 96            	ldw	x,sp
-3048  0a99 1c0001        	addw	x,#OFST-12
-3049  0a9c cd0000        	call	c_rtol
-3052  0a9f 96            	ldw	x,sp
-3053  0aa0 1c0009        	addw	x,#OFST-4
-3054  0aa3 cd0000        	call	c_ltor
-3056  0aa6 96            	ldw	x,sp
-3057  0aa7 1c0001        	addw	x,#OFST-12
-3058  0aaa cd0000        	call	c_lmul
-3060  0aad 96            	ldw	x,sp
-3061  0aae 1c0005        	addw	x,#OFST-8
-3062  0ab1 cd0000        	call	c_lgadd
-3065                     ; 673 	    multiplier *= 0x80;
-3067  0ab4 96            	ldw	x,sp
-3068  0ab5 1c0009        	addw	x,#OFST-4
-3069  0ab8 a607          	ld	a,#7
-3070  0aba cd0000        	call	c_lglsh
-3073                     ; 674 	    if (multiplier > (0x80 * 0x80 * 0x80))
-3075  0abd 96            	ldw	x,sp
-3076  0abe 1c0009        	addw	x,#OFST-4
-3077  0ac1 cd0000        	call	c_lzmp
-3079  0ac4 2709          	jreq	L107
-3080                     ; 676 	        return value;
-3082  0ac6 96            	ldw	x,sp
-3083  0ac7 1c0005        	addw	x,#OFST-8
-3084  0aca cd0000        	call	c_ltor
-3087  0acd 201d          	jra	L42
-3088  0acf               L107:
-3089                     ; 678 	} while ((punLength[i++] & 0x80) != 0 && i < 4);
-3091  0acf 7b0d          	ld	a,(OFST+0,sp)
-3092  0ad1 97            	ld	xl,a
-3093  0ad2 0c0d          	inc	(OFST+0,sp)
-3095  0ad4 9f            	ld	a,xl
-3096  0ad5 5f            	clrw	x
-3097  0ad6 97            	ld	xl,a
-3098  0ad7 72fb0e        	addw	x,(OFST+1,sp)
-3099  0ada f6            	ld	a,(x)
-3100  0adb a580          	bcp	a,#128
-3101  0add 2706          	jreq	L707
-3103  0adf 7b0d          	ld	a,(OFST+0,sp)
-3104  0ae1 a104          	cp	a,#4
-3105  0ae3 25a1          	jrult	L776
-3106  0ae5               L707:
-3107                     ; 680     return value;
-3109  0ae5 96            	ldw	x,sp
-3110  0ae6 1c0005        	addw	x,#OFST-8
-3111  0ae9 cd0000        	call	c_ltor
-3114  0aec               L42:
-3116  0aec 5b0f          	addw	sp,#15
-3117  0aee 81            	ret
-3130                     	xdef	_unMQTT_Disconnect
-3131                     	xdef	_unMQTT_PingRequest
-3132                     	xdef	_ulMQTT_UnSubscribe
-3133                     	xdef	_ulMQTT_Subscribe
-3134                     	xdef	_ulMQTT_Publish
-3135                     	xdef	_ulMQTT_Connect
-3136                     	xdef	_ulDecodedLength
-3137                     	xdef	_punEncodeLength
-3138                     	xref	_strlen
-3139                     .const:	section	.text
-3140  0000               L141:
-3141  0000 4d51545400    	dc.b	"MQTT",0
-3142                     	xref.b	c_lreg
-3143                     	xref.b	c_x
-3163                     	xref	c_lglsh
-3164                     	xref	c_lmul
-3165                     	xref	c_lgadd
-3166                     	xref	c_ladd
-3167                     	xref	c_rtol
-3168                     	xref	c_uitolx
-3169                     	xref	c_lgadc
-3170                     	xref	c_ltor
-3171                     	xref	c_lzmp
-3172                     	xref	c_lgursh
-3173                     	end
+ 400  00f8 89            	pushw	x
+ 401  00f9 7b0b          	ld	a,(OFST-5,sp)
+ 402  00fb 97            	ld	xl,a
+ 403  00fc 7b0c          	ld	a,(OFST-4,sp)
+ 404  00fe 1b12          	add	a,(OFST+2,sp)
+ 405  0100 2401          	jrnc	L01
+ 406  0102 5c            	incw	x
+ 407  0103               L01:
+ 408  0103 02            	rlwa	x,a
+ 409  0104 f6            	ld	a,(x)
+ 410  0105 85            	popw	x
+ 411  0106 f7            	ld	(x),a
+ 412                     ; 170 	for ( j = 0; j < i; j++)
+ 414  0107 0c10          	inc	(OFST+0,sp)
+ 416  0109               L521:
+ 419  0109 7b10          	ld	a,(OFST+0,sp)
+ 420  010b 110b          	cp	a,(OFST-5,sp)
+ 421  010d 25c4          	jrult	L121
+ 422                     ; 175     i = strlen( ( const char* )PROTOCOL_NAME);
+ 424  010f a604          	ld	a,#4
+ 425  0111 6b0b          	ld	(OFST-5,sp),a
+ 427                     ; 176 	punBuffer[ulTotalPacketLength++] = (i >> 8) & 0xFF;	//Variable Header:  Protocol Name Length Most Significant Byte
+ 429  0113 1e11          	ldw	x,(OFST+1,sp)
+ 430  0115 cd0000        	call	c_uitolx
+ 432  0118 96            	ldw	x,sp
+ 433  0119 1c0001        	addw	x,#OFST-15
+ 434  011c cd0000        	call	c_rtol
+ 437  011f 96            	ldw	x,sp
+ 438  0120 1c000c        	addw	x,#OFST-4
+ 439  0123 cd0000        	call	c_ltor
+ 441  0126 96            	ldw	x,sp
+ 442  0127 1c000c        	addw	x,#OFST-4
+ 443  012a a601          	ld	a,#1
+ 444  012c cd0000        	call	c_lgadc
+ 447  012f 96            	ldw	x,sp
+ 448  0130 1c0001        	addw	x,#OFST-15
+ 449  0133 cd0000        	call	c_ladd
+ 451  0136 be02          	ldw	x,c_lreg+2
+ 452  0138 7f            	clr	(x)
+ 453                     ; 177 	punBuffer[ulTotalPacketLength++] = (i >> 0) & 0xFF;	//Variable Header:  Protocol Name Length Least Significant Byte
+ 455  0139 1e11          	ldw	x,(OFST+1,sp)
+ 456  013b cd0000        	call	c_uitolx
+ 458  013e 96            	ldw	x,sp
+ 459  013f 1c0001        	addw	x,#OFST-15
+ 460  0142 cd0000        	call	c_rtol
+ 463  0145 96            	ldw	x,sp
+ 464  0146 1c000c        	addw	x,#OFST-4
+ 465  0149 cd0000        	call	c_ltor
+ 467  014c 96            	ldw	x,sp
+ 468  014d 1c000c        	addw	x,#OFST-4
+ 469  0150 a601          	ld	a,#1
+ 470  0152 cd0000        	call	c_lgadc
+ 473  0155 96            	ldw	x,sp
+ 474  0156 1c0001        	addw	x,#OFST-15
+ 475  0159 cd0000        	call	c_ladd
+ 477  015c be02          	ldw	x,c_lreg+2
+ 478  015e 7b0b          	ld	a,(OFST-5,sp)
+ 479  0160 a4ff          	and	a,#255
+ 480  0162 f7            	ld	(x),a
+ 481                     ; 178 	for (j = 0; j < i; j++)
+ 483  0163 0f10          	clr	(OFST+0,sp)
+ 486  0165 2032          	jra	L531
+ 487  0167               L131:
+ 488                     ; 180         punBuffer[ulTotalPacketLength++] = (uint8_t)PROTOCOL_NAME[j];
+ 490  0167 1e11          	ldw	x,(OFST+1,sp)
+ 491  0169 cd0000        	call	c_uitolx
+ 493  016c 96            	ldw	x,sp
+ 494  016d 1c0001        	addw	x,#OFST-15
+ 495  0170 cd0000        	call	c_rtol
+ 498  0173 96            	ldw	x,sp
+ 499  0174 1c000c        	addw	x,#OFST-4
+ 500  0177 cd0000        	call	c_ltor
+ 502  017a 96            	ldw	x,sp
+ 503  017b 1c000c        	addw	x,#OFST-4
+ 504  017e a601          	ld	a,#1
+ 505  0180 cd0000        	call	c_lgadc
+ 508  0183 96            	ldw	x,sp
+ 509  0184 1c0001        	addw	x,#OFST-15
+ 510  0187 cd0000        	call	c_ladd
+ 512  018a be02          	ldw	x,c_lreg+2
+ 513  018c 7b10          	ld	a,(OFST+0,sp)
+ 514  018e 905f          	clrw	y
+ 515  0190 9097          	ld	yl,a
+ 516  0192 90d60000      	ld	a,(L141,y)
+ 517  0196 f7            	ld	(x),a
+ 518                     ; 178 	for (j = 0; j < i; j++)
+ 520  0197 0c10          	inc	(OFST+0,sp)
+ 522  0199               L531:
+ 525  0199 7b10          	ld	a,(OFST+0,sp)
+ 526  019b 110b          	cp	a,(OFST-5,sp)
+ 527  019d 25c8          	jrult	L131
+ 528                     ; 187 	punBuffer[ulTotalPacketLength++] = 0x04;	//Variable Header:  Protocol Level: which is fixed Level-4
+ 530  019f 1e11          	ldw	x,(OFST+1,sp)
+ 531  01a1 cd0000        	call	c_uitolx
+ 533  01a4 96            	ldw	x,sp
+ 534  01a5 1c0001        	addw	x,#OFST-15
+ 535  01a8 cd0000        	call	c_rtol
+ 538  01ab 96            	ldw	x,sp
+ 539  01ac 1c000c        	addw	x,#OFST-4
+ 540  01af cd0000        	call	c_ltor
+ 542  01b2 96            	ldw	x,sp
+ 543  01b3 1c000c        	addw	x,#OFST-4
+ 544  01b6 a601          	ld	a,#1
+ 545  01b8 cd0000        	call	c_lgadc
+ 548  01bb 96            	ldw	x,sp
+ 549  01bc 1c0001        	addw	x,#OFST-15
+ 550  01bf cd0000        	call	c_ladd
+ 552  01c2 be02          	ldw	x,c_lreg+2
+ 553  01c4 a604          	ld	a,#4
+ 554  01c6 f7            	ld	(x),a
+ 555                     ; 199 	punBuffer[ulTotalPacketLength++] = 0x02;
+ 557  01c7 1e11          	ldw	x,(OFST+1,sp)
+ 558  01c9 cd0000        	call	c_uitolx
+ 560  01cc 96            	ldw	x,sp
+ 561  01cd 1c0001        	addw	x,#OFST-15
+ 562  01d0 cd0000        	call	c_rtol
+ 565  01d3 96            	ldw	x,sp
+ 566  01d4 1c000c        	addw	x,#OFST-4
+ 567  01d7 cd0000        	call	c_ltor
+ 569  01da 96            	ldw	x,sp
+ 570  01db 1c000c        	addw	x,#OFST-4
+ 571  01de a601          	ld	a,#1
+ 572  01e0 cd0000        	call	c_lgadc
+ 575  01e3 96            	ldw	x,sp
+ 576  01e4 1c0001        	addw	x,#OFST-15
+ 577  01e7 cd0000        	call	c_ladd
+ 579  01ea be02          	ldw	x,c_lreg+2
+ 580  01ec a602          	ld	a,#2
+ 581  01ee f7            	ld	(x),a
+ 582                     ; 200 	punBuffer[ulTotalPacketLength++] = ((uint16_t)KEEP_ALIVE_TIMEOUT	>> 8)	&	0xFF;	////Variable Header:  Keep Alive Most Significant Byte
+ 584  01ef 1e11          	ldw	x,(OFST+1,sp)
+ 585  01f1 cd0000        	call	c_uitolx
+ 587  01f4 96            	ldw	x,sp
+ 588  01f5 1c0001        	addw	x,#OFST-15
+ 589  01f8 cd0000        	call	c_rtol
+ 592  01fb 96            	ldw	x,sp
+ 593  01fc 1c000c        	addw	x,#OFST-4
+ 594  01ff cd0000        	call	c_ltor
+ 596  0202 96            	ldw	x,sp
+ 597  0203 1c000c        	addw	x,#OFST-4
+ 598  0206 a601          	ld	a,#1
+ 599  0208 cd0000        	call	c_lgadc
+ 602  020b 96            	ldw	x,sp
+ 603  020c 1c0001        	addw	x,#OFST-15
+ 604  020f cd0000        	call	c_ladd
+ 606  0212 be02          	ldw	x,c_lreg+2
+ 607  0214 7f            	clr	(x)
+ 608                     ; 201 	punBuffer[ulTotalPacketLength++] = ((uint16_t)KEEP_ALIVE_TIMEOUT	>> 0)	&	0xFF;	////Variable Header:  Keep Alive Least Significant Byte
+ 610  0215 1e11          	ldw	x,(OFST+1,sp)
+ 611  0217 cd0000        	call	c_uitolx
+ 613  021a 96            	ldw	x,sp
+ 614  021b 1c0001        	addw	x,#OFST-15
+ 615  021e cd0000        	call	c_rtol
+ 618  0221 96            	ldw	x,sp
+ 619  0222 1c000c        	addw	x,#OFST-4
+ 620  0225 cd0000        	call	c_ltor
+ 622  0228 96            	ldw	x,sp
+ 623  0229 1c000c        	addw	x,#OFST-4
+ 624  022c a601          	ld	a,#1
+ 625  022e cd0000        	call	c_lgadc
+ 628  0231 96            	ldw	x,sp
+ 629  0232 1c0001        	addw	x,#OFST-15
+ 630  0235 cd0000        	call	c_ladd
+ 632  0238 be02          	ldw	x,c_lreg+2
+ 633  023a a63c          	ld	a,#60
+ 634  023c f7            	ld	(x),a
+ 635                     ; 205 	ptr = (uint8_t *)punEncodeLength(strlen( ( const char* )punClientIdentifier));
+ 637  023d 1e15          	ldw	x,(OFST+5,sp)
+ 638  023f cd0000        	call	_strlen
+ 640  0242 cd0000        	call	c_uitolx
+ 642  0245 be02          	ldw	x,c_lreg+2
+ 643  0247 89            	pushw	x
+ 644  0248 be00          	ldw	x,c_lreg
+ 645  024a 89            	pushw	x
+ 646  024b cd0000        	call	_punEncodeLength
+ 648  024e 5b04          	addw	sp,#4
+ 649  0250 1f09          	ldw	(OFST-7,sp),x
+ 651                     ; 206 	i = strlen( ( const char* )ptr);
+ 653  0252 1e09          	ldw	x,(OFST-7,sp)
+ 654  0254 cd0000        	call	_strlen
+ 656  0257 01            	rrwa	x,a
+ 657  0258 6b0b          	ld	(OFST-5,sp),a
+ 658  025a 02            	rlwa	x,a
+ 660                     ; 207 	if(i < 2)
+ 662  025b 7b0b          	ld	a,(OFST-5,sp)
+ 663  025d a102          	cp	a,#2
+ 664  025f 2452          	jruge	L341
+ 665                     ; 209 		punBuffer[ulTotalPacketLength++] = 0;
+ 667  0261 1e11          	ldw	x,(OFST+1,sp)
+ 668  0263 cd0000        	call	c_uitolx
+ 670  0266 96            	ldw	x,sp
+ 671  0267 1c0001        	addw	x,#OFST-15
+ 672  026a cd0000        	call	c_rtol
+ 675  026d 96            	ldw	x,sp
+ 676  026e 1c000c        	addw	x,#OFST-4
+ 677  0271 cd0000        	call	c_ltor
+ 679  0274 96            	ldw	x,sp
+ 680  0275 1c000c        	addw	x,#OFST-4
+ 681  0278 a601          	ld	a,#1
+ 682  027a cd0000        	call	c_lgadc
+ 685  027d 96            	ldw	x,sp
+ 686  027e 1c0001        	addw	x,#OFST-15
+ 687  0281 cd0000        	call	c_ladd
+ 689  0284 be02          	ldw	x,c_lreg+2
+ 690  0286 7f            	clr	(x)
+ 691                     ; 210 		punBuffer[ulTotalPacketLength++] = *(ptr);
+ 693  0287 1e11          	ldw	x,(OFST+1,sp)
+ 694  0289 cd0000        	call	c_uitolx
+ 696  028c 96            	ldw	x,sp
+ 697  028d 1c0001        	addw	x,#OFST-15
+ 698  0290 cd0000        	call	c_rtol
+ 701  0293 96            	ldw	x,sp
+ 702  0294 1c000c        	addw	x,#OFST-4
+ 703  0297 cd0000        	call	c_ltor
+ 705  029a 96            	ldw	x,sp
+ 706  029b 1c000c        	addw	x,#OFST-4
+ 707  029e a601          	ld	a,#1
+ 708  02a0 cd0000        	call	c_lgadc
+ 711  02a3 96            	ldw	x,sp
+ 712  02a4 1c0001        	addw	x,#OFST-15
+ 713  02a7 cd0000        	call	c_ladd
+ 715  02aa be02          	ldw	x,c_lreg+2
+ 716  02ac 1609          	ldw	y,(OFST-7,sp)
+ 717  02ae 90f6          	ld	a,(y)
+ 718  02b0 f7            	ld	(x),a
+ 720  02b1 2055          	jra	L541
+ 721  02b3               L341:
+ 722                     ; 214 		punBuffer[ulTotalPacketLength++] = *(ptr);
+ 724  02b3 1e11          	ldw	x,(OFST+1,sp)
+ 725  02b5 cd0000        	call	c_uitolx
+ 727  02b8 96            	ldw	x,sp
+ 728  02b9 1c0001        	addw	x,#OFST-15
+ 729  02bc cd0000        	call	c_rtol
+ 732  02bf 96            	ldw	x,sp
+ 733  02c0 1c000c        	addw	x,#OFST-4
+ 734  02c3 cd0000        	call	c_ltor
+ 736  02c6 96            	ldw	x,sp
+ 737  02c7 1c000c        	addw	x,#OFST-4
+ 738  02ca a601          	ld	a,#1
+ 739  02cc cd0000        	call	c_lgadc
+ 742  02cf 96            	ldw	x,sp
+ 743  02d0 1c0001        	addw	x,#OFST-15
+ 744  02d3 cd0000        	call	c_ladd
+ 746  02d6 be02          	ldw	x,c_lreg+2
+ 747  02d8 1609          	ldw	y,(OFST-7,sp)
+ 748  02da 90f6          	ld	a,(y)
+ 749  02dc f7            	ld	(x),a
+ 750                     ; 215 		punBuffer[ulTotalPacketLength++] = *(ptr+1);
+ 752  02dd 1e11          	ldw	x,(OFST+1,sp)
+ 753  02df cd0000        	call	c_uitolx
+ 755  02e2 96            	ldw	x,sp
+ 756  02e3 1c0001        	addw	x,#OFST-15
+ 757  02e6 cd0000        	call	c_rtol
+ 760  02e9 96            	ldw	x,sp
+ 761  02ea 1c000c        	addw	x,#OFST-4
+ 762  02ed cd0000        	call	c_ltor
+ 764  02f0 96            	ldw	x,sp
+ 765  02f1 1c000c        	addw	x,#OFST-4
+ 766  02f4 a601          	ld	a,#1
+ 767  02f6 cd0000        	call	c_lgadc
+ 770  02f9 96            	ldw	x,sp
+ 771  02fa 1c0001        	addw	x,#OFST-15
+ 772  02fd cd0000        	call	c_ladd
+ 774  0300 be02          	ldw	x,c_lreg+2
+ 775  0302 1609          	ldw	y,(OFST-7,sp)
+ 776  0304 90e601        	ld	a,(1,y)
+ 777  0307 f7            	ld	(x),a
+ 778  0308               L541:
+ 779                     ; 217 	i = strlen( ( const char* )punClientIdentifier);
+ 781  0308 1e15          	ldw	x,(OFST+5,sp)
+ 782  030a cd0000        	call	_strlen
+ 784  030d 01            	rrwa	x,a
+ 785  030e 6b0b          	ld	(OFST-5,sp),a
+ 786  0310 02            	rlwa	x,a
+ 788                     ; 218 	for ( j = 0; j < i; j++)
+ 790  0311 0f10          	clr	(OFST+0,sp)
+ 793  0313 2036          	jra	L351
+ 794  0315               L741:
+ 795                     ; 220 		punBuffer[ulTotalPacketLength++] = punClientIdentifier[j];
+ 797  0315 1e11          	ldw	x,(OFST+1,sp)
+ 798  0317 cd0000        	call	c_uitolx
+ 800  031a 96            	ldw	x,sp
+ 801  031b 1c0001        	addw	x,#OFST-15
+ 802  031e cd0000        	call	c_rtol
+ 805  0321 96            	ldw	x,sp
+ 806  0322 1c000c        	addw	x,#OFST-4
+ 807  0325 cd0000        	call	c_ltor
+ 809  0328 96            	ldw	x,sp
+ 810  0329 1c000c        	addw	x,#OFST-4
+ 811  032c a601          	ld	a,#1
+ 812  032e cd0000        	call	c_lgadc
+ 815  0331 96            	ldw	x,sp
+ 816  0332 1c0001        	addw	x,#OFST-15
+ 817  0335 cd0000        	call	c_ladd
+ 819  0338 be02          	ldw	x,c_lreg+2
+ 820  033a 89            	pushw	x
+ 821  033b 7b17          	ld	a,(OFST+7,sp)
+ 822  033d 97            	ld	xl,a
+ 823  033e 7b18          	ld	a,(OFST+8,sp)
+ 824  0340 1b12          	add	a,(OFST+2,sp)
+ 825  0342 2401          	jrnc	L21
+ 826  0344 5c            	incw	x
+ 827  0345               L21:
+ 828  0345 02            	rlwa	x,a
+ 829  0346 f6            	ld	a,(x)
+ 830  0347 85            	popw	x
+ 831  0348 f7            	ld	(x),a
+ 832                     ; 218 	for ( j = 0; j < i; j++)
+ 834  0349 0c10          	inc	(OFST+0,sp)
+ 836  034b               L351:
+ 839  034b 7b10          	ld	a,(OFST+0,sp)
+ 840  034d 110b          	cp	a,(OFST-5,sp)
+ 841  034f 25c4          	jrult	L741
+ 842                     ; 298 	punBuffer[ulTotalPacketLength]	=	'\0';
+ 844  0351 1e11          	ldw	x,(OFST+1,sp)
+ 845  0353 72fb0e        	addw	x,(OFST-2,sp)
+ 846  0356 7f            	clr	(x)
+ 847                     ; 300 	return ulTotalPacketLength;
+ 849  0357 96            	ldw	x,sp
+ 850  0358 1c000c        	addw	x,#OFST-4
+ 851  035b cd0000        	call	c_ltor
+ 855  035e 5b12          	addw	sp,#18
+ 856  0360 81            	ret
+1161                     ; 303 uint32_t ulMQTT_Publish ( uint8_t *punBuffer, uint8_t *punTopic, uint8_t *punMessage/*, enMQTT_CTRL_PKT_FLAGS ePublishFlags*/ )
+1161                     ; 304 {
+1162                     	switch	.text
+1163  0361               _ulMQTT_Publish:
+1165  0361 89            	pushw	x
+1166  0362 5210          	subw	sp,#16
+1167       00000010      OFST:	set	16
+1170                     ; 305 	uint32_t ulTotalPacketLength	= 0;
+1172  0364 ae0000        	ldw	x,#0
+1173  0367 1f0d          	ldw	(OFST-3,sp),x
+1174  0369 ae0000        	ldw	x,#0
+1175  036c 1f0b          	ldw	(OFST-5,sp),x
+1177                     ; 306 	uint32_t ulRemainingLength		= 0;
+1179  036e ae0000        	ldw	x,#0
+1180  0371 1f07          	ldw	(OFST-9,sp),x
+1181  0373 ae0000        	ldw	x,#0
+1182  0376 1f05          	ldw	(OFST-11,sp),x
+1184                     ; 307 	uint8_t i = 0, j = 0, *ptr;
+1188                     ; 309 	enum MQTT_CTRL_PKT_FLAGS_ENUM ePublishFlags = eCTRL_PKT_FLAG_PUBLISH_D0_0_R0;
+1190  0378 0f0f          	clr	(OFST-1,sp)
+1192                     ; 313 	punBuffer[ulTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_PUBLISH & 0xF) << 4 ) & 0xF0) | (( (uint8_t)ePublishFlags & 0x0F) );
+1194  037a 1e11          	ldw	x,(OFST+1,sp)
+1195  037c cd0000        	call	c_uitolx
+1197  037f 96            	ldw	x,sp
+1198  0380 1c0001        	addw	x,#OFST-15
+1199  0383 cd0000        	call	c_rtol
+1202  0386 96            	ldw	x,sp
+1203  0387 1c000b        	addw	x,#OFST-5
+1204  038a cd0000        	call	c_ltor
+1206  038d 96            	ldw	x,sp
+1207  038e 1c000b        	addw	x,#OFST-5
+1208  0391 a601          	ld	a,#1
+1209  0393 cd0000        	call	c_lgadc
+1212  0396 96            	ldw	x,sp
+1213  0397 1c0001        	addw	x,#OFST-15
+1214  039a cd0000        	call	c_ladd
+1216  039d be02          	ldw	x,c_lreg+2
+1217  039f a630          	ld	a,#48
+1218  03a1 f7            	ld	(x),a
+1219                     ; 316 	ulRemainingLength	+=	2;	//Variable Header: Topic Name Length size in 2 Bytes
+1221  03a2 96            	ldw	x,sp
+1222  03a3 1c0005        	addw	x,#OFST-11
+1223  03a6 a602          	ld	a,#2
+1224  03a8 cd0000        	call	c_lgadc
+1227                     ; 317 	ulRemainingLength	+=	strlen( ( const char* )punTopic);	//Variable Header: Topic Name
+1229  03ab 1e15          	ldw	x,(OFST+5,sp)
+1230  03ad cd0000        	call	_strlen
+1232  03b0 cd0000        	call	c_uitolx
+1234  03b3 96            	ldw	x,sp
+1235  03b4 1c0005        	addw	x,#OFST-11
+1236  03b7 cd0000        	call	c_lgadd
+1239                     ; 318 	if( (ePublishFlags & 0x06) != 0 )	// Check if QOS-1 or QOS-2 is selected
+1241  03ba 7b0f          	ld	a,(OFST-1,sp)
+1242  03bc a506          	bcp	a,#6
+1243  03be 2709          	jreq	L713
+1244                     ; 320 		ulRemainingLength	+=	2;	//Variable Header: Packet Identifier Length which is 2 Bytes
+1246  03c0 96            	ldw	x,sp
+1247  03c1 1c0005        	addw	x,#OFST-11
+1248  03c4 a602          	ld	a,#2
+1249  03c6 cd0000        	call	c_lgadc
+1252  03c9               L713:
+1253                     ; 322 	ulRemainingLength	+=	strlen( ( const char* )punMessage);	//Payload: Message Length in Bytes
+1255  03c9 1e17          	ldw	x,(OFST+7,sp)
+1256  03cb cd0000        	call	_strlen
+1258  03ce cd0000        	call	c_uitolx
+1260  03d1 96            	ldw	x,sp
+1261  03d2 1c0005        	addw	x,#OFST-11
+1262  03d5 cd0000        	call	c_lgadd
+1265                     ; 325 	ptr = (uint8_t *)punEncodeLength(ulRemainingLength);
+1267  03d8 1e07          	ldw	x,(OFST-9,sp)
+1268  03da 89            	pushw	x
+1269  03db 1e07          	ldw	x,(OFST-9,sp)
+1270  03dd 89            	pushw	x
+1271  03de cd0000        	call	_punEncodeLength
+1273  03e1 5b04          	addw	sp,#4
+1274  03e3 1f09          	ldw	(OFST-7,sp),x
+1276                     ; 326 	i = strlen( ( const char* )ptr);
+1278  03e5 1e09          	ldw	x,(OFST-7,sp)
+1279  03e7 cd0000        	call	_strlen
+1281  03ea 01            	rrwa	x,a
+1282  03eb 6b0f          	ld	(OFST-1,sp),a
+1283  03ed 02            	rlwa	x,a
+1285                     ; 327 	for ( j = 0; j < i; j++)
+1287  03ee 0f10          	clr	(OFST+0,sp)
+1290  03f0 2036          	jra	L523
+1291  03f2               L123:
+1292                     ; 329 		punBuffer[ulTotalPacketLength++] = *(ptr + j);
+1294  03f2 1e11          	ldw	x,(OFST+1,sp)
+1295  03f4 cd0000        	call	c_uitolx
+1297  03f7 96            	ldw	x,sp
+1298  03f8 1c0001        	addw	x,#OFST-15
+1299  03fb cd0000        	call	c_rtol
+1302  03fe 96            	ldw	x,sp
+1303  03ff 1c000b        	addw	x,#OFST-5
+1304  0402 cd0000        	call	c_ltor
+1306  0405 96            	ldw	x,sp
+1307  0406 1c000b        	addw	x,#OFST-5
+1308  0409 a601          	ld	a,#1
+1309  040b cd0000        	call	c_lgadc
+1312  040e 96            	ldw	x,sp
+1313  040f 1c0001        	addw	x,#OFST-15
+1314  0412 cd0000        	call	c_ladd
+1316  0415 be02          	ldw	x,c_lreg+2
+1317  0417 89            	pushw	x
+1318  0418 7b0b          	ld	a,(OFST-5,sp)
+1319  041a 97            	ld	xl,a
+1320  041b 7b0c          	ld	a,(OFST-4,sp)
+1321  041d 1b12          	add	a,(OFST+2,sp)
+1322  041f 2401          	jrnc	L61
+1323  0421 5c            	incw	x
+1324  0422               L61:
+1325  0422 02            	rlwa	x,a
+1326  0423 f6            	ld	a,(x)
+1327  0424 85            	popw	x
+1328  0425 f7            	ld	(x),a
+1329                     ; 327 	for ( j = 0; j < i; j++)
+1331  0426 0c10          	inc	(OFST+0,sp)
+1333  0428               L523:
+1336  0428 7b10          	ld	a,(OFST+0,sp)
+1337  042a 110f          	cp	a,(OFST-1,sp)
+1338  042c 25c4          	jrult	L123
+1339                     ; 332 	ptr = (uint8_t *)punEncodeLength(strlen( ( const char* )punTopic));
+1341  042e 1e15          	ldw	x,(OFST+5,sp)
+1342  0430 cd0000        	call	_strlen
+1344  0433 cd0000        	call	c_uitolx
+1346  0436 be02          	ldw	x,c_lreg+2
+1347  0438 89            	pushw	x
+1348  0439 be00          	ldw	x,c_lreg
+1349  043b 89            	pushw	x
+1350  043c cd0000        	call	_punEncodeLength
+1352  043f 5b04          	addw	sp,#4
+1353  0441 1f09          	ldw	(OFST-7,sp),x
+1355                     ; 333 	i = strlen( ( const char* )ptr);
+1357  0443 1e09          	ldw	x,(OFST-7,sp)
+1358  0445 cd0000        	call	_strlen
+1360  0448 01            	rrwa	x,a
+1361  0449 6b0f          	ld	(OFST-1,sp),a
+1362  044b 02            	rlwa	x,a
+1364                     ; 334 	if(i < 2)
+1366  044c 7b0f          	ld	a,(OFST-1,sp)
+1367  044e a102          	cp	a,#2
+1368  0450 2452          	jruge	L133
+1369                     ; 336 		punBuffer[ulTotalPacketLength++] = 0;
+1371  0452 1e11          	ldw	x,(OFST+1,sp)
+1372  0454 cd0000        	call	c_uitolx
+1374  0457 96            	ldw	x,sp
+1375  0458 1c0001        	addw	x,#OFST-15
+1376  045b cd0000        	call	c_rtol
+1379  045e 96            	ldw	x,sp
+1380  045f 1c000b        	addw	x,#OFST-5
+1381  0462 cd0000        	call	c_ltor
+1383  0465 96            	ldw	x,sp
+1384  0466 1c000b        	addw	x,#OFST-5
+1385  0469 a601          	ld	a,#1
+1386  046b cd0000        	call	c_lgadc
+1389  046e 96            	ldw	x,sp
+1390  046f 1c0001        	addw	x,#OFST-15
+1391  0472 cd0000        	call	c_ladd
+1393  0475 be02          	ldw	x,c_lreg+2
+1394  0477 7f            	clr	(x)
+1395                     ; 337 		punBuffer[ulTotalPacketLength++] = *(ptr);
+1397  0478 1e11          	ldw	x,(OFST+1,sp)
+1398  047a cd0000        	call	c_uitolx
+1400  047d 96            	ldw	x,sp
+1401  047e 1c0001        	addw	x,#OFST-15
+1402  0481 cd0000        	call	c_rtol
+1405  0484 96            	ldw	x,sp
+1406  0485 1c000b        	addw	x,#OFST-5
+1407  0488 cd0000        	call	c_ltor
+1409  048b 96            	ldw	x,sp
+1410  048c 1c000b        	addw	x,#OFST-5
+1411  048f a601          	ld	a,#1
+1412  0491 cd0000        	call	c_lgadc
+1415  0494 96            	ldw	x,sp
+1416  0495 1c0001        	addw	x,#OFST-15
+1417  0498 cd0000        	call	c_ladd
+1419  049b be02          	ldw	x,c_lreg+2
+1420  049d 1609          	ldw	y,(OFST-7,sp)
+1421  049f 90f6          	ld	a,(y)
+1422  04a1 f7            	ld	(x),a
+1424  04a2 2055          	jra	L333
+1425  04a4               L133:
+1426                     ; 341 		punBuffer[ulTotalPacketLength++] = *(ptr);
+1428  04a4 1e11          	ldw	x,(OFST+1,sp)
+1429  04a6 cd0000        	call	c_uitolx
+1431  04a9 96            	ldw	x,sp
+1432  04aa 1c0001        	addw	x,#OFST-15
+1433  04ad cd0000        	call	c_rtol
+1436  04b0 96            	ldw	x,sp
+1437  04b1 1c000b        	addw	x,#OFST-5
+1438  04b4 cd0000        	call	c_ltor
+1440  04b7 96            	ldw	x,sp
+1441  04b8 1c000b        	addw	x,#OFST-5
+1442  04bb a601          	ld	a,#1
+1443  04bd cd0000        	call	c_lgadc
+1446  04c0 96            	ldw	x,sp
+1447  04c1 1c0001        	addw	x,#OFST-15
+1448  04c4 cd0000        	call	c_ladd
+1450  04c7 be02          	ldw	x,c_lreg+2
+1451  04c9 1609          	ldw	y,(OFST-7,sp)
+1452  04cb 90f6          	ld	a,(y)
+1453  04cd f7            	ld	(x),a
+1454                     ; 342 		punBuffer[ulTotalPacketLength++] = *(ptr+1);
+1456  04ce 1e11          	ldw	x,(OFST+1,sp)
+1457  04d0 cd0000        	call	c_uitolx
+1459  04d3 96            	ldw	x,sp
+1460  04d4 1c0001        	addw	x,#OFST-15
+1461  04d7 cd0000        	call	c_rtol
+1464  04da 96            	ldw	x,sp
+1465  04db 1c000b        	addw	x,#OFST-5
+1466  04de cd0000        	call	c_ltor
+1468  04e1 96            	ldw	x,sp
+1469  04e2 1c000b        	addw	x,#OFST-5
+1470  04e5 a601          	ld	a,#1
+1471  04e7 cd0000        	call	c_lgadc
+1474  04ea 96            	ldw	x,sp
+1475  04eb 1c0001        	addw	x,#OFST-15
+1476  04ee cd0000        	call	c_ladd
+1478  04f1 be02          	ldw	x,c_lreg+2
+1479  04f3 1609          	ldw	y,(OFST-7,sp)
+1480  04f5 90e601        	ld	a,(1,y)
+1481  04f8 f7            	ld	(x),a
+1482  04f9               L333:
+1483                     ; 344 	i = strlen( ( const char* )punTopic);
+1485  04f9 1e15          	ldw	x,(OFST+5,sp)
+1486  04fb cd0000        	call	_strlen
+1488  04fe 01            	rrwa	x,a
+1489  04ff 6b0f          	ld	(OFST-1,sp),a
+1490  0501 02            	rlwa	x,a
+1492                     ; 345 	for ( j = 0; j < i; j++)
+1494  0502 0f10          	clr	(OFST+0,sp)
+1497  0504 2036          	jra	L143
+1498  0506               L533:
+1499                     ; 347 		punBuffer[ulTotalPacketLength++] = punTopic[j];
+1501  0506 1e11          	ldw	x,(OFST+1,sp)
+1502  0508 cd0000        	call	c_uitolx
+1504  050b 96            	ldw	x,sp
+1505  050c 1c0001        	addw	x,#OFST-15
+1506  050f cd0000        	call	c_rtol
+1509  0512 96            	ldw	x,sp
+1510  0513 1c000b        	addw	x,#OFST-5
+1511  0516 cd0000        	call	c_ltor
+1513  0519 96            	ldw	x,sp
+1514  051a 1c000b        	addw	x,#OFST-5
+1515  051d a601          	ld	a,#1
+1516  051f cd0000        	call	c_lgadc
+1519  0522 96            	ldw	x,sp
+1520  0523 1c0001        	addw	x,#OFST-15
+1521  0526 cd0000        	call	c_ladd
+1523  0529 be02          	ldw	x,c_lreg+2
+1524  052b 89            	pushw	x
+1525  052c 7b17          	ld	a,(OFST+7,sp)
+1526  052e 97            	ld	xl,a
+1527  052f 7b18          	ld	a,(OFST+8,sp)
+1528  0531 1b12          	add	a,(OFST+2,sp)
+1529  0533 2401          	jrnc	L02
+1530  0535 5c            	incw	x
+1531  0536               L02:
+1532  0536 02            	rlwa	x,a
+1533  0537 f6            	ld	a,(x)
+1534  0538 85            	popw	x
+1535  0539 f7            	ld	(x),a
+1536                     ; 345 	for ( j = 0; j < i; j++)
+1538  053a 0c10          	inc	(OFST+0,sp)
+1540  053c               L143:
+1543  053c 7b10          	ld	a,(OFST+0,sp)
+1544  053e 110f          	cp	a,(OFST-1,sp)
+1545  0540 25c4          	jrult	L533
+1546                     ; 357 	i = strlen( ( const char* )punMessage);
+1548  0542 1e17          	ldw	x,(OFST+7,sp)
+1549  0544 cd0000        	call	_strlen
+1551  0547 01            	rrwa	x,a
+1552  0548 6b0f          	ld	(OFST-1,sp),a
+1553  054a 02            	rlwa	x,a
+1555                     ; 358 	for ( j = 0; j < i; j++)
+1557  054b 0f10          	clr	(OFST+0,sp)
+1560  054d 2036          	jra	L153
+1561  054f               L543:
+1562                     ; 360 		punBuffer[ulTotalPacketLength++] = punMessage[j];
+1564  054f 1e11          	ldw	x,(OFST+1,sp)
+1565  0551 cd0000        	call	c_uitolx
+1567  0554 96            	ldw	x,sp
+1568  0555 1c0001        	addw	x,#OFST-15
+1569  0558 cd0000        	call	c_rtol
+1572  055b 96            	ldw	x,sp
+1573  055c 1c000b        	addw	x,#OFST-5
+1574  055f cd0000        	call	c_ltor
+1576  0562 96            	ldw	x,sp
+1577  0563 1c000b        	addw	x,#OFST-5
+1578  0566 a601          	ld	a,#1
+1579  0568 cd0000        	call	c_lgadc
+1582  056b 96            	ldw	x,sp
+1583  056c 1c0001        	addw	x,#OFST-15
+1584  056f cd0000        	call	c_ladd
+1586  0572 be02          	ldw	x,c_lreg+2
+1587  0574 89            	pushw	x
+1588  0575 7b19          	ld	a,(OFST+9,sp)
+1589  0577 97            	ld	xl,a
+1590  0578 7b1a          	ld	a,(OFST+10,sp)
+1591  057a 1b12          	add	a,(OFST+2,sp)
+1592  057c 2401          	jrnc	L22
+1593  057e 5c            	incw	x
+1594  057f               L22:
+1595  057f 02            	rlwa	x,a
+1596  0580 f6            	ld	a,(x)
+1597  0581 85            	popw	x
+1598  0582 f7            	ld	(x),a
+1599                     ; 358 	for ( j = 0; j < i; j++)
+1601  0583 0c10          	inc	(OFST+0,sp)
+1603  0585               L153:
+1606  0585 7b10          	ld	a,(OFST+0,sp)
+1607  0587 110f          	cp	a,(OFST-1,sp)
+1608  0589 25c4          	jrult	L543
+1609                     ; 363 	punBuffer[ulTotalPacketLength]	=	'\0';
+1611  058b 1e11          	ldw	x,(OFST+1,sp)
+1612  058d 72fb0d        	addw	x,(OFST-3,sp)
+1613  0590 7f            	clr	(x)
+1614                     ; 365 	return ulTotalPacketLength;
+1616  0591 96            	ldw	x,sp
+1617  0592 1c000b        	addw	x,#OFST-5
+1618  0595 cd0000        	call	c_ltor
+1622  0598 5b12          	addw	sp,#18
+1623  059a 81            	ret
+1770                     ; 368 uint32_t ulMQTT_Subscribe ( uint8_t *punBuffer, uint8_t *punTopic/*, enMQTT_QOS eQOS, uint16_t udPacketIdentifier*/ )
+1770                     ; 369 {
+1771                     	switch	.text
+1772  059b               _ulMQTT_Subscribe:
+1774  059b 89            	pushw	x
+1775  059c 5213          	subw	sp,#19
+1776       00000013      OFST:	set	19
+1779                     ; 370 	uint32_t ulTotalPacketLength	= 0;
+1781  059e ae0000        	ldw	x,#0
+1782  05a1 1f11          	ldw	(OFST-2,sp),x
+1783  05a3 ae0000        	ldw	x,#0
+1784  05a6 1f0f          	ldw	(OFST-4,sp),x
+1786                     ; 371 	uint32_t ulRemainingLength		= 0;
+1788  05a8 ae0000        	ldw	x,#0
+1789  05ab 1f0a          	ldw	(OFST-9,sp),x
+1790  05ad ae0000        	ldw	x,#0
+1791  05b0 1f08          	ldw	(OFST-11,sp),x
+1793                     ; 372 	uint8_t i = 0, j = 0, *ptr;
+1797                     ; 374 	uint16_t udPacketIdentifier = 1;
+1799  05b2 ae0001        	ldw	x,#1
+1800  05b5 1f06          	ldw	(OFST-13,sp),x
+1802                     ; 375 	enum MQTT_QOS_ENUM eQOS = eQOS_0;
+1804  05b7 0f05          	clr	(OFST-14,sp)
+1806                     ; 377 	punBuffer[ulTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_SUBSCRIBE & 0xF) << 4 ) & 0xF0) | (( (uint8_t)eCTRL_PKT_FLAG_SUBSCRIBE & 0x0F) );
+1808  05b9 1e14          	ldw	x,(OFST+1,sp)
+1809  05bb cd0000        	call	c_uitolx
+1811  05be 96            	ldw	x,sp
+1812  05bf 1c0001        	addw	x,#OFST-18
+1813  05c2 cd0000        	call	c_rtol
+1816  05c5 96            	ldw	x,sp
+1817  05c6 1c000f        	addw	x,#OFST-4
+1818  05c9 cd0000        	call	c_ltor
+1820  05cc 96            	ldw	x,sp
+1821  05cd 1c000f        	addw	x,#OFST-4
+1822  05d0 a601          	ld	a,#1
+1823  05d2 cd0000        	call	c_lgadc
+1826  05d5 96            	ldw	x,sp
+1827  05d6 1c0001        	addw	x,#OFST-18
+1828  05d9 cd0000        	call	c_ladd
+1830  05dc be02          	ldw	x,c_lreg+2
+1831  05de a682          	ld	a,#130
+1832  05e0 f7            	ld	(x),a
+1833                     ; 380 	ulRemainingLength	+=	2;	//Variable Header: Packet Identifier of fixed 2 Bytes
+1835  05e1 96            	ldw	x,sp
+1836  05e2 1c0008        	addw	x,#OFST-11
+1837  05e5 a602          	ld	a,#2
+1838  05e7 cd0000        	call	c_lgadc
+1841                     ; 381 	ulRemainingLength	+=	2;	//Payload: Topic Name Length which is 2 Bytes
+1843  05ea 96            	ldw	x,sp
+1844  05eb 1c0008        	addw	x,#OFST-11
+1845  05ee a602          	ld	a,#2
+1846  05f0 cd0000        	call	c_lgadc
+1849                     ; 382 	ulRemainingLength	+=	strlen( ( const char* )punTopic);;	//Payload: Topic Name Length
+1851  05f3 1e18          	ldw	x,(OFST+5,sp)
+1852  05f5 cd0000        	call	_strlen
+1854  05f8 cd0000        	call	c_uitolx
+1856  05fb 96            	ldw	x,sp
+1857  05fc 1c0008        	addw	x,#OFST-11
+1858  05ff cd0000        	call	c_lgadd
+1861                     ; 383 	ulRemainingLength	+=	1;	//Payload: Requested QOS Byte
+1864  0602 96            	ldw	x,sp
+1865  0603 1c0008        	addw	x,#OFST-11
+1866  0606 a601          	ld	a,#1
+1867  0608 cd0000        	call	c_lgadc
+1870                     ; 386 	ptr = (uint8_t *)punEncodeLength(ulRemainingLength);
+1872  060b 1e0a          	ldw	x,(OFST-9,sp)
+1873  060d 89            	pushw	x
+1874  060e 1e0a          	ldw	x,(OFST-9,sp)
+1875  0610 89            	pushw	x
+1876  0611 cd0000        	call	_punEncodeLength
+1878  0614 5b04          	addw	sp,#4
+1879  0616 1f0c          	ldw	(OFST-7,sp),x
+1881                     ; 387 	i = strlen( ( const char* )ptr);
+1883  0618 1e0c          	ldw	x,(OFST-7,sp)
+1884  061a cd0000        	call	_strlen
+1886  061d 01            	rrwa	x,a
+1887  061e 6b0e          	ld	(OFST-5,sp),a
+1888  0620 02            	rlwa	x,a
+1890                     ; 388 	for ( j = 0; j < i; j++)
+1892  0621 0f13          	clr	(OFST+0,sp)
+1895  0623 2036          	jra	L354
+1896  0625               L744:
+1897                     ; 390 		punBuffer[ulTotalPacketLength++] = *(ptr + j);
+1899  0625 1e14          	ldw	x,(OFST+1,sp)
+1900  0627 cd0000        	call	c_uitolx
+1902  062a 96            	ldw	x,sp
+1903  062b 1c0001        	addw	x,#OFST-18
+1904  062e cd0000        	call	c_rtol
+1907  0631 96            	ldw	x,sp
+1908  0632 1c000f        	addw	x,#OFST-4
+1909  0635 cd0000        	call	c_ltor
+1911  0638 96            	ldw	x,sp
+1912  0639 1c000f        	addw	x,#OFST-4
+1913  063c a601          	ld	a,#1
+1914  063e cd0000        	call	c_lgadc
+1917  0641 96            	ldw	x,sp
+1918  0642 1c0001        	addw	x,#OFST-18
+1919  0645 cd0000        	call	c_ladd
+1921  0648 be02          	ldw	x,c_lreg+2
+1922  064a 89            	pushw	x
+1923  064b 7b0e          	ld	a,(OFST-5,sp)
+1924  064d 97            	ld	xl,a
+1925  064e 7b0f          	ld	a,(OFST-4,sp)
+1926  0650 1b15          	add	a,(OFST+2,sp)
+1927  0652 2401          	jrnc	L62
+1928  0654 5c            	incw	x
+1929  0655               L62:
+1930  0655 02            	rlwa	x,a
+1931  0656 f6            	ld	a,(x)
+1932  0657 85            	popw	x
+1933  0658 f7            	ld	(x),a
+1934                     ; 388 	for ( j = 0; j < i; j++)
+1936  0659 0c13          	inc	(OFST+0,sp)
+1938  065b               L354:
+1941  065b 7b13          	ld	a,(OFST+0,sp)
+1942  065d 110e          	cp	a,(OFST-5,sp)
+1943  065f 25c4          	jrult	L744
+1944                     ; 394 	punBuffer[ulTotalPacketLength++]	=	( udPacketIdentifier	>>	8 ) & 0xFF;	// Most Significant Byte
+1946  0661 1e14          	ldw	x,(OFST+1,sp)
+1947  0663 cd0000        	call	c_uitolx
+1949  0666 96            	ldw	x,sp
+1950  0667 1c0001        	addw	x,#OFST-18
+1951  066a cd0000        	call	c_rtol
+1954  066d 96            	ldw	x,sp
+1955  066e 1c000f        	addw	x,#OFST-4
+1956  0671 cd0000        	call	c_ltor
+1958  0674 96            	ldw	x,sp
+1959  0675 1c000f        	addw	x,#OFST-4
+1960  0678 a601          	ld	a,#1
+1961  067a cd0000        	call	c_lgadc
+1964  067d 96            	ldw	x,sp
+1965  067e 1c0001        	addw	x,#OFST-18
+1966  0681 cd0000        	call	c_ladd
+1968  0684 be02          	ldw	x,c_lreg+2
+1969  0686 7b06          	ld	a,(OFST-13,sp)
+1970  0688 f7            	ld	(x),a
+1971                     ; 395 	punBuffer[ulTotalPacketLength++]	=	( udPacketIdentifier	>>	0 ) & 0xFF;	// Least Significant Byte
+1973  0689 1e14          	ldw	x,(OFST+1,sp)
+1974  068b cd0000        	call	c_uitolx
+1976  068e 96            	ldw	x,sp
+1977  068f 1c0001        	addw	x,#OFST-18
+1978  0692 cd0000        	call	c_rtol
+1981  0695 96            	ldw	x,sp
+1982  0696 1c000f        	addw	x,#OFST-4
+1983  0699 cd0000        	call	c_ltor
+1985  069c 96            	ldw	x,sp
+1986  069d 1c000f        	addw	x,#OFST-4
+1987  06a0 a601          	ld	a,#1
+1988  06a2 cd0000        	call	c_lgadc
+1991  06a5 96            	ldw	x,sp
+1992  06a6 1c0001        	addw	x,#OFST-18
+1993  06a9 cd0000        	call	c_ladd
+1995  06ac be02          	ldw	x,c_lreg+2
+1996  06ae 7b07          	ld	a,(OFST-12,sp)
+1997  06b0 a4ff          	and	a,#255
+1998  06b2 f7            	ld	(x),a
+1999                     ; 398 	ptr = (uint8_t *)punEncodeLength(strlen( ( const char* )punTopic));
+2001  06b3 1e18          	ldw	x,(OFST+5,sp)
+2002  06b5 cd0000        	call	_strlen
+2004  06b8 cd0000        	call	c_uitolx
+2006  06bb be02          	ldw	x,c_lreg+2
+2007  06bd 89            	pushw	x
+2008  06be be00          	ldw	x,c_lreg
+2009  06c0 89            	pushw	x
+2010  06c1 cd0000        	call	_punEncodeLength
+2012  06c4 5b04          	addw	sp,#4
+2013  06c6 1f0c          	ldw	(OFST-7,sp),x
+2015                     ; 399 	i = strlen( ( const char* )ptr);
+2017  06c8 1e0c          	ldw	x,(OFST-7,sp)
+2018  06ca cd0000        	call	_strlen
+2020  06cd 01            	rrwa	x,a
+2021  06ce 6b0e          	ld	(OFST-5,sp),a
+2022  06d0 02            	rlwa	x,a
+2024                     ; 400 	if(i < 2)
+2026  06d1 7b0e          	ld	a,(OFST-5,sp)
+2027  06d3 a102          	cp	a,#2
+2028  06d5 2452          	jruge	L754
+2029                     ; 402 		punBuffer[ulTotalPacketLength++] = 0;
+2031  06d7 1e14          	ldw	x,(OFST+1,sp)
+2032  06d9 cd0000        	call	c_uitolx
+2034  06dc 96            	ldw	x,sp
+2035  06dd 1c0001        	addw	x,#OFST-18
+2036  06e0 cd0000        	call	c_rtol
+2039  06e3 96            	ldw	x,sp
+2040  06e4 1c000f        	addw	x,#OFST-4
+2041  06e7 cd0000        	call	c_ltor
+2043  06ea 96            	ldw	x,sp
+2044  06eb 1c000f        	addw	x,#OFST-4
+2045  06ee a601          	ld	a,#1
+2046  06f0 cd0000        	call	c_lgadc
+2049  06f3 96            	ldw	x,sp
+2050  06f4 1c0001        	addw	x,#OFST-18
+2051  06f7 cd0000        	call	c_ladd
+2053  06fa be02          	ldw	x,c_lreg+2
+2054  06fc 7f            	clr	(x)
+2055                     ; 403 		punBuffer[ulTotalPacketLength++] = *(ptr);
+2057  06fd 1e14          	ldw	x,(OFST+1,sp)
+2058  06ff cd0000        	call	c_uitolx
+2060  0702 96            	ldw	x,sp
+2061  0703 1c0001        	addw	x,#OFST-18
+2062  0706 cd0000        	call	c_rtol
+2065  0709 96            	ldw	x,sp
+2066  070a 1c000f        	addw	x,#OFST-4
+2067  070d cd0000        	call	c_ltor
+2069  0710 96            	ldw	x,sp
+2070  0711 1c000f        	addw	x,#OFST-4
+2071  0714 a601          	ld	a,#1
+2072  0716 cd0000        	call	c_lgadc
+2075  0719 96            	ldw	x,sp
+2076  071a 1c0001        	addw	x,#OFST-18
+2077  071d cd0000        	call	c_ladd
+2079  0720 be02          	ldw	x,c_lreg+2
+2080  0722 160c          	ldw	y,(OFST-7,sp)
+2081  0724 90f6          	ld	a,(y)
+2082  0726 f7            	ld	(x),a
+2084  0727 2055          	jra	L164
+2085  0729               L754:
+2086                     ; 407 		punBuffer[ulTotalPacketLength++] = *(ptr);
+2088  0729 1e14          	ldw	x,(OFST+1,sp)
+2089  072b cd0000        	call	c_uitolx
+2091  072e 96            	ldw	x,sp
+2092  072f 1c0001        	addw	x,#OFST-18
+2093  0732 cd0000        	call	c_rtol
+2096  0735 96            	ldw	x,sp
+2097  0736 1c000f        	addw	x,#OFST-4
+2098  0739 cd0000        	call	c_ltor
+2100  073c 96            	ldw	x,sp
+2101  073d 1c000f        	addw	x,#OFST-4
+2102  0740 a601          	ld	a,#1
+2103  0742 cd0000        	call	c_lgadc
+2106  0745 96            	ldw	x,sp
+2107  0746 1c0001        	addw	x,#OFST-18
+2108  0749 cd0000        	call	c_ladd
+2110  074c be02          	ldw	x,c_lreg+2
+2111  074e 160c          	ldw	y,(OFST-7,sp)
+2112  0750 90f6          	ld	a,(y)
+2113  0752 f7            	ld	(x),a
+2114                     ; 408 		punBuffer[ulTotalPacketLength++] = *(ptr+1);
+2116  0753 1e14          	ldw	x,(OFST+1,sp)
+2117  0755 cd0000        	call	c_uitolx
+2119  0758 96            	ldw	x,sp
+2120  0759 1c0001        	addw	x,#OFST-18
+2121  075c cd0000        	call	c_rtol
+2124  075f 96            	ldw	x,sp
+2125  0760 1c000f        	addw	x,#OFST-4
+2126  0763 cd0000        	call	c_ltor
+2128  0766 96            	ldw	x,sp
+2129  0767 1c000f        	addw	x,#OFST-4
+2130  076a a601          	ld	a,#1
+2131  076c cd0000        	call	c_lgadc
+2134  076f 96            	ldw	x,sp
+2135  0770 1c0001        	addw	x,#OFST-18
+2136  0773 cd0000        	call	c_ladd
+2138  0776 be02          	ldw	x,c_lreg+2
+2139  0778 160c          	ldw	y,(OFST-7,sp)
+2140  077a 90e601        	ld	a,(1,y)
+2141  077d f7            	ld	(x),a
+2142  077e               L164:
+2143                     ; 410 	i = strlen( ( const char* )punTopic);
+2145  077e 1e18          	ldw	x,(OFST+5,sp)
+2146  0780 cd0000        	call	_strlen
+2148  0783 01            	rrwa	x,a
+2149  0784 6b0e          	ld	(OFST-5,sp),a
+2150  0786 02            	rlwa	x,a
+2152                     ; 411 	for ( j = 0; j < i; j++)
+2154  0787 0f13          	clr	(OFST+0,sp)
+2157  0789 2036          	jra	L764
+2158  078b               L364:
+2159                     ; 413 		punBuffer[ulTotalPacketLength++] = punTopic[j];
+2161  078b 1e14          	ldw	x,(OFST+1,sp)
+2162  078d cd0000        	call	c_uitolx
+2164  0790 96            	ldw	x,sp
+2165  0791 1c0001        	addw	x,#OFST-18
+2166  0794 cd0000        	call	c_rtol
+2169  0797 96            	ldw	x,sp
+2170  0798 1c000f        	addw	x,#OFST-4
+2171  079b cd0000        	call	c_ltor
+2173  079e 96            	ldw	x,sp
+2174  079f 1c000f        	addw	x,#OFST-4
+2175  07a2 a601          	ld	a,#1
+2176  07a4 cd0000        	call	c_lgadc
+2179  07a7 96            	ldw	x,sp
+2180  07a8 1c0001        	addw	x,#OFST-18
+2181  07ab cd0000        	call	c_ladd
+2183  07ae be02          	ldw	x,c_lreg+2
+2184  07b0 89            	pushw	x
+2185  07b1 7b1a          	ld	a,(OFST+7,sp)
+2186  07b3 97            	ld	xl,a
+2187  07b4 7b1b          	ld	a,(OFST+8,sp)
+2188  07b6 1b15          	add	a,(OFST+2,sp)
+2189  07b8 2401          	jrnc	L03
+2190  07ba 5c            	incw	x
+2191  07bb               L03:
+2192  07bb 02            	rlwa	x,a
+2193  07bc f6            	ld	a,(x)
+2194  07bd 85            	popw	x
+2195  07be f7            	ld	(x),a
+2196                     ; 411 	for ( j = 0; j < i; j++)
+2198  07bf 0c13          	inc	(OFST+0,sp)
+2200  07c1               L764:
+2203  07c1 7b13          	ld	a,(OFST+0,sp)
+2204  07c3 110e          	cp	a,(OFST-5,sp)
+2205  07c5 25c4          	jrult	L364
+2206                     ; 417 	punBuffer[ulTotalPacketLength++]	=	((uint8_t)eQOS & 0x03);	//	Requested QOS, where bits[1:0] is QOS, and bits[7:2] are reserved 0
+2208  07c7 1e14          	ldw	x,(OFST+1,sp)
+2209  07c9 cd0000        	call	c_uitolx
+2211  07cc 96            	ldw	x,sp
+2212  07cd 1c0001        	addw	x,#OFST-18
+2213  07d0 cd0000        	call	c_rtol
+2216  07d3 96            	ldw	x,sp
+2217  07d4 1c000f        	addw	x,#OFST-4
+2218  07d7 cd0000        	call	c_ltor
+2220  07da 96            	ldw	x,sp
+2221  07db 1c000f        	addw	x,#OFST-4
+2222  07de a601          	ld	a,#1
+2223  07e0 cd0000        	call	c_lgadc
+2226  07e3 96            	ldw	x,sp
+2227  07e4 1c0001        	addw	x,#OFST-18
+2228  07e7 cd0000        	call	c_ladd
+2230  07ea be02          	ldw	x,c_lreg+2
+2231  07ec 7b05          	ld	a,(OFST-14,sp)
+2232  07ee a403          	and	a,#3
+2233  07f0 f7            	ld	(x),a
+2234                     ; 419 	punBuffer[ulTotalPacketLength]	=	'\0';
+2236  07f1 1e14          	ldw	x,(OFST+1,sp)
+2237  07f3 72fb11        	addw	x,(OFST-2,sp)
+2238  07f6 7f            	clr	(x)
+2239                     ; 421 	return ulTotalPacketLength;
+2241  07f7 96            	ldw	x,sp
+2242  07f8 1c000f        	addw	x,#OFST-4
+2243  07fb cd0000        	call	c_ltor
+2247  07fe 5b15          	addw	sp,#21
+2248  0800 81            	ret
+2351                     ; 424 uint32_t ulMQTT_UnSubscribe ( uint8_t *punBuffer, uint8_t *punTopic/*, uint16_t udPacketIdentifier */)
+2351                     ; 425 {
+2352                     	switch	.text
+2353  0801               _ulMQTT_UnSubscribe:
+2355  0801 89            	pushw	x
+2356  0802 5212          	subw	sp,#18
+2357       00000012      OFST:	set	18
+2360                     ; 426 	uint32_t ulTotalPacketLength	= 0;
+2362  0804 ae0000        	ldw	x,#0
+2363  0807 1f10          	ldw	(OFST-2,sp),x
+2364  0809 ae0000        	ldw	x,#0
+2365  080c 1f0e          	ldw	(OFST-4,sp),x
+2367                     ; 427 	uint32_t ulRemainingLength		= 0;
+2369  080e ae0000        	ldw	x,#0
+2370  0811 1f09          	ldw	(OFST-9,sp),x
+2371  0813 ae0000        	ldw	x,#0
+2372  0816 1f07          	ldw	(OFST-11,sp),x
+2374                     ; 428 	uint8_t i = 0, j = 0, *ptr;
+2378                     ; 430 	uint16_t udPacketIdentifier = 1;
+2380  0818 ae0001        	ldw	x,#1
+2381  081b 1f05          	ldw	(OFST-13,sp),x
+2383                     ; 432 	punBuffer[ulTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_UNSUBSCRIBE & 0xF) << 4 ) & 0xF0) | (( (uint8_t)eCTRL_PKT_FLAG_UNSUBSCRIBE & 0x0F) );
+2385  081d 1e13          	ldw	x,(OFST+1,sp)
+2386  081f cd0000        	call	c_uitolx
+2388  0822 96            	ldw	x,sp
+2389  0823 1c0001        	addw	x,#OFST-17
+2390  0826 cd0000        	call	c_rtol
+2393  0829 96            	ldw	x,sp
+2394  082a 1c000e        	addw	x,#OFST-4
+2395  082d cd0000        	call	c_ltor
+2397  0830 96            	ldw	x,sp
+2398  0831 1c000e        	addw	x,#OFST-4
+2399  0834 a601          	ld	a,#1
+2400  0836 cd0000        	call	c_lgadc
+2403  0839 96            	ldw	x,sp
+2404  083a 1c0001        	addw	x,#OFST-17
+2405  083d cd0000        	call	c_ladd
+2407  0840 be02          	ldw	x,c_lreg+2
+2408  0842 a6a2          	ld	a,#162
+2409  0844 f7            	ld	(x),a
+2410                     ; 435 	ulRemainingLength	+=	2;	//Variable Header: Packet Identifier of fixed 2 Bytes
+2412  0845 96            	ldw	x,sp
+2413  0846 1c0007        	addw	x,#OFST-11
+2414  0849 a602          	ld	a,#2
+2415  084b cd0000        	call	c_lgadc
+2418                     ; 436 	ulRemainingLength	+=	2;	//Payload: Topic Name Length which is 2 Bytes
+2420  084e 96            	ldw	x,sp
+2421  084f 1c0007        	addw	x,#OFST-11
+2422  0852 a602          	ld	a,#2
+2423  0854 cd0000        	call	c_lgadc
+2426                     ; 437 	ulRemainingLength	+=	strlen( ( const char* )punTopic);;	//Payload: Topic Name Length
+2428  0857 1e17          	ldw	x,(OFST+5,sp)
+2429  0859 cd0000        	call	_strlen
+2431  085c cd0000        	call	c_uitolx
+2433  085f 96            	ldw	x,sp
+2434  0860 1c0007        	addw	x,#OFST-11
+2435  0863 cd0000        	call	c_lgadd
+2438                     ; 440 	ptr = (uint8_t *)punEncodeLength(ulRemainingLength);
+2441  0866 1e09          	ldw	x,(OFST-9,sp)
+2442  0868 89            	pushw	x
+2443  0869 1e09          	ldw	x,(OFST-9,sp)
+2444  086b 89            	pushw	x
+2445  086c cd0000        	call	_punEncodeLength
+2447  086f 5b04          	addw	sp,#4
+2448  0871 1f0b          	ldw	(OFST-7,sp),x
+2450                     ; 441 	i = strlen( ( const char* )ptr);
+2452  0873 1e0b          	ldw	x,(OFST-7,sp)
+2453  0875 cd0000        	call	_strlen
+2455  0878 01            	rrwa	x,a
+2456  0879 6b0d          	ld	(OFST-5,sp),a
+2457  087b 02            	rlwa	x,a
+2459                     ; 442 	for ( j = 0; j < i; j++)
+2461  087c 0f12          	clr	(OFST+0,sp)
+2464  087e 2036          	jra	L155
+2465  0880               L545:
+2466                     ; 444 		punBuffer[ulTotalPacketLength++] = *(ptr + j);
+2468  0880 1e13          	ldw	x,(OFST+1,sp)
+2469  0882 cd0000        	call	c_uitolx
+2471  0885 96            	ldw	x,sp
+2472  0886 1c0001        	addw	x,#OFST-17
+2473  0889 cd0000        	call	c_rtol
+2476  088c 96            	ldw	x,sp
+2477  088d 1c000e        	addw	x,#OFST-4
+2478  0890 cd0000        	call	c_ltor
+2480  0893 96            	ldw	x,sp
+2481  0894 1c000e        	addw	x,#OFST-4
+2482  0897 a601          	ld	a,#1
+2483  0899 cd0000        	call	c_lgadc
+2486  089c 96            	ldw	x,sp
+2487  089d 1c0001        	addw	x,#OFST-17
+2488  08a0 cd0000        	call	c_ladd
+2490  08a3 be02          	ldw	x,c_lreg+2
+2491  08a5 89            	pushw	x
+2492  08a6 7b0d          	ld	a,(OFST-5,sp)
+2493  08a8 97            	ld	xl,a
+2494  08a9 7b0e          	ld	a,(OFST-4,sp)
+2495  08ab 1b14          	add	a,(OFST+2,sp)
+2496  08ad 2401          	jrnc	L43
+2497  08af 5c            	incw	x
+2498  08b0               L43:
+2499  08b0 02            	rlwa	x,a
+2500  08b1 f6            	ld	a,(x)
+2501  08b2 85            	popw	x
+2502  08b3 f7            	ld	(x),a
+2503                     ; 442 	for ( j = 0; j < i; j++)
+2505  08b4 0c12          	inc	(OFST+0,sp)
+2507  08b6               L155:
+2510  08b6 7b12          	ld	a,(OFST+0,sp)
+2511  08b8 110d          	cp	a,(OFST-5,sp)
+2512  08ba 25c4          	jrult	L545
+2513                     ; 448 	punBuffer[ulTotalPacketLength++]	=	( udPacketIdentifier	>>	8 ) & 0xFF;	// Most Significant Byte
+2515  08bc 1e13          	ldw	x,(OFST+1,sp)
+2516  08be cd0000        	call	c_uitolx
+2518  08c1 96            	ldw	x,sp
+2519  08c2 1c0001        	addw	x,#OFST-17
+2520  08c5 cd0000        	call	c_rtol
+2523  08c8 96            	ldw	x,sp
+2524  08c9 1c000e        	addw	x,#OFST-4
+2525  08cc cd0000        	call	c_ltor
+2527  08cf 96            	ldw	x,sp
+2528  08d0 1c000e        	addw	x,#OFST-4
+2529  08d3 a601          	ld	a,#1
+2530  08d5 cd0000        	call	c_lgadc
+2533  08d8 96            	ldw	x,sp
+2534  08d9 1c0001        	addw	x,#OFST-17
+2535  08dc cd0000        	call	c_ladd
+2537  08df be02          	ldw	x,c_lreg+2
+2538  08e1 7b05          	ld	a,(OFST-13,sp)
+2539  08e3 f7            	ld	(x),a
+2540                     ; 449 	punBuffer[ulTotalPacketLength++]	=	( udPacketIdentifier	>>	0 ) & 0xFF;	// Least Significant Byte
+2542  08e4 1e13          	ldw	x,(OFST+1,sp)
+2543  08e6 cd0000        	call	c_uitolx
+2545  08e9 96            	ldw	x,sp
+2546  08ea 1c0001        	addw	x,#OFST-17
+2547  08ed cd0000        	call	c_rtol
+2550  08f0 96            	ldw	x,sp
+2551  08f1 1c000e        	addw	x,#OFST-4
+2552  08f4 cd0000        	call	c_ltor
+2554  08f7 96            	ldw	x,sp
+2555  08f8 1c000e        	addw	x,#OFST-4
+2556  08fb a601          	ld	a,#1
+2557  08fd cd0000        	call	c_lgadc
+2560  0900 96            	ldw	x,sp
+2561  0901 1c0001        	addw	x,#OFST-17
+2562  0904 cd0000        	call	c_ladd
+2564  0907 be02          	ldw	x,c_lreg+2
+2565  0909 7b06          	ld	a,(OFST-12,sp)
+2566  090b a4ff          	and	a,#255
+2567  090d f7            	ld	(x),a
+2568                     ; 452 	ptr = (uint8_t *)punEncodeLength(strlen( ( const char* )punTopic));
+2570  090e 1e17          	ldw	x,(OFST+5,sp)
+2571  0910 cd0000        	call	_strlen
+2573  0913 cd0000        	call	c_uitolx
+2575  0916 be02          	ldw	x,c_lreg+2
+2576  0918 89            	pushw	x
+2577  0919 be00          	ldw	x,c_lreg
+2578  091b 89            	pushw	x
+2579  091c cd0000        	call	_punEncodeLength
+2581  091f 5b04          	addw	sp,#4
+2582  0921 1f0b          	ldw	(OFST-7,sp),x
+2584                     ; 453 	i = strlen( ( const char* )ptr);
+2586  0923 1e0b          	ldw	x,(OFST-7,sp)
+2587  0925 cd0000        	call	_strlen
+2589  0928 01            	rrwa	x,a
+2590  0929 6b0d          	ld	(OFST-5,sp),a
+2591  092b 02            	rlwa	x,a
+2593                     ; 454 	if(i < 2)
+2595  092c 7b0d          	ld	a,(OFST-5,sp)
+2596  092e a102          	cp	a,#2
+2597  0930 2452          	jruge	L555
+2598                     ; 456 		punBuffer[ulTotalPacketLength++] = 0;
+2600  0932 1e13          	ldw	x,(OFST+1,sp)
+2601  0934 cd0000        	call	c_uitolx
+2603  0937 96            	ldw	x,sp
+2604  0938 1c0001        	addw	x,#OFST-17
+2605  093b cd0000        	call	c_rtol
+2608  093e 96            	ldw	x,sp
+2609  093f 1c000e        	addw	x,#OFST-4
+2610  0942 cd0000        	call	c_ltor
+2612  0945 96            	ldw	x,sp
+2613  0946 1c000e        	addw	x,#OFST-4
+2614  0949 a601          	ld	a,#1
+2615  094b cd0000        	call	c_lgadc
+2618  094e 96            	ldw	x,sp
+2619  094f 1c0001        	addw	x,#OFST-17
+2620  0952 cd0000        	call	c_ladd
+2622  0955 be02          	ldw	x,c_lreg+2
+2623  0957 7f            	clr	(x)
+2624                     ; 457 		punBuffer[ulTotalPacketLength++] = *(ptr);
+2626  0958 1e13          	ldw	x,(OFST+1,sp)
+2627  095a cd0000        	call	c_uitolx
+2629  095d 96            	ldw	x,sp
+2630  095e 1c0001        	addw	x,#OFST-17
+2631  0961 cd0000        	call	c_rtol
+2634  0964 96            	ldw	x,sp
+2635  0965 1c000e        	addw	x,#OFST-4
+2636  0968 cd0000        	call	c_ltor
+2638  096b 96            	ldw	x,sp
+2639  096c 1c000e        	addw	x,#OFST-4
+2640  096f a601          	ld	a,#1
+2641  0971 cd0000        	call	c_lgadc
+2644  0974 96            	ldw	x,sp
+2645  0975 1c0001        	addw	x,#OFST-17
+2646  0978 cd0000        	call	c_ladd
+2648  097b be02          	ldw	x,c_lreg+2
+2649  097d 160b          	ldw	y,(OFST-7,sp)
+2650  097f 90f6          	ld	a,(y)
+2651  0981 f7            	ld	(x),a
+2653  0982 2055          	jra	L755
+2654  0984               L555:
+2655                     ; 461 		punBuffer[ulTotalPacketLength++] = *(ptr);
+2657  0984 1e13          	ldw	x,(OFST+1,sp)
+2658  0986 cd0000        	call	c_uitolx
+2660  0989 96            	ldw	x,sp
+2661  098a 1c0001        	addw	x,#OFST-17
+2662  098d cd0000        	call	c_rtol
+2665  0990 96            	ldw	x,sp
+2666  0991 1c000e        	addw	x,#OFST-4
+2667  0994 cd0000        	call	c_ltor
+2669  0997 96            	ldw	x,sp
+2670  0998 1c000e        	addw	x,#OFST-4
+2671  099b a601          	ld	a,#1
+2672  099d cd0000        	call	c_lgadc
+2675  09a0 96            	ldw	x,sp
+2676  09a1 1c0001        	addw	x,#OFST-17
+2677  09a4 cd0000        	call	c_ladd
+2679  09a7 be02          	ldw	x,c_lreg+2
+2680  09a9 160b          	ldw	y,(OFST-7,sp)
+2681  09ab 90f6          	ld	a,(y)
+2682  09ad f7            	ld	(x),a
+2683                     ; 462 		punBuffer[ulTotalPacketLength++] = *(ptr+1);
+2685  09ae 1e13          	ldw	x,(OFST+1,sp)
+2686  09b0 cd0000        	call	c_uitolx
+2688  09b3 96            	ldw	x,sp
+2689  09b4 1c0001        	addw	x,#OFST-17
+2690  09b7 cd0000        	call	c_rtol
+2693  09ba 96            	ldw	x,sp
+2694  09bb 1c000e        	addw	x,#OFST-4
+2695  09be cd0000        	call	c_ltor
+2697  09c1 96            	ldw	x,sp
+2698  09c2 1c000e        	addw	x,#OFST-4
+2699  09c5 a601          	ld	a,#1
+2700  09c7 cd0000        	call	c_lgadc
+2703  09ca 96            	ldw	x,sp
+2704  09cb 1c0001        	addw	x,#OFST-17
+2705  09ce cd0000        	call	c_ladd
+2707  09d1 be02          	ldw	x,c_lreg+2
+2708  09d3 160b          	ldw	y,(OFST-7,sp)
+2709  09d5 90e601        	ld	a,(1,y)
+2710  09d8 f7            	ld	(x),a
+2711  09d9               L755:
+2712                     ; 464 	i = strlen( ( const char* )punTopic);
+2714  09d9 1e17          	ldw	x,(OFST+5,sp)
+2715  09db cd0000        	call	_strlen
+2717  09de 01            	rrwa	x,a
+2718  09df 6b0d          	ld	(OFST-5,sp),a
+2719  09e1 02            	rlwa	x,a
+2721                     ; 465 	for ( j = 0; j < i; j++)
+2723  09e2 0f12          	clr	(OFST+0,sp)
+2726  09e4 2036          	jra	L565
+2727  09e6               L165:
+2728                     ; 467 		punBuffer[ulTotalPacketLength++] = punTopic[j];
+2730  09e6 1e13          	ldw	x,(OFST+1,sp)
+2731  09e8 cd0000        	call	c_uitolx
+2733  09eb 96            	ldw	x,sp
+2734  09ec 1c0001        	addw	x,#OFST-17
+2735  09ef cd0000        	call	c_rtol
+2738  09f2 96            	ldw	x,sp
+2739  09f3 1c000e        	addw	x,#OFST-4
+2740  09f6 cd0000        	call	c_ltor
+2742  09f9 96            	ldw	x,sp
+2743  09fa 1c000e        	addw	x,#OFST-4
+2744  09fd a601          	ld	a,#1
+2745  09ff cd0000        	call	c_lgadc
+2748  0a02 96            	ldw	x,sp
+2749  0a03 1c0001        	addw	x,#OFST-17
+2750  0a06 cd0000        	call	c_ladd
+2752  0a09 be02          	ldw	x,c_lreg+2
+2753  0a0b 89            	pushw	x
+2754  0a0c 7b19          	ld	a,(OFST+7,sp)
+2755  0a0e 97            	ld	xl,a
+2756  0a0f 7b1a          	ld	a,(OFST+8,sp)
+2757  0a11 1b14          	add	a,(OFST+2,sp)
+2758  0a13 2401          	jrnc	L63
+2759  0a15 5c            	incw	x
+2760  0a16               L63:
+2761  0a16 02            	rlwa	x,a
+2762  0a17 f6            	ld	a,(x)
+2763  0a18 85            	popw	x
+2764  0a19 f7            	ld	(x),a
+2765                     ; 465 	for ( j = 0; j < i; j++)
+2767  0a1a 0c12          	inc	(OFST+0,sp)
+2769  0a1c               L565:
+2772  0a1c 7b12          	ld	a,(OFST+0,sp)
+2773  0a1e 110d          	cp	a,(OFST-5,sp)
+2774  0a20 25c4          	jrult	L165
+2775                     ; 470 	punBuffer[ulTotalPacketLength]	=	'\0';
+2777  0a22 1e13          	ldw	x,(OFST+1,sp)
+2778  0a24 72fb10        	addw	x,(OFST-2,sp)
+2779  0a27 7f            	clr	(x)
+2780                     ; 472 	return ulTotalPacketLength;
+2782  0a28 96            	ldw	x,sp
+2783  0a29 1c000e        	addw	x,#OFST-4
+2784  0a2c cd0000        	call	c_ltor
+2788  0a2f 5b14          	addw	sp,#20
+2789  0a31 81            	ret
+2843                     ; 475 uint8_t unMQTT_PingRequest ( uint8_t *punBuffer )
+2843                     ; 476 {
+2844                     	switch	.text
+2845  0a32               _unMQTT_PingRequest:
+2847  0a32 89            	pushw	x
+2848  0a33 89            	pushw	x
+2849       00000002      OFST:	set	2
+2852                     ; 477 	uint8_t unTotalPacketLength	= 0;
+2854  0a34 0f02          	clr	(OFST+0,sp)
+2856                     ; 478 	uint8_t unRemainingLength	= 0;
+2858                     ; 481 	punBuffer[unTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_PINGREQ & 0xF) << 4 ) & 0xF0) | ( ((uint8_t)eCTRL_PKT_FLAG_PINGREQ & 0x0F) );
+2860  0a36 7b02          	ld	a,(OFST+0,sp)
+2861  0a38 97            	ld	xl,a
+2862  0a39 0c02          	inc	(OFST+0,sp)
+2864  0a3b 9f            	ld	a,xl
+2865  0a3c 5f            	clrw	x
+2866  0a3d 97            	ld	xl,a
+2867  0a3e 72fb03        	addw	x,(OFST+1,sp)
+2868  0a41 a6c0          	ld	a,#192
+2869  0a43 f7            	ld	(x),a
+2870                     ; 483 	punBuffer[unTotalPacketLength++] = unRemainingLength;
+2872  0a44 7b02          	ld	a,(OFST+0,sp)
+2873  0a46 97            	ld	xl,a
+2874  0a47 0c02          	inc	(OFST+0,sp)
+2876  0a49 9f            	ld	a,xl
+2877  0a4a 5f            	clrw	x
+2878  0a4b 97            	ld	xl,a
+2879  0a4c 72fb03        	addw	x,(OFST+1,sp)
+2880  0a4f 7f            	clr	(x)
+2881                     ; 485 	punBuffer[unTotalPacketLength]	=	'\0';
+2883  0a50 7b03          	ld	a,(OFST+1,sp)
+2884  0a52 97            	ld	xl,a
+2885  0a53 7b04          	ld	a,(OFST+2,sp)
+2886  0a55 1b02          	add	a,(OFST+0,sp)
+2887  0a57 2401          	jrnc	L24
+2888  0a59 5c            	incw	x
+2889  0a5a               L24:
+2890  0a5a 02            	rlwa	x,a
+2891  0a5b 7f            	clr	(x)
+2892                     ; 487 	return unTotalPacketLength;
+2894  0a5c 7b02          	ld	a,(OFST+0,sp)
+2897  0a5e 5b04          	addw	sp,#4
+2898  0a60 81            	ret
+2952                     ; 490 uint8_t unMQTT_Disconnect ( uint8_t *punBuffer )
+2952                     ; 491 {
+2953                     	switch	.text
+2954  0a61               _unMQTT_Disconnect:
+2956  0a61 89            	pushw	x
+2957  0a62 89            	pushw	x
+2958       00000002      OFST:	set	2
+2961                     ; 492 	uint8_t unTotalPacketLength	= 0;
+2963  0a63 0f02          	clr	(OFST+0,sp)
+2965                     ; 493 	uint8_t unRemainingLength	= 0;
+2967                     ; 496 	punBuffer[unTotalPacketLength++] = ((((uint8_t)eCTRL_PKT_DISCONNECT & 0xF) << 4 ) & 0xF0) | ( ((uint8_t)eCTRL_PKT_FLAG_DISCONNECT & 0x0F) );
+2969  0a65 7b02          	ld	a,(OFST+0,sp)
+2970  0a67 97            	ld	xl,a
+2971  0a68 0c02          	inc	(OFST+0,sp)
+2973  0a6a 9f            	ld	a,xl
+2974  0a6b 5f            	clrw	x
+2975  0a6c 97            	ld	xl,a
+2976  0a6d 72fb03        	addw	x,(OFST+1,sp)
+2977  0a70 a6e0          	ld	a,#224
+2978  0a72 f7            	ld	(x),a
+2979                     ; 498 	punBuffer[unTotalPacketLength++] = unRemainingLength;
+2981  0a73 7b02          	ld	a,(OFST+0,sp)
+2982  0a75 97            	ld	xl,a
+2983  0a76 0c02          	inc	(OFST+0,sp)
+2985  0a78 9f            	ld	a,xl
+2986  0a79 5f            	clrw	x
+2987  0a7a 97            	ld	xl,a
+2988  0a7b 72fb03        	addw	x,(OFST+1,sp)
+2989  0a7e 7f            	clr	(x)
+2990                     ; 500 	punBuffer[unTotalPacketLength]	=	'\0';
+2992  0a7f 7b03          	ld	a,(OFST+1,sp)
+2993  0a81 97            	ld	xl,a
+2994  0a82 7b04          	ld	a,(OFST+2,sp)
+2995  0a84 1b02          	add	a,(OFST+0,sp)
+2996  0a86 2401          	jrnc	L64
+2997  0a88 5c            	incw	x
+2998  0a89               L64:
+2999  0a89 02            	rlwa	x,a
+3000  0a8a 7f            	clr	(x)
+3001                     ; 502 	return unTotalPacketLength;
+3003  0a8b 7b02          	ld	a,(OFST+0,sp)
+3006  0a8d 5b04          	addw	sp,#4
+3007  0a8f 81            	ret
+3069                     ; 664 uint32_t ulDecodedLength (uint8_t * punLength)
+3069                     ; 665 {
+3070                     	switch	.text
+3071  0a90               _ulDecodedLength:
+3073  0a90 89            	pushw	x
+3074  0a91 5209          	subw	sp,#9
+3075       00000009      OFST:	set	9
+3078                     ; 666   uint32_t multiplier = 1;
+3080  0a93 ae0001        	ldw	x,#1
+3081  0a96 1f07          	ldw	(OFST-2,sp),x
+3082  0a98 ae0000        	ldw	x,#0
+3083  0a9b 1f05          	ldw	(OFST-4,sp),x
+3085                     ; 667   uint32_t value = 0;
+3087  0a9d ae0000        	ldw	x,#0
+3088  0aa0 1f03          	ldw	(OFST-6,sp),x
+3089  0aa2 ae0000        	ldw	x,#0
+3090  0aa5 1f01          	ldw	(OFST-8,sp),x
+3092                     ; 668   uint8_t  i = 0;
+3094  0aa7 0f09          	clr	(OFST+0,sp)
+3096  0aa9               L776:
+3097                     ; 672         value += (punLength[i] & 0x7F) * multiplier;
+3099  0aa9 7b0a          	ld	a,(OFST+1,sp)
+3100  0aab 97            	ld	xl,a
+3101  0aac 7b0b          	ld	a,(OFST+2,sp)
+3102  0aae 1b09          	add	a,(OFST+0,sp)
+3103  0ab0 2401          	jrnc	L25
+3104  0ab2 5c            	incw	x
+3105  0ab3               L25:
+3106  0ab3 02            	rlwa	x,a
+3107  0ab4 f6            	ld	a,(x)
+3108  0ab5 a47f          	and	a,#127
+3109  0ab7 b703          	ld	c_lreg+3,a
+3110  0ab9 3f02          	clr	c_lreg+2
+3111  0abb 3f01          	clr	c_lreg+1
+3112  0abd 3f00          	clr	c_lreg
+3113  0abf 96            	ldw	x,sp
+3114  0ac0 1c0005        	addw	x,#OFST-4
+3115  0ac3 cd0000        	call	c_lmul
+3117  0ac6 96            	ldw	x,sp
+3118  0ac7 1c0001        	addw	x,#OFST-8
+3119  0aca cd0000        	call	c_lgadd
+3122                     ; 673 	    multiplier *= 0x80;
+3124  0acd 96            	ldw	x,sp
+3125  0ace 1c0005        	addw	x,#OFST-4
+3126  0ad1 a607          	ld	a,#7
+3127  0ad3 cd0000        	call	c_lglsh
+3130                     ; 674 	    if (multiplier > (0x80 * 0x80 * 0x80))
+3132  0ad6 96            	ldw	x,sp
+3133  0ad7 1c0005        	addw	x,#OFST-4
+3134  0ada cd0000        	call	c_lzmp
+3136  0add 2709          	jreq	L107
+3137                     ; 676 	        return value;
+3139  0adf 96            	ldw	x,sp
+3140  0ae0 1c0001        	addw	x,#OFST-8
+3141  0ae3 cd0000        	call	c_ltor
+3144  0ae6 201d          	jra	L45
+3145  0ae8               L107:
+3146                     ; 678 	} while ((punLength[i++] & 0x80) != 0 && i < 4);
+3148  0ae8 7b09          	ld	a,(OFST+0,sp)
+3149  0aea 97            	ld	xl,a
+3150  0aeb 0c09          	inc	(OFST+0,sp)
+3152  0aed 9f            	ld	a,xl
+3153  0aee 5f            	clrw	x
+3154  0aef 97            	ld	xl,a
+3155  0af0 72fb0a        	addw	x,(OFST+1,sp)
+3156  0af3 f6            	ld	a,(x)
+3157  0af4 a580          	bcp	a,#128
+3158  0af6 2706          	jreq	L707
+3160  0af8 7b09          	ld	a,(OFST+0,sp)
+3161  0afa a104          	cp	a,#4
+3162  0afc 25ab          	jrult	L776
+3163  0afe               L707:
+3164                     ; 680     return value;
+3166  0afe 96            	ldw	x,sp
+3167  0aff 1c0001        	addw	x,#OFST-8
+3168  0b02 cd0000        	call	c_ltor
+3171  0b05               L45:
+3173  0b05 5b0b          	addw	sp,#11
+3174  0b07 81            	ret
+3187                     	xdef	_unMQTT_Disconnect
+3188                     	xdef	_unMQTT_PingRequest
+3189                     	xdef	_ulMQTT_UnSubscribe
+3190                     	xdef	_ulMQTT_Subscribe
+3191                     	xdef	_ulMQTT_Publish
+3192                     	xdef	_ulMQTT_Connect
+3193                     	xdef	_ulDecodedLength
+3194                     	xdef	_punEncodeLength
+3195                     	xref	_strlen
+3196                     .const:	section	.text
+3197  0000               L141:
+3198  0000 4d51545400    	dc.b	"MQTT",0
+3199                     	xref.b	c_lreg
+3200                     	xref.b	c_x
+3220                     	xref	c_lglsh
+3221                     	xref	c_lmul
+3222                     	xref	c_lgadd
+3223                     	xref	c_ladd
+3224                     	xref	c_rtol
+3225                     	xref	c_uitolx
+3226                     	xref	c_lgadc
+3227                     	xref	c_ltor
+3228                     	xref	c_lzmp
+3229                     	xref	c_lgursh
+3230                     	end

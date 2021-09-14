@@ -86,13 +86,7 @@ void sms_receive(void)
 	uint8_t temp1[10] = "";
 	uint8_t calibrationFactor[4];
 	uint16_t value;
-	uint8_t i;
-	uint8_t j;
-	uint8_t m;
-	uint8_t n;
-	uint8_t k = 0;
-	uint8_t l = 0;
-	uint8_t t = 0;
+	uint8_t i,j,m,n,k = 0,l = 0,t = 0;
 	char *ret_pin;
 	uint32_t myVar = 0;
 	UART1_ITConfig(UART1_IT_RXNE, DISABLE);
@@ -483,65 +477,66 @@ bool bSendSMS(char *message, uint8_t messageLength, char *Number)
 	}
 }
 
-int GSM_DOWNLOAD(void)
-{
-	uint8_t r1;
-	char *ret3;
-	const char STATUS1[] = "DOWNLOAD";
-	char response_buffer[11];
-	uint16_t gsm_download_timeout = 10000;
+// int GSM_DOWNLOAD(void)
+// {
+// 	uint8_t r1;
+// 	char *ret3;
+// 	const char STATUS1[] = "DOWNLOAD";
+// 	char response_buffer[11];
+// 	uint16_t gsm_download_timeout = 10000;
 
-	for (r1 = 0; r1 < 11; r1++)
-	{
-		while (UART1_GetFlagStatus(UART1_FLAG_RXNE) == FALSE && (--gsm_download_timeout > 0))
-			;
-		response_buffer[r1] = UART1_ReceiveData8();
-	}
+// 	for (r1 = 0; r1 < 11; r1++)
+// 	{
+// 		while (UART1_GetFlagStatus(UART1_FLAG_RXNE) == FALSE && (--gsm_download_timeout > 0))
+// 			;
+// 		response_buffer[r1] = UART1_ReceiveData8();
+// 	}
 
-	ret3 = strstr(response_buffer, STATUS1);
+// 	ret3 = strstr(response_buffer, STATUS1);
 
-	if (ret3)
-	{
+// 	if (ret3)
+// 	{
 
-		return 1;
-	}
+// 		return 1;
+// 	}
 
-	else
+// 	else
 
-	{
+// 	{
 
-		return 0;
-	}
-}
+// 		return 0;
+// 	}
+// }
 
-int GSM_OK_FAST(void)
-{
-	uint8_t p;
-	uint16_t gsm_ok_timeout = 7000;
-	const char OK[3] = "OK";
-	char *ret1;
+// int GSM_OK_FAST(void)
+// {
+// 	uint8_t p;
+// 	uint16_t gsm_ok_timeout = 7000;
+// 	const char OK[3] = "OK";
+// 	char *ret1;
 
-	for (p = 0; p < 30; p++) //8 for error
-	{
-		while (UART1_GetFlagStatus(UART1_FLAG_RXNE) == FALSE && (--gsm_ok_timeout > 0))
-			;
-		//while (UART1_GetFlagStatus (UART1_FLAG_RXNE) == FALSE);
-		response_buffer[p] = UART1_ReceiveData8();
-	}
+// 	for (p = 0; p < 30; p++) //8 for error
+// 	{
+// 		while (UART1_GetFlagStatus(UART1_FLAG_RXNE) == FALSE && (--gsm_ok_timeout > 0))
+// 			;
+// 		//while (UART1_GetFlagStatus (UART1_FLAG_RXNE) == FALSE);
+// 		response_buffer[p] = UART1_ReceiveData8();
+// 	}
 
-	ret1 = strstr(response_buffer, OK);
+// 	ret1 = strstr(response_buffer, OK);
 
-	if (ret1)
-	{
-		return 1;
-	}
+// 	if (ret1)
+// 	{
+// 		return 1;
+// 	}
 
-	else
+// 	else
 
-	{
-		return 0;
-	}
-}
+// 	{
+// 		return 0;
+// 	}
+// }
+
 int GSM_OK(void)
 {
 	uint8_t p;

@@ -1,6 +1,6 @@
    1                     ; C Compiler for STM8 (COSMIC Software)
-   2                     ; Parser V4.12.1 - 30 Jun 2020
-   3                     ; Generator (Limited) V4.4.12 - 02 Jul 2020
+   2                     ; Parser V4.11.10 - 06 Jul 2017
+   3                     ; Generator (Limited) V4.4.7 - 05 Oct 2017
   42                     ; 50 uint8_t ITC_GetCPUCC(void)
   42                     ; 51 {
   44                     	switch	.text

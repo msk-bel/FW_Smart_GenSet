@@ -1,6 +1,6 @@
    1                     ; C Compiler for STM8 (COSMIC Software)
-   2                     ; Parser V4.12.1 - 30 Jun 2020
-   3                     ; Generator (Limited) V4.4.12 - 02 Jul 2020
+   2                     ; Parser V4.11.10 - 06 Jul 2017
+   3                     ; Generator (Limited) V4.4.7 - 05 Oct 2017
   49                     ; 54 void SIMCom_setup(void)
   49                     ; 55 {
   51                     	switch	.text
@@ -41,7 +41,7 @@
  108  003c ae03e8        	ldw	x,#1000
  109  003f cd0000        	call	_delay_ms
  111                     ; 70     vPrintStickerInfo(); //Added by Saqib
- 113  0042 cd06cb        	call	_vPrintStickerInfo
+ 113  0042 cd06da        	call	_vPrintStickerInfo
  115                     ; 71     delay_ms(1000);
  117  0045 ae03e8        	ldw	x,#1000
  118  0048 cd0000        	call	_delay_ms
@@ -217,7 +217,7 @@
  374  0186 ae03e8        	ldw	x,#1000
  375  0189 cd0000        	call	_delay_ms
  377                     ; 141     enGet_TCP_Status();
- 379  018c cd0507        	call	_enGet_TCP_Status
+ 379  018c cd050b        	call	_enGet_TCP_Status
  381                     ; 142     delay_ms(500);
  383  018f ae01f4        	ldw	x,#500
  384  0192 cd0000        	call	_delay_ms
@@ -434,7 +434,7 @@
  988       00000001      OFST:	set	1
  991                     ; 416     uint8_t unLength = 0;
  993                     ; 420     eTCP_Status = enGet_TCP_Status();
- 995  02ac cd0507        	call	_enGet_TCP_Status
+ 995  02ac cd050b        	call	_enGet_TCP_Status
  997  02af 6b01          	ld	(OFST+0,sp),a
  999                     ; 422     if (eTCP_Status == eTCP_STAT_CONNECT_OK && IMEIRecievedOKFlag)
 1001  02b1 7b01          	ld	a,(OFST+0,sp)
@@ -574,7 +574,7 @@
 1186  037a 2007          	jra	L553
 1187  037c               L753:
 1188                     ; 472         vTCP_Reconnect();
-1190  037c cd0623        	call	_vTCP_Reconnect
+1190  037c cd0627        	call	_vTCP_Reconnect
 1192                     ; 473         unMQQT_PingCounter = 0;
 1194  037f 3f01          	clr	L532_unMQQT_PingCounter
 1195                     ; 474         unMQTTCounter = 0;
@@ -584,7 +584,7 @@
 1201  0383 3d00          	tnz	_IMEIRecievedOKFlag
 1202  0385 2603          	jrne	L363
 1203                     ; 478         vPrintStickerInfo();
-1205  0387 cd06cb        	call	_vPrintStickerInfo
+1205  0387 cd06da        	call	_vPrintStickerInfo
 1207  038a               L363:
 1208                     ; 480 }
 1211  038a 84            	pop	a
@@ -829,757 +829,775 @@
 1776       00000001      OFST:	set	1
 1779                     ; 547     for (i = 0; i < unLen; i++)
 1781  04f0 0f01          	clr	(OFST+0,sp)
-1784  04f2 200a          	jra	L155
+1784  04f2 200e          	jra	L155
 1785  04f4               L545:
 1786                     ; 549         *(temp + i) = '\0';
-1788  04f4 7b01          	ld	a,(OFST+0,sp)
-1789  04f6 5f            	clrw	x
-1790  04f7 97            	ld	xl,a
-1791  04f8 72fb02        	addw	x,(OFST+1,sp)
-1792  04fb 7f            	clr	(x)
-1793                     ; 547     for (i = 0; i < unLen; i++)
-1795  04fc 0c01          	inc	(OFST+0,sp)
-1797  04fe               L155:
-1800  04fe 7b01          	ld	a,(OFST+0,sp)
-1801  0500 1106          	cp	a,(OFST+5,sp)
-1802  0502 25f0          	jrult	L545
-1803                     ; 551 }
-1806  0504 5b03          	addw	sp,#3
-1807  0506 81            	ret
-1848                     ; 553 enTCP_STATUS enGet_TCP_Status(void)
-1848                     ; 554 {
-1849                     	switch	.text
-1850  0507               _enGet_TCP_Status:
-1852  0507 88            	push	a
-1853       00000001      OFST:	set	1
-1856                     ; 557     ms_send_cmd(TCP_GET_STATUS, strlen((const char *)TCP_GET_STATUS));
-1858  0508 4b0c          	push	#12
-1859  050a ae00b8        	ldw	x,#L375
-1860  050d cd0000        	call	_ms_send_cmd
-1862  0510 84            	pop	a
-1863                     ; 558     delay_ms(1000);
-1865  0511 ae03e8        	ldw	x,#1000
-1866  0514 cd0000        	call	_delay_ms
-1868                     ; 560     if (strstr(response_buffer, "STATE:"))
-1870  0517 ae00b1        	ldw	x,#L775
-1871  051a 89            	pushw	x
-1872  051b ae0000        	ldw	x,#_response_buffer
-1873  051e cd0000        	call	_strstr
-1875  0521 5b02          	addw	sp,#2
-1876  0523 a30000        	cpw	x,#0
-1877  0526 2603          	jrne	L64
-1878  0528 cc061c        	jp	L575
-1879  052b               L64:
-1880                     ; 562         if (strstr(response_buffer, "IP INITIAL"))
-1882  052b ae00a6        	ldw	x,#L306
-1883  052e 89            	pushw	x
-1884  052f ae0000        	ldw	x,#_response_buffer
-1885  0532 cd0000        	call	_strstr
-1887  0535 5b02          	addw	sp,#2
-1888  0537 a30000        	cpw	x,#0
-1889  053a 2708          	jreq	L106
-1890                     ; 564             eStatus = eTCP_STAT_IP_INITIAL;
-1892  053c a601          	ld	a,#1
-1893  053e 6b01          	ld	(OFST+0,sp),a
-1896  0540 ac1e061e      	jpf	L576
-1897  0544               L106:
-1898                     ; 566         else if (strstr(response_buffer, "IP START"))
-1900  0544 ae009d        	ldw	x,#L116
-1901  0547 89            	pushw	x
-1902  0548 ae0000        	ldw	x,#_response_buffer
-1903  054b cd0000        	call	_strstr
-1905  054e 5b02          	addw	sp,#2
-1906  0550 a30000        	cpw	x,#0
-1907  0553 2708          	jreq	L706
-1908                     ; 568             eStatus = eTCP_STAT_IP_START;
-1910  0555 a602          	ld	a,#2
-1911  0557 6b01          	ld	(OFST+0,sp),a
-1914  0559 ac1e061e      	jpf	L576
-1915  055d               L706:
-1916                     ; 570         else if (strstr(response_buffer, "IP CONFIG"))
-1918  055d ae0093        	ldw	x,#L716
-1919  0560 89            	pushw	x
-1920  0561 ae0000        	ldw	x,#_response_buffer
-1921  0564 cd0000        	call	_strstr
-1923  0567 5b02          	addw	sp,#2
-1924  0569 a30000        	cpw	x,#0
-1925  056c 2708          	jreq	L516
-1926                     ; 572             eStatus = eTCP_STAT_IP_CONFIG;
-1928  056e a603          	ld	a,#3
-1929  0570 6b01          	ld	(OFST+0,sp),a
-1932  0572 ac1e061e      	jpf	L576
-1933  0576               L516:
-1934                     ; 574         else if (strstr(response_buffer, "IP GPRSACT"))
-1936  0576 ae0088        	ldw	x,#L526
-1937  0579 89            	pushw	x
-1938  057a ae0000        	ldw	x,#_response_buffer
-1939  057d cd0000        	call	_strstr
-1941  0580 5b02          	addw	sp,#2
-1942  0582 a30000        	cpw	x,#0
-1943  0585 2707          	jreq	L326
-1944                     ; 576             eStatus = eTCP_STAT_IP_GPRSACT;
-1946  0587 a604          	ld	a,#4
-1947  0589 6b01          	ld	(OFST+0,sp),a
-1950  058b cc061e        	jra	L576
-1951  058e               L326:
-1952                     ; 578         else if (strstr(response_buffer, "IP STATUS"))
-1954  058e ae007e        	ldw	x,#L336
-1955  0591 89            	pushw	x
-1956  0592 ae0000        	ldw	x,#_response_buffer
-1957  0595 cd0000        	call	_strstr
-1959  0598 5b02          	addw	sp,#2
-1960  059a a30000        	cpw	x,#0
-1961  059d 2706          	jreq	L136
-1962                     ; 580             eStatus = eTCP_STAT_IP_STATUS;
-1964  059f a605          	ld	a,#5
-1965  05a1 6b01          	ld	(OFST+0,sp),a
-1968  05a3 2079          	jra	L576
-1969  05a5               L136:
-1970                     ; 582         else if (strstr(response_buffer, "TCP CONNECTING"))
-1972  05a5 ae006f        	ldw	x,#L146
-1973  05a8 89            	pushw	x
-1974  05a9 ae0000        	ldw	x,#_response_buffer
-1975  05ac cd0000        	call	_strstr
-1977  05af 5b02          	addw	sp,#2
-1978  05b1 a30000        	cpw	x,#0
-1979  05b4 2706          	jreq	L736
-1980                     ; 584             eStatus = eTCP_STAT_CONNECTING;
-1982  05b6 a606          	ld	a,#6
-1983  05b8 6b01          	ld	(OFST+0,sp),a
-1986  05ba 2062          	jra	L576
-1987  05bc               L736:
-1988                     ; 586         else if (strstr(response_buffer, "CONNECT OK"))
-1990  05bc ae0064        	ldw	x,#L746
-1991  05bf 89            	pushw	x
-1992  05c0 ae0000        	ldw	x,#_response_buffer
-1993  05c3 cd0000        	call	_strstr
-1995  05c6 5b02          	addw	sp,#2
-1996  05c8 a30000        	cpw	x,#0
-1997  05cb 2706          	jreq	L546
-1998                     ; 588             eStatus = eTCP_STAT_CONNECT_OK;
-2000  05cd a607          	ld	a,#7
-2001  05cf 6b01          	ld	(OFST+0,sp),a
-2004  05d1 204b          	jra	L576
-2005  05d3               L546:
-2006                     ; 590         else if (strstr(response_buffer, "TCP CLOSING"))
-2008  05d3 ae0058        	ldw	x,#L556
-2009  05d6 89            	pushw	x
-2010  05d7 ae0000        	ldw	x,#_response_buffer
-2011  05da cd0000        	call	_strstr
-2013  05dd 5b02          	addw	sp,#2
-2014  05df a30000        	cpw	x,#0
-2015  05e2 2706          	jreq	L356
-2016                     ; 592             eStatus = eTCP_STAT_CLOSING;
-2018  05e4 a608          	ld	a,#8
-2019  05e6 6b01          	ld	(OFST+0,sp),a
-2022  05e8 2034          	jra	L576
-2023  05ea               L356:
-2024                     ; 594         else if (strstr(response_buffer, "TCP CLOSED"))
-2026  05ea ae004d        	ldw	x,#L366
-2027  05ed 89            	pushw	x
-2028  05ee ae0000        	ldw	x,#_response_buffer
-2029  05f1 cd0000        	call	_strstr
-2031  05f4 5b02          	addw	sp,#2
-2032  05f6 a30000        	cpw	x,#0
-2033  05f9 2706          	jreq	L166
-2034                     ; 596             eStatus = eTCP_STAT_CLOSED;
-2036  05fb a609          	ld	a,#9
-2037  05fd 6b01          	ld	(OFST+0,sp),a
-2040  05ff 201d          	jra	L576
-2041  0601               L166:
-2042                     ; 598         else if (strstr(response_buffer, "PDP DEACT"))
-2044  0601 ae0043        	ldw	x,#L176
-2045  0604 89            	pushw	x
-2046  0605 ae0000        	ldw	x,#_response_buffer
-2047  0608 cd0000        	call	_strstr
-2049  060b 5b02          	addw	sp,#2
-2050  060d a30000        	cpw	x,#0
-2051  0610 2706          	jreq	L766
-2052                     ; 600             eStatus = eTCP_STAT_PDP_DEACT;
-2054  0612 a60a          	ld	a,#10
-2055  0614 6b01          	ld	(OFST+0,sp),a
-2058  0616 2006          	jra	L576
-2059  0618               L766:
-2060                     ; 604             eStatus = eTCP_STAT_UNKNOWN;
-2062  0618 0f01          	clr	(OFST+0,sp)
-2064  061a 2002          	jra	L576
-2065  061c               L575:
-2066                     ; 609         eStatus = eTCP_STAT_UNKNOWN;
-2068  061c 0f01          	clr	(OFST+0,sp)
-2070  061e               L576:
-2071                     ; 611     return eStatus;
-2073  061e 7b01          	ld	a,(OFST+0,sp)
-2076  0620 5b01          	addw	sp,#1
-2077  0622 81            	ret
-2103                     ; 615 void vTCP_Reconnect(void)
-2103                     ; 616 {
-2104                     	switch	.text
-2105  0623               _vTCP_Reconnect:
-2109                     ; 617     ms_send_cmd(TCP_SHUTDOWN, strlen((const char *)TCP_SHUTDOWN)); /* OPEN BEARER */
-2111  0623 4b0a          	push	#10
-2112  0625 ae01a3        	ldw	x,#L74
-2113  0628 cd0000        	call	_ms_send_cmd
-2115  062b 84            	pop	a
-2116                     ; 618     delay_ms(1000);
-2118  062c ae03e8        	ldw	x,#1000
-2119  062f cd0000        	call	_delay_ms
-2121                     ; 619     ms_send_cmd(TCP_SET_APN, strlen((const char *)TCP_SET_APN)); /* OPEN BEARER */
-2123  0632 4b11          	push	#17
-2124  0634 ae0137        	ldw	x,#L76
-2125  0637 cd0000        	call	_ms_send_cmd
-2127  063a 84            	pop	a
-2128                     ; 620     delay_ms(1000);
-2130  063b ae03e8        	ldw	x,#1000
-2131  063e cd0000        	call	_delay_ms
-2133                     ; 621     ms_send_cmd(TCP_START_WIRELESS_CONN, strlen((const char *)TCP_START_WIRELESS_CONN)); /* OPEN BEARER */
-2135  0641 4b08          	push	#8
-2136  0643 ae012e        	ldw	x,#L17
-2137  0646 cd0000        	call	_ms_send_cmd
-2139  0649 84            	pop	a
-2140                     ; 622     delay_ms(1000);
-2142  064a ae03e8        	ldw	x,#1000
-2143  064d cd0000        	call	_delay_ms
-2145                     ; 623     ms_send_cmd("AT+CIFSR", strlen((const char *)"AT+CIFSR")); /* OPEN BEARER */
-2147  0650 4b08          	push	#8
-2148  0652 ae0125        	ldw	x,#L37
-2149  0655 cd0000        	call	_ms_send_cmd
-2151  0658 84            	pop	a
-2152                     ; 624     delay_ms(1000);
-2154  0659 ae03e8        	ldw	x,#1000
-2155  065c cd0000        	call	_delay_ms
-2157                     ; 625     ms_send_cmd(startTCP_CMD, strlen((const char *)startTCP_CMD)); /* OPEN BEARER */
-2159  065f 4b29          	push	#41
-2160  0661 ae00fb        	ldw	x,#L57
-2161  0664 cd0000        	call	_ms_send_cmd
-2163  0667 84            	pop	a
-2164                     ; 626     delay_ms(1000);
-2166  0668 ae03e8        	ldw	x,#1000
-2167  066b cd0000        	call	_delay_ms
-2169                     ; 628 }
-2172  066e 81            	ret
-2238                     ; 631 bool bValidIMEIRecieved(char *myArray)
-2238                     ; 632 {
-2239                     	switch	.text
-2240  066f               _bValidIMEIRecieved:
-2242  066f 89            	pushw	x
-2243  0670 5203          	subw	sp,#3
-2244       00000003      OFST:	set	3
-2247                     ; 633     uint8_t i = 0, j = 0, k = 0;
-2253  0672 0f02          	clr	(OFST-1,sp)
-2255                     ; 634     for (j = 0; j < 20; j++)
-2257  0674 0f03          	clr	(OFST+0,sp)
-2259  0676               L147:
-2260                     ; 636         if (myArray[j] > 0x39 || myArray[j] < 0x30)
-2262  0676 7b03          	ld	a,(OFST+0,sp)
-2263  0678 5f            	clrw	x
-2264  0679 97            	ld	xl,a
-2265  067a 72fb04        	addw	x,(OFST+1,sp)
-2266  067d f6            	ld	a,(x)
-2267  067e a13a          	cp	a,#58
-2268  0680 240c          	jruge	L157
-2270  0682 7b03          	ld	a,(OFST+0,sp)
-2271  0684 5f            	clrw	x
-2272  0685 97            	ld	xl,a
-2273  0686 72fb04        	addw	x,(OFST+1,sp)
-2274  0689 f6            	ld	a,(x)
-2275  068a a130          	cp	a,#48
-2276  068c 2419          	jruge	L747
-2277  068e               L157:
-2278                     ; 638             nop();
-2281  068e 9d            nop
-2284  068f               L357:
-2285                     ; 634     for (j = 0; j < 20; j++)
-2287  068f 0c03          	inc	(OFST+0,sp)
-2291  0691 7b03          	ld	a,(OFST+0,sp)
-2292  0693 a114          	cp	a,#20
-2293  0695 25df          	jrult	L147
-2294                     ; 645     if (k == 15)
-2296  0697 7b02          	ld	a,(OFST-1,sp)
-2297  0699 a10f          	cp	a,#15
-2298  069b 2621          	jrne	L557
-2299                     ; 647         aunIMEI[k] = '\0';
-2301  069d 7b02          	ld	a,(OFST-1,sp)
-2302  069f 5f            	clrw	x
-2303  06a0 97            	ld	xl,a
-2304  06a1 6f10          	clr	(_aunIMEI,x)
-2305                     ; 648         return TRUE;
-2307  06a3 a601          	ld	a,#1
-2309  06a5 2021          	jra	L45
-2310  06a7               L747:
-2311                     ; 642             aunIMEI[k++] = myArray[j];
-2313  06a7 7b02          	ld	a,(OFST-1,sp)
-2314  06a9 97            	ld	xl,a
-2315  06aa 0c02          	inc	(OFST-1,sp)
-2317  06ac 9f            	ld	a,xl
-2318  06ad 5f            	clrw	x
-2319  06ae 97            	ld	xl,a
-2320  06af 7b03          	ld	a,(OFST+0,sp)
-2321  06b1 905f          	clrw	y
-2322  06b3 9097          	ld	yl,a
-2323  06b5 72f904        	addw	y,(OFST+1,sp)
-2324  06b8 90f6          	ld	a,(y)
-2325  06ba e710          	ld	(_aunIMEI,x),a
-2326  06bc 20d1          	jra	L357
-2327  06be               L557:
-2328                     ; 652         vClearBuffer(aunIMEI, 16);
-2330  06be 4b10          	push	#16
-2331  06c0 ae0010        	ldw	x,#_aunIMEI
-2332  06c3 cd04ee        	call	_vClearBuffer
-2334  06c6 84            	pop	a
-2335                     ; 653         return FALSE;
-2337  06c7 4f            	clr	a
-2339  06c8               L45:
-2341  06c8 5b05          	addw	sp,#5
-2342  06ca 81            	ret
-2345                     	switch	.const
-2346  0014               L167_imei_array:
-2347  0014 00            	dc.b	0
-2348  0015 000000000000  	ds.b	19
-2452                     ; 658 void vPrintStickerInfo(void)
-2452                     ; 659 {
-2453                     	switch	.text
-2454  06cb               _vPrintStickerInfo:
-2456  06cb 521a          	subw	sp,#26
-2457       0000001a      OFST:	set	26
-2460                     ; 660     uint8_t p = 0, i = 0;
-2464                     ; 661     uint8_t NotRespondingCounter = 0;
-2466  06cd 0f19          	clr	(OFST-1,sp)
-2468                     ; 662     uint16_t gsm_ok_timeout = 10000;
-2470                     ; 663     uint8_t imei_array[20] = {0};
-2472  06cf 96            	ldw	x,sp
-2473  06d0 1c0004        	addw	x,#OFST-22
-2474  06d3 90ae0014      	ldw	y,#L167_imei_array
-2475  06d7 a614          	ld	a,#20
-2476  06d9 cd0000        	call	c_xymvx
-2478                     ; 664     bool ModuleResponding = FALSE;
-2480                     ; 665     bool myInterruptFlag = TRUE;
-2482                     ; 667     UART1_ITConfig(UART1_IT_RXNE, DISABLE);
-2484  06dc 4b00          	push	#0
-2485  06de ae0255        	ldw	x,#597
-2486  06e1 cd0000        	call	_UART1_ITConfig
-2488  06e4 84            	pop	a
-2489                     ; 668     UART1_ITConfig(UART1_IT_IDLE, DISABLE);
-2491  06e5 4b00          	push	#0
-2492  06e7 ae0244        	ldw	x,#580
-2493  06ea cd0000        	call	_UART1_ITConfig
-2495  06ed 84            	pop	a
-2496                     ; 669     delay_ms(100);
-2498  06ee ae0064        	ldw	x,#100
-2499  06f1 cd0000        	call	_delay_ms
-2501  06f4               L1301:
-2502                     ; 673         ms_send_cmd(AT, strlen((const char *)AT));
-2504  06f4 4b02          	push	#2
-2505  06f6 ae0040        	ldw	x,#L7301
-2506  06f9 cd0000        	call	_ms_send_cmd
-2508  06fc 84            	pop	a
-2509                     ; 674         if (GSM_OK())
-2511  06fd cd0000        	call	_GSM_OK
-2513  0700 a30000        	cpw	x,#0
-2514  0703 2603          	jrne	L06
-2515  0705 cc083c        	jp	L1401
-2516  0708               L06:
-2517                     ; 676             delay_ms(200);
-2519  0708 ae00c8        	ldw	x,#200
-2520  070b cd0000        	call	_delay_ms
-2522                     ; 678             getIMEI();
-2524  070e cd0207        	call	_getIMEI
-2526                     ; 679             if (bValidIMEIRecieved(aunIMEI))
-2528  0711 ae0010        	ldw	x,#_aunIMEI
-2529  0714 cd066f        	call	_bValidIMEIRecieved
-2531  0717 4d            	tnz	a
-2532  0718 2603          	jrne	L26
-2533  071a cc0830        	jp	L3401
-2534  071d               L26:
-2535                     ; 681                 delay_ms(100);
-2537  071d ae0064        	ldw	x,#100
-2538  0720 cd0000        	call	_delay_ms
-2540                     ; 682                 for (i = 0; i < 20; i++)
-2542  0723 0f1a          	clr	(OFST+0,sp)
-2544  0725               L5501:
-2545                     ; 684                     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2547  0725 ae0040        	ldw	x,#64
-2548  0728 cd0000        	call	_UART1_GetFlagStatus
-2550  072b 4d            	tnz	a
-2551  072c 27f7          	jreq	L5501
-2552                     ; 686                     UART1_SendData8('*');
-2554  072e a62a          	ld	a,#42
-2555  0730 cd0000        	call	_UART1_SendData8
-2557                     ; 682                 for (i = 0; i < 20; i++)
-2559  0733 0c1a          	inc	(OFST+0,sp)
-2563  0735 7b1a          	ld	a,(OFST+0,sp)
-2564  0737 a114          	cp	a,#20
-2565  0739 25ea          	jrult	L5501
-2567  073b               L3601:
-2568                     ; 688                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2570  073b ae0040        	ldw	x,#64
-2571  073e cd0000        	call	_UART1_GetFlagStatus
-2573  0741 4d            	tnz	a
-2574  0742 27f7          	jreq	L3601
-2575                     ; 690                 UART1_SendData8('\n');
-2577  0744 a60a          	ld	a,#10
-2578  0746 cd0000        	call	_UART1_SendData8
-2581  0749               L1701:
-2582                     ; 691                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2584  0749 ae0040        	ldw	x,#64
-2585  074c cd0000        	call	_UART1_GetFlagStatus
-2587  074f 4d            	tnz	a
-2588  0750 27f7          	jreq	L1701
-2589                     ; 693                 UART1_SendData8('I');
-2591  0752 a649          	ld	a,#73
-2592  0754 cd0000        	call	_UART1_SendData8
-2595  0757               L7701:
-2596                     ; 694                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2598  0757 ae0040        	ldw	x,#64
-2599  075a cd0000        	call	_UART1_GetFlagStatus
-2601  075d 4d            	tnz	a
-2602  075e 27f7          	jreq	L7701
-2603                     ; 696                 UART1_SendData8('M');
-2605  0760 a64d          	ld	a,#77
-2606  0762 cd0000        	call	_UART1_SendData8
-2609  0765               L5011:
-2610                     ; 697                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2612  0765 ae0040        	ldw	x,#64
-2613  0768 cd0000        	call	_UART1_GetFlagStatus
-2615  076b 4d            	tnz	a
-2616  076c 27f7          	jreq	L5011
-2617                     ; 699                 UART1_SendData8('E');
-2619  076e a645          	ld	a,#69
-2620  0770 cd0000        	call	_UART1_SendData8
-2623  0773               L3111:
-2624                     ; 700                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2626  0773 ae0040        	ldw	x,#64
-2627  0776 cd0000        	call	_UART1_GetFlagStatus
-2629  0779 4d            	tnz	a
-2630  077a 27f7          	jreq	L3111
-2631                     ; 702                 UART1_SendData8('I');
-2633  077c a649          	ld	a,#73
-2634  077e cd0000        	call	_UART1_SendData8
-2637  0781               L1211:
-2638                     ; 703                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2640  0781 ae0040        	ldw	x,#64
-2641  0784 cd0000        	call	_UART1_GetFlagStatus
-2643  0787 4d            	tnz	a
-2644  0788 27f7          	jreq	L1211
-2645                     ; 705                 UART1_SendData8(' ');
-2647  078a a620          	ld	a,#32
-2648  078c cd0000        	call	_UART1_SendData8
-2651  078f               L7211:
-2652                     ; 706                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2654  078f ae0040        	ldw	x,#64
-2655  0792 cd0000        	call	_UART1_GetFlagStatus
-2657  0795 4d            	tnz	a
-2658  0796 27f7          	jreq	L7211
-2659                     ; 708                 UART1_SendData8('i');
-2661  0798 a669          	ld	a,#105
-2662  079a cd0000        	call	_UART1_SendData8
-2665  079d               L5311:
-2666                     ; 709                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2668  079d ae0040        	ldw	x,#64
-2669  07a0 cd0000        	call	_UART1_GetFlagStatus
-2671  07a3 4d            	tnz	a
-2672  07a4 27f7          	jreq	L5311
-2673                     ; 711                 UART1_SendData8('s');
-2675  07a6 a673          	ld	a,#115
-2676  07a8 cd0000        	call	_UART1_SendData8
-2679  07ab               L3411:
-2680                     ; 712                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2682  07ab ae0040        	ldw	x,#64
-2683  07ae cd0000        	call	_UART1_GetFlagStatus
-2685  07b1 4d            	tnz	a
-2686  07b2 27f7          	jreq	L3411
-2687                     ; 714                 UART1_SendData8('\n');
-2689  07b4 a60a          	ld	a,#10
-2690  07b6 cd0000        	call	_UART1_SendData8
-2693  07b9               L1511:
-2694                     ; 716                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2696  07b9 ae0040        	ldw	x,#64
-2697  07bc cd0000        	call	_UART1_GetFlagStatus
-2699  07bf 4d            	tnz	a
-2700  07c0 27f7          	jreq	L1511
-2701                     ; 718                 UART1_SendData8('\n');
-2703  07c2 a60a          	ld	a,#10
-2704  07c4 cd0000        	call	_UART1_SendData8
-2706                     ; 719                 for (i = 0; i < 15; i++)
-2708  07c7 0f1a          	clr	(OFST+0,sp)
-2710  07c9               L5611:
-2711                     ; 721                     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2713  07c9 ae0040        	ldw	x,#64
-2714  07cc cd0000        	call	_UART1_GetFlagStatus
-2716  07cf 4d            	tnz	a
-2717  07d0 27f7          	jreq	L5611
-2718                     ; 723                     UART1_SendData8(aunIMEI[i]);
-2720  07d2 7b1a          	ld	a,(OFST+0,sp)
-2721  07d4 5f            	clrw	x
-2722  07d5 97            	ld	xl,a
-2723  07d6 e610          	ld	a,(_aunIMEI,x)
-2724  07d8 cd0000        	call	_UART1_SendData8
-2726                     ; 719                 for (i = 0; i < 15; i++)
-2728  07db 0c1a          	inc	(OFST+0,sp)
-2732  07dd 7b1a          	ld	a,(OFST+0,sp)
-2733  07df a10f          	cp	a,#15
-2734  07e1 25e6          	jrult	L5611
-2736  07e3               L3711:
-2737                     ; 725                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2739  07e3 ae0040        	ldw	x,#64
-2740  07e6 cd0000        	call	_UART1_GetFlagStatus
-2742  07e9 4d            	tnz	a
-2743  07ea 27f7          	jreq	L3711
-2744                     ; 728                 UART1_SendData8('\n');
-2746  07ec a60a          	ld	a,#10
-2747  07ee cd0000        	call	_UART1_SendData8
-2749                     ; 729                 for (i = 0; i < 20; i++)
-2751  07f1 0f1a          	clr	(OFST+0,sp)
-2753  07f3               L7021:
-2754                     ; 731                     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2756  07f3 ae0040        	ldw	x,#64
-2757  07f6 cd0000        	call	_UART1_GetFlagStatus
-2759  07f9 4d            	tnz	a
-2760  07fa 27f7          	jreq	L7021
-2761                     ; 733                     UART1_SendData8('*');
-2763  07fc a62a          	ld	a,#42
-2764  07fe cd0000        	call	_UART1_SendData8
-2766                     ; 729                 for (i = 0; i < 20; i++)
-2768  0801 0c1a          	inc	(OFST+0,sp)
-2772  0803 7b1a          	ld	a,(OFST+0,sp)
-2773  0805 a114          	cp	a,#20
-2774  0807 25ea          	jrult	L7021
-2776  0809               L5121:
-2777                     ; 735                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
-2779  0809 ae0040        	ldw	x,#64
-2780  080c cd0000        	call	_UART1_GetFlagStatus
-2782  080f 4d            	tnz	a
-2783  0810 27f7          	jreq	L5121
-2784                     ; 737                 UART1_SendData8('\r');
-2786  0812 a60d          	ld	a,#13
-2787  0814 cd0000        	call	_UART1_SendData8
-2789                     ; 738                 delay_ms(100);
-2791  0817 ae0064        	ldw	x,#100
-2792  081a cd0000        	call	_delay_ms
-2794                     ; 740                 punGet_Client_ID();
-2796  081d cd0000        	call	_punGet_Client_ID
-2798                     ; 741                 punGet_Command_Topic();
-2800  0820 cd0000        	call	_punGet_Command_Topic
-2802                     ; 742                 punGet_Event_Topic();
-2804  0823 cd0000        	call	_punGet_Event_Topic
-2806                     ; 744                 ModuleResponding = TRUE;
-2808  0826 a601          	ld	a,#1
-2809  0828 6b1a          	ld	(OFST+0,sp),a
-2811                     ; 745                 IMEIRecievedOKFlag = 1;
-2813  082a 35010000      	mov	_IMEIRecievedOKFlag,#1
-2815  082e 2025          	jra	L3221
-2816  0830               L3401:
-2817                     ; 749                 delay_ms(200);
-2819  0830 ae00c8        	ldw	x,#200
-2820  0833 cd0000        	call	_delay_ms
-2822                     ; 750                 ModuleResponding = FALSE;
-2824  0836 0f1a          	clr	(OFST+0,sp)
-2826                     ; 751                 NotRespondingCounter++;
-2828  0838 0c19          	inc	(OFST-1,sp)
-2830  083a 2019          	jra	L3221
-2831  083c               L1401:
-2832                     ; 757             delay_ms(200);
-2834  083c ae00c8        	ldw	x,#200
-2835  083f cd0000        	call	_delay_ms
-2837                     ; 758             ms_send_cmd("No Response from Module", strlen((const char *)"No Response from Module"));
-2839  0842 4b17          	push	#23
-2840  0844 ae0028        	ldw	x,#L5221
-2841  0847 cd0000        	call	_ms_send_cmd
-2843  084a 84            	pop	a
-2844                     ; 759             delay_ms(200);
-2846  084b ae00c8        	ldw	x,#200
-2847  084e cd0000        	call	_delay_ms
-2849                     ; 760             ModuleResponding = FALSE;
-2851  0851 0f1a          	clr	(OFST+0,sp)
-2853                     ; 761             NotRespondingCounter++;
-2855  0853 0c19          	inc	(OFST-1,sp)
-2857  0855               L3221:
-2858                     ; 764         delay_ms(200);
-2860  0855 ae00c8        	ldw	x,#200
-2861  0858 cd0000        	call	_delay_ms
-2863                     ; 765     } while (!ModuleResponding && NotRespondingCounter < 10);
-2865  085b 0d1a          	tnz	(OFST+0,sp)
-2866  085d 2609          	jrne	L7221
-2868  085f 7b19          	ld	a,(OFST-1,sp)
-2869  0861 a10a          	cp	a,#10
-2870  0863 2403          	jruge	L46
-2871  0865 cc06f4        	jp	L1301
-2872  0868               L46:
-2873  0868               L7221:
-2874                     ; 767     if (NotRespondingCounter < 10)
-2876  0868 7b19          	ld	a,(OFST-1,sp)
-2877  086a a10a          	cp	a,#10
-2878  086c 2406          	jruge	L1321
-2879                     ; 768         IMEIRecievedOKFlag = 1;
-2881  086e 35010000      	mov	_IMEIRecievedOKFlag,#1
-2883  0872 2002          	jra	L3321
-2884  0874               L1321:
-2885                     ; 770         IMEIRecievedOKFlag = 0;
-2887  0874 3f00          	clr	_IMEIRecievedOKFlag
-2888  0876               L3321:
-2889                     ; 771     UART1_ITConfig(UART1_IT_RXNE, ENABLE);
-2891  0876 4b01          	push	#1
-2892  0878 ae0255        	ldw	x,#597
-2893  087b cd0000        	call	_UART1_ITConfig
-2895  087e 84            	pop	a
-2896                     ; 772     UART1_ITConfig(UART1_IT_IDLE, ENABLE);
-2898  087f 4b01          	push	#1
-2899  0881 ae0244        	ldw	x,#580
-2900  0884 cd0000        	call	_UART1_ITConfig
-2902  0887 84            	pop	a
-2903                     ; 773 }
-2906  0888 5b1a          	addw	sp,#26
-2907  088a 81            	ret
-2942                     	xdef	_bValidIMEIRecieved
-2943                     	xref.b	_IMEIRecievedOKFlag
-2944                     	xref	_aunPushed_Data
-2945                     	xdef	_vPrintStickerInfo
-2946                     	xdef	_vTCP_Reconnect
-2947                     	xdef	_vSend_MQTT_Ping
-2948                     	xdef	_vHandle_MQTT
-2949                     	xdef	_enGet_TCP_Status
-2950                     	xdef	_vClearBuffer
-2951                     	xdef	_bSendDataOverTCP
-2952                     	xdef	_vInit_MQTT
-2953                     	xdef	_getIMEI
-2954                     	xdef	_checkNum
-2955                     	xdef	_SIMComrestart
-2956                     	xref	_GSM_OK
-2957                     	xdef	_SIMCom_setup
-2958                     	xref	_response_buffer
-2959                     	xref	_unMQTT_PingRequest
-2960                     	xref	_ulMQTT_Subscribe
-2961                     	xref	_ulMQTT_Connect
-2962                     	xref	_ms_send_cmd_TCP
-2963                     	xref	_ms_send_cmd
-2964                     	xref	_aunMQTT_Subscribe_Topic
-2965                     	xref	_aunMQTT_ClientID
-2966                     	xref	_vMevris_Send_Version
-2967                     	xref	_vMevris_Send_IMEI
-2968                     	xref	_punGet_Client_ID
-2969                     	xref	_punGet_Command_Topic
-2970                     	xref	_punGet_Event_Topic
-2971                     	xref	_sprintf
-2972                     	switch	.ubsct
-2973  0000               _PASS_KEY:
-2974  0000 000000000000  	ds.b	16
-2975                     	xdef	_PASS_KEY
-2976  0010               _aunIMEI:
-2977  0010 000000000000  	ds.b	20
-2978                     	xdef	_aunIMEI
-2979                     	xref	_strlen
-2980                     	xref	_strstr
-2981                     	xref	_strcat
-2982                     	xref.b	_checkit
-2983                     	xref	_delay_ms
-2984                     	xref	_UART1_GetFlagStatus
-2985                     	xref	_UART1_SendData8
-2986                     	xref	_UART1_ReceiveData8
-2987                     	xref	_UART1_ITConfig
-2988                     	xref	_GPIO_WriteLow
-2989                     	xref	_GPIO_WriteHigh
-2990                     	switch	.const
-2991  0028               L5221:
-2992  0028 4e6f20526573  	dc.b	"No Response from M"
-2993  003a 6f64756c6500  	dc.b	"odule",0
-2994  0040               L7301:
-2995  0040 415400        	dc.b	"AT",0
-2996  0043               L176:
-2997  0043 504450204445  	dc.b	"PDP DEACT",0
-2998  004d               L366:
-2999  004d 54435020434c  	dc.b	"TCP CLOSED",0
-3000  0058               L556:
-3001  0058 54435020434c  	dc.b	"TCP CLOSING",0
-3002  0064               L746:
-3003  0064 434f4e4e4543  	dc.b	"CONNECT OK",0
-3004  006f               L146:
-3005  006f 54435020434f  	dc.b	"TCP CONNECTING",0
-3006  007e               L336:
-3007  007e 495020535441  	dc.b	"IP STATUS",0
-3008  0088               L526:
-3009  0088 495020475052  	dc.b	"IP GPRSACT",0
-3010  0093               L716:
-3011  0093 495020434f4e  	dc.b	"IP CONFIG",0
-3012  009d               L116:
-3013  009d 495020535441  	dc.b	"IP START",0
-3014  00a6               L306:
-3015  00a6 495020494e49  	dc.b	"IP INITIAL",0
-3016  00b1               L775:
-3017  00b1 53544154453a  	dc.b	"STATE:",0
-3018  00b8               L375:
-3019  00b8 41542b434950  	dc.b	"AT+CIPSTATUS",0
-3020  00c5               L315:
-3021  00c5 53454e44204f  	dc.b	"SEND OK",0
-3022  00cd               L705:
-3023  00cd 53454e4400    	dc.b	"SEND",0
-3024  00d2               L574:
-3025  00d2 256400        	dc.b	"%d",0
-3026  00d5               L374:
-3027  00d5 41542b434950  	dc.b	"AT+CIPSEND=",0
-3028  00e1               L502:
-3029  00e1 41542b47534e  	dc.b	"AT+GSN",0
-3030  00e8               L331:
-3031  00e8 41542b434e55  	dc.b	"AT+CNUM",0
-3032  00f0               L701:
-3033  00f0 41542b43504f  	dc.b	"AT+CPOWD=0",0
-3034  00fb               L57:
-3035  00fb 41542b434950  	dc.b	"AT+CIPSTART=",34
-3036  0108 54435022      	dc.b	"TCP",34
-3037  010c 2c22          	dc.b	",",34
-3038  010e 6d7174742e6d  	dc.b	"mqtt.mevris.io",34
-3039  011d 2c22          	dc.b	",",34
-3040  011f 333838312200  	dc.b	"3881",34,0
-3041  0125               L37:
-3042  0125 41542b434946  	dc.b	"AT+CIFSR",0
-3043  012e               L17:
-3044  012e 41542b434949  	dc.b	"AT+CIICR",0
-3045  0137               L76:
-3046  0137 41542b435354  	dc.b	"AT+CSTT=",34
-3047  0140 7a6f6e677761  	dc.b	"zongwap",34,0
-3048  0149               L56:
-3049  0149 41542b434950  	dc.b	"AT+CIPSCONT",0
-3050  0155               L36:
-3051  0155 41542b434950  	dc.b	"AT+CIPHEAD=1",0
-3052  0162               L16:
-3053  0162 41542b434950  	dc.b	"AT+CIPSRIP=1",0
-3054  016f               L75:
-3055  016f 41542b434950  	dc.b	"AT+CIPSPRT=1",0
-3056  017c               L55:
-3057  017c 41542b434950  	dc.b	"AT+CIPQSEND=0",0
-3058  018a               L35:
-3059  018a 41542b434950  	dc.b	"AT+CIPMODE=0",0
-3060  0197               L15:
-3061  0197 41542b434950  	dc.b	"AT+CIPMUX=0",0
-3062  01a3               L74:
-3063  01a3 41542b434950  	dc.b	"AT+CIPSHUT",0
-3064  01ae               L54:
-3065  01ae 41542b534150  	dc.b	"AT+SAPBR=1,1",0
-3066  01bb               L34:
-3067  01bb 41542b534150  	dc.b	"AT+SAPBR=3,1,",34
-3068  01c9 41504e22      	dc.b	"APN",34
-3069  01cd 2c22          	dc.b	",",34
-3070  01cf 7a6f6e677761  	dc.b	"zongwap",34,0
-3071  01d8               L14:
-3072  01d8 41542b534150  	dc.b	"AT+SAPBR=3,1,",34
-3073  01e6 434f4e545950  	dc.b	"CONTYPE",34
-3074  01ee 2c22          	dc.b	",",34
-3075  01f0 475052532200  	dc.b	"GPRS",34,0
-3076  01f6               L73:
-3077  01f6 41542b434741  	dc.b	"AT+CGATT=1",0
-3078  0201               L53:
-3079  0201 41542b434d45  	dc.b	"AT+CMEE=2",0
-3080  020b               L33:
-3081  020b 41542b43474e  	dc.b	"AT+CGNSSEQ=RMC",0
-3082  021a               L13:
-3083  021a 41542b43474e  	dc.b	"AT+CGNSPWR=1",0
-3084  0227               L72:
-3085  0227 41542b434647  	dc.b	"AT+CFGRI=0",0
-3086  0232               L52:
-3087  0232 41542b435343  	dc.b	"AT+CSCLK=0",0
-3088  023d               L32:
-3089  023d 41542b434d47  	dc.b	"AT+CMGD=1,4",0
-3090  0249               L12:
-3091  0249 4154453000    	dc.b	"ATE0",0
-3092                     	xref.b	c_lreg
-3093                     	xref.b	c_x
-3113                     	xref	c_xymvx
-3114                     	end
+1788  04f4 7b02          	ld	a,(OFST+1,sp)
+1789  04f6 97            	ld	xl,a
+1790  04f7 7b03          	ld	a,(OFST+2,sp)
+1791  04f9 1b01          	add	a,(OFST+0,sp)
+1792  04fb 2401          	jrnc	L44
+1793  04fd 5c            	incw	x
+1794  04fe               L44:
+1795  04fe 02            	rlwa	x,a
+1796  04ff 7f            	clr	(x)
+1797                     ; 547     for (i = 0; i < unLen; i++)
+1799  0500 0c01          	inc	(OFST+0,sp)
+1801  0502               L155:
+1804  0502 7b01          	ld	a,(OFST+0,sp)
+1805  0504 1106          	cp	a,(OFST+5,sp)
+1806  0506 25ec          	jrult	L545
+1807                     ; 551 }
+1810  0508 5b03          	addw	sp,#3
+1811  050a 81            	ret
+1852                     ; 553 enTCP_STATUS enGet_TCP_Status(void)
+1852                     ; 554 {
+1853                     	switch	.text
+1854  050b               _enGet_TCP_Status:
+1856  050b 88            	push	a
+1857       00000001      OFST:	set	1
+1860                     ; 557     ms_send_cmd(TCP_GET_STATUS, strlen((const char *)TCP_GET_STATUS));
+1862  050c 4b0c          	push	#12
+1863  050e ae00b8        	ldw	x,#L375
+1864  0511 cd0000        	call	_ms_send_cmd
+1866  0514 84            	pop	a
+1867                     ; 558     delay_ms(1000);
+1869  0515 ae03e8        	ldw	x,#1000
+1870  0518 cd0000        	call	_delay_ms
+1872                     ; 560     if (strstr(response_buffer, "STATE:"))
+1874  051b ae00b1        	ldw	x,#L775
+1875  051e 89            	pushw	x
+1876  051f ae0000        	ldw	x,#_response_buffer
+1877  0522 cd0000        	call	_strstr
+1879  0525 5b02          	addw	sp,#2
+1880  0527 a30000        	cpw	x,#0
+1881  052a 2603          	jrne	L05
+1882  052c cc0620        	jp	L575
+1883  052f               L05:
+1884                     ; 562         if (strstr(response_buffer, "IP INITIAL"))
+1886  052f ae00a6        	ldw	x,#L306
+1887  0532 89            	pushw	x
+1888  0533 ae0000        	ldw	x,#_response_buffer
+1889  0536 cd0000        	call	_strstr
+1891  0539 5b02          	addw	sp,#2
+1892  053b a30000        	cpw	x,#0
+1893  053e 2708          	jreq	L106
+1894                     ; 564             eStatus = eTCP_STAT_IP_INITIAL;
+1896  0540 a601          	ld	a,#1
+1897  0542 6b01          	ld	(OFST+0,sp),a
+1900  0544 ac220622      	jpf	L576
+1901  0548               L106:
+1902                     ; 566         else if (strstr(response_buffer, "IP START"))
+1904  0548 ae009d        	ldw	x,#L116
+1905  054b 89            	pushw	x
+1906  054c ae0000        	ldw	x,#_response_buffer
+1907  054f cd0000        	call	_strstr
+1909  0552 5b02          	addw	sp,#2
+1910  0554 a30000        	cpw	x,#0
+1911  0557 2708          	jreq	L706
+1912                     ; 568             eStatus = eTCP_STAT_IP_START;
+1914  0559 a602          	ld	a,#2
+1915  055b 6b01          	ld	(OFST+0,sp),a
+1918  055d ac220622      	jpf	L576
+1919  0561               L706:
+1920                     ; 570         else if (strstr(response_buffer, "IP CONFIG"))
+1922  0561 ae0093        	ldw	x,#L716
+1923  0564 89            	pushw	x
+1924  0565 ae0000        	ldw	x,#_response_buffer
+1925  0568 cd0000        	call	_strstr
+1927  056b 5b02          	addw	sp,#2
+1928  056d a30000        	cpw	x,#0
+1929  0570 2708          	jreq	L516
+1930                     ; 572             eStatus = eTCP_STAT_IP_CONFIG;
+1932  0572 a603          	ld	a,#3
+1933  0574 6b01          	ld	(OFST+0,sp),a
+1936  0576 ac220622      	jpf	L576
+1937  057a               L516:
+1938                     ; 574         else if (strstr(response_buffer, "IP GPRSACT"))
+1940  057a ae0088        	ldw	x,#L526
+1941  057d 89            	pushw	x
+1942  057e ae0000        	ldw	x,#_response_buffer
+1943  0581 cd0000        	call	_strstr
+1945  0584 5b02          	addw	sp,#2
+1946  0586 a30000        	cpw	x,#0
+1947  0589 2707          	jreq	L326
+1948                     ; 576             eStatus = eTCP_STAT_IP_GPRSACT;
+1950  058b a604          	ld	a,#4
+1951  058d 6b01          	ld	(OFST+0,sp),a
+1954  058f cc0622        	jra	L576
+1955  0592               L326:
+1956                     ; 578         else if (strstr(response_buffer, "IP STATUS"))
+1958  0592 ae007e        	ldw	x,#L336
+1959  0595 89            	pushw	x
+1960  0596 ae0000        	ldw	x,#_response_buffer
+1961  0599 cd0000        	call	_strstr
+1963  059c 5b02          	addw	sp,#2
+1964  059e a30000        	cpw	x,#0
+1965  05a1 2706          	jreq	L136
+1966                     ; 580             eStatus = eTCP_STAT_IP_STATUS;
+1968  05a3 a605          	ld	a,#5
+1969  05a5 6b01          	ld	(OFST+0,sp),a
+1972  05a7 2079          	jra	L576
+1973  05a9               L136:
+1974                     ; 582         else if (strstr(response_buffer, "TCP CONNECTING"))
+1976  05a9 ae006f        	ldw	x,#L146
+1977  05ac 89            	pushw	x
+1978  05ad ae0000        	ldw	x,#_response_buffer
+1979  05b0 cd0000        	call	_strstr
+1981  05b3 5b02          	addw	sp,#2
+1982  05b5 a30000        	cpw	x,#0
+1983  05b8 2706          	jreq	L736
+1984                     ; 584             eStatus = eTCP_STAT_CONNECTING;
+1986  05ba a606          	ld	a,#6
+1987  05bc 6b01          	ld	(OFST+0,sp),a
+1990  05be 2062          	jra	L576
+1991  05c0               L736:
+1992                     ; 586         else if (strstr(response_buffer, "CONNECT OK"))
+1994  05c0 ae0064        	ldw	x,#L746
+1995  05c3 89            	pushw	x
+1996  05c4 ae0000        	ldw	x,#_response_buffer
+1997  05c7 cd0000        	call	_strstr
+1999  05ca 5b02          	addw	sp,#2
+2000  05cc a30000        	cpw	x,#0
+2001  05cf 2706          	jreq	L546
+2002                     ; 588             eStatus = eTCP_STAT_CONNECT_OK;
+2004  05d1 a607          	ld	a,#7
+2005  05d3 6b01          	ld	(OFST+0,sp),a
+2008  05d5 204b          	jra	L576
+2009  05d7               L546:
+2010                     ; 590         else if (strstr(response_buffer, "TCP CLOSING"))
+2012  05d7 ae0058        	ldw	x,#L556
+2013  05da 89            	pushw	x
+2014  05db ae0000        	ldw	x,#_response_buffer
+2015  05de cd0000        	call	_strstr
+2017  05e1 5b02          	addw	sp,#2
+2018  05e3 a30000        	cpw	x,#0
+2019  05e6 2706          	jreq	L356
+2020                     ; 592             eStatus = eTCP_STAT_CLOSING;
+2022  05e8 a608          	ld	a,#8
+2023  05ea 6b01          	ld	(OFST+0,sp),a
+2026  05ec 2034          	jra	L576
+2027  05ee               L356:
+2028                     ; 594         else if (strstr(response_buffer, "TCP CLOSED"))
+2030  05ee ae004d        	ldw	x,#L366
+2031  05f1 89            	pushw	x
+2032  05f2 ae0000        	ldw	x,#_response_buffer
+2033  05f5 cd0000        	call	_strstr
+2035  05f8 5b02          	addw	sp,#2
+2036  05fa a30000        	cpw	x,#0
+2037  05fd 2706          	jreq	L166
+2038                     ; 596             eStatus = eTCP_STAT_CLOSED;
+2040  05ff a609          	ld	a,#9
+2041  0601 6b01          	ld	(OFST+0,sp),a
+2044  0603 201d          	jra	L576
+2045  0605               L166:
+2046                     ; 598         else if (strstr(response_buffer, "PDP DEACT"))
+2048  0605 ae0043        	ldw	x,#L176
+2049  0608 89            	pushw	x
+2050  0609 ae0000        	ldw	x,#_response_buffer
+2051  060c cd0000        	call	_strstr
+2053  060f 5b02          	addw	sp,#2
+2054  0611 a30000        	cpw	x,#0
+2055  0614 2706          	jreq	L766
+2056                     ; 600             eStatus = eTCP_STAT_PDP_DEACT;
+2058  0616 a60a          	ld	a,#10
+2059  0618 6b01          	ld	(OFST+0,sp),a
+2062  061a 2006          	jra	L576
+2063  061c               L766:
+2064                     ; 604             eStatus = eTCP_STAT_UNKNOWN;
+2066  061c 0f01          	clr	(OFST+0,sp)
+2068  061e 2002          	jra	L576
+2069  0620               L575:
+2070                     ; 609         eStatus = eTCP_STAT_UNKNOWN;
+2072  0620 0f01          	clr	(OFST+0,sp)
+2074  0622               L576:
+2075                     ; 611     return eStatus;
+2077  0622 7b01          	ld	a,(OFST+0,sp)
+2080  0624 5b01          	addw	sp,#1
+2081  0626 81            	ret
+2107                     ; 615 void vTCP_Reconnect(void)
+2107                     ; 616 {
+2108                     	switch	.text
+2109  0627               _vTCP_Reconnect:
+2113                     ; 617     ms_send_cmd(TCP_SHUTDOWN, strlen((const char *)TCP_SHUTDOWN)); /* OPEN BEARER */
+2115  0627 4b0a          	push	#10
+2116  0629 ae01a3        	ldw	x,#L74
+2117  062c cd0000        	call	_ms_send_cmd
+2119  062f 84            	pop	a
+2120                     ; 618     delay_ms(1000);
+2122  0630 ae03e8        	ldw	x,#1000
+2123  0633 cd0000        	call	_delay_ms
+2125                     ; 619     ms_send_cmd(TCP_SET_APN, strlen((const char *)TCP_SET_APN)); /* OPEN BEARER */
+2127  0636 4b11          	push	#17
+2128  0638 ae0137        	ldw	x,#L76
+2129  063b cd0000        	call	_ms_send_cmd
+2131  063e 84            	pop	a
+2132                     ; 620     delay_ms(1000);
+2134  063f ae03e8        	ldw	x,#1000
+2135  0642 cd0000        	call	_delay_ms
+2137                     ; 621     ms_send_cmd(TCP_START_WIRELESS_CONN, strlen((const char *)TCP_START_WIRELESS_CONN)); /* OPEN BEARER */
+2139  0645 4b08          	push	#8
+2140  0647 ae012e        	ldw	x,#L17
+2141  064a cd0000        	call	_ms_send_cmd
+2143  064d 84            	pop	a
+2144                     ; 622     delay_ms(1000);
+2146  064e ae03e8        	ldw	x,#1000
+2147  0651 cd0000        	call	_delay_ms
+2149                     ; 623     ms_send_cmd("AT+CIFSR", strlen((const char *)"AT+CIFSR")); /* OPEN BEARER */
+2151  0654 4b08          	push	#8
+2152  0656 ae0125        	ldw	x,#L37
+2153  0659 cd0000        	call	_ms_send_cmd
+2155  065c 84            	pop	a
+2156                     ; 624     delay_ms(1000);
+2158  065d ae03e8        	ldw	x,#1000
+2159  0660 cd0000        	call	_delay_ms
+2161                     ; 625     ms_send_cmd(startTCP_CMD, strlen((const char *)startTCP_CMD)); /* OPEN BEARER */
+2163  0663 4b29          	push	#41
+2164  0665 ae00fb        	ldw	x,#L57
+2165  0668 cd0000        	call	_ms_send_cmd
+2167  066b 84            	pop	a
+2168                     ; 626     delay_ms(1000);
+2170  066c ae03e8        	ldw	x,#1000
+2171  066f cd0000        	call	_delay_ms
+2173                     ; 628 }
+2176  0672 81            	ret
+2242                     ; 631 bool bValidIMEIRecieved(char *myArray)
+2242                     ; 632 {
+2243                     	switch	.text
+2244  0673               _bValidIMEIRecieved:
+2246  0673 89            	pushw	x
+2247  0674 5203          	subw	sp,#3
+2248       00000003      OFST:	set	3
+2251                     ; 633     uint8_t i = 0, j = 0, k = 0;
+2257  0676 0f02          	clr	(OFST-1,sp)
+2259                     ; 634     for (j = 0; j < 20; j++)
+2261  0678 0f03          	clr	(OFST+0,sp)
+2263  067a               L147:
+2264                     ; 636         if (myArray[j] > 0x39 || myArray[j] < 0x30)
+2266  067a 7b04          	ld	a,(OFST+1,sp)
+2267  067c 97            	ld	xl,a
+2268  067d 7b05          	ld	a,(OFST+2,sp)
+2269  067f 1b03          	add	a,(OFST+0,sp)
+2270  0681 2401          	jrnc	L65
+2271  0683 5c            	incw	x
+2272  0684               L65:
+2273  0684 02            	rlwa	x,a
+2274  0685 f6            	ld	a,(x)
+2275  0686 a13a          	cp	a,#58
+2276  0688 2410          	jruge	L157
+2278  068a 7b04          	ld	a,(OFST+1,sp)
+2279  068c 97            	ld	xl,a
+2280  068d 7b05          	ld	a,(OFST+2,sp)
+2281  068f 1b03          	add	a,(OFST+0,sp)
+2282  0691 2401          	jrnc	L06
+2283  0693 5c            	incw	x
+2284  0694               L06:
+2285  0694 02            	rlwa	x,a
+2286  0695 f6            	ld	a,(x)
+2287  0696 a130          	cp	a,#48
+2288  0698 2419          	jruge	L747
+2289  069a               L157:
+2290                     ; 638             nop();
+2293  069a 9d            nop
+2296  069b               L357:
+2297                     ; 634     for (j = 0; j < 20; j++)
+2299  069b 0c03          	inc	(OFST+0,sp)
+2303  069d 7b03          	ld	a,(OFST+0,sp)
+2304  069f a114          	cp	a,#20
+2305  06a1 25d7          	jrult	L147
+2306                     ; 645     if (k == 15)
+2308  06a3 7b02          	ld	a,(OFST-1,sp)
+2309  06a5 a10f          	cp	a,#15
+2310  06a7 2624          	jrne	L557
+2311                     ; 647         aunIMEI[k] = '\0';
+2313  06a9 7b02          	ld	a,(OFST-1,sp)
+2314  06ab 5f            	clrw	x
+2315  06ac 97            	ld	xl,a
+2316  06ad 6f10          	clr	(_aunIMEI,x)
+2317                     ; 648         return TRUE;
+2319  06af a601          	ld	a,#1
+2321  06b1 2024          	jra	L46
+2322  06b3               L747:
+2323                     ; 642             aunIMEI[k++] = myArray[j];
+2325  06b3 7b02          	ld	a,(OFST-1,sp)
+2326  06b5 97            	ld	xl,a
+2327  06b6 0c02          	inc	(OFST-1,sp)
+2329  06b8 9f            	ld	a,xl
+2330  06b9 5f            	clrw	x
+2331  06ba 97            	ld	xl,a
+2332  06bb 89            	pushw	x
+2333  06bc 7b06          	ld	a,(OFST+3,sp)
+2334  06be 97            	ld	xl,a
+2335  06bf 7b07          	ld	a,(OFST+4,sp)
+2336  06c1 1b05          	add	a,(OFST+2,sp)
+2337  06c3 2401          	jrnc	L26
+2338  06c5 5c            	incw	x
+2339  06c6               L26:
+2340  06c6 02            	rlwa	x,a
+2341  06c7 f6            	ld	a,(x)
+2342  06c8 85            	popw	x
+2343  06c9 e710          	ld	(_aunIMEI,x),a
+2344  06cb 20ce          	jra	L357
+2345  06cd               L557:
+2346                     ; 652         vClearBuffer(aunIMEI, 16);
+2348  06cd 4b10          	push	#16
+2349  06cf ae0010        	ldw	x,#_aunIMEI
+2350  06d2 cd04ee        	call	_vClearBuffer
+2352  06d5 84            	pop	a
+2353                     ; 653         return FALSE;
+2355  06d6 4f            	clr	a
+2357  06d7               L46:
+2359  06d7 5b05          	addw	sp,#5
+2360  06d9 81            	ret
+2363                     	switch	.const
+2364  0014               L167_imei_array:
+2365  0014 00            	dc.b	0
+2366  0015 000000000000  	ds.b	19
+2470                     ; 658 void vPrintStickerInfo(void)
+2470                     ; 659 {
+2471                     	switch	.text
+2472  06da               _vPrintStickerInfo:
+2474  06da 521a          	subw	sp,#26
+2475       0000001a      OFST:	set	26
+2478                     ; 660     uint8_t p = 0, i = 0;
+2482                     ; 661     uint8_t NotRespondingCounter = 0;
+2484  06dc 0f19          	clr	(OFST-1,sp)
+2486                     ; 662     uint16_t gsm_ok_timeout = 10000;
+2488                     ; 663     uint8_t imei_array[20] = {0};
+2490  06de 96            	ldw	x,sp
+2491  06df 1c0004        	addw	x,#OFST-22
+2492  06e2 90ae0014      	ldw	y,#L167_imei_array
+2493  06e6 a614          	ld	a,#20
+2494  06e8 cd0000        	call	c_xymvx
+2496                     ; 664     bool ModuleResponding = FALSE;
+2498                     ; 665     bool myInterruptFlag = TRUE;
+2500                     ; 667     UART1_ITConfig(UART1_IT_RXNE, DISABLE);
+2502  06eb 4b00          	push	#0
+2503  06ed ae0255        	ldw	x,#597
+2504  06f0 cd0000        	call	_UART1_ITConfig
+2506  06f3 84            	pop	a
+2507                     ; 668     UART1_ITConfig(UART1_IT_IDLE, DISABLE);
+2509  06f4 4b00          	push	#0
+2510  06f6 ae0244        	ldw	x,#580
+2511  06f9 cd0000        	call	_UART1_ITConfig
+2513  06fc 84            	pop	a
+2514                     ; 669     delay_ms(100);
+2516  06fd ae0064        	ldw	x,#100
+2517  0700 cd0000        	call	_delay_ms
+2519  0703               L1301:
+2520                     ; 673         ms_send_cmd(AT, strlen((const char *)AT));
+2522  0703 4b02          	push	#2
+2523  0705 ae0040        	ldw	x,#L7301
+2524  0708 cd0000        	call	_ms_send_cmd
+2526  070b 84            	pop	a
+2527                     ; 674         if (GSM_OK())
+2529  070c cd0000        	call	_GSM_OK
+2531  070f a30000        	cpw	x,#0
+2532  0712 2603          	jrne	L07
+2533  0714 cc084b        	jp	L1401
+2534  0717               L07:
+2535                     ; 676             delay_ms(200);
+2537  0717 ae00c8        	ldw	x,#200
+2538  071a cd0000        	call	_delay_ms
+2540                     ; 678             getIMEI();
+2542  071d cd0207        	call	_getIMEI
+2544                     ; 679             if (bValidIMEIRecieved(aunIMEI))
+2546  0720 ae0010        	ldw	x,#_aunIMEI
+2547  0723 cd0673        	call	_bValidIMEIRecieved
+2549  0726 4d            	tnz	a
+2550  0727 2603          	jrne	L27
+2551  0729 cc083f        	jp	L3401
+2552  072c               L27:
+2553                     ; 681                 delay_ms(100);
+2555  072c ae0064        	ldw	x,#100
+2556  072f cd0000        	call	_delay_ms
+2558                     ; 682                 for (i = 0; i < 20; i++)
+2560  0732 0f1a          	clr	(OFST+0,sp)
+2562  0734               L5501:
+2563                     ; 684                     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2565  0734 ae0040        	ldw	x,#64
+2566  0737 cd0000        	call	_UART1_GetFlagStatus
+2568  073a 4d            	tnz	a
+2569  073b 27f7          	jreq	L5501
+2570                     ; 686                     UART1_SendData8('*');
+2572  073d a62a          	ld	a,#42
+2573  073f cd0000        	call	_UART1_SendData8
+2575                     ; 682                 for (i = 0; i < 20; i++)
+2577  0742 0c1a          	inc	(OFST+0,sp)
+2581  0744 7b1a          	ld	a,(OFST+0,sp)
+2582  0746 a114          	cp	a,#20
+2583  0748 25ea          	jrult	L5501
+2585  074a               L3601:
+2586                     ; 688                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2588  074a ae0040        	ldw	x,#64
+2589  074d cd0000        	call	_UART1_GetFlagStatus
+2591  0750 4d            	tnz	a
+2592  0751 27f7          	jreq	L3601
+2593                     ; 690                 UART1_SendData8('\n');
+2595  0753 a60a          	ld	a,#10
+2596  0755 cd0000        	call	_UART1_SendData8
+2599  0758               L1701:
+2600                     ; 691                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2602  0758 ae0040        	ldw	x,#64
+2603  075b cd0000        	call	_UART1_GetFlagStatus
+2605  075e 4d            	tnz	a
+2606  075f 27f7          	jreq	L1701
+2607                     ; 693                 UART1_SendData8('I');
+2609  0761 a649          	ld	a,#73
+2610  0763 cd0000        	call	_UART1_SendData8
+2613  0766               L7701:
+2614                     ; 694                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2616  0766 ae0040        	ldw	x,#64
+2617  0769 cd0000        	call	_UART1_GetFlagStatus
+2619  076c 4d            	tnz	a
+2620  076d 27f7          	jreq	L7701
+2621                     ; 696                 UART1_SendData8('M');
+2623  076f a64d          	ld	a,#77
+2624  0771 cd0000        	call	_UART1_SendData8
+2627  0774               L5011:
+2628                     ; 697                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2630  0774 ae0040        	ldw	x,#64
+2631  0777 cd0000        	call	_UART1_GetFlagStatus
+2633  077a 4d            	tnz	a
+2634  077b 27f7          	jreq	L5011
+2635                     ; 699                 UART1_SendData8('E');
+2637  077d a645          	ld	a,#69
+2638  077f cd0000        	call	_UART1_SendData8
+2641  0782               L3111:
+2642                     ; 700                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2644  0782 ae0040        	ldw	x,#64
+2645  0785 cd0000        	call	_UART1_GetFlagStatus
+2647  0788 4d            	tnz	a
+2648  0789 27f7          	jreq	L3111
+2649                     ; 702                 UART1_SendData8('I');
+2651  078b a649          	ld	a,#73
+2652  078d cd0000        	call	_UART1_SendData8
+2655  0790               L1211:
+2656                     ; 703                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2658  0790 ae0040        	ldw	x,#64
+2659  0793 cd0000        	call	_UART1_GetFlagStatus
+2661  0796 4d            	tnz	a
+2662  0797 27f7          	jreq	L1211
+2663                     ; 705                 UART1_SendData8(' ');
+2665  0799 a620          	ld	a,#32
+2666  079b cd0000        	call	_UART1_SendData8
+2669  079e               L7211:
+2670                     ; 706                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2672  079e ae0040        	ldw	x,#64
+2673  07a1 cd0000        	call	_UART1_GetFlagStatus
+2675  07a4 4d            	tnz	a
+2676  07a5 27f7          	jreq	L7211
+2677                     ; 708                 UART1_SendData8('i');
+2679  07a7 a669          	ld	a,#105
+2680  07a9 cd0000        	call	_UART1_SendData8
+2683  07ac               L5311:
+2684                     ; 709                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2686  07ac ae0040        	ldw	x,#64
+2687  07af cd0000        	call	_UART1_GetFlagStatus
+2689  07b2 4d            	tnz	a
+2690  07b3 27f7          	jreq	L5311
+2691                     ; 711                 UART1_SendData8('s');
+2693  07b5 a673          	ld	a,#115
+2694  07b7 cd0000        	call	_UART1_SendData8
+2697  07ba               L3411:
+2698                     ; 712                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2700  07ba ae0040        	ldw	x,#64
+2701  07bd cd0000        	call	_UART1_GetFlagStatus
+2703  07c0 4d            	tnz	a
+2704  07c1 27f7          	jreq	L3411
+2705                     ; 714                 UART1_SendData8('\n');
+2707  07c3 a60a          	ld	a,#10
+2708  07c5 cd0000        	call	_UART1_SendData8
+2711  07c8               L1511:
+2712                     ; 716                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2714  07c8 ae0040        	ldw	x,#64
+2715  07cb cd0000        	call	_UART1_GetFlagStatus
+2717  07ce 4d            	tnz	a
+2718  07cf 27f7          	jreq	L1511
+2719                     ; 718                 UART1_SendData8('\n');
+2721  07d1 a60a          	ld	a,#10
+2722  07d3 cd0000        	call	_UART1_SendData8
+2724                     ; 719                 for (i = 0; i < 15; i++)
+2726  07d6 0f1a          	clr	(OFST+0,sp)
+2728  07d8               L5611:
+2729                     ; 721                     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2731  07d8 ae0040        	ldw	x,#64
+2732  07db cd0000        	call	_UART1_GetFlagStatus
+2734  07de 4d            	tnz	a
+2735  07df 27f7          	jreq	L5611
+2736                     ; 723                     UART1_SendData8(aunIMEI[i]);
+2738  07e1 7b1a          	ld	a,(OFST+0,sp)
+2739  07e3 5f            	clrw	x
+2740  07e4 97            	ld	xl,a
+2741  07e5 e610          	ld	a,(_aunIMEI,x)
+2742  07e7 cd0000        	call	_UART1_SendData8
+2744                     ; 719                 for (i = 0; i < 15; i++)
+2746  07ea 0c1a          	inc	(OFST+0,sp)
+2750  07ec 7b1a          	ld	a,(OFST+0,sp)
+2751  07ee a10f          	cp	a,#15
+2752  07f0 25e6          	jrult	L5611
+2754  07f2               L3711:
+2755                     ; 725                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2757  07f2 ae0040        	ldw	x,#64
+2758  07f5 cd0000        	call	_UART1_GetFlagStatus
+2760  07f8 4d            	tnz	a
+2761  07f9 27f7          	jreq	L3711
+2762                     ; 728                 UART1_SendData8('\n');
+2764  07fb a60a          	ld	a,#10
+2765  07fd cd0000        	call	_UART1_SendData8
+2767                     ; 729                 for (i = 0; i < 20; i++)
+2769  0800 0f1a          	clr	(OFST+0,sp)
+2771  0802               L7021:
+2772                     ; 731                     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2774  0802 ae0040        	ldw	x,#64
+2775  0805 cd0000        	call	_UART1_GetFlagStatus
+2777  0808 4d            	tnz	a
+2778  0809 27f7          	jreq	L7021
+2779                     ; 733                     UART1_SendData8('*');
+2781  080b a62a          	ld	a,#42
+2782  080d cd0000        	call	_UART1_SendData8
+2784                     ; 729                 for (i = 0; i < 20; i++)
+2786  0810 0c1a          	inc	(OFST+0,sp)
+2790  0812 7b1a          	ld	a,(OFST+0,sp)
+2791  0814 a114          	cp	a,#20
+2792  0816 25ea          	jrult	L7021
+2794  0818               L5121:
+2795                     ; 735                 while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+2797  0818 ae0040        	ldw	x,#64
+2798  081b cd0000        	call	_UART1_GetFlagStatus
+2800  081e 4d            	tnz	a
+2801  081f 27f7          	jreq	L5121
+2802                     ; 737                 UART1_SendData8('\r');
+2804  0821 a60d          	ld	a,#13
+2805  0823 cd0000        	call	_UART1_SendData8
+2807                     ; 738                 delay_ms(100);
+2809  0826 ae0064        	ldw	x,#100
+2810  0829 cd0000        	call	_delay_ms
+2812                     ; 740                 punGet_Client_ID();
+2814  082c cd0000        	call	_punGet_Client_ID
+2816                     ; 741                 punGet_Command_Topic();
+2818  082f cd0000        	call	_punGet_Command_Topic
+2820                     ; 742                 punGet_Event_Topic();
+2822  0832 cd0000        	call	_punGet_Event_Topic
+2824                     ; 744                 ModuleResponding = TRUE;
+2826  0835 a601          	ld	a,#1
+2827  0837 6b1a          	ld	(OFST+0,sp),a
+2829                     ; 745                 IMEIRecievedOKFlag = 1;
+2831  0839 35010000      	mov	_IMEIRecievedOKFlag,#1
+2833  083d 2025          	jra	L3221
+2834  083f               L3401:
+2835                     ; 749                 delay_ms(200);
+2837  083f ae00c8        	ldw	x,#200
+2838  0842 cd0000        	call	_delay_ms
+2840                     ; 750                 ModuleResponding = FALSE;
+2842  0845 0f1a          	clr	(OFST+0,sp)
+2844                     ; 751                 NotRespondingCounter++;
+2846  0847 0c19          	inc	(OFST-1,sp)
+2848  0849 2019          	jra	L3221
+2849  084b               L1401:
+2850                     ; 757             delay_ms(200);
+2852  084b ae00c8        	ldw	x,#200
+2853  084e cd0000        	call	_delay_ms
+2855                     ; 758             ms_send_cmd("No Response from Module", strlen((const char *)"No Response from Module"));
+2857  0851 4b17          	push	#23
+2858  0853 ae0028        	ldw	x,#L5221
+2859  0856 cd0000        	call	_ms_send_cmd
+2861  0859 84            	pop	a
+2862                     ; 759             delay_ms(200);
+2864  085a ae00c8        	ldw	x,#200
+2865  085d cd0000        	call	_delay_ms
+2867                     ; 760             ModuleResponding = FALSE;
+2869  0860 0f1a          	clr	(OFST+0,sp)
+2871                     ; 761             NotRespondingCounter++;
+2873  0862 0c19          	inc	(OFST-1,sp)
+2875  0864               L3221:
+2876                     ; 764         delay_ms(200);
+2878  0864 ae00c8        	ldw	x,#200
+2879  0867 cd0000        	call	_delay_ms
+2881                     ; 765     } while (!ModuleResponding && NotRespondingCounter < 10);
+2883  086a 0d1a          	tnz	(OFST+0,sp)
+2884  086c 2609          	jrne	L7221
+2886  086e 7b19          	ld	a,(OFST-1,sp)
+2887  0870 a10a          	cp	a,#10
+2888  0872 2403          	jruge	L47
+2889  0874 cc0703        	jp	L1301
+2890  0877               L47:
+2891  0877               L7221:
+2892                     ; 767     if (NotRespondingCounter < 10)
+2894  0877 7b19          	ld	a,(OFST-1,sp)
+2895  0879 a10a          	cp	a,#10
+2896  087b 2406          	jruge	L1321
+2897                     ; 768         IMEIRecievedOKFlag = 1;
+2899  087d 35010000      	mov	_IMEIRecievedOKFlag,#1
+2901  0881 2002          	jra	L3321
+2902  0883               L1321:
+2903                     ; 770         IMEIRecievedOKFlag = 0;
+2905  0883 3f00          	clr	_IMEIRecievedOKFlag
+2906  0885               L3321:
+2907                     ; 771     UART1_ITConfig(UART1_IT_RXNE, ENABLE);
+2909  0885 4b01          	push	#1
+2910  0887 ae0255        	ldw	x,#597
+2911  088a cd0000        	call	_UART1_ITConfig
+2913  088d 84            	pop	a
+2914                     ; 772     UART1_ITConfig(UART1_IT_IDLE, ENABLE);
+2916  088e 4b01          	push	#1
+2917  0890 ae0244        	ldw	x,#580
+2918  0893 cd0000        	call	_UART1_ITConfig
+2920  0896 84            	pop	a
+2921                     ; 773 }
+2924  0897 5b1a          	addw	sp,#26
+2925  0899 81            	ret
+2960                     	xdef	_bValidIMEIRecieved
+2961                     	xref.b	_IMEIRecievedOKFlag
+2962                     	xref	_aunPushed_Data
+2963                     	xdef	_vPrintStickerInfo
+2964                     	xdef	_vTCP_Reconnect
+2965                     	xdef	_vSend_MQTT_Ping
+2966                     	xdef	_vHandle_MQTT
+2967                     	xdef	_enGet_TCP_Status
+2968                     	xdef	_vClearBuffer
+2969                     	xdef	_bSendDataOverTCP
+2970                     	xdef	_vInit_MQTT
+2971                     	xdef	_getIMEI
+2972                     	xdef	_checkNum
+2973                     	xdef	_SIMComrestart
+2974                     	xref	_GSM_OK
+2975                     	xdef	_SIMCom_setup
+2976                     	xref	_response_buffer
+2977                     	xref	_unMQTT_PingRequest
+2978                     	xref	_ulMQTT_Subscribe
+2979                     	xref	_ulMQTT_Connect
+2980                     	xref	_ms_send_cmd_TCP
+2981                     	xref	_ms_send_cmd
+2982                     	xref	_aunMQTT_Subscribe_Topic
+2983                     	xref	_aunMQTT_ClientID
+2984                     	xref	_vMevris_Send_Version
+2985                     	xref	_vMevris_Send_IMEI
+2986                     	xref	_punGet_Client_ID
+2987                     	xref	_punGet_Command_Topic
+2988                     	xref	_punGet_Event_Topic
+2989                     	xref	_sprintf
+2990                     	switch	.ubsct
+2991  0000               _PASS_KEY:
+2992  0000 000000000000  	ds.b	16
+2993                     	xdef	_PASS_KEY
+2994  0010               _aunIMEI:
+2995  0010 000000000000  	ds.b	20
+2996                     	xdef	_aunIMEI
+2997                     	xref	_strlen
+2998                     	xref	_strstr
+2999                     	xref	_strcat
+3000                     	xref.b	_checkit
+3001                     	xref	_delay_ms
+3002                     	xref	_UART1_GetFlagStatus
+3003                     	xref	_UART1_SendData8
+3004                     	xref	_UART1_ReceiveData8
+3005                     	xref	_UART1_ITConfig
+3006                     	xref	_GPIO_WriteLow
+3007                     	xref	_GPIO_WriteHigh
+3008                     	switch	.const
+3009  0028               L5221:
+3010  0028 4e6f20526573  	dc.b	"No Response from M"
+3011  003a 6f64756c6500  	dc.b	"odule",0
+3012  0040               L7301:
+3013  0040 415400        	dc.b	"AT",0
+3014  0043               L176:
+3015  0043 504450204445  	dc.b	"PDP DEACT",0
+3016  004d               L366:
+3017  004d 54435020434c  	dc.b	"TCP CLOSED",0
+3018  0058               L556:
+3019  0058 54435020434c  	dc.b	"TCP CLOSING",0
+3020  0064               L746:
+3021  0064 434f4e4e4543  	dc.b	"CONNECT OK",0
+3022  006f               L146:
+3023  006f 54435020434f  	dc.b	"TCP CONNECTING",0
+3024  007e               L336:
+3025  007e 495020535441  	dc.b	"IP STATUS",0
+3026  0088               L526:
+3027  0088 495020475052  	dc.b	"IP GPRSACT",0
+3028  0093               L716:
+3029  0093 495020434f4e  	dc.b	"IP CONFIG",0
+3030  009d               L116:
+3031  009d 495020535441  	dc.b	"IP START",0
+3032  00a6               L306:
+3033  00a6 495020494e49  	dc.b	"IP INITIAL",0
+3034  00b1               L775:
+3035  00b1 53544154453a  	dc.b	"STATE:",0
+3036  00b8               L375:
+3037  00b8 41542b434950  	dc.b	"AT+CIPSTATUS",0
+3038  00c5               L315:
+3039  00c5 53454e44204f  	dc.b	"SEND OK",0
+3040  00cd               L705:
+3041  00cd 53454e4400    	dc.b	"SEND",0
+3042  00d2               L574:
+3043  00d2 256400        	dc.b	"%d",0
+3044  00d5               L374:
+3045  00d5 41542b434950  	dc.b	"AT+CIPSEND=",0
+3046  00e1               L502:
+3047  00e1 41542b47534e  	dc.b	"AT+GSN",0
+3048  00e8               L331:
+3049  00e8 41542b434e55  	dc.b	"AT+CNUM",0
+3050  00f0               L701:
+3051  00f0 41542b43504f  	dc.b	"AT+CPOWD=0",0
+3052  00fb               L57:
+3053  00fb 41542b434950  	dc.b	"AT+CIPSTART=",34
+3054  0108 54435022      	dc.b	"TCP",34
+3055  010c 2c22          	dc.b	",",34
+3056  010e 6d7174742e6d  	dc.b	"mqtt.mevris.io",34
+3057  011d 2c22          	dc.b	",",34
+3058  011f 333838312200  	dc.b	"3881",34,0
+3059  0125               L37:
+3060  0125 41542b434946  	dc.b	"AT+CIFSR",0
+3061  012e               L17:
+3062  012e 41542b434949  	dc.b	"AT+CIICR",0
+3063  0137               L76:
+3064  0137 41542b435354  	dc.b	"AT+CSTT=",34
+3065  0140 7a6f6e677761  	dc.b	"zongwap",34,0
+3066  0149               L56:
+3067  0149 41542b434950  	dc.b	"AT+CIPSCONT",0
+3068  0155               L36:
+3069  0155 41542b434950  	dc.b	"AT+CIPHEAD=1",0
+3070  0162               L16:
+3071  0162 41542b434950  	dc.b	"AT+CIPSRIP=1",0
+3072  016f               L75:
+3073  016f 41542b434950  	dc.b	"AT+CIPSPRT=1",0
+3074  017c               L55:
+3075  017c 41542b434950  	dc.b	"AT+CIPQSEND=0",0
+3076  018a               L35:
+3077  018a 41542b434950  	dc.b	"AT+CIPMODE=0",0
+3078  0197               L15:
+3079  0197 41542b434950  	dc.b	"AT+CIPMUX=0",0
+3080  01a3               L74:
+3081  01a3 41542b434950  	dc.b	"AT+CIPSHUT",0
+3082  01ae               L54:
+3083  01ae 41542b534150  	dc.b	"AT+SAPBR=1,1",0
+3084  01bb               L34:
+3085  01bb 41542b534150  	dc.b	"AT+SAPBR=3,1,",34
+3086  01c9 41504e22      	dc.b	"APN",34
+3087  01cd 2c22          	dc.b	",",34
+3088  01cf 7a6f6e677761  	dc.b	"zongwap",34,0
+3089  01d8               L14:
+3090  01d8 41542b534150  	dc.b	"AT+SAPBR=3,1,",34
+3091  01e6 434f4e545950  	dc.b	"CONTYPE",34
+3092  01ee 2c22          	dc.b	",",34
+3093  01f0 475052532200  	dc.b	"GPRS",34,0
+3094  01f6               L73:
+3095  01f6 41542b434741  	dc.b	"AT+CGATT=1",0
+3096  0201               L53:
+3097  0201 41542b434d45  	dc.b	"AT+CMEE=2",0
+3098  020b               L33:
+3099  020b 41542b43474e  	dc.b	"AT+CGNSSEQ=RMC",0
+3100  021a               L13:
+3101  021a 41542b43474e  	dc.b	"AT+CGNSPWR=1",0
+3102  0227               L72:
+3103  0227 41542b434647  	dc.b	"AT+CFGRI=0",0
+3104  0232               L52:
+3105  0232 41542b435343  	dc.b	"AT+CSCLK=0",0
+3106  023d               L32:
+3107  023d 41542b434d47  	dc.b	"AT+CMGD=1,4",0
+3108  0249               L12:
+3109  0249 4154453000    	dc.b	"ATE0",0
+3110                     	xref.b	c_lreg
+3111                     	xref.b	c_x
+3131                     	xref	c_xymvx
+3132                     	end

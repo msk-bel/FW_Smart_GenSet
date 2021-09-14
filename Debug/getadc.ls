@@ -1,6 +1,6 @@
    1                     ; C Compiler for STM8 (COSMIC Software)
-   2                     ; Parser V4.12.1 - 30 Jun 2020
-   3                     ; Generator (Limited) V4.4.12 - 02 Jul 2020
+   2                     ; Parser V4.11.10 - 06 Jul 2017
+   3                     ; Generator (Limited) V4.4.7 - 05 Oct 2017
   14                     	bsct
   15  0000               _batVolt:
   16  0000 00000000      	dc.l	0
@@ -81,7 +81,7 @@
  223  0058 cd0000        	call	_ADC2_Cmd
  225                     ; 78   calculateTemp1(tempADC);
  227  005b 1e01          	ldw	x,(OFST-1,sp)
- 228  005d ad7a          	call	_calculateTemp1
+ 228  005d ad7c          	call	_calculateTemp1
  230                     ; 79 }
  233  005f 85            	popw	x
  234  0060 81            	ret
@@ -119,7 +119,7 @@
  326  0088 cd0000        	call	_ADC2_Cmd
  328                     ; 96   calculateTemp2(tempADC);
  330  008b 1e01          	ldw	x,(OFST-1,sp)
- 331  008d cd017c        	call	_calculateTemp2
+ 331  008d cd017e        	call	_calculateTemp2
  333                     ; 97 }
  336  0090 85            	popw	x
  337  0091 81            	ret
@@ -157,7 +157,7 @@
  429  00b9 cd0000        	call	_ADC2_Cmd
  431                     ; 115   calculateFuelLevel(tempADC);
  433  00bc 1e01          	ldw	x,(OFST-1,sp)
- 434  00be cd021f        	call	_calculateFuelLevel
+ 434  00be cd0221        	call	_calculateFuelLevel
  436                     ; 116 }
  439  00c1 85            	popw	x
  440  00c2 81            	ret
@@ -166,188 +166,188 @@
  476                     	switch	.text
  477  00c3               _calculateBatVolt:
  481                     ; 120   batVolt = ((uint32_t)((batVolt2)*ADCvoltmultiplier) * BatVoltDividerFactor)/ADC_RESOLUTION;
- 483  00c3 a631          	ld	a,#49
- 484  00c5 cd0000        	call	c_bmulx
- 486  00c8 a629          	ld	a,#41
- 487  00ca cd0000        	call	c_cmulx
- 489  00cd a60a          	ld	a,#10
- 490  00cf cd0000        	call	c_lursh
- 492  00d2 ae0000        	ldw	x,#_batVolt
- 493  00d5 cd0000        	call	c_rtol
+ 483  00c3 90ae0031      	ldw	y,#49
+ 484  00c7 cd0000        	call	c_imul
+ 486  00ca a629          	ld	a,#41
+ 487  00cc cd0000        	call	c_cmulx
+ 489  00cf a60a          	ld	a,#10
+ 490  00d1 cd0000        	call	c_lursh
+ 492  00d4 ae0000        	ldw	x,#_batVolt
+ 493  00d7 cd0000        	call	c_rtol
  495                     ; 121 }
- 498  00d8 81            	ret
+ 498  00da 81            	ret
  597                     ; 123 void calculateTemp1(uint16_t tempADC1)
  597                     ; 124 {
  598                     	switch	.text
- 599  00d9               _calculateTemp1:
- 601  00d9 520c          	subw	sp,#12
+ 599  00db               _calculateTemp1:
+ 601  00db 520c          	subw	sp,#12
  602       0000000c      OFST:	set	12
  605                     ; 133   ntcR = adcSeriesResistor * (((float)adcMaxVal / tempADC1) - 1);
- 607  00db cd0000        	call	c_uitof
- 609  00de 96            	ldw	x,sp
- 610  00df 1c0001        	addw	x,#OFST-11
- 611  00e2 cd0000        	call	c_rtol
- 614  00e5 ae0018        	ldw	x,#L522
- 615  00e8 cd0000        	call	c_ltor
- 617  00eb 96            	ldw	x,sp
- 618  00ec 1c0001        	addw	x,#OFST-11
- 619  00ef cd0000        	call	c_fdiv
- 621  00f2 ae0014        	ldw	x,#L532
- 622  00f5 cd0000        	call	c_fsub
- 624  00f8 ae0010        	ldw	x,#L542
- 625  00fb cd0000        	call	c_fmul
- 627  00fe 96            	ldw	x,sp
- 628  00ff 1c0009        	addw	x,#OFST-3
- 629  0102 cd0000        	call	c_rtol
+ 607  00dd cd0000        	call	c_uitof
+ 609  00e0 96            	ldw	x,sp
+ 610  00e1 1c0001        	addw	x,#OFST-11
+ 611  00e4 cd0000        	call	c_rtol
+ 614  00e7 ae0018        	ldw	x,#L522
+ 615  00ea cd0000        	call	c_ltor
+ 617  00ed 96            	ldw	x,sp
+ 618  00ee 1c0001        	addw	x,#OFST-11
+ 619  00f1 cd0000        	call	c_fdiv
+ 621  00f4 ae0014        	ldw	x,#L532
+ 622  00f7 cd0000        	call	c_fsub
+ 624  00fa ae0010        	ldw	x,#L542
+ 625  00fd cd0000        	call	c_fmul
+ 627  0100 96            	ldw	x,sp
+ 628  0101 1c0009        	addw	x,#OFST-3
+ 629  0104 cd0000        	call	c_rtol
  632                     ; 134   resRatio = ntcR / resistanceRoomTeperature;
- 634  0105 96            	ldw	x,sp
- 635  0106 1c0009        	addw	x,#OFST-3
- 636  0109 cd0000        	call	c_ltor
- 638  010c ae000c        	ldw	x,#L552
- 639  010f cd0000        	call	c_fdiv
- 641  0112 96            	ldw	x,sp
- 642  0113 1c0009        	addw	x,#OFST-3
- 643  0116 cd0000        	call	c_rtol
+ 634  0107 96            	ldw	x,sp
+ 635  0108 1c0009        	addw	x,#OFST-3
+ 636  010b cd0000        	call	c_ltor
+ 638  010e ae000c        	ldw	x,#L552
+ 639  0111 cd0000        	call	c_fdiv
+ 641  0114 96            	ldw	x,sp
+ 642  0115 1c0009        	addw	x,#OFST-3
+ 643  0118 cd0000        	call	c_rtol
  646                     ; 135   logresRatio = log(resRatio);
- 648  0119 1e0b          	ldw	x,(OFST-1,sp)
- 649  011b 89            	pushw	x
- 650  011c 1e0b          	ldw	x,(OFST-1,sp)
- 651  011e 89            	pushw	x
- 652  011f cd0000        	call	_log
- 654  0122 5b04          	addw	sp,#4
- 655  0124 96            	ldw	x,sp
- 656  0125 1c0009        	addw	x,#OFST-3
- 657  0128 cd0000        	call	c_rtol
+ 648  011b 1e0b          	ldw	x,(OFST-1,sp)
+ 649  011d 89            	pushw	x
+ 650  011e 1e0b          	ldw	x,(OFST-1,sp)
+ 651  0120 89            	pushw	x
+ 652  0121 cd0000        	call	_log
+ 654  0124 5b04          	addw	sp,#4
+ 655  0126 96            	ldw	x,sp
+ 656  0127 1c0009        	addw	x,#OFST-3
+ 657  012a cd0000        	call	c_rtol
  660                     ; 136   temp = logresRatio / ntcCoefficient;
- 662  012b 96            	ldw	x,sp
- 663  012c 1c0009        	addw	x,#OFST-3
- 664  012f cd0000        	call	c_ltor
- 666  0132 ae0008        	ldw	x,#L562
- 667  0135 cd0000        	call	c_fdiv
- 669  0138 96            	ldw	x,sp
- 670  0139 1c0009        	addw	x,#OFST-3
- 671  013c cd0000        	call	c_rtol
+ 662  012d 96            	ldw	x,sp
+ 663  012e 1c0009        	addw	x,#OFST-3
+ 664  0131 cd0000        	call	c_ltor
+ 666  0134 ae0008        	ldw	x,#L562
+ 667  0137 cd0000        	call	c_fdiv
+ 669  013a 96            	ldw	x,sp
+ 670  013b 1c0009        	addw	x,#OFST-3
+ 671  013e cd0000        	call	c_rtol
  674                     ; 137   temp1 = 1.0 / RoomTeperature;
  676                     ; 138   temp2 = temp1 + temp;
- 678  013f 96            	ldw	x,sp
- 679  0140 1c0009        	addw	x,#OFST-3
- 680  0143 cd0000        	call	c_ltor
- 682  0146 ae0004        	ldw	x,#L572
- 683  0149 cd0000        	call	c_fadd
- 685  014c 96            	ldw	x,sp
- 686  014d 1c0009        	addw	x,#OFST-3
- 687  0150 cd0000        	call	c_rtol
+ 678  0141 96            	ldw	x,sp
+ 679  0142 1c0009        	addw	x,#OFST-3
+ 680  0145 cd0000        	call	c_ltor
+ 682  0148 ae0004        	ldw	x,#L572
+ 683  014b cd0000        	call	c_fadd
+ 685  014e 96            	ldw	x,sp
+ 686  014f 1c0009        	addw	x,#OFST-3
+ 687  0152 cd0000        	call	c_rtol
  690                     ; 139   tKelvin = 1 / temp2;
- 692  0153 a601          	ld	a,#1
- 693  0155 cd0000        	call	c_ctof
- 695  0158 96            	ldw	x,sp
- 696  0159 1c0009        	addw	x,#OFST-3
- 697  015c cd0000        	call	c_fdiv
- 699  015f 96            	ldw	x,sp
- 700  0160 1c0009        	addw	x,#OFST-3
- 701  0163 cd0000        	call	c_rtol
+ 692  0155 a601          	ld	a,#1
+ 693  0157 cd0000        	call	c_ctof
+ 695  015a 96            	ldw	x,sp
+ 696  015b 1c0009        	addw	x,#OFST-3
+ 697  015e cd0000        	call	c_fdiv
+ 699  0161 96            	ldw	x,sp
+ 700  0162 1c0009        	addw	x,#OFST-3
+ 701  0165 cd0000        	call	c_rtol
  704                     ; 140   Temperature1 = tKelvin - 273.15;
- 706  0166 96            	ldw	x,sp
- 707  0167 1c0009        	addw	x,#OFST-3
- 708  016a cd0000        	call	c_ltor
- 710  016d ae0000        	ldw	x,#L503
- 711  0170 cd0000        	call	c_fsub
- 713  0173 ae0000        	ldw	x,#_Temperature1
- 714  0176 cd0000        	call	c_rtol
+ 706  0168 96            	ldw	x,sp
+ 707  0169 1c0009        	addw	x,#OFST-3
+ 708  016c cd0000        	call	c_ltor
+ 710  016f ae0000        	ldw	x,#L503
+ 711  0172 cd0000        	call	c_fsub
+ 713  0175 ae0000        	ldw	x,#_Temperature1
+ 714  0178 cd0000        	call	c_rtol
  716                     ; 141 }
- 719  0179 5b0c          	addw	sp,#12
- 720  017b 81            	ret
+ 719  017b 5b0c          	addw	sp,#12
+ 720  017d 81            	ret
  819                     ; 143 void calculateTemp2(uint16_t tempADC2)
  819                     ; 144 {
  820                     	switch	.text
- 821  017c               _calculateTemp2:
- 823  017c 520c          	subw	sp,#12
+ 821  017e               _calculateTemp2:
+ 823  017e 520c          	subw	sp,#12
  824       0000000c      OFST:	set	12
  827                     ; 155   ntcR = adcSeriesResistor * (((float)adcMaxVal / tempADC2) - 1);
- 829  017e cd0000        	call	c_uitof
- 831  0181 96            	ldw	x,sp
- 832  0182 1c0001        	addw	x,#OFST-11
- 833  0185 cd0000        	call	c_rtol
- 836  0188 ae0018        	ldw	x,#L522
- 837  018b cd0000        	call	c_ltor
- 839  018e 96            	ldw	x,sp
- 840  018f 1c0001        	addw	x,#OFST-11
- 841  0192 cd0000        	call	c_fdiv
- 843  0195 ae0014        	ldw	x,#L532
- 844  0198 cd0000        	call	c_fsub
- 846  019b ae0010        	ldw	x,#L542
- 847  019e cd0000        	call	c_fmul
- 849  01a1 96            	ldw	x,sp
- 850  01a2 1c0009        	addw	x,#OFST-3
- 851  01a5 cd0000        	call	c_rtol
+ 829  0180 cd0000        	call	c_uitof
+ 831  0183 96            	ldw	x,sp
+ 832  0184 1c0001        	addw	x,#OFST-11
+ 833  0187 cd0000        	call	c_rtol
+ 836  018a ae0018        	ldw	x,#L522
+ 837  018d cd0000        	call	c_ltor
+ 839  0190 96            	ldw	x,sp
+ 840  0191 1c0001        	addw	x,#OFST-11
+ 841  0194 cd0000        	call	c_fdiv
+ 843  0197 ae0014        	ldw	x,#L532
+ 844  019a cd0000        	call	c_fsub
+ 846  019d ae0010        	ldw	x,#L542
+ 847  01a0 cd0000        	call	c_fmul
+ 849  01a3 96            	ldw	x,sp
+ 850  01a4 1c0009        	addw	x,#OFST-3
+ 851  01a7 cd0000        	call	c_rtol
  854                     ; 156   resRatio = ntcR / resistanceRoomTeperature;
- 856  01a8 96            	ldw	x,sp
- 857  01a9 1c0009        	addw	x,#OFST-3
- 858  01ac cd0000        	call	c_ltor
- 860  01af ae000c        	ldw	x,#L552
- 861  01b2 cd0000        	call	c_fdiv
- 863  01b5 96            	ldw	x,sp
- 864  01b6 1c0009        	addw	x,#OFST-3
- 865  01b9 cd0000        	call	c_rtol
+ 856  01aa 96            	ldw	x,sp
+ 857  01ab 1c0009        	addw	x,#OFST-3
+ 858  01ae cd0000        	call	c_ltor
+ 860  01b1 ae000c        	ldw	x,#L552
+ 861  01b4 cd0000        	call	c_fdiv
+ 863  01b7 96            	ldw	x,sp
+ 864  01b8 1c0009        	addw	x,#OFST-3
+ 865  01bb cd0000        	call	c_rtol
  868                     ; 157   logresRatio = log(resRatio);
- 870  01bc 1e0b          	ldw	x,(OFST-1,sp)
- 871  01be 89            	pushw	x
- 872  01bf 1e0b          	ldw	x,(OFST-1,sp)
- 873  01c1 89            	pushw	x
- 874  01c2 cd0000        	call	_log
- 876  01c5 5b04          	addw	sp,#4
- 877  01c7 96            	ldw	x,sp
- 878  01c8 1c0009        	addw	x,#OFST-3
- 879  01cb cd0000        	call	c_rtol
+ 870  01be 1e0b          	ldw	x,(OFST-1,sp)
+ 871  01c0 89            	pushw	x
+ 872  01c1 1e0b          	ldw	x,(OFST-1,sp)
+ 873  01c3 89            	pushw	x
+ 874  01c4 cd0000        	call	_log
+ 876  01c7 5b04          	addw	sp,#4
+ 877  01c9 96            	ldw	x,sp
+ 878  01ca 1c0009        	addw	x,#OFST-3
+ 879  01cd cd0000        	call	c_rtol
  882                     ; 158   temp = logresRatio / ntcCoefficient;
- 884  01ce 96            	ldw	x,sp
- 885  01cf 1c0009        	addw	x,#OFST-3
- 886  01d2 cd0000        	call	c_ltor
- 888  01d5 ae0008        	ldw	x,#L562
- 889  01d8 cd0000        	call	c_fdiv
- 891  01db 96            	ldw	x,sp
- 892  01dc 1c0009        	addw	x,#OFST-3
- 893  01df cd0000        	call	c_rtol
+ 884  01d0 96            	ldw	x,sp
+ 885  01d1 1c0009        	addw	x,#OFST-3
+ 886  01d4 cd0000        	call	c_ltor
+ 888  01d7 ae0008        	ldw	x,#L562
+ 889  01da cd0000        	call	c_fdiv
+ 891  01dd 96            	ldw	x,sp
+ 892  01de 1c0009        	addw	x,#OFST-3
+ 893  01e1 cd0000        	call	c_rtol
  896                     ; 159   temp1 = 1.0 / RoomTeperature;
  898                     ; 160   temp2 = temp1 + temp;
- 900  01e2 96            	ldw	x,sp
- 901  01e3 1c0009        	addw	x,#OFST-3
- 902  01e6 cd0000        	call	c_ltor
- 904  01e9 ae0004        	ldw	x,#L572
- 905  01ec cd0000        	call	c_fadd
- 907  01ef 96            	ldw	x,sp
- 908  01f0 1c0009        	addw	x,#OFST-3
- 909  01f3 cd0000        	call	c_rtol
+ 900  01e4 96            	ldw	x,sp
+ 901  01e5 1c0009        	addw	x,#OFST-3
+ 902  01e8 cd0000        	call	c_ltor
+ 904  01eb ae0004        	ldw	x,#L572
+ 905  01ee cd0000        	call	c_fadd
+ 907  01f1 96            	ldw	x,sp
+ 908  01f2 1c0009        	addw	x,#OFST-3
+ 909  01f5 cd0000        	call	c_rtol
  912                     ; 161   tKelvin = 1 / temp2;
- 914  01f6 a601          	ld	a,#1
- 915  01f8 cd0000        	call	c_ctof
- 917  01fb 96            	ldw	x,sp
- 918  01fc 1c0009        	addw	x,#OFST-3
- 919  01ff cd0000        	call	c_fdiv
- 921  0202 96            	ldw	x,sp
- 922  0203 1c0009        	addw	x,#OFST-3
- 923  0206 cd0000        	call	c_rtol
+ 914  01f8 a601          	ld	a,#1
+ 915  01fa cd0000        	call	c_ctof
+ 917  01fd 96            	ldw	x,sp
+ 918  01fe 1c0009        	addw	x,#OFST-3
+ 919  0201 cd0000        	call	c_fdiv
+ 921  0204 96            	ldw	x,sp
+ 922  0205 1c0009        	addw	x,#OFST-3
+ 923  0208 cd0000        	call	c_rtol
  926                     ; 162   Temperature2 = tKelvin - 273.15;
- 928  0209 96            	ldw	x,sp
- 929  020a 1c0009        	addw	x,#OFST-3
- 930  020d cd0000        	call	c_ltor
- 932  0210 ae0000        	ldw	x,#L503
- 933  0213 cd0000        	call	c_fsub
- 935  0216 ae0004        	ldw	x,#_Temperature2
- 936  0219 cd0000        	call	c_rtol
+ 928  020b 96            	ldw	x,sp
+ 929  020c 1c0009        	addw	x,#OFST-3
+ 930  020f cd0000        	call	c_ltor
+ 932  0212 ae0000        	ldw	x,#L503
+ 933  0215 cd0000        	call	c_fsub
+ 935  0218 ae0004        	ldw	x,#_Temperature2
+ 936  021b cd0000        	call	c_rtol
  938                     ; 163 }
- 941  021c 5b0c          	addw	sp,#12
- 942  021e 81            	ret
+ 941  021e 5b0c          	addw	sp,#12
+ 942  0220 81            	ret
  977                     ; 165 void calculateFuelLevel(uint16_t fuelLevel) // calculate fuel level in cubic feet
  977                     ; 166 {
  978                     	switch	.text
- 979  021f               _calculateFuelLevel:
+ 979  0221               _calculateFuelLevel:
  983                     ; 171     Fuellevel = ((uint32_t)(fuelLevel)/**FuelLevelFactor*/) /** (TankLengthinFoot) * (TankBreadthinFoot)*/; // divide FuelLevelFactor by 100,000
- 985  021f cd0000        	call	c_uitolx
- 987  0222 ae0000        	ldw	x,#_Fuellevel
- 988  0225 cd0000        	call	c_rtol
+ 985  0221 cd0000        	call	c_uitolx
+ 987  0224 ae0000        	ldw	x,#_Fuellevel
+ 988  0227 cd0000        	call	c_rtol
  990                     ; 177 }
- 993  0228 81            	ret
+ 993  022a 81            	ret
 1044                     	xdef	_getFuelLevel
 1045                     	xdef	_gettemp2
 1046                     	xdef	_gettemp1
@@ -398,5 +398,5 @@
 1110                     	xref	c_rtol
 1111                     	xref	c_lursh
 1112                     	xref	c_cmulx
-1113                     	xref	c_bmulx
+1113                     	xref	c_imul
 1114                     	end

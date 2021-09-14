@@ -33,11 +33,11 @@ typedef enum TCP_STATUS_ENUM
 
 void SIMCom_setup(void);
 int GSM_OK(void);
-int GSM_DOWNLOAD(void);
+// int GSM_DOWNLOAD(void);
 void GPRS_connectvity_check(void);
 void GPRS_reconnect(void);
 void gprs_init(void);
-int GSM_OK_FAST(void);
+// int GSM_OK_FAST(void);
 void SIMComrestart(void);
 void checkNum(void);
 void getIMEI(void);

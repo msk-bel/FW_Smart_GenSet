@@ -73,21 +73,21 @@ void sendDataToCloud(void)
         {
             switch (enSendEventCounter)
             {
-            case eCommand_Reserved:
-                // enSendEventCounter++;
-                break;
-            case eCommand_IMEI:
-                // vMevris_Send_IMEI();
-                break;
-            case eCommand_SIM_Number:
-                // vMevris_Send_SIM_Number();
-                break;
-            case eCommand_Location:
-                // vMevris_Send_Location();
-                break;
-            case eCommand_Version:
-                // vMevris_Send_Version();
-                break;
+            // case eCommand_Reserved:
+            //     // enSendEventCounter++;
+            //     break;
+            // case eCommand_IMEI:
+            //     // vMevris_Send_IMEI();
+            //     break;
+            // case eCommand_SIM_Number:
+            //     // vMevris_Send_SIM_Number();
+            //     break;
+            // case eCommand_Location:
+            //     // vMevris_Send_Location();
+            //     break;
+            // case eCommand_Version:
+            //     // vMevris_Send_Version();
+            //     break;
             case eCommand_Phase1:
                 // vMevris_Send_Phase1();
                 vMevris_Send_Phase(1, Watt_Phase1, Voltage_Phase1, Ampere_Phase1);

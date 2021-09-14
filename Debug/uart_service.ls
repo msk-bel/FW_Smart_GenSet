@@ -1,6 +1,6 @@
    1                     ; C Compiler for STM8 (COSMIC Software)
-   2                     ; Parser V4.12.1 - 30 Jun 2020
-   3                     ; Generator (Limited) V4.4.12 - 02 Jul 2020
+   2                     ; Parser V4.11.10 - 06 Jul 2017
+   3                     ; Generator (Limited) V4.4.7 - 05 Oct 2017
   14                     	bsct
   15  0000               _unRecievePtr:
   16  0000 00            	dc.b	0
@@ -17,7 +17,7 @@
   88       00000001      OFST:	set	1
   91                     ; 32   for (i = 0; i < length; i++)
   93  0002 0f01          	clr	(OFST+0,sp)
-  96  0004 2016          	jra	L34
+  96  0004 201a          	jra	L34
   97  0006               L15:
   98                     ; 34     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
  100  0006 ae0040        	ldw	x,#64
@@ -25,215 +25,223 @@
  103  000c 4d            	tnz	a
  104  000d 27f7          	jreq	L15
  105                     ; 36     UART1_SendData8(*(cmd + i));
- 107  000f 7b01          	ld	a,(OFST+0,sp)
- 108  0011 5f            	clrw	x
- 109  0012 97            	ld	xl,a
- 110  0013 72fb02        	addw	x,(OFST+1,sp)
- 111  0016 f6            	ld	a,(x)
- 112  0017 cd0000        	call	_UART1_SendData8
- 114                     ; 32   for (i = 0; i < length; i++)
- 116  001a 0c01          	inc	(OFST+0,sp)
- 118  001c               L34:
- 121  001c 7b01          	ld	a,(OFST+0,sp)
- 122  001e 1106          	cp	a,(OFST+5,sp)
- 123  0020 25e4          	jrult	L15
- 125  0022               L75:
- 126                     ; 40   while (!UART1_GetFlagStatus(UART1_FLAG_TC))
- 128  0022 ae0040        	ldw	x,#64
- 129  0025 cd0000        	call	_UART1_GetFlagStatus
- 131  0028 4d            	tnz	a
- 132  0029 27f7          	jreq	L75
- 133                     ; 42   UART1_SendData8(0x0D);
- 135  002b a60d          	ld	a,#13
- 136  002d cd0000        	call	_UART1_SendData8
- 138                     ; 43 }
- 141  0030 5b03          	addw	sp,#3
- 142  0032 81            	ret
- 197                     ; 45 void ms_send_cmd_TCP(uint8_t *cmd, uint8_t length)
- 197                     ; 46 {
- 198                     	switch	.text
- 199  0033               _ms_send_cmd_TCP:
- 201  0033 89            	pushw	x
- 202  0034 88            	push	a
- 203       00000001      OFST:	set	1
- 206                     ; 48   for (i = 0; i < length; i++)
- 208  0035 0f01          	clr	(OFST+0,sp)
- 211  0037 2016          	jra	L511
- 212  0039               L321:
- 213                     ; 50     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
- 215  0039 ae0040        	ldw	x,#64
- 216  003c cd0000        	call	_UART1_GetFlagStatus
- 218  003f 4d            	tnz	a
- 219  0040 27f7          	jreq	L321
- 220                     ; 52     UART1_SendData8(*(cmd + i));
- 222  0042 7b01          	ld	a,(OFST+0,sp)
- 223  0044 5f            	clrw	x
- 224  0045 97            	ld	xl,a
- 225  0046 72fb02        	addw	x,(OFST+1,sp)
- 226  0049 f6            	ld	a,(x)
- 227  004a cd0000        	call	_UART1_SendData8
- 229                     ; 48   for (i = 0; i < length; i++)
- 231  004d 0c01          	inc	(OFST+0,sp)
- 233  004f               L511:
- 236  004f 7b01          	ld	a,(OFST+0,sp)
- 237  0051 1106          	cp	a,(OFST+5,sp)
- 238  0053 25e4          	jrult	L321
- 240  0055               L131:
- 241                     ; 56   while (!UART1_GetFlagStatus(UART1_FLAG_TC))
- 243  0055 ae0040        	ldw	x,#64
- 244  0058 cd0000        	call	_UART1_GetFlagStatus
- 246  005b 4d            	tnz	a
- 247  005c 27f7          	jreq	L131
- 248                     ; 58   UART1_SendData8(0x1A);
- 250  005e a61a          	ld	a,#26
- 251  0060 cd0000        	call	_UART1_SendData8
- 253                     ; 59 }
- 256  0063 5b03          	addw	sp,#3
- 257  0065 81            	ret
- 283                     ; 61 void vSerialRecieveISR(void)
- 283                     ; 62 {
- 284                     	switch	.text
- 285  0066               _vSerialRecieveISR:
- 289                     ; 63   aunRecievedData[unRecievePtr] = UART1_ReceiveData8();
- 291  0066 b600          	ld	a,_unRecievePtr
- 292  0068 5f            	clrw	x
- 293  0069 97            	ld	xl,a
- 294  006a 89            	pushw	x
- 295  006b cd0000        	call	_UART1_ReceiveData8
- 297  006e 85            	popw	x
- 298  006f d70000        	ld	(_aunRecievedData,x),a
- 299                     ; 64   unRecievePtr++;
- 301  0072 3c00          	inc	_unRecievePtr
- 302                     ; 65   if (unRecievePtr == MAX_UART_RING_BUFF_SIZE)
- 304  0074 b600          	ld	a,_unRecievePtr
- 305  0076 a164          	cp	a,#100
- 306  0078 2602          	jrne	L541
- 307                     ; 67     unRecievePtr = 0;
- 309  007a 3f00          	clr	_unRecievePtr
- 310  007c               L541:
- 311                     ; 69 }
- 314  007c 81            	ret
- 397                     ; 71 void vHandleDataRecvUARTviaISR(void)
- 397                     ; 72 {
- 398                     	switch	.text
- 399  007d               _vHandleDataRecvUARTviaISR:
- 401  007d 5203          	subw	sp,#3
- 402       00000003      OFST:	set	3
- 405                     ; 73   uint8_t i = 0;
- 407  007f 0f03          	clr	(OFST+0,sp)
- 409                     ; 74   bool start = FALSE, end = FALSE;
- 413                     ; 75   clearBuffer();
- 415  0081 cd0000        	call	_clearBuffer
- 418  0084 2023          	jra	L702
- 419  0086               L502:
- 420                     ; 79     response_buffer[i++] = aunRecievedData[unReadPtr++];
- 422  0086 7b03          	ld	a,(OFST+0,sp)
- 423  0088 97            	ld	xl,a
- 424  0089 0c03          	inc	(OFST+0,sp)
- 426  008b 9f            	ld	a,xl
- 427  008c 5f            	clrw	x
- 428  008d 97            	ld	xl,a
- 429  008e b601          	ld	a,_unReadPtr
- 430  0090 9097          	ld	yl,a
- 431  0092 3c01          	inc	_unReadPtr
- 432  0094 909f          	ld	a,yl
- 433  0096 905f          	clrw	y
- 434  0098 9097          	ld	yl,a
- 435  009a 90d60000      	ld	a,(_aunRecievedData,y)
- 436  009e d70000        	ld	(_response_buffer,x),a
- 437                     ; 80     if (unReadPtr == MAX_UART_RING_BUFF_SIZE)
- 439  00a1 b601          	ld	a,_unReadPtr
- 440  00a3 a164          	cp	a,#100
- 441  00a5 2602          	jrne	L702
- 442                     ; 82       unReadPtr = 0;
- 444  00a7 3f01          	clr	_unReadPtr
- 445  00a9               L702:
- 446                     ; 77   while (unReadPtr != unRecievePtr && i < 100)
- 448  00a9 b601          	ld	a,_unReadPtr
- 449  00ab b100          	cp	a,_unRecievePtr
- 450  00ad 2706          	jreq	L512
- 452  00af 7b03          	ld	a,(OFST+0,sp)
- 453  00b1 a164          	cp	a,#100
- 454  00b3 25d1          	jrult	L502
- 455  00b5               L512:
- 456                     ; 86   if (strstr(response_buffer, "OK"))
- 458  00b5 ae0019        	ldw	x,#L122
- 459  00b8 89            	pushw	x
- 460  00b9 ae0000        	ldw	x,#_response_buffer
- 461  00bc cd0000        	call	_strstr
- 463  00bf 5b02          	addw	sp,#2
- 464  00c1 a30000        	cpw	x,#0
- 465  00c4 2706          	jreq	L712
- 466                     ; 87     bOkFlag = TRUE;
- 468  00c6 35010000      	mov	_bOkFlag,#1
- 470  00ca 2019          	jra	L322
- 471  00cc               L712:
- 472                     ; 88   else if (strstr(response_buffer, "DOWNLOAD"))
- 474  00cc ae0010        	ldw	x,#L722
- 475  00cf 89            	pushw	x
- 476  00d0 ae0000        	ldw	x,#_response_buffer
- 477  00d3 cd0000        	call	_strstr
- 479  00d6 5b02          	addw	sp,#2
- 480  00d8 a30000        	cpw	x,#0
- 481  00db 2706          	jreq	L522
- 482                     ; 89     bOkFlag = TRUE;
- 484  00dd 35010000      	mov	_bOkFlag,#1
- 486  00e1 2002          	jra	L322
- 487  00e3               L522:
- 488                     ; 91     bOkFlag = FALSE;
- 490  00e3 3f00          	clr	_bOkFlag
- 491  00e5               L322:
- 492                     ; 97   if (strstr(response_buffer, "+IPD") || strstr(response_buffer, "RECV FROM:"))
- 494  00e5 ae000b        	ldw	x,#L732
- 495  00e8 89            	pushw	x
- 496  00e9 ae0000        	ldw	x,#_response_buffer
- 497  00ec cd0000        	call	_strstr
- 499  00ef 5b02          	addw	sp,#2
- 500  00f1 a30000        	cpw	x,#0
- 501  00f4 2611          	jrne	L532
- 503  00f6 ae0000        	ldw	x,#L142
- 504  00f9 89            	pushw	x
- 505  00fa ae0000        	ldw	x,#_response_buffer
- 506  00fd cd0000        	call	_strstr
- 508  0100 5b02          	addw	sp,#2
- 509  0102 a30000        	cpw	x,#0
- 510  0105 2703          	jreq	L332
- 511  0107               L532:
- 512                     ; 102     vHandleMevris_MQTT_Recv_Data();
- 514  0107 cd0000        	call	_vHandleMevris_MQTT_Recv_Data
- 516  010a               L332:
- 517                     ; 109 }
- 520  010a 5b03          	addw	sp,#3
- 521  010c 81            	ret
- 583                     	xdef	_dataLength
- 584                     	xdef	_unReadPtr
- 585                     	xdef	_unRecievePtr
- 586                     	switch	.ubsct
- 587  0000               _bOkFlag:
- 588  0000 00            	ds.b	1
- 589                     	xdef	_bOkFlag
- 590                     	switch	.bss
- 591  0000               _aunRecievedData:
- 592  0000 000000000000  	ds.b	100
- 593                     	xdef	_aunRecievedData
- 594                     	xref	_clearBuffer
- 595                     	xdef	_vHandleDataRecvUARTviaISR
- 596                     	xdef	_vSerialRecieveISR
- 597                     	xdef	_ms_send_cmd_TCP
- 598                     	xdef	_ms_send_cmd
- 599                     	xref	_vHandleMevris_MQTT_Recv_Data
- 600                     	xref	_response_buffer
- 601                     	xref	_strstr
- 602                     	xref	_UART1_GetFlagStatus
- 603                     	xref	_UART1_SendData8
- 604                     	xref	_UART1_ReceiveData8
- 605                     .const:	section	.text
- 606  0000               L142:
- 607  0000 524543562046  	dc.b	"RECV FROM:",0
- 608  000b               L732:
- 609  000b 2b49504400    	dc.b	"+IPD",0
- 610  0010               L722:
- 611  0010 444f574e4c4f  	dc.b	"DOWNLOAD",0
- 612  0019               L122:
- 613  0019 4f4b00        	dc.b	"OK",0
- 633                     	end
+ 107  000f 7b02          	ld	a,(OFST+1,sp)
+ 108  0011 97            	ld	xl,a
+ 109  0012 7b03          	ld	a,(OFST+2,sp)
+ 110  0014 1b01          	add	a,(OFST+0,sp)
+ 111  0016 2401          	jrnc	L6
+ 112  0018 5c            	incw	x
+ 113  0019               L6:
+ 114  0019 02            	rlwa	x,a
+ 115  001a f6            	ld	a,(x)
+ 116  001b cd0000        	call	_UART1_SendData8
+ 118                     ; 32   for (i = 0; i < length; i++)
+ 120  001e 0c01          	inc	(OFST+0,sp)
+ 122  0020               L34:
+ 125  0020 7b01          	ld	a,(OFST+0,sp)
+ 126  0022 1106          	cp	a,(OFST+5,sp)
+ 127  0024 25e0          	jrult	L15
+ 129  0026               L75:
+ 130                     ; 40   while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+ 132  0026 ae0040        	ldw	x,#64
+ 133  0029 cd0000        	call	_UART1_GetFlagStatus
+ 135  002c 4d            	tnz	a
+ 136  002d 27f7          	jreq	L75
+ 137                     ; 42   UART1_SendData8(0x0D);
+ 139  002f a60d          	ld	a,#13
+ 140  0031 cd0000        	call	_UART1_SendData8
+ 142                     ; 43 }
+ 145  0034 5b03          	addw	sp,#3
+ 146  0036 81            	ret
+ 201                     ; 45 void ms_send_cmd_TCP(uint8_t *cmd, uint8_t length)
+ 201                     ; 46 {
+ 202                     	switch	.text
+ 203  0037               _ms_send_cmd_TCP:
+ 205  0037 89            	pushw	x
+ 206  0038 88            	push	a
+ 207       00000001      OFST:	set	1
+ 210                     ; 48   for (i = 0; i < length; i++)
+ 212  0039 0f01          	clr	(OFST+0,sp)
+ 215  003b 201a          	jra	L511
+ 216  003d               L321:
+ 217                     ; 50     while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+ 219  003d ae0040        	ldw	x,#64
+ 220  0040 cd0000        	call	_UART1_GetFlagStatus
+ 222  0043 4d            	tnz	a
+ 223  0044 27f7          	jreq	L321
+ 224                     ; 52     UART1_SendData8(*(cmd + i));
+ 226  0046 7b02          	ld	a,(OFST+1,sp)
+ 227  0048 97            	ld	xl,a
+ 228  0049 7b03          	ld	a,(OFST+2,sp)
+ 229  004b 1b01          	add	a,(OFST+0,sp)
+ 230  004d 2401          	jrnc	L21
+ 231  004f 5c            	incw	x
+ 232  0050               L21:
+ 233  0050 02            	rlwa	x,a
+ 234  0051 f6            	ld	a,(x)
+ 235  0052 cd0000        	call	_UART1_SendData8
+ 237                     ; 48   for (i = 0; i < length; i++)
+ 239  0055 0c01          	inc	(OFST+0,sp)
+ 241  0057               L511:
+ 244  0057 7b01          	ld	a,(OFST+0,sp)
+ 245  0059 1106          	cp	a,(OFST+5,sp)
+ 246  005b 25e0          	jrult	L321
+ 248  005d               L131:
+ 249                     ; 56   while (!UART1_GetFlagStatus(UART1_FLAG_TC))
+ 251  005d ae0040        	ldw	x,#64
+ 252  0060 cd0000        	call	_UART1_GetFlagStatus
+ 254  0063 4d            	tnz	a
+ 255  0064 27f7          	jreq	L131
+ 256                     ; 58   UART1_SendData8(0x1A);
+ 258  0066 a61a          	ld	a,#26
+ 259  0068 cd0000        	call	_UART1_SendData8
+ 261                     ; 59 }
+ 264  006b 5b03          	addw	sp,#3
+ 265  006d 81            	ret
+ 291                     ; 61 void vSerialRecieveISR(void)
+ 291                     ; 62 {
+ 292                     	switch	.text
+ 293  006e               _vSerialRecieveISR:
+ 297                     ; 63   aunRecievedData[unRecievePtr] = UART1_ReceiveData8();
+ 299  006e b600          	ld	a,_unRecievePtr
+ 300  0070 5f            	clrw	x
+ 301  0071 97            	ld	xl,a
+ 302  0072 89            	pushw	x
+ 303  0073 cd0000        	call	_UART1_ReceiveData8
+ 305  0076 85            	popw	x
+ 306  0077 d70000        	ld	(_aunRecievedData,x),a
+ 307                     ; 64   unRecievePtr++;
+ 309  007a 3c00          	inc	_unRecievePtr
+ 310                     ; 65   if (unRecievePtr == MAX_UART_RING_BUFF_SIZE)
+ 312  007c b600          	ld	a,_unRecievePtr
+ 313  007e a164          	cp	a,#100
+ 314  0080 2602          	jrne	L541
+ 315                     ; 67     unRecievePtr = 0;
+ 317  0082 3f00          	clr	_unRecievePtr
+ 318  0084               L541:
+ 319                     ; 69 }
+ 322  0084 81            	ret
+ 405                     ; 71 void vHandleDataRecvUARTviaISR(void)
+ 405                     ; 72 {
+ 406                     	switch	.text
+ 407  0085               _vHandleDataRecvUARTviaISR:
+ 409  0085 5203          	subw	sp,#3
+ 410       00000003      OFST:	set	3
+ 413                     ; 73   uint8_t i = 0;
+ 415  0087 0f03          	clr	(OFST+0,sp)
+ 417                     ; 74   bool start = FALSE, end = FALSE;
+ 421                     ; 75   clearBuffer();
+ 423  0089 cd0000        	call	_clearBuffer
+ 426  008c 2023          	jra	L702
+ 427  008e               L502:
+ 428                     ; 79     response_buffer[i++] = aunRecievedData[unReadPtr++];
+ 430  008e 7b03          	ld	a,(OFST+0,sp)
+ 431  0090 97            	ld	xl,a
+ 432  0091 0c03          	inc	(OFST+0,sp)
+ 434  0093 9f            	ld	a,xl
+ 435  0094 5f            	clrw	x
+ 436  0095 97            	ld	xl,a
+ 437  0096 b601          	ld	a,_unReadPtr
+ 438  0098 9097          	ld	yl,a
+ 439  009a 3c01          	inc	_unReadPtr
+ 440  009c 909f          	ld	a,yl
+ 441  009e 905f          	clrw	y
+ 442  00a0 9097          	ld	yl,a
+ 443  00a2 90d60000      	ld	a,(_aunRecievedData,y)
+ 444  00a6 d70000        	ld	(_response_buffer,x),a
+ 445                     ; 80     if (unReadPtr == MAX_UART_RING_BUFF_SIZE)
+ 447  00a9 b601          	ld	a,_unReadPtr
+ 448  00ab a164          	cp	a,#100
+ 449  00ad 2602          	jrne	L702
+ 450                     ; 82       unReadPtr = 0;
+ 452  00af 3f01          	clr	_unReadPtr
+ 453  00b1               L702:
+ 454                     ; 77   while (unReadPtr != unRecievePtr && i < 100)
+ 456  00b1 b601          	ld	a,_unReadPtr
+ 457  00b3 b100          	cp	a,_unRecievePtr
+ 458  00b5 2706          	jreq	L512
+ 460  00b7 7b03          	ld	a,(OFST+0,sp)
+ 461  00b9 a164          	cp	a,#100
+ 462  00bb 25d1          	jrult	L502
+ 463  00bd               L512:
+ 464                     ; 86   if (strstr(response_buffer, "OK"))
+ 466  00bd ae0019        	ldw	x,#L122
+ 467  00c0 89            	pushw	x
+ 468  00c1 ae0000        	ldw	x,#_response_buffer
+ 469  00c4 cd0000        	call	_strstr
+ 471  00c7 5b02          	addw	sp,#2
+ 472  00c9 a30000        	cpw	x,#0
+ 473  00cc 2706          	jreq	L712
+ 474                     ; 87     bOkFlag = TRUE;
+ 476  00ce 35010000      	mov	_bOkFlag,#1
+ 478  00d2 2019          	jra	L322
+ 479  00d4               L712:
+ 480                     ; 88   else if (strstr(response_buffer, "DOWNLOAD"))
+ 482  00d4 ae0010        	ldw	x,#L722
+ 483  00d7 89            	pushw	x
+ 484  00d8 ae0000        	ldw	x,#_response_buffer
+ 485  00db cd0000        	call	_strstr
+ 487  00de 5b02          	addw	sp,#2
+ 488  00e0 a30000        	cpw	x,#0
+ 489  00e3 2706          	jreq	L522
+ 490                     ; 89     bOkFlag = TRUE;
+ 492  00e5 35010000      	mov	_bOkFlag,#1
+ 494  00e9 2002          	jra	L322
+ 495  00eb               L522:
+ 496                     ; 91     bOkFlag = FALSE;
+ 498  00eb 3f00          	clr	_bOkFlag
+ 499  00ed               L322:
+ 500                     ; 97   if (strstr(response_buffer, "+IPD") || strstr(response_buffer, "RECV FROM:"))
+ 502  00ed ae000b        	ldw	x,#L732
+ 503  00f0 89            	pushw	x
+ 504  00f1 ae0000        	ldw	x,#_response_buffer
+ 505  00f4 cd0000        	call	_strstr
+ 507  00f7 5b02          	addw	sp,#2
+ 508  00f9 a30000        	cpw	x,#0
+ 509  00fc 2611          	jrne	L532
+ 511  00fe ae0000        	ldw	x,#L142
+ 512  0101 89            	pushw	x
+ 513  0102 ae0000        	ldw	x,#_response_buffer
+ 514  0105 cd0000        	call	_strstr
+ 516  0108 5b02          	addw	sp,#2
+ 517  010a a30000        	cpw	x,#0
+ 518  010d 2703          	jreq	L332
+ 519  010f               L532:
+ 520                     ; 102     vHandleMevris_MQTT_Recv_Data();
+ 522  010f cd0000        	call	_vHandleMevris_MQTT_Recv_Data
+ 524  0112               L332:
+ 525                     ; 109 }
+ 528  0112 5b03          	addw	sp,#3
+ 529  0114 81            	ret
+ 591                     	xdef	_dataLength
+ 592                     	xdef	_unReadPtr
+ 593                     	xdef	_unRecievePtr
+ 594                     	switch	.ubsct
+ 595  0000               _bOkFlag:
+ 596  0000 00            	ds.b	1
+ 597                     	xdef	_bOkFlag
+ 598                     	switch	.bss
+ 599  0000               _aunRecievedData:
+ 600  0000 000000000000  	ds.b	100
+ 601                     	xdef	_aunRecievedData
+ 602                     	xref	_clearBuffer
+ 603                     	xdef	_vHandleDataRecvUARTviaISR
+ 604                     	xdef	_vSerialRecieveISR
+ 605                     	xdef	_ms_send_cmd_TCP
+ 606                     	xdef	_ms_send_cmd
+ 607                     	xref	_vHandleMevris_MQTT_Recv_Data
+ 608                     	xref	_response_buffer
+ 609                     	xref	_strstr
+ 610                     	xref	_UART1_GetFlagStatus
+ 611                     	xref	_UART1_SendData8
+ 612                     	xref	_UART1_ReceiveData8
+ 613                     .const:	section	.text
+ 614  0000               L142:
+ 615  0000 524543562046  	dc.b	"RECV FROM:",0
+ 616  000b               L732:
+ 617  000b 2b49504400    	dc.b	"+IPD",0
+ 618  0010               L722:
+ 619  0010 444f574e4c4f  	dc.b	"DOWNLOAD",0
+ 620  0019               L122:
+ 621  0019 4f4b00        	dc.b	"OK",0
+ 641                     	end
