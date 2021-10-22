@@ -1,4 +1,31 @@
-#include "uart_service.h"
+/**
+  ****************************************************************************************************
+  * File:    uart_service.c
+  * Author      M.Ahmad Naeem
+  * Co-Author   Saqib Kamal
+  * Version: V1.1.0
+  * Date:    20-May-2021
+  * Brief:   This file contains all the functions for reading .
+   ***************************************************************************************************
+  * Attention:
+  *                         COPYRIGHT 2021 BlueEast
+  *
+  * Licensed under ************* License Agreement V2, (the "License");
+  * You may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at:
+  *
+  *        
+  *
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  *
+  ************************************************************************************************************
+  */
+
+/* Includes ------------------------------------------------------------------*/#include "uart_service.h"
 
 @near uint8_t aunRecievedData[MAX_UART_RING_BUFF_SIZE];
 extern @near uint8_t response_buffer[100];
@@ -94,7 +121,15 @@ void vHandleDataRecvUARTviaISR(void)
     //ms_send_cmd(response_buffer, strlen((const char *)response_buffer));
     // vHandle_BT_Add_Device_Flow();
   // }
+  #ifdef MODULE_SIMCOM_SIM868
   if (strstr(response_buffer, "+IPD") || strstr(response_buffer, "RECV FROM:"))
+  #endif
+  #ifdef MODULE_QUECTEL_EC200U_DISABLED
+  if (strstr(response_buffer, "+QIURC: \"recv\""))
+  #endif
+  #ifdef MODULE_QUECTEL_EC200U
+  if (strstr(response_buffer, "+QIURC: \"recv\""))
+  #endif
   {
     //ms_send_cmd("response_buffer", strlen((const char *)"response_buffer")); //  no echo
     //ms_send_cmd(response_buffer, 100); //  no echo

@@ -42,6 +42,8 @@
 */
 #include "board.h"
 #include <string.h>
+#include "stm8s_delay.h"
+#include "uart_service.h"
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <stdint.h>
@@ -53,6 +55,7 @@
 //===================================================================================
 //                     	  EXTERNAL CONSTANTS & MACROS
 //===================================================================================
+#ifdef MODULE_SIMCOM_SIM868
 /*
     Must Select following MACROS before compiling this code. These
     following MACROS are Implementation Dependent
@@ -60,14 +63,16 @@
 #define KEEP_ALIVE_TIMEOUT  60	//Seconds
 #define PROTOCOL_NAME       "MQTT"  //Most Brokers/Server Demand PROTOCOL_NAME as "MQTT", otherwise change it to required Name
 #define PROTOCOL_LEVEL      0x04    //Most Brokers/Server Demand PROTOCOL_LEVEL as 0x04, otherwise change it to required level
-
+#endif
 //===================================================================================
 //                                EXTERNAL ENUMS
 //===================================================================================
+#ifdef MODULE_SIMCOM_SIM868
 /*
     MQTT_QOS_ENUM represent Type of QOS-Level of MQTT. However mostly QOS_0 is used,
     so this can be ignored and chooses constant value of 0 for QOS_0.
 */
+
 typedef enum MQTT_QOS_ENUM
 {
 	eQOS_0		=	0,	//At most once delivery
@@ -146,10 +151,11 @@ typedef enum CONNECT_RETURN_CODE_ENUM
     eCN_RFS_INVALID_USERNAME_PSWD   =   0x04,   //The data in the user name or password is malformed
     eCN_RFS_NOT_AUTHORIZED          =   0x05    //The Client is not authorized to connect
 }enCONNECT_RETURN_CODES;
-
+#endif
 //===================================================================================
 //                        		EXTERNAL STRUCTURES
 //===================================================================================
+#ifdef MODULE_SIMCOM_SIM868
 /*
     SUBACK_RETURN_PARAM_STRUCT contains 2 Byte wide Packet Identifier which should be same as send in the SUBSCRIBE Packet
     by Client & Return Code which is,
@@ -163,6 +169,7 @@ typedef struct SUBACK_RETURN_PARAM_STRUCT
     uint16_t    udPacketIdentifier;
     uint8_t     unReturnCode;
 }stSUBACK_RETURN_PARAM;
+#endif
 //===================================================================================
 //                        			EXTERNAL DATA
 //===================================================================================
@@ -170,6 +177,7 @@ typedef struct SUBACK_RETURN_PARAM_STRUCT
 //===================================================================================
 //                			 GLOBAL/EXTERNAL FUNCTIONS
 //===================================================================================
+#ifdef MODULE_SIMCOM_SIM868
 /*
     punEncodeLength takes max 4 bytes length as an argument and return the length in
     UTF-8 encoded formate as a pointer to a maximum 4 byte array.
@@ -369,6 +377,56 @@ extern uint8_t unMQTT_Disconnect ( uint8_t *punBuffer );
         1-  bIsServerAlive      -> Return true is server/Broker is alive, otherwise false.
 */
 //extern bool bPINRESP_Response(uint8_t *punBuffer);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+/*
+    vMQTT_Connect is used to connect to MQTT broker/server after TCP/IP connection to
+    broker has been established.
+    Inputs:
+        1-  punClientIdentifier ->  ClientID to distinguish Client on Broker. i.e. AplhaNumeric Null terminated string.
+    Outputs:
+        1-  void        ->  Nothing
+ */
+extern void vMQTT_Connect ( uint8_t *punClientIdentifier);
+
+/*
+    vMQTT_Publish is used to publish message to specific topic on broker/server.
+    Inputs:
+        1-  punTopic    ->  Topic to which message to be published. i.e. a null terminated string.
+        2-  punMessage  ->  Message to be published on specific topic i.e. a null terminated string.
+    Outputs:
+        1-  void        ->  Nothing
+*/
+extern void vMQTT_Publish ( uint8_t *punTopic, uint8_t *punMessage);
+
+/*
+    vMQTT_Subscribe is used to subscribe to specific topic on broker/server.
+    Inputs:
+        1-  punTopic    ->  Topic to be subscribed. i.e. a null terminated string.
+    Outputs:
+        1-  void        ->  Nothing
+*/
+extern void vMQTT_Subscribe ( uint8_t *punTopic);
+
+/*
+    vMQTT_UnSubscribe is used to Un-subscribe to already subscribed topic on broker/server.
+    Inputs:
+        1-  punTopic    ->  Topic to be un-subscribed. i.e. a null terminated string.
+    Outputs:
+        1-  void        ->  Nothing
+*/
+extern void vMQTT_UnSubscribe ( uint8_t *punTopic );
+
+/*
+    unMQTT_Disconnect is used to Disconnect client from broker/server cleanly
+    Inputs:
+        1-  None   
+    Outputs:
+        1-  void        ->  Nothing
+*/
+extern void vMQTT_Disconnect ( void );
+#endif
+
 
 #endif
 //===================================================================================

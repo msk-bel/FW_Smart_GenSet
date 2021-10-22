@@ -1,9 +1,9 @@
 /**
   ****************************************************************************************************
   * File:    SIMCOM.c
-  * Author:  Ex-Employees
-  * Co-Author M.Ahmad Naeem
-  * Version: V1.0.0
+  * Author      M.Ahmad Naeem
+  * Co-Author   Saqib Kamal
+  * Version: V1.1.0
   * Date:    20-May-2021
   * Brief:   This file contains all the functions for reading .
    ***************************************************************************************************
@@ -70,21 +70,63 @@ void SIMCom_setup(void)
     vPrintStickerInfo(); //Added by Saqib
     delay_ms(1000);
     // Disable Ringer Interrupt
+#ifdef MODULE_SIMCOM_SIM868
     ms_send_cmd("AT+CFGRI=0", strlen((const char *)"AT+CFGRI=0")); /* Disable power saving mode */
     delay_ms(1000);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    ms_send_cmd(MODULE_RI_OTHERS_OFF, strlen((const char *)MODULE_RI_OTHERS_OFF)); /* Disable power saving mode */
+    delay_ms(500);
+    ms_send_cmd(MODULE_RI_RING_OFF, strlen((const char *)MODULE_RI_RING_OFF)); /* Disable power saving mode */
+    delay_ms(500);
+    ms_send_cmd(MODULE_RI_SMS_ON, strlen((const char *)MODULE_RI_SMS_ON)); /* Disable power saving mode */
+    delay_ms(500);
+#endif
+#ifdef MODULE_SIMCOM_SIM868
+    // ms_send_cmd(GPS_ON, strlen((const char *)GPS_ON));
+    // delay_ms(1000);
 
-    ms_send_cmd(GPS_ON, strlen((const char *)GPS_ON));
-    delay_ms(1000);
-
-    ms_send_cmd(rmc, strlen((const char *)rmc));
-    delay_ms(1000);
-
+    // ms_send_cmd(rmc, strlen((const char *)rmc));
+    // delay_ms(1000);
+#endif
     ms_send_cmd(NOECHO, strlen((const char *)NOECHO)); /* No echo */
     delay_ms(1000);
 
+#ifdef MODULE_SIMCOM_SIM868
     ms_send_cmd("AT+CMEE=2", strlen((const char *)"AT+CMEE=2")); /* No echo */
     delay_ms(1000);
+#endif
+#ifdef MODULE_QUECTEL_EC200U_DISABLED
+    ms_send_cmd(MODULE_SET_RESPONSE_AS_OK, strlen((const char *)MODULE_SET_RESPONSE_AS_OK)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_SET_RESPONSE_FORMAT, strlen((const char *)MODULE_SET_RESPONSE_FORMAT)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_SET_URC_FORMAT, strlen((const char *)MODULE_SET_URC_FORMAT)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_SET_CHARACTER_FORMAT, strlen((const char *)MODULE_SET_CHARACTER_FORMAT)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_SET_URC_PORT, strlen((const char *)MODULE_SET_URC_PORT)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_SAVE_CONFIGURATION, strlen((const char *)MODULE_SAVE_CONFIGURATION)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_SET_FULL_FUNCTION, strlen((const char *)MODULE_SET_FULL_FUNCTION)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_URC_REPORT_MAIN_ON, strlen((const char *)MODULE_URC_REPORT_MAIN_ON)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_URC_REPORT_CSQ_OFF, strlen((const char *)MODULE_URC_REPORT_CSQ_OFF)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_URC_REPORT_SMS_RCV_ON, strlen((const char *)MODULE_URC_REPORT_SMS_RCV_ON)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_URC_REPORT_SMS_FULL_OFF, strlen((const char *)MODULE_URC_REPORT_SMS_FULL_OFF)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_URC_REPORT_RING_OFF, strlen((const char *)MODULE_URC_REPORT_RING_OFF)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_URC_REPORT_NETWORK_ON, strlen((const char *)MODULE_URC_REPORT_NETWORK_ON)); /* No echo */
+    delay_ms(500);
+    ms_send_cmd(MODULE_SET_URC_FORMAT, strlen((const char *)MODULE_SET_URC_FORMAT)); /* No echo */
+    delay_ms(500);
 
+#endif
     ms_send_cmd(GPRS_ATT, strlen((const char *)GPRS_ATT)); /* ATTACH TO GPRS SERVICE */
     delay_ms(1000);
 
@@ -102,44 +144,72 @@ void SIMCom_setup(void)
     // passkeyGenerator(); //Added by Saqib
     delay_ms(1000); //Added by Saqib
 
+#ifdef MODULE_QUECTEL_EC200U_DISABLED
     ms_send_cmd(TCP_SHUTDOWN, strlen((const char *)TCP_SHUTDOWN)); /* OPEN BEARER */
     delay_ms(1000);
-
+#ifdef MODULE_SIMCOM_SIM868
     ms_send_cmd(TCP_SINGLE_CONN_MODE, strlen((const char *)TCP_SINGLE_CONN_MODE)); /* OPEN BEARER */
     delay_ms(1000);
-
+#endif
     ms_send_cmd(TCP_NON_TRANSPARENT_MODE, strlen((const char *)TCP_NON_TRANSPARENT_MODE)); /* OPEN BEARER */
     delay_ms(1000);
 
     ms_send_cmd(TCP_MODE_RESPONSE_NORMAL, strlen((const char *)TCP_MODE_RESPONSE_NORMAL)); /* OPEN BEARER */
     delay_ms(1000);
-
+#ifdef MODULE_SIMCOM_SIM868
     ms_send_cmd(TCP_MODE_SEND_PROMPT_ECHO, strlen((const char *)TCP_MODE_SEND_PROMPT_ECHO)); /* OPEN BEARER */
     delay_ms(1000);
-
     ms_send_cmd(TCP_MODE_REMOTE_IP_PORT_ON, strlen((const char *)TCP_MODE_REMOTE_IP_PORT_ON)); /* OPEN BEARER */
     delay_ms(1000);
-
     ms_send_cmd(TCP_MODE_HEADER_ON_RECV_ON, strlen((const char *)TCP_MODE_HEADER_ON_RECV_ON)); /* OPEN BEARER */
     delay_ms(1000);
-
     ms_send_cmd(TCP_SAVE_CONTEXT, strlen((const char *)TCP_SAVE_CONTEXT)); /* OPEN BEARER */
     delay_ms(1000);
-
+#endif
     ms_send_cmd(TCP_SET_APN, strlen((const char *)TCP_SET_APN)); /* OPEN BEARER */
     delay_ms(1000);
 
     ms_send_cmd(TCP_START_WIRELESS_CONN, strlen((const char *)TCP_START_WIRELESS_CONN)); /* OPEN BEARER */
     delay_ms(1000);
-
+#ifdef MODULE_SIMCOM_SIM868
     ms_send_cmd("AT+CIFSR", strlen((const char *)"AT+CIFSR")); /* OPEN BEARER */
     delay_ms(1000);
+#endif
+
+#ifdef MODULE_QUECTEL_EC200U
+    ms_send_cmd(TCP_GET_IP, strlen((const char *)TCP_GET_IP)); /* GET BEARER */
+    delay_ms(1000);
+#endif
 
     ms_send_cmd(startTCP_CMD, strlen((const char *)startTCP_CMD)); /* OPEN BEARER */
     delay_ms(1000);
 
     enGet_TCP_Status();
     delay_ms(500);
+
+#endif
+#ifdef MODULE_QUECTEL_EC200U_DISABLED
+    ms_send_cmd(MQTT_CLOSE_CONNECTION, strlen((const char *)MQTT_CLOSE_CONNECTION));
+    delay_ms(500);
+    ms_send_cmd(MQTT_SET_VERSION, strlen((const char *)MQTT_SET_VERSION));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_PDP_CONTEXT, strlen((const char *)MQTT_SET_PDP_CONTEXT));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_TCP_PROTOCOL, strlen((const char *)MQTT_SET_TCP_PROTOCOL));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_KEEPALIVE_TIME, strlen((const char *)MQTT_SET_KEEPALIVE_TIME));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_SESSION_TYPE, strlen((const char *)MQTT_SET_SESSION_TYPE));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_URC_RESPONSE_FORMAT, strlen((const char *)MQTT_SET_URC_RESPONSE_FORMAT));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_DATA_VIEW_MODE, strlen((const char *)MQTT_SET_DATA_VIEW_MODE));
+    delay_ms(200);
+    ms_send_cmd(MQTT_DISABLE_EDIT_TIMEOUT, strlen((const char *)MQTT_DISABLE_EDIT_TIMEOUT));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_MODE_SEND_RECV, strlen((const char *)MQTT_SET_MODE_SEND_RECV));
+    delay_ms(200);
+#endif
 
     // ms_send_cmd(BT_TURN_ON, strlen((const char *)BT_TURN_ON));
     // delay_ms(1000);
@@ -149,6 +219,7 @@ void SIMCom_setup(void)
 
     // ms_send_cmd(BT_SET_PIN, strlen((const char *)BT_SET_PIN));
     // delay_ms(3000);
+
     checkit = 1; //Recieve data through Ringer Interrupt
 }
 
@@ -410,7 +481,7 @@ void getIMEI(void)
 //         return FALSE;
 //     }
 // }
-
+#ifdef MODULE_SIMCOM_SIM868
 void vHandle_MQTT(void)
 {
     uint8_t unLength = 0;
@@ -424,7 +495,7 @@ void vHandle_MQTT(void)
         if (unMQTTCounter == 0 /*&& !bCONNACK_Recieved*/)
         {
             vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
-            unLength = (uint8_t)ulMQTT_Connect(aunPushed_Data, aunMQTT_ClientID/*punGet_Client_ID()*/ /*, FALSE, FALSE, FALSE, FALSE, TRUE, eQOS_0, NULL, NULL, NULL, NULL*/);
+            unLength = (uint8_t)ulMQTT_Connect(aunPushed_Data, aunMQTT_ClientID /*punGet_Client_ID()*/ /*, FALSE, FALSE, FALSE, FALSE, TRUE, eQOS_0, NULL, NULL, NULL, NULL*/);
             if (bSendDataOverTCP(aunPushed_Data, unLength))
                 unMQTTCounter++;
             unMQQT_PingCounter = 0;
@@ -432,7 +503,7 @@ void vHandle_MQTT(void)
         else if (unMQTTCounter == 1)
         {
             vClearBuffer(aunPushed_Data, MEVRIS_RECV_DATA_MAX_SIZE);
-            unLength = (uint8_t)ulMQTT_Subscribe(aunPushed_Data, aunMQTT_Subscribe_Topic/*punGet_Command_Topic()*/ /*, eQOS_0, 1*/);
+            unLength = (uint8_t)ulMQTT_Subscribe(aunPushed_Data, aunMQTT_Subscribe_Topic /*punGet_Command_Topic()*/ /*, eQOS_0, 1*/);
             if (bSendDataOverTCP(aunPushed_Data, unLength))
                 unMQTTCounter++;
             unMQQT_PingCounter = 0;
@@ -512,17 +583,21 @@ void vInit_MQTT(void)
     delay_ms(1000);
 }
 
-
 bool bSendDataOverTCP(uint8_t *Data, uint8_t unLength)
 {
     uint8_t timeout = 0;
     uint8_t tempData[15] = "";
     uint8_t temp1[5] = "";
     vClearBuffer(tempData, 15);
+#ifdef MODULE_SIMCOM_SIM868
     strcpy(tempData, "AT+CIPSEND=");
-    vClearBuffer(temp1,5);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    strcpy(tempData, TCP_SEND_FIXED_LENGTH);
+#endif
+    vClearBuffer(temp1, 5);
     sprintf(temp1, "%d", (uint16_t)unLength);
-    strcat(tempData,temp1);
+    strcat(tempData, temp1);
     // ms_send_cmd(TCP_SEND_VARIABLE_LENGTH, strlen((const char *)TCP_SEND_VARIABLE_LENGTH));
     ms_send_cmd(tempData, strlen((const char *)tempData));
     delay_ms(100);
@@ -540,6 +615,57 @@ bool bSendDataOverTCP(uint8_t *Data, uint8_t unLength)
         return FALSE;
     }
 }
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+void vHandle_MQTT(void)
+{
+    uint8_t unLength = 0;
+    static uint8_t unMQTTCounter = 0;
+    enTCP_STATUS eTCP_Status;
+    static uint8_t unMQQT_PingCounter = 0;
+
+    if (IMEIRecievedOKFlag)
+    {
+        eTCP_Status = enGet_TCP_Status();
+        if (eTCP_Status == eTCP_STAT_CONNECT_OK)
+        {
+            if (unMQTTCounter == 0)
+            {
+                vMQTT_Subscribe(aunMQTT_Subscribe_Topic);
+                unMQTTCounter++;
+            }
+            else if (unMQTTCounter == 1)
+            {
+                delay_ms(100);
+                vMevris_Send_IMEI();
+                unMQTTCounter++;
+                // unMQQT_PingCounter = 0;
+            }
+            else if (unMQTTCounter == 2)
+            {
+                delay_ms(100);
+                vMevris_Send_Version();
+                unMQTTCounter++;
+                // unMQQT_PingCounter = 0;
+            }
+            else if (unMQTTCounter >= 3)
+            {
+                //do thing
+            }
+        }
+        else
+        {
+            vMQTT_Connect(aunMQTT_ClientID);
+            unMQTTCounter = 0;
+        }
+    }
+    else
+    {
+        vPrintStickerInfo();
+    }
+}
+
+#endif
 
 void vClearBuffer(char *temp, uint8_t unLen)
 {
@@ -552,11 +678,11 @@ void vClearBuffer(char *temp, uint8_t unLen)
 
 enTCP_STATUS enGet_TCP_Status(void)
 {
+    uint8_t *i;
+    uint8_t j = 0;
     enTCP_STATUS eStatus;
 
-    ms_send_cmd(TCP_GET_STATUS, strlen((const char *)TCP_GET_STATUS));
-    delay_ms(1000);
-
+#ifdef MODULE_SIMCOM_SIM868
     if (strstr(response_buffer, "STATE:"))
     {
         if (strstr(response_buffer, "IP INITIAL"))
@@ -608,9 +734,66 @@ enTCP_STATUS enGet_TCP_Status(void)
     {
         eStatus = eTCP_STAT_UNKNOWN;
     }
+#endif
+
+#ifdef MODULE_QUECTEL_EC200U
+    // ms_send_cmd(TCP_GET_STATUS, strlen((const char *)TCP_GET_STATUS));
+    // delay_ms(1000);
+    ms_send_cmd(MQTT_CHECK_STATUS, strlen((const char *)MQTT_CHECK_STATUS));
+    delay_ms(1000);
+
+    if (strstr(response_buffer, "+QMTCONN:"))
+    {
+        i = strstr(response_buffer, "+QMTCONN:");
+        if (i)
+        {
+            while (*(i + j) != ',' && j < 100)
+                j++;
+            // while(*(i+j) != ',' && j < 100)j++;
+            // while(*(i+j) != ',' && j < 100)j++;
+            // while(*(i+j) != ',' && j < 100)j++;
+            j++;
+            // if (*(i+j) == 0)
+            if (*(i + j) == 1)
+            {
+                eStatus = eTCP_STAT_IP_INITIAL;
+            }
+            // else if (*(i+j) == 1)
+            else if (*(i + j) == 2)
+            {
+                eStatus = eTCP_STAT_CONNECTING;
+            }
+            // else if (*(i+j) == 2)
+            else if (*(i + j) == 3)
+            {
+                eStatus = eTCP_STAT_CONNECT_OK;
+            }
+            // else if (*i == 4)
+            // {
+            //     eStatus = eTCP_STAT_CLOSING;
+            // }
+            else if (*(i + j) == 4)
+            {
+                eStatus = eTCP_STAT_CLOSED;
+            }
+            else
+            {
+                eStatus = eTCP_STAT_UNKNOWN;
+            }
+        }
+        else
+        {
+            eStatus = eTCP_STAT_UNKNOWN;
+        }
+    }
+    else
+    {
+        eStatus = eTCP_STAT_UNKNOWN;
+    }
+#endif
     return eStatus;
 }
-
+#ifdef MODULE_SIMCOM_SIM868
 //Added By Saqib
 void vTCP_Reconnect(void)
 {
@@ -620,13 +803,19 @@ void vTCP_Reconnect(void)
     delay_ms(1000);
     ms_send_cmd(TCP_START_WIRELESS_CONN, strlen((const char *)TCP_START_WIRELESS_CONN)); /* OPEN BEARER */
     delay_ms(1000);
+#ifdef MODULE_SIMCOM_SIM868
     ms_send_cmd("AT+CIFSR", strlen((const char *)"AT+CIFSR")); /* OPEN BEARER */
     delay_ms(1000);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    ms_send_cmd(TCP_GET_IP, strlen((const char *)TCP_GET_IP)); /* OPEN BEARER */
+    delay_ms(1000);
+#endif
     ms_send_cmd(startTCP_CMD, strlen((const char *)startTCP_CMD)); /* OPEN BEARER */
     delay_ms(1000);
     // vHandle_MQTT();
 }
-
+#endif
 //Added By Saqib
 bool bValidIMEIRecieved(char *myArray)
 {

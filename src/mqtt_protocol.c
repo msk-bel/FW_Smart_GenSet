@@ -76,10 +76,13 @@
 //===================================================================================
 //                      		  LOCAL FUNCTIONS
 //===================================================================================
+#ifdef MODULE_SIMCOM_SIM868
 uint8_t *punEncodeLength (uint32_t ulLength);
+#endif
 //===================================================================================
 //                			 GLOBAL/EXTERNAL FUNCTIONS
 //===================================================================================
+#ifdef MODULE_SIMCOM_SIM868
 uint32_t ulMQTT_Connect ( uint8_t *punBuffer, uint8_t *punClientIdentifier/*,
 						bool bUserNameFlag, bool bPasswordFlag,
 						bool bWillFlag, bool bWillRetainFlag,
@@ -101,9 +104,18 @@ uint32_t ulDecodedLength (uint8_t * punLength);
 //struct SUBACK_RETURN_PARAM_STRUCT   stSUBACK_Response (uint8_t *punBuffer);
 //uint16_t udUNSUBACK_Response (uint8_t *punBuffer);
 //bool bPINRESP_Response(uint8_t *punBuffer);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+void vMQTT_Connect ( uint8_t *punClientIdentifier);
+void vMQTT_Publish ( uint8_t *punTopic, uint8_t *punMessage);
+void vMQTT_Subscribe ( uint8_t *punTopic);
+void vMQTT_UnSubscribe ( uint8_t *punTopic);
+void vMQTT_Disconnect ( void );
+#endif
 //===================================================================================
 //        					LOCAL FUNCTIONS CODE SECTION
 //===================================================================================
+#ifdef MODULE_SIMCOM_SIM868
 uint8_t *punEncodeLength (uint32_t ulLength)
 {
     static uint8_t buffer[5] = {0,0,0,0,0};
@@ -123,11 +135,12 @@ uint8_t *punEncodeLength (uint32_t ulLength)
 
     return buffer;
 }
-
+#endif
 
 //===================================================================================
 //   				  GLOBAL/EXTERNAL FUNCTIONS CODE SECTION
 //===================================================================================
+#ifdef MODULE_SIMCOM_SIM868
 uint32_t ulMQTT_Connect ( uint8_t *punBuffer, uint8_t *punClientIdentifier/*,
 						bool bUserNameFlag, bool bPasswordFlag,
 						bool bWillFlag, bool bWillRetainFlag,
@@ -135,6 +148,7 @@ uint32_t ulMQTT_Connect ( uint8_t *punBuffer, uint8_t *punClientIdentifier/*,
 						uint8_t *punWillTopic, uint8_t *punWillMessage,
 						uint8_t *punUsername, uint8_t *punPassword*/	)
 {
+	
 	uint32_t ulTotalPacketLength	= 0;
 	uint32_t ulRemainingLength	= 0;
 	uint8_t i = 0, j = 0, *ptr;
@@ -299,7 +313,46 @@ uint32_t ulMQTT_Connect ( uint8_t *punBuffer, uint8_t *punClientIdentifier/*,
 
 	return ulTotalPacketLength;
 }
+#endif
 
+#ifdef MODULE_QUECTEL_EC200U
+void vMQTT_Connect ( uint8_t *punClientIdentifier )
+{   
+	uint8_t temp[50];
+    ms_send_cmd(MQTT_CLOSE_CONNECTION, strlen((const char *)MQTT_CLOSE_CONNECTION));
+    delay_ms(500);
+    ms_send_cmd(MQTT_SET_VERSION, strlen((const char *)MQTT_SET_VERSION));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_PDP_CONTEXT, strlen((const char *)MQTT_SET_PDP_CONTEXT));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_TCP_PROTOCOL, strlen((const char *)MQTT_SET_TCP_PROTOCOL));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_KEEPALIVE_TIME, strlen((const char *)MQTT_SET_KEEPALIVE_TIME));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_SESSION_TYPE, strlen((const char *)MQTT_SET_SESSION_TYPE));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_URC_RESPONSE_FORMAT, strlen((const char *)MQTT_SET_URC_RESPONSE_FORMAT));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_DATA_VIEW_MODE, strlen((const char *)MQTT_SET_DATA_VIEW_MODE));
+    delay_ms(200);
+    ms_send_cmd(MQTT_DISABLE_EDIT_TIMEOUT, strlen((const char *)MQTT_DISABLE_EDIT_TIMEOUT));
+    delay_ms(200);
+    ms_send_cmd(MQTT_SET_MODE_SEND_RECV, strlen((const char *)MQTT_SET_MODE_SEND_RECV));
+    delay_ms(200);
+
+    ms_send_cmd(MQTT_OPEN_CONNECTION, strlen((const char *)MQTT_OPEN_CONNECTION));
+    delay_ms(500);	
+
+	vClearBuffer(temp, 50);
+    strcpy(temp, "AT+QMTCONN=1,\"");//"AT+QMTCONN=1,\"gen867400032743266\""
+	strcat(temp,punClientIdentifier);
+	strcat(temp,"\"");
+    ms_send_cmd(temp, strlen((const char *)temp));
+    delay_ms(200);	
+}
+#endif
+
+#ifdef MODULE_SIMCOM_SIM868
 uint32_t ulMQTT_Publish ( uint8_t *punBuffer, uint8_t *punTopic, uint8_t *punMessage/*, enMQTT_CTRL_PKT_FLAGS ePublishFlags*/ )
 {
 	uint32_t ulTotalPacketLength	= 0;
@@ -364,7 +417,29 @@ uint32_t ulMQTT_Publish ( uint8_t *punBuffer, uint8_t *punTopic, uint8_t *punMes
 
 	return ulTotalPacketLength;
 }
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+void vMQTT_Publish ( uint8_t *punTopic, uint8_t *punMessage )
+{
+	uint8_t temp[100];
+	uint8_t unLength = 0;
+	uint8_t temp1[5] = "";
+	vClearBuffer(temp, 100);
+    strcpy(temp, "AT+QMTPUBEX=1,0,0,0,\"");	//AT+QMTPUBEX=1,0,0,0,"sc2/867400032743266/event",14
+	strcat(temp,punTopic);
+	strcat(temp,"\"");
+	unLength = strlen((const char *)punMessage);
+	vClearBuffer(temp1,5);
+    sprintf(temp1, "%d", (uint16_t)unLength);
+    strcat(temp,temp1);
+    ms_send_cmd(temp, strlen((const char *)temp));
+	delay_ms(10);
+	ms_send_cmd(punMessage, unLength);
+    delay_ms(200);	
+}
+#endif
 
+#ifdef MODULE_SIMCOM_SIM868
 uint32_t ulMQTT_Subscribe ( uint8_t *punBuffer, uint8_t *punTopic/*, enMQTT_QOS eQOS, uint16_t udPacketIdentifier*/ )
 {
 	uint32_t ulTotalPacketLength	= 0;
@@ -420,7 +495,21 @@ uint32_t ulMQTT_Subscribe ( uint8_t *punBuffer, uint8_t *punTopic/*, enMQTT_QOS 
 
 	return ulTotalPacketLength;
 }
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+void vMQTT_Subscribe ( uint8_t *punTopic )
+{
+	uint8_t temp[50];
+	vClearBuffer(temp, 50);
+    strcpy(temp, "AT+QMTSUB=1,1,\"");	//AT+QMTSUB=1,1,"sc2/867400032743266/command",0
+	strcat(temp,punTopic);
+	strcat(temp,"\",0");
+    ms_send_cmd(temp, strlen((const char *)temp));
+    delay_ms(200);	
+}
+#endif
 
+#ifdef MODULE_SIMCOM_SIM868
 uint32_t ulMQTT_UnSubscribe ( uint8_t *punBuffer, uint8_t *punTopic/*, uint16_t udPacketIdentifier */)
 {
 	uint32_t ulTotalPacketLength	= 0;
@@ -471,7 +560,21 @@ uint32_t ulMQTT_UnSubscribe ( uint8_t *punBuffer, uint8_t *punTopic/*, uint16_t 
 
 	return ulTotalPacketLength;
 }
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+void vMQTT_UnSubscribe ( uint8_t *punTopic)
+{
+	uint8_t temp[50];
+	vClearBuffer(temp, 50);
+    strcpy(temp, "AT+QMTUNS=1,1,\"");	//AT+QMTUNS=1,1,"sc2/867400032743266/command"
+	strcat(temp,punTopic);
+	strcat(temp,"\"");
+    ms_send_cmd(temp, strlen((const char *)temp));
+    delay_ms(200);
+}
+#endif
 
+#ifdef MODULE_SIMCOM_SIM868
 uint8_t unMQTT_PingRequest ( uint8_t *punBuffer )
 {
 	uint8_t unTotalPacketLength	= 0;
@@ -486,7 +589,9 @@ uint8_t unMQTT_PingRequest ( uint8_t *punBuffer )
 
 	return unTotalPacketLength;
 }
+#endif
 
+#ifdef MODULE_SIMCOM_SIM868
 uint8_t unMQTT_Disconnect ( uint8_t *punBuffer )
 {
 	uint8_t unTotalPacketLength	= 0;
@@ -501,7 +606,15 @@ uint8_t unMQTT_Disconnect ( uint8_t *punBuffer )
 
 	return unTotalPacketLength;
 }
+#endif
 
+#ifdef MODULE_QUECTEL_EC200U
+void vMQTT_Disconnect ( void )
+{
+    ms_send_cmd(MQTT_DISCONNECT_BROKER, strlen((const char *)MQTT_DISCONNECT_BROKER));
+    delay_ms(200);
+}
+#endif
 //uint8_t unPUBREL ( uint8_t *punBuffer , uint16_t udPacketIdentifier) //This Packet is sent in QOS_2 in response to PUBREC Packet recieved from Server/Broker
 //{
 //	uint8_t unTotalPacketLength	= 0;
@@ -661,6 +774,7 @@ uint8_t unMQTT_Disconnect ( uint8_t *punBuffer )
 //        return FALSE;
 //}
 
+#ifdef MODULE_SIMCOM_SIM868
 uint32_t ulDecodedLength (uint8_t * punLength)
 {
   uint32_t multiplier = 1;
@@ -679,6 +793,7 @@ uint32_t ulDecodedLength (uint8_t * punLength)
 
     return value;
 }
+#endif
 //===================================================================================
 //                         			END OF FILE
 //===================================================================================

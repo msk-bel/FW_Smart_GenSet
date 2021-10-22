@@ -4,27 +4,27 @@
   14                     	bsct
   15  0000               _checkit:
   16  0000 00            	dc.b	0
-  55                     ; 52 void systemInit(void)
-  55                     ; 53 {
+  55                     ; 54 void systemInit(void)
+  55                     ; 55 {
   57                     	switch	.text
   58  0000               _systemInit:
-  62                     ; 55 	clockSetup();
+  62                     ; 56 	clockSetup();
   64  0000 ad28          	call	_clockSetup
-  66                     ; 56 	EEPROMSetup();
+  66                     ; 57 	EEPROMSetup();
   68  0002 cd023b        	call	_EEPROMSetup
-  70                     ; 57 	getCalibration();
+  70                     ; 58 	getCalibration();
   72  0005 cd02b3        	call	_getCalibration
-  74                     ; 59 	SetPortD7AsTim1_Ch4();
+  74                     ; 60 	SetPortD7AsTim1_Ch4();
   76  0008 cd03b5        	call	_SetPortD7AsTim1_Ch4
-  78                     ; 61 	gpioSetup();
+  78                     ; 62 	gpioSetup();
   80  000b cd0091        	call	_gpioSetup
-  82                     ; 62 	timer2Setup();
+  82                     ; 63 	timer2Setup();
   84  000e cd015d        	call	_timer2Setup
-  86                     ; 63 	timer1Setup();
+  86                     ; 64 	timer1Setup();
   88  0011 cd019e        	call	_timer1Setup
-  90                     ; 64 	ADCSetup();
+  90                     ; 65 	ADCSetup();
   92  0014 cd034a        	call	_ADCSetup
-  94                     ; 65 	UARTSetup(uartBaudRate, MEVRIS_UART_PARITY_NONE);
+  94                     ; 66 	UARTSetup(uartBaudRate, MEVRIS_UART_PARITY_NONE);
   96  0017 4b00          	push	#0
   97  0019 ae2580        	ldw	x,#9600
   98  001c 89            	pushw	x
@@ -32,7 +32,7 @@
  100  0020 89            	pushw	x
  101  0021 cd036a        	call	_UARTSetup
  103  0024 5b05          	addw	sp,#5
- 104                     ; 66 	EXTI_setup();
+ 104                     ; 67 	EXTI_setup();
  106  0026 cd0223        	call	_EXTI_setup
  108                     ; 69 }
  111  0029 81            	ret

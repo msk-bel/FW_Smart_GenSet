@@ -1,9 +1,11 @@
 /**
   ****************************************************************************************************
-  * File:    board.c
-  * Author:  M.Ahmad Naeem
-  * Version: V1.0.0
-  * Date:    20-May-2021
+  * File:    		board.c
+  * Author      	M.Ahmad Naeem
+  * Co-Author   	Saqib Kamal
+  * Version: 		V1.1.0
+  * Date:    		20-May-2021
+  * Last Modified:	20-Oct-2021
   * Brief:   This file contains all the functions for initializing the controller peripherals.
    ***************************************************************************************************
   * Attention:
@@ -51,7 +53,6 @@ uint16_t powerCalibrationFactor3;
 bool checkit = 0;
 void systemInit(void)
 {
-	
 	clockSetup();
 	EEPROMSetup();
 	getCalibration();
@@ -64,7 +65,6 @@ void systemInit(void)
 	ADCSetup();
 	UARTSetup(uartBaudRate, MEVRIS_UART_PARITY_NONE);
 	EXTI_setup();
-	
 	//IWDG_Config(); /* Disable Watchdog for testing purpose */
 }
 
@@ -152,7 +152,7 @@ void gpioSetup(void)
 	GPIO_Init(Temp1Pin, GPIO_MODE_IN_FL_NO_IT);					   //Temperature 1 read pin
 	GPIO_Init(Temp2Pin, GPIO_MODE_IN_FL_NO_IT);					   //Temperature 2 read pin
 }
-
+ 
 /*
 =======================================================================================================================
 *Function: timer2Setup

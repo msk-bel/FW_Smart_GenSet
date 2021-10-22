@@ -1,10 +1,12 @@
 /**
   ****************************************************************************************************
-  * File:    main.c
-  * Author:  M.Ahmad Naeem
-  * Version: V1.0.0
-  * Date:    20-May-2021
-  * Brief:   This file contains all the functions for System Setup, SIMMCOM Setup and Reading Sensors.
+  * File:    		main.c
+  * Author:  		M.Ahmad Naeem
+  * Author:	 		Saqib Kamal
+  * Version: 		V1.1.0
+  * Date:    		20-May-2021
+  * Last Modified:	20-Oct-2021
+  * Brief:   This file contains all the functions for System Setup, SIMMCOM/Quectel Setup and Reading Sensors.
    ***************************************************************************************************
   * Attention:
   *                         COPYRIGHT 2021 BlueEast Pvt Ltd.

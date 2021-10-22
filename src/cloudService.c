@@ -1,8 +1,9 @@
 /**
   ****************************************************************************************************
   * File:    cloudService.c
-  * Author:  M.Ahmad Naeem
-  * Version: V1.0.0
+  * Author      M.Ahmad Naeem
+  * Co-Author   Saqib Kamal
+  * Version: V1.1.0
   * Date:    20-May-2021
   * Brief:   This file contains all the functions for creating information string.
    ***************************************************************************************************
@@ -341,7 +342,7 @@ void vHandleMevris_MQTT_Recv_Data(void)
 
     // ms_send_cmd("print below response_buffer", strlen((const char *)"print below response_buffer"));
     // ms_send_cmd(response_buffer, strlen((const char *)response_buffer));
-
+#ifdef MODULE_SIMCOM_SIM868
     ptr = strstr(response_buffer, "+IPD");
     if (ptr)
     {
@@ -375,21 +376,63 @@ void vHandleMevris_MQTT_Recv_Data(void)
             }
         }
     }
+#endif
+
+#ifdef MODULE_QUECTEL_EC200U_DISABLED
+    ptr = strstr(response_buffer, "recv");
+    if (ptr)
+    {
+        i = 0;
+        while (*(ptr + i) != 0x0A)
+            i++;
+        i++;
+        if (*(ptr + i) == 0x30) //Check if Message is a PUBLISH Packet from server
+        {
+            while (*(ptr + i) != '{' && i < 99)
+                i++;
+            //            ptr = strstr(response_buffer, MQTT_INBOUND_TOPIC_FOOTER);
+            if (*(ptr + i) == '{')
+            {
+                vClearBuffer(localBuffer, 30);
+                j = 0;
+                while (*(ptr + i) != '\r' && j < 29)
+                {
+                    localBuffer[j++] = *(ptr + i);
+                    unLength++;
+                    i++;
+                }
+                vHandleMevrisRecievedData(localBuffer, unLength);
+            }
+        }
+    }
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    ptr = strstr(response_buffer, MQTT_TOPIC_HEADER);
+    if (ptr)
+    {
+        i = 0;
+        while (*(ptr + i) != '{' && i < 99)
+            i++;
+        if (*(ptr + i) == '{')
+        {
+            vClearBuffer(localBuffer, 30);
+            j = 0;
+            while (*(ptr + i) != '\r' && j < 29)
+            {
+                localBuffer[j++] = *(ptr + i);
+                unLength++;
+                i++;
+            }
+            vHandleMevrisRecievedData(localBuffer, unLength);
+        }
+    }
+#endif
 }
 
 void vHandleMevrisRecievedData(uint8_t *Data, uint8_t unLength)
 {
     uint8_t i, j;
     uint8_t *ret;
-    // Example Data[] = "{1,1,RUN}"
-    // if (Data[0] == '{')
-    // {
-    //     if (Data[1] = '1')
-    //     {
-    //         ms_send_cmd("are you there", strlen((const char *)"are you there"));
-    //         vMevris_Send_IMEI();
-    //     }
-    // }
     if (strstr(Data, "\"info\"")) //Example "{"info":"imei"}"
     {
         if (strstr(Data, "\"imei\""))
@@ -397,23 +440,6 @@ void vHandleMevrisRecievedData(uint8_t *Data, uint8_t unLength)
             vMevris_Send_IMEI();
         }
     }
-    // else if (strstr(Data, "\"key\""))
-    // {
-    //     i = 0;
-    //     ret = strstr(Data, "\"key\":");
-    //     while (*(ret + i) != ':' && i < 8)
-    //     {
-    //         i++;
-    //     }
-    //     i++;
-    //     i++;
-    //     vClearBuffer(PASS_KEY, strlen((const char*)PASS_KEY));
-    //     for (j = 0; j < 8; j++)
-    //     {
-    //         PASS_KEY[j] = *(ret + i);
-    //         i++;
-    //     }
-    // }
 }
 
 uint8_t *punGet_Client_ID(void)
@@ -476,11 +502,16 @@ void vMevris_Send_IMEI(void)
     strcpy(localBuffer, "{\"imei\":\"");
     strcat(localBuffer, aunIMEI);
     strcat(localBuffer, "\"}");
+#ifdef MODULE_SIMCOM_SIM868
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
 }
 
 // void vMevris_Send_SIM_Number()
@@ -526,11 +557,16 @@ void vMevris_Send_Version()
     strcat(localBuffer, "\",\"hw\":\"");
     strcat(localBuffer, /*"0.0.001"*/ Hardware_Version);
     strcat(localBuffer, "\"}");
+#ifdef MODULE_SIMCOM_SIM868
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
 }
 
 void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, uint32_t Ampere)
@@ -569,11 +605,16 @@ void vMevris_Send_Phase(uint8_t phase_number, uint32_t Watt, uint32_t Voltage, u
     strcat(localBuffer, temp1);
     strcat(localBuffer, "\"}");
 
+#ifdef MODULE_SIMCOM_SIM868
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
 }
 
 // void vMevris_Send_Phase1()
@@ -698,11 +739,16 @@ void vMevris_Send_BatteryVolt()
     sprintf(temp1, "%ld", batVolt % 100);
     strcat(localBuffer, temp1);
     strcat(localBuffer, "\"}");
+#ifdef MODULE_SIMCOM_SIM868
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
 }
 
 void vMevris_Send_RadiatorTemp()
@@ -722,10 +768,16 @@ void vMevris_Send_RadiatorTemp()
     // sprintf(temp1, "%f", /*Temperature1*/10.29);
     strcat(localBuffer, "\"}");
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
+#ifdef MODULE_SIMCOM_SIM868
+    vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
 }
 
 void vMevris_Send_EngineTemp()
@@ -744,11 +796,16 @@ void vMevris_Send_EngineTemp()
     strcat(localBuffer, temp1);
     // sprintf(temp1, "%f", /*Temperature2*/897.12);
     strcat(localBuffer, "\"}");
+#ifdef MODULE_SIMCOM_SIM868
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
 }
 
 void vMevris_Send_FuelLevel()
@@ -761,9 +818,14 @@ void vMevris_Send_FuelLevel()
     sprintf(temp1, "%ld", Fuellevel);
     strcat(localBuffer, temp1);
     strcat(localBuffer, "\"}");
+#ifdef MODULE_SIMCOM_SIM868
     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-                                               aunMQTT_Publish_Topic/*punGet_Event_Topic()*/,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
                                                localBuffer);
     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
 }

@@ -4,6 +4,7 @@
         "vipe_calculation.h": "c",
         "bluetooth.h": "c",
         "board.h": "c",
-        "cloudservice.h": "c"
+        "cloudservice.h": "c",
+        "simcom.h": "c"
     }
 }
