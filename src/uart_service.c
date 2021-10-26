@@ -128,7 +128,7 @@ void vHandleDataRecvUARTviaISR(void)
   if (strstr(response_buffer, "+QIURC: \"recv\""))
   #endif
   #ifdef MODULE_QUECTEL_EC200U
-  if (strstr(response_buffer, "+QIURC: \"recv\""))
+  if (strstr(response_buffer, "+QMTRECV:"))
   #endif
   {
     //ms_send_cmd("response_buffer", strlen((const char *)"response_buffer")); //  no echo
@@ -137,8 +137,8 @@ void vHandleDataRecvUARTviaISR(void)
     vHandleMevris_MQTT_Recv_Data();
   }
   //Added by Saqib
-  // if (strstr(response_buffer, "+CMTI:") )
-  // {
-    // sms_receive();
-  // }
+  if (strstr(response_buffer, "+CMTI:") )
+  {
+    sms_receive();
+  }
 }

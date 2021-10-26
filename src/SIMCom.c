@@ -60,7 +60,7 @@ void SIMCom_setup(void)
     ms_send_cmd(NOECHO, strlen((const char *)NOECHO)); /* No echo */
     delay_ms(20000);                                   //need to adjust the delay
     delay_ms(1000);
-
+    ms_send_cmd(NOECHO, strlen((const char *)NOECHO)); /* No echo */
     ms_send_cmd(MS_DELETE_ALL_SMS, strlen((const char *)MS_DELETE_ALL_SMS)); /* Delete SMS */
     delay_ms(1000);
 
@@ -138,7 +138,7 @@ void SIMCom_setup(void)
 
     ms_send_cmd(GPRS_Set, strlen((const char *)GPRS_Set)); /* OPEN BEARER */
     delay_ms(1000);
-
+// 
     // getIMEI();//Added by Saqib
     // vPrintStickerInfo(); //Added by Saqib
     // passkeyGenerator(); //Added by Saqib
@@ -549,6 +549,7 @@ void vHandle_MQTT(void)
         vPrintStickerInfo();
     }
 }
+
 //Added by Saqib
 void vSend_MQTT_Ping(void)
 {
@@ -754,17 +755,17 @@ enTCP_STATUS enGet_TCP_Status(void)
             // while(*(i+j) != ',' && j < 100)j++;
             j++;
             // if (*(i+j) == 0)
-            if (*(i + j) == 1)
+            if (*(i + j) == '1')
             {
                 eStatus = eTCP_STAT_IP_INITIAL;
             }
             // else if (*(i+j) == 1)
-            else if (*(i + j) == 2)
+            else if (*(i + j) == '2')
             {
                 eStatus = eTCP_STAT_CONNECTING;
             }
             // else if (*(i+j) == 2)
-            else if (*(i + j) == 3)
+            else if (*(i + j) == '3')
             {
                 eStatus = eTCP_STAT_CONNECT_OK;
             }
@@ -772,7 +773,7 @@ enTCP_STATUS enGet_TCP_Status(void)
             // {
             //     eStatus = eTCP_STAT_CLOSING;
             // }
-            else if (*(i + j) == 4)
+            else if (*(i + j) == '4')
             {
                 eStatus = eTCP_STAT_CLOSED;
             }

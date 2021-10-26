@@ -319,6 +319,12 @@ uint32_t ulMQTT_Connect ( uint8_t *punBuffer, uint8_t *punClientIdentifier/*,
 void vMQTT_Connect ( uint8_t *punClientIdentifier )
 {   
 	uint8_t temp[50];
+    ms_send_cmd(CHECK_REGISTRATION_STATUS_CS, strlen((const char *)CHECK_REGISTRATION_STATUS_CS));
+    delay_ms(500);
+    ms_send_cmd(CHECK_REGISTRATION_STATUS_PS, strlen((const char *)CHECK_REGISTRATION_STATUS_PS));
+    delay_ms(500);
+    ms_send_cmd(CHECK_REGISTRATION_STATUS_EPS, strlen((const char *)CHECK_REGISTRATION_STATUS_EPS));
+    delay_ms(500);
     ms_send_cmd(MQTT_CLOSE_CONNECTION, strlen((const char *)MQTT_CLOSE_CONNECTION));
     delay_ms(500);
     ms_send_cmd(MQTT_SET_VERSION, strlen((const char *)MQTT_SET_VERSION));
@@ -427,7 +433,7 @@ void vMQTT_Publish ( uint8_t *punTopic, uint8_t *punMessage )
 	vClearBuffer(temp, 100);
     strcpy(temp, "AT+QMTPUBEX=1,0,0,0,\"");	//AT+QMTPUBEX=1,0,0,0,"sc2/867400032743266/event",14
 	strcat(temp,punTopic);
-	strcat(temp,"\"");
+	strcat(temp,"\",");
 	unLength = strlen((const char *)punMessage);
 	vClearBuffer(temp1,5);
     sprintf(temp1, "%d", (uint16_t)unLength);

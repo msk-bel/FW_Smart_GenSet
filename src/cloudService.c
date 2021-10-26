@@ -760,6 +760,8 @@ void vMevris_Send_RadiatorTemp()
     vClearBuffer(localBuffer, 40);
     strcpy(localBuffer, "{\"RadiatorTemperature\":\"");
     myVar = (uint32_t)(Temperature1 * 100);
+    if(myVar > 100000)
+    myVar = 0;
     sprintf(temp1, "%ld", myVar / 100);
     strcat(localBuffer, temp1);
     strcat(localBuffer, ".");
@@ -789,6 +791,8 @@ void vMevris_Send_EngineTemp()
     vClearBuffer(localBuffer, 40);
     strcpy(localBuffer, "{\"EngineTemperature\":\"");
     myVar = (uint32_t)(Temperature2 * 100);
+    if(myVar > 100000)
+    myVar = 0;
     sprintf(temp1, "%ld", myVar / 100);
     strcat(localBuffer, temp1);
     strcat(localBuffer, ".");

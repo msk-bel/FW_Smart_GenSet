@@ -148,13 +148,13 @@
  449  00a8               L12:
  450                     ; 110             case eCommand_EngineTemp:
  450                     ; 111                 vMevris_Send_EngineTemp();
- 452  00a8 cd0691        	call	_vMevris_Send_EngineTemp
+ 452  00a8 cd06aa        	call	_vMevris_Send_EngineTemp
  454                     ; 112                 break;
  456  00ab 2003          	jra	L561
  457  00ad               L32:
  458                     ; 113             case eCommand_FuelLevel:
  458                     ; 114                 vMevris_Send_FuelLevel();
- 460  00ad cd075f        	call	_vMevris_Send_FuelLevel
+ 460  00ad cd0791        	call	_vMevris_Send_FuelLevel
  462                     ; 115                 break;
  464  00b0               L52:
  465                     ; 116             case eCommand_Others:
@@ -193,7 +193,7 @@
  584                     ; 341     uint8_t unLength = 0;
  586  00c8 0f21          	clr	(OFST-4,sp)
  588                     ; 410     ptr = strstr(response_buffer, MQTT_TOPIC_HEADER);
- 590  00ca ae0223        	ldw	x,#L132
+ 590  00ca ae0227        	ldw	x,#L132
  591  00cd 89            	pushw	x
  592  00ce ae0000        	ldw	x,#_response_buffer
  593  00d1 cd0000        	call	_strstr
@@ -312,7 +312,7 @@
  772  015f 89            	pushw	x
  773       00000000      OFST:	set	0
  776                     ; 436     if (strstr(Data, "\"info\"")) //Example "{"info":"imei"}"
- 778  0160 ae021c        	ldw	x,#L303
+ 778  0160 ae0220        	ldw	x,#L303
  779  0163 89            	pushw	x
  780  0164 1e03          	ldw	x,(OFST+3,sp)
  781  0166 cd0000        	call	_strstr
@@ -320,7 +320,7 @@
  784  016b a30000        	cpw	x,#0
  785  016e 2713          	jreq	L103
  786                     ; 438         if (strstr(Data, "\"imei\""))
- 788  0170 ae0215        	ldw	x,#L703
+ 788  0170 ae0219        	ldw	x,#L703
  789  0173 89            	pushw	x
  790  0174 1e03          	ldw	x,(OFST+3,sp)
  791  0176 cd0000        	call	_strstr
@@ -344,7 +344,7 @@
  846  018d 84            	pop	a
  847                     ; 454     strcpy(aunMQTT_ClientID, "gen");
  849  018e ae0064        	ldw	x,#_aunMQTT_ClientID
- 850  0191 90ae0211      	ldw	y,#L123
+ 850  0191 90ae0215      	ldw	y,#L123
  851  0195               L43:
  852  0195 90f6          	ld	a,(y)
  853  0197 905c          	incw	y
@@ -375,7 +375,7 @@
  928  01b6 84            	pop	a
  929                     ; 469     strcpy(aunMQTT_Subscribe_Topic, MQTT_TOPIC_HEADER);
  931  01b7 ae0078        	ldw	x,#_aunMQTT_Subscribe_Topic
- 932  01ba 90ae0223      	ldw	y,#L132
+ 932  01ba 90ae0227      	ldw	y,#L132
  933  01be               L04:
  934  01be 90f6          	ld	a,(y)
  935  01c0 905c          	incw	y
@@ -384,7 +384,7 @@
  938  01c4 4d            	tnz	a
  939  01c5 26f7          	jrne	L04
  940                     ; 470     strcat(aunMQTT_Subscribe_Topic, "/");
- 942  01c7 ae020f        	ldw	x,#L143
+ 942  01c7 ae0213        	ldw	x,#L143
  943  01ca 89            	pushw	x
  944  01cb ae0078        	ldw	x,#_aunMQTT_Subscribe_Topic
  945  01ce cd0000        	call	_strcat
@@ -396,13 +396,13 @@
  953  01d9 cd0000        	call	_strcat
  955  01dc 85            	popw	x
  956                     ; 472     strcat(aunMQTT_Subscribe_Topic, "/");
- 958  01dd ae020f        	ldw	x,#L143
+ 958  01dd ae0213        	ldw	x,#L143
  959  01e0 89            	pushw	x
  960  01e1 ae0078        	ldw	x,#_aunMQTT_Subscribe_Topic
  961  01e4 cd0000        	call	_strcat
  963  01e7 85            	popw	x
  964                     ; 473     strcat(aunMQTT_Subscribe_Topic, MQTT_INBOUND_TOPIC_FOOTER);
- 966  01e8 ae0207        	ldw	x,#L343
+ 966  01e8 ae020b        	ldw	x,#L343
  967  01eb 89            	pushw	x
  968  01ec ae0078        	ldw	x,#_aunMQTT_Subscribe_Topic
  969  01ef cd0000        	call	_strcat
@@ -425,7 +425,7 @@
 1034  0201 84            	pop	a
 1035                     ; 487     strcpy(aunMQTT_Publish_Topic, MQTT_TOPIC_HEADER);
 1037  0202 ae0096        	ldw	x,#_aunMQTT_Publish_Topic
-1038  0205 90ae0223      	ldw	y,#L132
+1038  0205 90ae0227      	ldw	y,#L132
 1039  0209               L44:
 1040  0209 90f6          	ld	a,(y)
 1041  020b 905c          	incw	y
@@ -434,7 +434,7 @@
 1044  020f 4d            	tnz	a
 1045  0210 26f7          	jrne	L44
 1046                     ; 488     strcat(aunMQTT_Publish_Topic, "/");
-1048  0212 ae020f        	ldw	x,#L143
+1048  0212 ae0213        	ldw	x,#L143
 1049  0215 89            	pushw	x
 1050  0216 ae0096        	ldw	x,#_aunMQTT_Publish_Topic
 1051  0219 cd0000        	call	_strcat
@@ -446,13 +446,13 @@
 1059  0224 cd0000        	call	_strcat
 1061  0227 85            	popw	x
 1062                     ; 490     strcat(aunMQTT_Publish_Topic, "/");
-1064  0228 ae020f        	ldw	x,#L143
+1064  0228 ae0213        	ldw	x,#L143
 1065  022b 89            	pushw	x
 1066  022c ae0096        	ldw	x,#_aunMQTT_Publish_Topic
 1067  022f cd0000        	call	_strcat
 1069  0232 85            	popw	x
 1070                     ; 491     strcat(aunMQTT_Publish_Topic, MQTT_OUTBOUND_TOPIC_FOOTER);
-1072  0233 ae0201        	ldw	x,#L363
+1072  0233 ae0205        	ldw	x,#L363
 1073  0236 89            	pushw	x
 1074  0237 ae0096        	ldw	x,#_aunMQTT_Publish_Topic
 1075  023a cd0000        	call	_strcat
@@ -491,7 +491,7 @@
 1168                     ; 502     strcpy(localBuffer, "{\"imei\":\"");
 1170  025c 96            	ldw	x,sp
 1171  025d 1c0002        	addw	x,#OFST-29
-1172  0260 90ae01f7      	ldw	y,#L114
+1172  0260 90ae01fb      	ldw	y,#L114
 1173  0264               L05:
 1174  0264 90f6          	ld	a,(y)
 1175  0266 905c          	incw	y
@@ -507,7 +507,7 @@
 1186  0275 cd0000        	call	_strcat
 1188  0278 85            	popw	x
 1189                     ; 504     strcat(localBuffer, "\"}");
-1191  0279 ae01f4        	ldw	x,#L314
+1191  0279 ae01f8        	ldw	x,#L314
 1192  027c 89            	pushw	x
 1193  027d 96            	ldw	x,sp
 1194  027e 1c0004        	addw	x,#OFST-27
@@ -557,7 +557,7 @@
 1299                     ; 555     strcpy(localBuffer, "{\"fw\":\"");
 1301  02ad 96            	ldw	x,sp
 1302  02ae 1c0002        	addw	x,#OFST-34
-1303  02b1 90ae01ec      	ldw	y,#L144
+1303  02b1 90ae01f0      	ldw	y,#L144
 1304  02b5               L45:
 1305  02b5 90f6          	ld	a,(y)
 1306  02b7 905c          	incw	y
@@ -566,28 +566,28 @@
 1309  02bb 4d            	tnz	a
 1310  02bc 26f7          	jrne	L45
 1311                     ; 556     strcat(localBuffer, /*"2.4.010"*/ Firmware_Version);
-1313  02be ae01e4        	ldw	x,#L344
+1313  02be ae01e8        	ldw	x,#L344
 1314  02c1 89            	pushw	x
 1315  02c2 96            	ldw	x,sp
 1316  02c3 1c0004        	addw	x,#OFST-32
 1317  02c6 cd0000        	call	_strcat
 1319  02c9 85            	popw	x
 1320                     ; 557     strcat(localBuffer, "\",\"hw\":\"");
-1322  02ca ae01db        	ldw	x,#L544
+1322  02ca ae01df        	ldw	x,#L544
 1323  02cd 89            	pushw	x
 1324  02ce 96            	ldw	x,sp
 1325  02cf 1c0004        	addw	x,#OFST-32
 1326  02d2 cd0000        	call	_strcat
 1328  02d5 85            	popw	x
 1329                     ; 558     strcat(localBuffer, /*"0.0.001"*/ Hardware_Version);
-1331  02d6 ae01d3        	ldw	x,#L744
+1331  02d6 ae01d7        	ldw	x,#L744
 1332  02d9 89            	pushw	x
 1333  02da 96            	ldw	x,sp
 1334  02db 1c0004        	addw	x,#OFST-32
 1335  02de cd0000        	call	_strcat
 1337  02e1 85            	popw	x
 1338                     ; 559     strcat(localBuffer, "\"}");
-1340  02e2 ae01f4        	ldw	x,#L314
+1340  02e2 ae01f8        	ldw	x,#L314
 1341  02e5 89            	pushw	x
 1342  02e6 96            	ldw	x,sp
 1343  02e7 1c0004        	addw	x,#OFST-32
@@ -665,7 +665,7 @@
 1537  0333 5f            	clrw	x
 1538  0334 97            	ld	xl,a
 1539  0335 89            	pushw	x
-1540  0336 ae01d0        	ldw	x,#L135
+1540  0336 ae01d4        	ldw	x,#L135
 1541  0339 89            	pushw	x
 1542  033a 96            	ldw	x,sp
 1543  033b 1c0006        	addw	x,#OFST-85
@@ -674,7 +674,7 @@
 1547                     ; 580     strcpy(localBuffer, "{\"power");
 1549  0343 96            	ldw	x,sp
 1550  0344 1c0011        	addw	x,#OFST-74
-1551  0347 90ae01c8      	ldw	y,#L335
+1551  0347 90ae01cc      	ldw	y,#L335
 1552  034b               L06:
 1553  034b 90f6          	ld	a,(y)
 1554  034d 905c          	incw	y
@@ -691,7 +691,7 @@
 1566  035d cd0000        	call	_strcat
 1568  0360 85            	popw	x
 1569                     ; 582     strcat(localBuffer, "\":\"");
-1571  0361 ae01c4        	ldw	x,#L535
+1571  0361 ae01c8        	ldw	x,#L535
 1572  0364 89            	pushw	x
 1573  0365 96            	ldw	x,sp
 1574  0366 1c0013        	addw	x,#OFST-72
@@ -707,7 +707,7 @@
 1588  037c 89            	pushw	x
 1589  037d be00          	ldw	x,c_lreg
 1590  037f 89            	pushw	x
-1591  0380 ae01c0        	ldw	x,#L735
+1591  0380 ae01c4        	ldw	x,#L735
 1592  0383 89            	pushw	x
 1593  0384 96            	ldw	x,sp
 1594  0385 1c000b        	addw	x,#OFST-80
@@ -722,7 +722,7 @@
 1605  0396 cd0000        	call	_strcat
 1607  0399 85            	popw	x
 1608                     ; 585     strcat(localBuffer, ".");
-1610  039a ae01be        	ldw	x,#L145
+1610  039a ae01c2        	ldw	x,#L145
 1611  039d 89            	pushw	x
 1612  039e 96            	ldw	x,sp
 1613  039f 1c0013        	addw	x,#OFST-72
@@ -738,7 +738,7 @@
 1627  03b5 89            	pushw	x
 1628  03b6 be00          	ldw	x,c_lreg
 1629  03b8 89            	pushw	x
-1630  03b9 ae01c0        	ldw	x,#L735
+1630  03b9 ae01c4        	ldw	x,#L735
 1631  03bc 89            	pushw	x
 1632  03bd 96            	ldw	x,sp
 1633  03be 1c000b        	addw	x,#OFST-80
@@ -753,7 +753,7 @@
 1644  03cf cd0000        	call	_strcat
 1646  03d2 85            	popw	x
 1647                     ; 589     strcat(localBuffer, "\",\"voltage");
-1649  03d3 ae01b3        	ldw	x,#L345
+1649  03d3 ae01b7        	ldw	x,#L345
 1650  03d6 89            	pushw	x
 1651  03d7 96            	ldw	x,sp
 1652  03d8 1c0013        	addw	x,#OFST-72
@@ -768,7 +768,7 @@
 1663  03e8 cd0000        	call	_strcat
 1665  03eb 85            	popw	x
 1666                     ; 591     strcat(localBuffer, "\":\"");
-1668  03ec ae01c4        	ldw	x,#L535
+1668  03ec ae01c8        	ldw	x,#L535
 1669  03ef 89            	pushw	x
 1670  03f0 96            	ldw	x,sp
 1671  03f1 1c0013        	addw	x,#OFST-72
@@ -784,7 +784,7 @@
 1685  0407 89            	pushw	x
 1686  0408 be00          	ldw	x,c_lreg
 1687  040a 89            	pushw	x
-1688  040b ae01c0        	ldw	x,#L735
+1688  040b ae01c4        	ldw	x,#L735
 1689  040e 89            	pushw	x
 1690  040f 96            	ldw	x,sp
 1691  0410 1c000b        	addw	x,#OFST-80
@@ -799,7 +799,7 @@
 1702  0421 cd0000        	call	_strcat
 1704  0424 85            	popw	x
 1705                     ; 594     strcat(localBuffer, ".");
-1707  0425 ae01be        	ldw	x,#L145
+1707  0425 ae01c2        	ldw	x,#L145
 1708  0428 89            	pushw	x
 1709  0429 96            	ldw	x,sp
 1710  042a 1c0013        	addw	x,#OFST-72
@@ -815,7 +815,7 @@
 1724  0440 89            	pushw	x
 1725  0441 be00          	ldw	x,c_lreg
 1726  0443 89            	pushw	x
-1727  0444 ae01c0        	ldw	x,#L735
+1727  0444 ae01c4        	ldw	x,#L735
 1728  0447 89            	pushw	x
 1729  0448 96            	ldw	x,sp
 1730  0449 1c000b        	addw	x,#OFST-80
@@ -830,7 +830,7 @@
 1741  045a cd0000        	call	_strcat
 1743  045d 85            	popw	x
 1744                     ; 598     strcat(localBuffer, "\",\"current");
-1746  045e ae01a8        	ldw	x,#L545
+1746  045e ae01ac        	ldw	x,#L545
 1747  0461 89            	pushw	x
 1748  0462 96            	ldw	x,sp
 1749  0463 1c0013        	addw	x,#OFST-72
@@ -845,7 +845,7 @@
 1760  0473 cd0000        	call	_strcat
 1762  0476 85            	popw	x
 1763                     ; 600     strcat(localBuffer, "\":\"");
-1765  0477 ae01c4        	ldw	x,#L535
+1765  0477 ae01c8        	ldw	x,#L535
 1766  047a 89            	pushw	x
 1767  047b 96            	ldw	x,sp
 1768  047c 1c0013        	addw	x,#OFST-72
@@ -861,7 +861,7 @@
 1782  0492 89            	pushw	x
 1783  0493 be00          	ldw	x,c_lreg
 1784  0495 89            	pushw	x
-1785  0496 ae01c0        	ldw	x,#L735
+1785  0496 ae01c4        	ldw	x,#L735
 1786  0499 89            	pushw	x
 1787  049a 96            	ldw	x,sp
 1788  049b 1c000b        	addw	x,#OFST-80
@@ -876,7 +876,7 @@
 1799  04ac cd0000        	call	_strcat
 1801  04af 85            	popw	x
 1802                     ; 603     strcat(localBuffer, ".");
-1804  04b0 ae01be        	ldw	x,#L145
+1804  04b0 ae01c2        	ldw	x,#L145
 1805  04b3 89            	pushw	x
 1806  04b4 96            	ldw	x,sp
 1807  04b5 1c0013        	addw	x,#OFST-72
@@ -892,7 +892,7 @@
 1821  04cb 89            	pushw	x
 1822  04cc be00          	ldw	x,c_lreg
 1823  04ce 89            	pushw	x
-1824  04cf ae01c0        	ldw	x,#L735
+1824  04cf ae01c4        	ldw	x,#L735
 1825  04d2 89            	pushw	x
 1826  04d3 96            	ldw	x,sp
 1827  04d4 1c000b        	addw	x,#OFST-80
@@ -907,7 +907,7 @@
 1838  04e5 cd0000        	call	_strcat
 1840  04e8 85            	popw	x
 1841                     ; 606     strcat(localBuffer, "\"}");
-1843  04e9 ae01f4        	ldw	x,#L314
+1843  04e9 ae01f8        	ldw	x,#L314
 1844  04ec 89            	pushw	x
 1845  04ed 96            	ldw	x,sp
 1846  04ee 1c0013        	addw	x,#OFST-72
@@ -962,7 +962,7 @@
 1970                     ; 734     strcpy(localBuffer, "{\"battery\":\"");
 1972  052a 96            	ldw	x,sp
 1973  052b 1c000c        	addw	x,#OFST-29
-1974  052e 90ae019b      	ldw	y,#L106
+1974  052e 90ae019f      	ldw	y,#L106
 1975  0532               L66:
 1976  0532 90f6          	ld	a,(y)
 1977  0534 905c          	incw	y
@@ -979,7 +979,7 @@
 1991  0549 89            	pushw	x
 1992  054a be00          	ldw	x,c_lreg
 1993  054c 89            	pushw	x
-1994  054d ae01c0        	ldw	x,#L735
+1994  054d ae01c4        	ldw	x,#L735
 1995  0550 89            	pushw	x
 1996  0551 96            	ldw	x,sp
 1997  0552 1c0008        	addw	x,#OFST-33
@@ -994,7 +994,7 @@
 2008  0563 cd0000        	call	_strcat
 2010  0566 85            	popw	x
 2011                     ; 738     strcat(localBuffer, ".");
-2013  0567 ae01be        	ldw	x,#L145
+2013  0567 ae01c2        	ldw	x,#L145
 2014  056a 89            	pushw	x
 2015  056b 96            	ldw	x,sp
 2016  056c 1c000e        	addw	x,#OFST-27
@@ -1009,7 +1009,7 @@
 2029  0581 89            	pushw	x
 2030  0582 be00          	ldw	x,c_lreg
 2031  0584 89            	pushw	x
-2032  0585 ae01c0        	ldw	x,#L735
+2032  0585 ae01c4        	ldw	x,#L735
 2033  0588 89            	pushw	x
 2034  0589 96            	ldw	x,sp
 2035  058a 1c0008        	addw	x,#OFST-33
@@ -1024,7 +1024,7 @@
 2046  059b cd0000        	call	_strcat
 2048  059e 85            	popw	x
 2049                     ; 741     strcat(localBuffer, "\"}");
-2051  059f ae01f4        	ldw	x,#L314
+2051  059f ae01f8        	ldw	x,#L314
 2052  05a2 89            	pushw	x
 2053  05a3 96            	ldw	x,sp
 2054  05a4 1c000e        	addw	x,#OFST-27
@@ -1052,456 +1052,486 @@
 2083  00ef               L506_temp1:
 2084  00ef 00            	dc.b	0
 2085  00f0 000000000000  	ds.b	14
-2155                     ; 754 void vMevris_Send_RadiatorTemp()
-2155                     ; 755 {
-2156                     	switch	.text
-2157  05ba               _vMevris_Send_RadiatorTemp:
-2159  05ba 523c          	subw	sp,#60
-2160       0000003c      OFST:	set	60
-2163                     ; 756     uint8_t localBuffer[40] = "{\"RadiatorTemperature\":\"123456.89\"}";
-2165  05bc 96            	ldw	x,sp
-2166  05bd 1c0015        	addw	x,#OFST-39
-2167  05c0 90ae00c7      	ldw	y,#L306_localBuffer
-2168  05c4 a628          	ld	a,#40
-2169  05c6 cd0000        	call	c_xymvx
-2171                     ; 757     uint8_t unSendDataLength = 0;
-2173                     ; 758     uint8_t temp1[15] = "";
-2175  05c9 96            	ldw	x,sp
-2176  05ca 1c0006        	addw	x,#OFST-54
-2177  05cd 90ae00ef      	ldw	y,#L506_temp1
-2178  05d1 a60f          	ld	a,#15
-2179  05d3 cd0000        	call	c_xymvx
-2181                     ; 759     uint32_t myVar = 0;
-2183                     ; 760     vClearBuffer(localBuffer, 40);
-2185  05d6 4b28          	push	#40
-2186  05d8 96            	ldw	x,sp
-2187  05d9 1c0016        	addw	x,#OFST-38
-2188  05dc cd0000        	call	_vClearBuffer
-2190  05df 84            	pop	a
-2191                     ; 761     strcpy(localBuffer, "{\"RadiatorTemperature\":\"");
-2193  05e0 96            	ldw	x,sp
-2194  05e1 1c0015        	addw	x,#OFST-39
-2195  05e4 90ae0182      	ldw	y,#L146
-2196  05e8               L27:
-2197  05e8 90f6          	ld	a,(y)
-2198  05ea 905c          	incw	y
-2199  05ec f7            	ld	(x),a
-2200  05ed 5c            	incw	x
-2201  05ee 4d            	tnz	a
-2202  05ef 26f7          	jrne	L27
-2203                     ; 762     myVar = (uint32_t)(Temperature1 * 100);
-2205  05f1 ae0000        	ldw	x,#_Temperature1
-2206  05f4 cd0000        	call	c_ltor
-2208  05f7 ae017e        	ldw	x,#L746
-2209  05fa cd0000        	call	c_fmul
-2211  05fd cd0000        	call	c_ftol
-2213  0600 96            	ldw	x,sp
-2214  0601 1c0002        	addw	x,#OFST-58
-2215  0604 cd0000        	call	c_rtol
-2218                     ; 763     sprintf(temp1, "%ld", myVar / 100);
-2220  0607 96            	ldw	x,sp
-2221  0608 1c0002        	addw	x,#OFST-58
-2222  060b cd0000        	call	c_ltor
-2224  060e ae009b        	ldw	x,#L26
-2225  0611 cd0000        	call	c_ludv
-2227  0614 be02          	ldw	x,c_lreg+2
-2228  0616 89            	pushw	x
-2229  0617 be00          	ldw	x,c_lreg
-2230  0619 89            	pushw	x
-2231  061a ae01c0        	ldw	x,#L735
-2232  061d 89            	pushw	x
-2233  061e 96            	ldw	x,sp
-2234  061f 1c000c        	addw	x,#OFST-48
-2235  0622 cd0000        	call	_sprintf
-2237  0625 5b06          	addw	sp,#6
-2238                     ; 764     strcat(localBuffer, temp1);
-2240  0627 96            	ldw	x,sp
-2241  0628 1c0006        	addw	x,#OFST-54
-2242  062b 89            	pushw	x
-2243  062c 96            	ldw	x,sp
-2244  062d 1c0017        	addw	x,#OFST-37
-2245  0630 cd0000        	call	_strcat
-2247  0633 85            	popw	x
-2248                     ; 765     strcat(localBuffer, ".");
-2250  0634 ae01be        	ldw	x,#L145
-2251  0637 89            	pushw	x
-2252  0638 96            	ldw	x,sp
-2253  0639 1c0017        	addw	x,#OFST-37
-2254  063c cd0000        	call	_strcat
-2256  063f 85            	popw	x
-2257                     ; 766     sprintf(temp1, "%ld", myVar % 100);
-2259  0640 96            	ldw	x,sp
-2260  0641 1c0002        	addw	x,#OFST-58
-2261  0644 cd0000        	call	c_ltor
-2263  0647 ae009b        	ldw	x,#L26
-2264  064a cd0000        	call	c_lumd
-2266  064d be02          	ldw	x,c_lreg+2
-2267  064f 89            	pushw	x
-2268  0650 be00          	ldw	x,c_lreg
-2269  0652 89            	pushw	x
-2270  0653 ae01c0        	ldw	x,#L735
-2271  0656 89            	pushw	x
-2272  0657 96            	ldw	x,sp
-2273  0658 1c000c        	addw	x,#OFST-48
-2274  065b cd0000        	call	_sprintf
-2276  065e 5b06          	addw	sp,#6
-2277                     ; 767     strcat(localBuffer, temp1);
-2279  0660 96            	ldw	x,sp
-2280  0661 1c0006        	addw	x,#OFST-54
-2281  0664 89            	pushw	x
-2282  0665 96            	ldw	x,sp
-2283  0666 1c0017        	addw	x,#OFST-37
-2284  0669 cd0000        	call	_strcat
-2286  066c 85            	popw	x
-2287                     ; 769     strcat(localBuffer, "\"}");
-2289  066d ae01f4        	ldw	x,#L314
-2290  0670 89            	pushw	x
-2291  0671 96            	ldw	x,sp
-2292  0672 1c0017        	addw	x,#OFST-37
-2293  0675 cd0000        	call	_strcat
-2295  0678 85            	popw	x
-2296                     ; 770     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
-2298  0679 4b64          	push	#100
-2299  067b ae0000        	ldw	x,#_aunPushed_Data
-2300  067e cd0000        	call	_vClearBuffer
-2302  0681 84            	pop	a
-2303                     ; 779     vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
-2305  0682 96            	ldw	x,sp
-2306  0683 1c0015        	addw	x,#OFST-39
-2307  0686 89            	pushw	x
-2308  0687 ae0096        	ldw	x,#_aunMQTT_Publish_Topic
-2309  068a cd0000        	call	_vMQTT_Publish
-2311  068d 85            	popw	x
-2312                     ; 781 }
-2315  068e 5b3c          	addw	sp,#60
-2316  0690 81            	ret
-2319                     	switch	.const
-2320  00fe               L356_localBuffer:
-2321  00fe 7b22          	dc.b	"{",34
-2322  0100 456e67696e65  	dc.b	"EngineTemperature",34
-2323  0112 3a22          	dc.b	":",34
-2324  0114 313233343536  	dc.b	"123456.89",34
-2325  011e 7d00          	dc.b	"}",0
-2326  0120 000000000000  	ds.b	6
-2327  0126               L556_temp1:
-2328  0126 00            	dc.b	0
-2329  0127 000000000000  	ds.b	14
-2398                     ; 783 void vMevris_Send_EngineTemp()
-2398                     ; 784 {
-2399                     	switch	.text
-2400  0691               _vMevris_Send_EngineTemp:
-2402  0691 523c          	subw	sp,#60
-2403       0000003c      OFST:	set	60
-2406                     ; 785     uint8_t localBuffer[40] = "{\"EngineTemperature\":\"123456.89\"}";
-2408  0693 96            	ldw	x,sp
-2409  0694 1c0015        	addw	x,#OFST-39
-2410  0697 90ae00fe      	ldw	y,#L356_localBuffer
-2411  069b a628          	ld	a,#40
-2412  069d cd0000        	call	c_xymvx
-2414                     ; 786     uint8_t unSendDataLength = 0;
-2416                     ; 787     uint8_t temp1[15] = "";
-2418  06a0 96            	ldw	x,sp
-2419  06a1 1c0006        	addw	x,#OFST-54
-2420  06a4 90ae0126      	ldw	y,#L556_temp1
-2421  06a8 a60f          	ld	a,#15
-2422  06aa cd0000        	call	c_xymvx
-2424                     ; 788     uint32_t myVar = 0;
-2426                     ; 789     vClearBuffer(localBuffer, 40);
-2428  06ad 4b28          	push	#40
-2429  06af 96            	ldw	x,sp
-2430  06b0 1c0016        	addw	x,#OFST-38
-2431  06b3 cd0000        	call	_vClearBuffer
-2433  06b6 84            	pop	a
-2434                     ; 790     strcpy(localBuffer, "{\"EngineTemperature\":\"");
-2436  06b7 96            	ldw	x,sp
-2437  06b8 1c0015        	addw	x,#OFST-39
-2438  06bb 90ae0167      	ldw	y,#L117
-2439  06bf               L67:
-2440  06bf 90f6          	ld	a,(y)
-2441  06c1 905c          	incw	y
-2442  06c3 f7            	ld	(x),a
-2443  06c4 5c            	incw	x
-2444  06c5 4d            	tnz	a
-2445  06c6 26f7          	jrne	L67
-2446                     ; 791     myVar = (uint32_t)(Temperature2 * 100);
-2448  06c8 ae0000        	ldw	x,#_Temperature2
-2449  06cb cd0000        	call	c_ltor
-2451  06ce ae017e        	ldw	x,#L746
-2452  06d1 cd0000        	call	c_fmul
-2454  06d4 cd0000        	call	c_ftol
-2456  06d7 96            	ldw	x,sp
-2457  06d8 1c0002        	addw	x,#OFST-58
-2458  06db cd0000        	call	c_rtol
-2461                     ; 792     sprintf(temp1, "%ld", myVar / 100);
-2463  06de 96            	ldw	x,sp
-2464  06df 1c0002        	addw	x,#OFST-58
-2465  06e2 cd0000        	call	c_ltor
-2467  06e5 ae009b        	ldw	x,#L26
-2468  06e8 cd0000        	call	c_ludv
-2470  06eb be02          	ldw	x,c_lreg+2
-2471  06ed 89            	pushw	x
-2472  06ee be00          	ldw	x,c_lreg
-2473  06f0 89            	pushw	x
-2474  06f1 ae01c0        	ldw	x,#L735
-2475  06f4 89            	pushw	x
-2476  06f5 96            	ldw	x,sp
-2477  06f6 1c000c        	addw	x,#OFST-48
-2478  06f9 cd0000        	call	_sprintf
-2480  06fc 5b06          	addw	sp,#6
-2481                     ; 793     strcat(localBuffer, temp1);
-2483  06fe 96            	ldw	x,sp
-2484  06ff 1c0006        	addw	x,#OFST-54
-2485  0702 89            	pushw	x
-2486  0703 96            	ldw	x,sp
-2487  0704 1c0017        	addw	x,#OFST-37
-2488  0707 cd0000        	call	_strcat
-2490  070a 85            	popw	x
-2491                     ; 794     strcat(localBuffer, ".");
-2493  070b ae01be        	ldw	x,#L145
-2494  070e 89            	pushw	x
-2495  070f 96            	ldw	x,sp
-2496  0710 1c0017        	addw	x,#OFST-37
-2497  0713 cd0000        	call	_strcat
-2499  0716 85            	popw	x
-2500                     ; 795     sprintf(temp1, "%ld", myVar % 100);
-2502  0717 96            	ldw	x,sp
-2503  0718 1c0002        	addw	x,#OFST-58
-2504  071b cd0000        	call	c_ltor
-2506  071e ae009b        	ldw	x,#L26
-2507  0721 cd0000        	call	c_lumd
-2509  0724 be02          	ldw	x,c_lreg+2
-2510  0726 89            	pushw	x
-2511  0727 be00          	ldw	x,c_lreg
-2512  0729 89            	pushw	x
-2513  072a ae01c0        	ldw	x,#L735
-2514  072d 89            	pushw	x
-2515  072e 96            	ldw	x,sp
-2516  072f 1c000c        	addw	x,#OFST-48
-2517  0732 cd0000        	call	_sprintf
-2519  0735 5b06          	addw	sp,#6
-2520                     ; 796     strcat(localBuffer, temp1);
-2522  0737 96            	ldw	x,sp
-2523  0738 1c0006        	addw	x,#OFST-54
-2524  073b 89            	pushw	x
-2525  073c 96            	ldw	x,sp
-2526  073d 1c0017        	addw	x,#OFST-37
-2527  0740 cd0000        	call	_strcat
-2529  0743 85            	popw	x
-2530                     ; 798     strcat(localBuffer, "\"}");
-2532  0744 ae01f4        	ldw	x,#L314
-2533  0747 89            	pushw	x
-2534  0748 96            	ldw	x,sp
-2535  0749 1c0017        	addw	x,#OFST-37
-2536  074c cd0000        	call	_strcat
-2538  074f 85            	popw	x
-2539                     ; 807     vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
-2541  0750 96            	ldw	x,sp
-2542  0751 1c0015        	addw	x,#OFST-39
-2543  0754 89            	pushw	x
-2544  0755 ae0096        	ldw	x,#_aunMQTT_Publish_Topic
-2545  0758 cd0000        	call	_vMQTT_Publish
-2547  075b 85            	popw	x
-2548                     ; 809 }
-2551  075c 5b3c          	addw	sp,#60
-2552  075e 81            	ret
-2555                     	switch	.const
-2556  0135               L317_localBuffer:
-2557  0135 7b22          	dc.b	"{",34
-2558  0137 6675656c22    	dc.b	"fuel",34
-2559  013c 3a22          	dc.b	":",34
-2560  013e 313233343536  	dc.b	"123456.89",34
-2561  0148 7d00          	dc.b	"}",0
-2562  014a 000000000000  	ds.b	9
-2563  0153               L517_temp1:
-2564  0153 00            	dc.b	0
-2565  0154 000000000000  	ds.b	9
-2625                     ; 811 void vMevris_Send_FuelLevel()
-2625                     ; 812 {
-2626                     	switch	.text
-2627  075f               _vMevris_Send_FuelLevel:
-2629  075f 5229          	subw	sp,#41
-2630       00000029      OFST:	set	41
-2633                     ; 813     uint8_t localBuffer[30] = "{\"fuel\":\"123456.89\"}";
-2635  0761 96            	ldw	x,sp
-2636  0762 1c000c        	addw	x,#OFST-29
-2637  0765 90ae0135      	ldw	y,#L317_localBuffer
-2638  0769 a61e          	ld	a,#30
-2639  076b cd0000        	call	c_xymvx
-2641                     ; 814     uint8_t unSendDataLength = 0;
-2643                     ; 815     uint8_t temp1[10] = "";
-2645  076e 96            	ldw	x,sp
-2646  076f 1c0002        	addw	x,#OFST-39
-2647  0772 90ae0153      	ldw	y,#L517_temp1
-2648  0776 a60a          	ld	a,#10
-2649  0778 cd0000        	call	c_xymvx
-2651                     ; 816     vClearBuffer(localBuffer, 30);
-2653  077b 4b1e          	push	#30
-2654  077d 96            	ldw	x,sp
-2655  077e 1c000d        	addw	x,#OFST-28
-2656  0781 cd0000        	call	_vClearBuffer
-2658  0784 84            	pop	a
-2659                     ; 817     strcpy(localBuffer, "{\"fuel\":\"");
-2661  0785 96            	ldw	x,sp
-2662  0786 1c000c        	addw	x,#OFST-29
-2663  0789 90ae015d      	ldw	y,#L547
-2664  078d               L201:
-2665  078d 90f6          	ld	a,(y)
-2666  078f 905c          	incw	y
-2667  0791 f7            	ld	(x),a
-2668  0792 5c            	incw	x
-2669  0793 4d            	tnz	a
-2670  0794 26f7          	jrne	L201
-2671                     ; 818     sprintf(temp1, "%ld", Fuellevel);
-2673  0796 ce0002        	ldw	x,_Fuellevel+2
-2674  0799 89            	pushw	x
-2675  079a ce0000        	ldw	x,_Fuellevel
-2676  079d 89            	pushw	x
-2677  079e ae01c0        	ldw	x,#L735
-2678  07a1 89            	pushw	x
-2679  07a2 96            	ldw	x,sp
-2680  07a3 1c0008        	addw	x,#OFST-33
-2681  07a6 cd0000        	call	_sprintf
-2683  07a9 5b06          	addw	sp,#6
-2684                     ; 819     strcat(localBuffer, temp1);
-2686  07ab 96            	ldw	x,sp
-2687  07ac 1c0002        	addw	x,#OFST-39
-2688  07af 89            	pushw	x
-2689  07b0 96            	ldw	x,sp
-2690  07b1 1c000e        	addw	x,#OFST-27
-2691  07b4 cd0000        	call	_strcat
-2693  07b7 85            	popw	x
-2694                     ; 820     strcat(localBuffer, "\"}");
-2696  07b8 ae01f4        	ldw	x,#L314
-2697  07bb 89            	pushw	x
-2698  07bc 96            	ldw	x,sp
-2699  07bd 1c000e        	addw	x,#OFST-27
-2700  07c0 cd0000        	call	_strcat
-2702  07c3 85            	popw	x
-2703                     ; 829     vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
-2705  07c4 96            	ldw	x,sp
-2706  07c5 1c000c        	addw	x,#OFST-29
-2707  07c8 89            	pushw	x
-2708  07c9 ae0096        	ldw	x,#_aunMQTT_Publish_Topic
-2709  07cc cd0000        	call	_vMQTT_Publish
-2711  07cf 85            	popw	x
-2712                     ; 831 }
-2715  07d0 5b29          	addw	sp,#41
-2716  07d2 81            	ret
-2803                     	xdef	_sendDataToCloud
-2804                     	xref.b	_IMEIRecievedOKFlag
-2805                     	xdef	_bCONNACK_Recieved
-2806                     	xdef	_aunPushed_Data
-2807                     	xdef	_vMevris_Send_Phase
-2808                     	xdef	_vMevris_Send_FuelLevel
-2809                     	xdef	_vMevris_Send_EngineTemp
-2810                     	xdef	_vMevris_Send_RadiatorTemp
-2811                     	xdef	_vMevris_Send_BatteryVolt
-2812                     	xdef	_aunMQTT_Publish_Topic
-2813                     	xdef	_aunMQTT_Subscribe_Topic
-2814                     	xdef	_aunMQTT_ClientID
-2815                     	xref	_Temperature2
-2816                     	xref	_Temperature1
-2817                     	xref	_Fuellevel
-2818                     	xref.b	_batVolt
-2819                     	xref	_Watt_Phase3
-2820                     	xref	_Ampere_Phase3
-2821                     	xref	_Voltage_Phase3
-2822                     	xref	_Watt_Phase2
-2823                     	xref	_Ampere_Phase2
-2824                     	xref	_Voltage_Phase2
-2825                     	xref	_Watt_Phase1
-2826                     	xref	_Ampere_Phase1
-2827                     	xref	_Voltage_Phase1
-2828                     	xdef	_vMevris_Send_Version
-2829                     	xdef	_vMevris_Send_IMEI
-2830                     	xdef	_punGet_Client_ID
-2831                     	xdef	_punGet_Command_Topic
-2832                     	xdef	_punGet_Event_Topic
-2833                     	xdef	_vHandleMevris_MQTT_Recv_Data
-2834                     	xdef	_vHandleMevrisRecievedData
-2835                     	xref	_enGet_TCP_Status
-2836                     	xref	_vClearBuffer
-2837                     	xref	_response_buffer
-2838                     	xref	_vMQTT_Publish
-2839                     	xref.b	_aunIMEI
-2840                     	xref	_sprintf
-2841                     	xref	_strstr
-2842                     	xref	_strcat
-2843                     	switch	.const
-2844  015d               L547:
-2845  015d 7b22          	dc.b	"{",34
-2846  015f 6675656c22    	dc.b	"fuel",34
-2847  0164 3a2200        	dc.b	":",34,0
-2848  0167               L117:
-2849  0167 7b22          	dc.b	"{",34
-2850  0169 456e67696e65  	dc.b	"EngineTemperature",34
-2851  017b 3a2200        	dc.b	":",34,0
-2852  017e               L746:
-2853  017e 42c80000      	dc.w	17096,0
-2854  0182               L146:
-2855  0182 7b22          	dc.b	"{",34
-2856  0184 526164696174  	dc.b	"RadiatorTemperatur"
-2857  0196 6522          	dc.b	"e",34
-2858  0198 3a2200        	dc.b	":",34,0
-2859  019b               L106:
-2860  019b 7b22          	dc.b	"{",34
-2861  019d 626174746572  	dc.b	"battery",34
-2862  01a5 3a2200        	dc.b	":",34,0
-2863  01a8               L545:
-2864  01a8 222c22637572  	dc.b	34,44,34,99,117,114
-2865  01ae 72656e7400    	dc.b	"rent",0
-2866  01b3               L345:
-2867  01b3 222c22766f6c  	dc.b	34,44,34,118,111,108
-2868  01b9 7461676500    	dc.b	"tage",0
-2869  01be               L145:
-2870  01be 2e00          	dc.b	".",0
-2871  01c0               L735:
-2872  01c0 256c6400      	dc.b	"%ld",0
-2873  01c4               L535:
-2874  01c4 223a2200      	dc.b	34,58,34,0
-2875  01c8               L335:
-2876  01c8 7b22          	dc.b	"{",34
-2877  01ca 706f77657200  	dc.b	"power",0
-2878  01d0               L135:
-2879  01d0 256400        	dc.b	"%d",0
-2880  01d3               L744:
-2881  01d3 302e302e3030  	dc.b	"0.0.001",0
-2882  01db               L544:
-2883  01db 222c22687722  	dc.b	34,44,34,104,119,34
-2884  01e1 3a2200        	dc.b	":",34,0
-2885  01e4               L344:
-2886  01e4 322e342e3030  	dc.b	"2.4.001",0
-2887  01ec               L144:
-2888  01ec 7b22          	dc.b	"{",34
-2889  01ee 667722        	dc.b	"fw",34
-2890  01f1 3a2200        	dc.b	":",34,0
-2891  01f4               L314:
-2892  01f4 227d00        	dc.b	34,125,0
-2893  01f7               L114:
-2894  01f7 7b22          	dc.b	"{",34
-2895  01f9 696d656922    	dc.b	"imei",34
-2896  01fe 3a2200        	dc.b	":",34,0
-2897  0201               L363:
-2898  0201 6576656e7400  	dc.b	"event",0
-2899  0207               L343:
-2900  0207 636f6d6d616e  	dc.b	"command",0
-2901  020f               L143:
-2902  020f 2f00          	dc.b	"/",0
-2903  0211               L123:
-2904  0211 67656e00      	dc.b	"gen",0
-2905  0215               L703:
-2906  0215 22696d656922  	dc.b	34,105,109,101,105,34,0
-2907  021c               L303:
-2908  021c 22696e666f22  	dc.b	34,105,110,102,111,34,0
-2909  0223               L132:
-2910  0223 73633200      	dc.b	"sc2",0
-2911                     	xref.b	c_lreg
-2912                     	xref.b	c_x
-2932                     	xref	c_rtol
-2933                     	xref	c_ftol
-2934                     	xref	c_fmul
-2935                     	xref	c_lumd
-2936                     	xref	c_ludv
-2937                     	xref	c_ltor
-2938                     	xref	c_xymvx
-2939                     	end
+2155                     	switch	.const
+2156  00fe               L47:
+2157  00fe 000186a1      	dc.l	100001
+2158                     ; 754 void vMevris_Send_RadiatorTemp()
+2158                     ; 755 {
+2159                     	switch	.text
+2160  05ba               _vMevris_Send_RadiatorTemp:
+2162  05ba 523c          	subw	sp,#60
+2163       0000003c      OFST:	set	60
+2166                     ; 756     uint8_t localBuffer[40] = "{\"RadiatorTemperature\":\"123456.89\"}";
+2168  05bc 96            	ldw	x,sp
+2169  05bd 1c0015        	addw	x,#OFST-39
+2170  05c0 90ae00c7      	ldw	y,#L306_localBuffer
+2171  05c4 a628          	ld	a,#40
+2172  05c6 cd0000        	call	c_xymvx
+2174                     ; 757     uint8_t unSendDataLength = 0;
+2176                     ; 758     uint8_t temp1[15] = "";
+2178  05c9 96            	ldw	x,sp
+2179  05ca 1c0002        	addw	x,#OFST-58
+2180  05cd 90ae00ef      	ldw	y,#L506_temp1
+2181  05d1 a60f          	ld	a,#15
+2182  05d3 cd0000        	call	c_xymvx
+2184                     ; 759     uint32_t myVar = 0;
+2186                     ; 760     vClearBuffer(localBuffer, 40);
+2188  05d6 4b28          	push	#40
+2189  05d8 96            	ldw	x,sp
+2190  05d9 1c0016        	addw	x,#OFST-38
+2191  05dc cd0000        	call	_vClearBuffer
+2193  05df 84            	pop	a
+2194                     ; 761     strcpy(localBuffer, "{\"RadiatorTemperature\":\"");
+2196  05e0 96            	ldw	x,sp
+2197  05e1 1c0015        	addw	x,#OFST-39
+2198  05e4 90ae0186      	ldw	y,#L146
+2199  05e8               L27:
+2200  05e8 90f6          	ld	a,(y)
+2201  05ea 905c          	incw	y
+2202  05ec f7            	ld	(x),a
+2203  05ed 5c            	incw	x
+2204  05ee 4d            	tnz	a
+2205  05ef 26f7          	jrne	L27
+2206                     ; 762     myVar = (uint32_t)(Temperature1 * 100);
+2208  05f1 ae0000        	ldw	x,#_Temperature1
+2209  05f4 cd0000        	call	c_ltor
+2211  05f7 ae0182        	ldw	x,#L746
+2212  05fa cd0000        	call	c_fmul
+2214  05fd cd0000        	call	c_ftol
+2216  0600 96            	ldw	x,sp
+2217  0601 1c0011        	addw	x,#OFST-43
+2218  0604 cd0000        	call	c_rtol
+2221                     ; 763     if(myVar > 100000)
+2223  0607 96            	ldw	x,sp
+2224  0608 1c0011        	addw	x,#OFST-43
+2225  060b cd0000        	call	c_ltor
+2227  060e ae00fe        	ldw	x,#L47
+2228  0611 cd0000        	call	c_lcmp
+2230  0614 250a          	jrult	L356
+2231                     ; 764     myVar = 0;
+2233  0616 ae0000        	ldw	x,#0
+2234  0619 1f13          	ldw	(OFST-41,sp),x
+2235  061b ae0000        	ldw	x,#0
+2236  061e 1f11          	ldw	(OFST-43,sp),x
+2238  0620               L356:
+2239                     ; 765     sprintf(temp1, "%ld", myVar / 100);
+2241  0620 96            	ldw	x,sp
+2242  0621 1c0011        	addw	x,#OFST-43
+2243  0624 cd0000        	call	c_ltor
+2245  0627 ae009b        	ldw	x,#L26
+2246  062a cd0000        	call	c_ludv
+2248  062d be02          	ldw	x,c_lreg+2
+2249  062f 89            	pushw	x
+2250  0630 be00          	ldw	x,c_lreg
+2251  0632 89            	pushw	x
+2252  0633 ae01c4        	ldw	x,#L735
+2253  0636 89            	pushw	x
+2254  0637 96            	ldw	x,sp
+2255  0638 1c0008        	addw	x,#OFST-52
+2256  063b cd0000        	call	_sprintf
+2258  063e 5b06          	addw	sp,#6
+2259                     ; 766     strcat(localBuffer, temp1);
+2261  0640 96            	ldw	x,sp
+2262  0641 1c0002        	addw	x,#OFST-58
+2263  0644 89            	pushw	x
+2264  0645 96            	ldw	x,sp
+2265  0646 1c0017        	addw	x,#OFST-37
+2266  0649 cd0000        	call	_strcat
+2268  064c 85            	popw	x
+2269                     ; 767     strcat(localBuffer, ".");
+2271  064d ae01c2        	ldw	x,#L145
+2272  0650 89            	pushw	x
+2273  0651 96            	ldw	x,sp
+2274  0652 1c0017        	addw	x,#OFST-37
+2275  0655 cd0000        	call	_strcat
+2277  0658 85            	popw	x
+2278                     ; 768     sprintf(temp1, "%ld", myVar % 100);
+2280  0659 96            	ldw	x,sp
+2281  065a 1c0011        	addw	x,#OFST-43
+2282  065d cd0000        	call	c_ltor
+2284  0660 ae009b        	ldw	x,#L26
+2285  0663 cd0000        	call	c_lumd
+2287  0666 be02          	ldw	x,c_lreg+2
+2288  0668 89            	pushw	x
+2289  0669 be00          	ldw	x,c_lreg
+2290  066b 89            	pushw	x
+2291  066c ae01c4        	ldw	x,#L735
+2292  066f 89            	pushw	x
+2293  0670 96            	ldw	x,sp
+2294  0671 1c0008        	addw	x,#OFST-52
+2295  0674 cd0000        	call	_sprintf
+2297  0677 5b06          	addw	sp,#6
+2298                     ; 769     strcat(localBuffer, temp1);
+2300  0679 96            	ldw	x,sp
+2301  067a 1c0002        	addw	x,#OFST-58
+2302  067d 89            	pushw	x
+2303  067e 96            	ldw	x,sp
+2304  067f 1c0017        	addw	x,#OFST-37
+2305  0682 cd0000        	call	_strcat
+2307  0685 85            	popw	x
+2308                     ; 771     strcat(localBuffer, "\"}");
+2310  0686 ae01f8        	ldw	x,#L314
+2311  0689 89            	pushw	x
+2312  068a 96            	ldw	x,sp
+2313  068b 1c0017        	addw	x,#OFST-37
+2314  068e cd0000        	call	_strcat
+2316  0691 85            	popw	x
+2317                     ; 772     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
+2319  0692 4b64          	push	#100
+2320  0694 ae0000        	ldw	x,#_aunPushed_Data
+2321  0697 cd0000        	call	_vClearBuffer
+2323  069a 84            	pop	a
+2324                     ; 781     vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+2326  069b 96            	ldw	x,sp
+2327  069c 1c0015        	addw	x,#OFST-39
+2328  069f 89            	pushw	x
+2329  06a0 ae0096        	ldw	x,#_aunMQTT_Publish_Topic
+2330  06a3 cd0000        	call	_vMQTT_Publish
+2332  06a6 85            	popw	x
+2333                     ; 783 }
+2336  06a7 5b3c          	addw	sp,#60
+2337  06a9 81            	ret
+2340                     	switch	.const
+2341  0102               L556_localBuffer:
+2342  0102 7b22          	dc.b	"{",34
+2343  0104 456e67696e65  	dc.b	"EngineTemperature",34
+2344  0116 3a22          	dc.b	":",34
+2345  0118 313233343536  	dc.b	"123456.89",34
+2346  0122 7d00          	dc.b	"}",0
+2347  0124 000000000000  	ds.b	6
+2348  012a               L756_temp1:
+2349  012a 00            	dc.b	0
+2350  012b 000000000000  	ds.b	14
+2419                     ; 785 void vMevris_Send_EngineTemp()
+2419                     ; 786 {
+2420                     	switch	.text
+2421  06aa               _vMevris_Send_EngineTemp:
+2423  06aa 523c          	subw	sp,#60
+2424       0000003c      OFST:	set	60
+2427                     ; 787     uint8_t localBuffer[40] = "{\"EngineTemperature\":\"123456.89\"}";
+2429  06ac 96            	ldw	x,sp
+2430  06ad 1c0015        	addw	x,#OFST-39
+2431  06b0 90ae0102      	ldw	y,#L556_localBuffer
+2432  06b4 a628          	ld	a,#40
+2433  06b6 cd0000        	call	c_xymvx
+2435                     ; 788     uint8_t unSendDataLength = 0;
+2437                     ; 789     uint8_t temp1[15] = "";
+2439  06b9 96            	ldw	x,sp
+2440  06ba 1c0002        	addw	x,#OFST-58
+2441  06bd 90ae012a      	ldw	y,#L756_temp1
+2442  06c1 a60f          	ld	a,#15
+2443  06c3 cd0000        	call	c_xymvx
+2445                     ; 790     uint32_t myVar = 0;
+2447                     ; 791     vClearBuffer(localBuffer, 40);
+2449  06c6 4b28          	push	#40
+2450  06c8 96            	ldw	x,sp
+2451  06c9 1c0016        	addw	x,#OFST-38
+2452  06cc cd0000        	call	_vClearBuffer
+2454  06cf 84            	pop	a
+2455                     ; 792     strcpy(localBuffer, "{\"EngineTemperature\":\"");
+2457  06d0 96            	ldw	x,sp
+2458  06d1 1c0015        	addw	x,#OFST-39
+2459  06d4 90ae016b      	ldw	y,#L317
+2460  06d8               L001:
+2461  06d8 90f6          	ld	a,(y)
+2462  06da 905c          	incw	y
+2463  06dc f7            	ld	(x),a
+2464  06dd 5c            	incw	x
+2465  06de 4d            	tnz	a
+2466  06df 26f7          	jrne	L001
+2467                     ; 793     myVar = (uint32_t)(Temperature2 * 100);
+2469  06e1 ae0000        	ldw	x,#_Temperature2
+2470  06e4 cd0000        	call	c_ltor
+2472  06e7 ae0182        	ldw	x,#L746
+2473  06ea cd0000        	call	c_fmul
+2475  06ed cd0000        	call	c_ftol
+2477  06f0 96            	ldw	x,sp
+2478  06f1 1c0011        	addw	x,#OFST-43
+2479  06f4 cd0000        	call	c_rtol
+2482                     ; 794     if(myVar > 100000)
+2484  06f7 96            	ldw	x,sp
+2485  06f8 1c0011        	addw	x,#OFST-43
+2486  06fb cd0000        	call	c_ltor
+2488  06fe ae00fe        	ldw	x,#L47
+2489  0701 cd0000        	call	c_lcmp
+2491  0704 250a          	jrult	L517
+2492                     ; 795     myVar = 0;
+2494  0706 ae0000        	ldw	x,#0
+2495  0709 1f13          	ldw	(OFST-41,sp),x
+2496  070b ae0000        	ldw	x,#0
+2497  070e 1f11          	ldw	(OFST-43,sp),x
+2499  0710               L517:
+2500                     ; 796     sprintf(temp1, "%ld", myVar / 100);
+2502  0710 96            	ldw	x,sp
+2503  0711 1c0011        	addw	x,#OFST-43
+2504  0714 cd0000        	call	c_ltor
+2506  0717 ae009b        	ldw	x,#L26
+2507  071a cd0000        	call	c_ludv
+2509  071d be02          	ldw	x,c_lreg+2
+2510  071f 89            	pushw	x
+2511  0720 be00          	ldw	x,c_lreg
+2512  0722 89            	pushw	x
+2513  0723 ae01c4        	ldw	x,#L735
+2514  0726 89            	pushw	x
+2515  0727 96            	ldw	x,sp
+2516  0728 1c0008        	addw	x,#OFST-52
+2517  072b cd0000        	call	_sprintf
+2519  072e 5b06          	addw	sp,#6
+2520                     ; 797     strcat(localBuffer, temp1);
+2522  0730 96            	ldw	x,sp
+2523  0731 1c0002        	addw	x,#OFST-58
+2524  0734 89            	pushw	x
+2525  0735 96            	ldw	x,sp
+2526  0736 1c0017        	addw	x,#OFST-37
+2527  0739 cd0000        	call	_strcat
+2529  073c 85            	popw	x
+2530                     ; 798     strcat(localBuffer, ".");
+2532  073d ae01c2        	ldw	x,#L145
+2533  0740 89            	pushw	x
+2534  0741 96            	ldw	x,sp
+2535  0742 1c0017        	addw	x,#OFST-37
+2536  0745 cd0000        	call	_strcat
+2538  0748 85            	popw	x
+2539                     ; 799     sprintf(temp1, "%ld", myVar % 100);
+2541  0749 96            	ldw	x,sp
+2542  074a 1c0011        	addw	x,#OFST-43
+2543  074d cd0000        	call	c_ltor
+2545  0750 ae009b        	ldw	x,#L26
+2546  0753 cd0000        	call	c_lumd
+2548  0756 be02          	ldw	x,c_lreg+2
+2549  0758 89            	pushw	x
+2550  0759 be00          	ldw	x,c_lreg
+2551  075b 89            	pushw	x
+2552  075c ae01c4        	ldw	x,#L735
+2553  075f 89            	pushw	x
+2554  0760 96            	ldw	x,sp
+2555  0761 1c0008        	addw	x,#OFST-52
+2556  0764 cd0000        	call	_sprintf
+2558  0767 5b06          	addw	sp,#6
+2559                     ; 800     strcat(localBuffer, temp1);
+2561  0769 96            	ldw	x,sp
+2562  076a 1c0002        	addw	x,#OFST-58
+2563  076d 89            	pushw	x
+2564  076e 96            	ldw	x,sp
+2565  076f 1c0017        	addw	x,#OFST-37
+2566  0772 cd0000        	call	_strcat
+2568  0775 85            	popw	x
+2569                     ; 802     strcat(localBuffer, "\"}");
+2571  0776 ae01f8        	ldw	x,#L314
+2572  0779 89            	pushw	x
+2573  077a 96            	ldw	x,sp
+2574  077b 1c0017        	addw	x,#OFST-37
+2575  077e cd0000        	call	_strcat
+2577  0781 85            	popw	x
+2578                     ; 811     vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+2580  0782 96            	ldw	x,sp
+2581  0783 1c0015        	addw	x,#OFST-39
+2582  0786 89            	pushw	x
+2583  0787 ae0096        	ldw	x,#_aunMQTT_Publish_Topic
+2584  078a cd0000        	call	_vMQTT_Publish
+2586  078d 85            	popw	x
+2587                     ; 813 }
+2590  078e 5b3c          	addw	sp,#60
+2591  0790 81            	ret
+2594                     	switch	.const
+2595  0139               L717_localBuffer:
+2596  0139 7b22          	dc.b	"{",34
+2597  013b 6675656c22    	dc.b	"fuel",34
+2598  0140 3a22          	dc.b	":",34
+2599  0142 313233343536  	dc.b	"123456.89",34
+2600  014c 7d00          	dc.b	"}",0
+2601  014e 000000000000  	ds.b	9
+2602  0157               L127_temp1:
+2603  0157 00            	dc.b	0
+2604  0158 000000000000  	ds.b	9
+2664                     ; 815 void vMevris_Send_FuelLevel()
+2664                     ; 816 {
+2665                     	switch	.text
+2666  0791               _vMevris_Send_FuelLevel:
+2668  0791 5229          	subw	sp,#41
+2669       00000029      OFST:	set	41
+2672                     ; 817     uint8_t localBuffer[30] = "{\"fuel\":\"123456.89\"}";
+2674  0793 96            	ldw	x,sp
+2675  0794 1c000c        	addw	x,#OFST-29
+2676  0797 90ae0139      	ldw	y,#L717_localBuffer
+2677  079b a61e          	ld	a,#30
+2678  079d cd0000        	call	c_xymvx
+2680                     ; 818     uint8_t unSendDataLength = 0;
+2682                     ; 819     uint8_t temp1[10] = "";
+2684  07a0 96            	ldw	x,sp
+2685  07a1 1c0002        	addw	x,#OFST-39
+2686  07a4 90ae0157      	ldw	y,#L127_temp1
+2687  07a8 a60a          	ld	a,#10
+2688  07aa cd0000        	call	c_xymvx
+2690                     ; 820     vClearBuffer(localBuffer, 30);
+2692  07ad 4b1e          	push	#30
+2693  07af 96            	ldw	x,sp
+2694  07b0 1c000d        	addw	x,#OFST-28
+2695  07b3 cd0000        	call	_vClearBuffer
+2697  07b6 84            	pop	a
+2698                     ; 821     strcpy(localBuffer, "{\"fuel\":\"");
+2700  07b7 96            	ldw	x,sp
+2701  07b8 1c000c        	addw	x,#OFST-29
+2702  07bb 90ae0161      	ldw	y,#L157
+2703  07bf               L401:
+2704  07bf 90f6          	ld	a,(y)
+2705  07c1 905c          	incw	y
+2706  07c3 f7            	ld	(x),a
+2707  07c4 5c            	incw	x
+2708  07c5 4d            	tnz	a
+2709  07c6 26f7          	jrne	L401
+2710                     ; 822     sprintf(temp1, "%ld", Fuellevel);
+2712  07c8 ce0002        	ldw	x,_Fuellevel+2
+2713  07cb 89            	pushw	x
+2714  07cc ce0000        	ldw	x,_Fuellevel
+2715  07cf 89            	pushw	x
+2716  07d0 ae01c4        	ldw	x,#L735
+2717  07d3 89            	pushw	x
+2718  07d4 96            	ldw	x,sp
+2719  07d5 1c0008        	addw	x,#OFST-33
+2720  07d8 cd0000        	call	_sprintf
+2722  07db 5b06          	addw	sp,#6
+2723                     ; 823     strcat(localBuffer, temp1);
+2725  07dd 96            	ldw	x,sp
+2726  07de 1c0002        	addw	x,#OFST-39
+2727  07e1 89            	pushw	x
+2728  07e2 96            	ldw	x,sp
+2729  07e3 1c000e        	addw	x,#OFST-27
+2730  07e6 cd0000        	call	_strcat
+2732  07e9 85            	popw	x
+2733                     ; 824     strcat(localBuffer, "\"}");
+2735  07ea ae01f8        	ldw	x,#L314
+2736  07ed 89            	pushw	x
+2737  07ee 96            	ldw	x,sp
+2738  07ef 1c000e        	addw	x,#OFST-27
+2739  07f2 cd0000        	call	_strcat
+2741  07f5 85            	popw	x
+2742                     ; 833     vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+2744  07f6 96            	ldw	x,sp
+2745  07f7 1c000c        	addw	x,#OFST-29
+2746  07fa 89            	pushw	x
+2747  07fb ae0096        	ldw	x,#_aunMQTT_Publish_Topic
+2748  07fe cd0000        	call	_vMQTT_Publish
+2750  0801 85            	popw	x
+2751                     ; 835 }
+2754  0802 5b29          	addw	sp,#41
+2755  0804 81            	ret
+2842                     	xdef	_sendDataToCloud
+2843                     	xref.b	_IMEIRecievedOKFlag
+2844                     	xdef	_bCONNACK_Recieved
+2845                     	xdef	_aunPushed_Data
+2846                     	xdef	_vMevris_Send_Phase
+2847                     	xdef	_vMevris_Send_FuelLevel
+2848                     	xdef	_vMevris_Send_EngineTemp
+2849                     	xdef	_vMevris_Send_RadiatorTemp
+2850                     	xdef	_vMevris_Send_BatteryVolt
+2851                     	xdef	_aunMQTT_Publish_Topic
+2852                     	xdef	_aunMQTT_Subscribe_Topic
+2853                     	xdef	_aunMQTT_ClientID
+2854                     	xref	_Temperature2
+2855                     	xref	_Temperature1
+2856                     	xref	_Fuellevel
+2857                     	xref.b	_batVolt
+2858                     	xref	_Watt_Phase3
+2859                     	xref	_Ampere_Phase3
+2860                     	xref	_Voltage_Phase3
+2861                     	xref	_Watt_Phase2
+2862                     	xref	_Ampere_Phase2
+2863                     	xref	_Voltage_Phase2
+2864                     	xref	_Watt_Phase1
+2865                     	xref	_Ampere_Phase1
+2866                     	xref	_Voltage_Phase1
+2867                     	xdef	_vMevris_Send_Version
+2868                     	xdef	_vMevris_Send_IMEI
+2869                     	xdef	_punGet_Client_ID
+2870                     	xdef	_punGet_Command_Topic
+2871                     	xdef	_punGet_Event_Topic
+2872                     	xdef	_vHandleMevris_MQTT_Recv_Data
+2873                     	xdef	_vHandleMevrisRecievedData
+2874                     	xref	_enGet_TCP_Status
+2875                     	xref	_vClearBuffer
+2876                     	xref	_response_buffer
+2877                     	xref	_vMQTT_Publish
+2878                     	xref.b	_aunIMEI
+2879                     	xref	_sprintf
+2880                     	xref	_strstr
+2881                     	xref	_strcat
+2882                     	switch	.const
+2883  0161               L157:
+2884  0161 7b22          	dc.b	"{",34
+2885  0163 6675656c22    	dc.b	"fuel",34
+2886  0168 3a2200        	dc.b	":",34,0
+2887  016b               L317:
+2888  016b 7b22          	dc.b	"{",34
+2889  016d 456e67696e65  	dc.b	"EngineTemperature",34
+2890  017f 3a2200        	dc.b	":",34,0
+2891  0182               L746:
+2892  0182 42c80000      	dc.w	17096,0
+2893  0186               L146:
+2894  0186 7b22          	dc.b	"{",34
+2895  0188 526164696174  	dc.b	"RadiatorTemperatur"
+2896  019a 6522          	dc.b	"e",34
+2897  019c 3a2200        	dc.b	":",34,0
+2898  019f               L106:
+2899  019f 7b22          	dc.b	"{",34
+2900  01a1 626174746572  	dc.b	"battery",34
+2901  01a9 3a2200        	dc.b	":",34,0
+2902  01ac               L545:
+2903  01ac 222c22637572  	dc.b	34,44,34,99,117,114
+2904  01b2 72656e7400    	dc.b	"rent",0
+2905  01b7               L345:
+2906  01b7 222c22766f6c  	dc.b	34,44,34,118,111,108
+2907  01bd 7461676500    	dc.b	"tage",0
+2908  01c2               L145:
+2909  01c2 2e00          	dc.b	".",0
+2910  01c4               L735:
+2911  01c4 256c6400      	dc.b	"%ld",0
+2912  01c8               L535:
+2913  01c8 223a2200      	dc.b	34,58,34,0
+2914  01cc               L335:
+2915  01cc 7b22          	dc.b	"{",34
+2916  01ce 706f77657200  	dc.b	"power",0
+2917  01d4               L135:
+2918  01d4 256400        	dc.b	"%d",0
+2919  01d7               L744:
+2920  01d7 302e302e3030  	dc.b	"0.0.001",0
+2921  01df               L544:
+2922  01df 222c22687722  	dc.b	34,44,34,104,119,34
+2923  01e5 3a2200        	dc.b	":",34,0
+2924  01e8               L344:
+2925  01e8 322e342e3030  	dc.b	"2.4.001",0
+2926  01f0               L144:
+2927  01f0 7b22          	dc.b	"{",34
+2928  01f2 667722        	dc.b	"fw",34
+2929  01f5 3a2200        	dc.b	":",34,0
+2930  01f8               L314:
+2931  01f8 227d00        	dc.b	34,125,0
+2932  01fb               L114:
+2933  01fb 7b22          	dc.b	"{",34
+2934  01fd 696d656922    	dc.b	"imei",34
+2935  0202 3a2200        	dc.b	":",34,0
+2936  0205               L363:
+2937  0205 6576656e7400  	dc.b	"event",0
+2938  020b               L343:
+2939  020b 636f6d6d616e  	dc.b	"command",0
+2940  0213               L143:
+2941  0213 2f00          	dc.b	"/",0
+2942  0215               L123:
+2943  0215 67656e00      	dc.b	"gen",0
+2944  0219               L703:
+2945  0219 22696d656922  	dc.b	34,105,109,101,105,34,0
+2946  0220               L303:
+2947  0220 22696e666f22  	dc.b	34,105,110,102,111,34,0
+2948  0227               L132:
+2949  0227 73633200      	dc.b	"sc2",0
+2950                     	xref.b	c_lreg
+2951                     	xref.b	c_x
+2971                     	xref	c_lcmp
+2972                     	xref	c_rtol
+2973                     	xref	c_ftol
+2974                     	xref	c_fmul
+2975                     	xref	c_lumd
+2976                     	xref	c_ludv
+2977                     	xref	c_ltor
+2978                     	xref	c_xymvx
+2979                     	end

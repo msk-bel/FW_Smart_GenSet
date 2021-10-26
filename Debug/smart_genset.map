@@ -1,27 +1,27 @@
 
-Map of Debug\smart_genset.sm8 from link file Debug\smart_genset.lkf - Fri Oct 22 14:38:40 2021
+Map of Debug\smart_genset.sm8 from link file Debug\smart_genset.lkf - Tue Oct 26 12:20:03 2021
 
 
                                --------
                                Segments
                                --------
 
-start 00008080 end 000088f9 length  2169 segment .const
-start 00008ab0 end 0000f25d length 26541 segment .text
+start 00008080 end 0000891f length  2207 segment .const
+start 00008ad6 end 0000f2ff length 26665 segment .text
 start 00004000 end 00004000 length     0 segment .eeprom
 start 00000000 end 00000060 length    96 segment .bsct, initialized
-start 0000890b end 0000896b length    96 segment .bsct, from
+start 00008931 end 00008991 length    96 segment .bsct, from
 start 00000060 end 000000b7 length    87 segment .ubsct
 start 0000b7:0 end 0000b7:6 length     6 segment .bit, initialized
-start 0000896b end 0000896c length     1 segment .bit, from
+start 00008991 end 00008992 length     1 segment .bit, from
 start 000000b8 end 000000b8 length     0 segment .share
 start 00000100 end 00000244 length   324 segment .data, initialized
-start 0000896c end 00008ab0 length   324 segment .data, from
+start 00008992 end 00008ad6 length   324 segment .data, from
 start 00000244 end 000002ac length   104 segment .bss
 start 00000000 end 00001a97 length  6807 segment .info.
 start 00000000 end 0001128c length 70284 segment .debug
 start 00008000 end 00008080 length   128 segment .const
-start 000088f9 end 0000890b length    18 segment .init
+start 0000891f end 00008931 length    18 segment .init
 
 
                                -------
@@ -29,13 +29,13 @@ start 000088f9 end 0000890b length    18 segment .init
                                -------
 
 C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8:
-start 00008ab0 end 00008b00 length    80 section .text
+start 00008ad6 end 00008b26 length    80 section .text
 start 00000244 end 00000244 length     0 section .bss
 start 00000060 end 00000060 length     0 section .ubsct
 start 00000000 end 00000034 length    52 section .info.
 
 Debug\main.o:
-start 00008b00 end 000099c9 length  3785 section .text
+start 00008b26 end 000099ef length  3785 section .text
 start 00000100 end 00000164 length   100 section .data
 start 00000000 end 00000013 length    19 section .bsct
 start ******** end ******** length     0 section .ubsct *** removed ***
@@ -49,339 +49,339 @@ start 00000b91 end 00000bd5 length    68 section .debug
 start 0000009f end 0000010f length   112 section .info.
 
 Debug\board.o:
-start 000099c9 end 00009db1 length  1000 section .text
+start 000099ef end 00009dd7 length  1000 section .text
 start 00000013 end 00000014 length     1 section .bsct
 start 00000060 end 00000073 length    19 section .ubsct
 start 00000bd5 end 00001329 length  1876 section .debug
 start 0000010f end 0000017b length   108 section .info.
 
 Debug\cloudservice.o:
-start 00009db1 end 0000a584 length  2003 section .text
+start 00009dd7 end 0000a5dc length  2053 section .text
 start 00000164 end 00000218 length   180 section .data
 start 00000014 end 00000016 length     2 section .bsct
 start 00000073 end 00000074 length     1 section .ubsct
 start 00001329 end 00002108 length  3551 section .debug
 start 0000017b end 000001ee length   115 section .info.
-start 000082a7 end 000084ce length   551 section .const
+start 000082a7 end 000084d2 length   555 section .const
 
 Debug\getadc.o:
-start 0000a584 end 0000a7af length   555 section .text
+start 0000a5dc end 0000a807 length   555 section .text
 start 00000218 end 00000220 length     8 section .data
 start 00000244 end 00000248 length     4 section .bss
 start 00000016 end 0000001a length     4 section .bsct
 start 00002108 end 00002698 length  1424 section .debug
 start 000001ee end 0000025b length   109 section .info.
-start 000084ce end 000084ea length    28 section .const
+start 000084d2 end 000084ee length    28 section .const
 
 Debug\metering.o:
-start 0000a7af end 0000ac99 length  1258 section .text
+start 0000a807 end 0000acf1 length  1258 section .text
 start 0000001a end 00000042 length    40 section .bsct
 start 00002698 end 00002aac length  1044 section .debug
 start 0000025b end 000002ca length   111 section .info.
 start 0000b7:0 end 0000b7:2 length     2 section .bit
-start 000084ea end 000084ee length     4 section .const
+start 000084ee end 000084f2 length     4 section .const
 
 Debug\mqtt_protocol.o:
-start 0000ac99 end 0000aed8 length   575 section .text
+start 0000acf1 end 0000af5d length   620 section .text
 start 00002aac end 00002ded length   833 section .debug
 start 000002ca end 0000033e length   116 section .info.
-start 000084ee end 0000866a length   380 section .const
+start 000084f2 end 0000868e length   412 section .const
 
 Debug\simcom.o:
-start 0000aed8 end 0000b413 length  1339 section .text
+start 0000af5d end 0000b4a1 length  1348 section .text
 start 00000042 end 00000044 length     2 section .bsct
 start 00000074 end 00000098 length    36 section .ubsct
 start 00002ded end 00003619 length  2092 section .debug
 start 0000033e end 000003ab length   109 section .info.
-start 0000866a end 00008796 length   300 section .const
+start 0000868e end 000087ba length   300 section .const
 
 Debug\stm8s_adc2.o:
-start 0000b413 end 0000b5bb length   424 section .text
+start 0000b4a1 end 0000b649 length   424 section .text
 start 00003619 end 00004536 length  3869 section .debug
 start 000003ab end 0000041c length   113 section .info.
 
 Debug\stm8s_clk.o:
-start 0000b5bb end 0000b93f length   900 section .text
+start 0000b649 end 0000b9cd length   900 section .text
 start 00004536 end 00005ba5 length  5743 section .debug
 start 0000041c end 0000048c length   112 section .info.
-start 00008796 end 000087a2 length    12 section .const
+start 000087ba end 000087c6 length    12 section .const
 
 Debug\stm8s_delay.o:
-start 0000b93f end 0000b99c length    93 section .text
+start 0000b9cd end 0000ba2a length    93 section .text
 start 00000044 end 00000048 length     4 section .bsct
 start 00005ba5 end 00005d7d length   472 section .debug
 start 0000048c end 000004fe length   114 section .info.
-start 000087a2 end 000087aa length     8 section .const
+start 000087c6 end 000087ce length     8 section .const
 
 Debug\stm8s_exti.o:
-start 0000b99c end 0000ba84 length   232 section .text
+start 0000ba2a end 0000bb12 length   232 section .text
 start 00005d7d end 0000620c length  1167 section .debug
 start 000004fe end 0000056f length   113 section .info.
 
 Debug\stm8s_flash.o:
-start 0000ba84 end 0000bd95 length   785 section .text
+start 0000bb12 end 0000be23 length   785 section .text
 start 0000620c end 0000703c length  3632 section .debug
 start 0000056f end 000005e1 length   114 section .info.
 
 Debug\stm8s_gpio.o:
-start 0000bd95 end 0000be47 length   178 section .text
+start 0000be23 end 0000bed5 length   178 section .text
 start 0000703c end 00007a46 length  2570 section .debug
 start 000005e1 end 00000652 length   113 section .info.
 
 Debug\stm8s_it.o:
-start 0000be47 end 0000c2da length  1171 section .text
+start 0000bed5 end 0000c368 length  1171 section .text
 start 00000048 end 0000005d length    21 section .bsct
 start 00000098 end 000000ac length    20 section .ubsct
 start 00007a46 end 00008712 length  3276 section .debug
 start 00000652 end 000006c1 length   111 section .info.
 start 0000b7:2 end 0000b7:6 length     4 section .bit
-start 000087aa end 000087b6 length    12 section .const
+start 000087ce end 000087da length    12 section .const
 
 Debug\stm8s_itc.o:
-start 0000c2da end 0000c42e length   340 section .text
+start 0000c368 end 0000c4bc length   340 section .text
 start 00008712 end 00008d59 length  1607 section .debug
 start 000006c1 end 00000731 length   112 section .info.
-start 000087b6 end 0000881a length   100 section .const
+start 000087da end 0000883e length   100 section .const
 
 Debug\stm8s_iwdg.o:
-start 0000c42e end 0000c444 length    22 section .text
+start 0000c4bc end 0000c4d2 length    22 section .text
 start 00008d59 end 000090fb length   930 section .debug
 start 00000731 end 000007a2 length   113 section .info.
 
 Debug\stm8s_tim1.o:
-start 0000c444 end 0000cd12 length  2254 section .text
+start 0000c4d2 end 0000cda0 length  2254 section .text
 start 000090fb end 0000d085 length 16266 section .debug
 start 000007a2 end 00000813 length   113 section .info.
 
 Debug\stm8s_tim2.o:
-start 0000cd12 end 0000d1ec length  1242 section .text
+start 0000cda0 end 0000d27a length  1242 section .text
 start 0000d085 end 0000f399 length  8980 section .debug
 start 00000813 end 00000884 length   113 section .info.
 
 Debug\stm8s_uart1.o:
-start 0000d1ec end 0000d5a2 length   950 section .text
+start 0000d27a end 0000d630 length   950 section .text
 start 0000f399 end 00010785 length  5100 section .debug
 start 00000884 end 000008f6 length   114 section .info.
-start 0000881a end 0000881e length     4 section .const
+start 0000883e end 00008842 length     4 section .const
 
 Debug\uart_service.o:
-start 0000d5a2 end 0000d6a6 length   260 section .text
+start 0000d630 end 0000d748 length   280 section .text
 start 00000248 end 000002ac length   100 section .bss
 start 0000005d end 00000060 length     3 section .bsct
 start 000000ac end 000000ad length     1 section .ubsct
 start 00010785 end 00010af6 length   881 section .debug
 start 000008f6 end 00000969 length   115 section .info.
-start 0000881e end 00008839 length    27 section .const
+start 00008842 end 0000885f length    29 section .const
 
 Debug\vipe_calculation.o:
-start 0000d6a6 end 0000db26 length  1152 section .text
+start 0000d748 end 0000dbc8 length  1152 section .text
 start 00000220 end 00000244 length    36 section .data
 start 00010af6 end 00011166 length  1648 section .debug
 start 00000969 end 000009e0 length   119 section .info.
-start 00008839 end 00008849 length    16 section .const
+start 0000885f end 0000886f length    16 section .const
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o:
-start 0000db26 end 0000dca6 length   384 section .text
+start 0000dbc8 end 0000dd48 length   384 section .text
 start 000009e0 end 00000a50 length   112 section .info.
-start 00008849 end 00008875 length    44 section .const
+start 0000886f end 0000889b length    44 section .const
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cfcon.o:
 start 00000a50 end 00000ac2 length   114 section .info.
-start 00008875 end 00008897 length    34 section .const
+start 0000889b end 000088bd length    34 section .const
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o:
-start 0000dca6 end 0000dd02 length    92 section .text
+start 0000dd48 end 0000dda4 length    92 section .text
 start 00000ac2 end 00000af0 length    46 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)sprnt.o:
-start 0000dd02 end 0000dd16 length    20 section .text
+start 0000dda4 end 0000ddb8 length    20 section .text
 start 00000af0 end 00000b62 length   114 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o:
-start 0000dd16 end 0000e2e7 length  1489 section .text
+start 0000ddb8 end 0000e389 length  1489 section .text
 start 00000b62 end 00000bd5 length   115 section .info.
-start 00008897 end 000088d0 length    57 section .const
+start 000088bd end 000088f6 length    57 section .const
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtoe.o:
-start 0000e2e7 end 0000e429 length   322 section .text
+start 0000e389 end 0000e4cb length   322 section .text
 start 00000bd5 end 00000c46 length   113 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtof.o:
-start 0000e429 end 0000e519 length   240 section .text
+start 0000e4cb end 0000e5bb length   240 section .text
 start 00000c46 end 00000cb7 length   113 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtog.o:
-start 0000e519 end 0000e5fe length   229 section .text
+start 0000e5bb end 0000e6a0 length   229 section .text
 start 00000cb7 end 00000d28 length   113 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o:
-start 0000e5fe end 0000e764 length   358 section .text
+start 0000e6a0 end 0000e806 length   358 section .text
 start 00000d28 end 00000d9a length   114 section .info.
-start 000088d0 end 000088d4 length     4 section .const
+start 000088f6 end 000088fa length     4 section .const
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o:
-start 0000e764 end 0000e833 length   207 section .text
+start 0000e806 end 0000e8d5 length   207 section .text
 start 00000d9a end 00000e0d length   115 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)round.o:
-start 0000e833 end 0000e8ab length   120 section .text
+start 0000e8d5 end 0000e94d length   120 section .text
 start 00000e0d end 00000e7f length   114 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o:
-start 0000e8ab end 0000e9bb length   272 section .text
+start 0000e94d end 0000ea5d length   272 section .text
 start 00000e7f end 00000ef0 length   113 section .info.
-start 000088d4 end 000088f9 length    37 section .const
+start 000088fa end 0000891f length    37 section .const
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)idiv0.o:
-start 0000e9bb end 0000e9c6 length    11 section .text
+start 0000ea5d end 0000ea68 length    11 section .text
 start 00000ef0 end 00000f1d length    45 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)ildiv0.o:
-start 0000e9c6 end 0000e9e1 length    27 section .text
+start 0000ea68 end 0000ea83 length    27 section .text
 start 00000f1d end 00000f4b length    46 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)atoi.o:
-start 0000e9e1 end 0000ea3d length    92 section .text
+start 0000ea83 end 0000eadf length    92 section .text
 start 00000f4b end 00000fbc length   113 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)isspac0.o:
-start 0000ea3d end 0000ea4d length    16 section .text
+start 0000eadf end 0000eaef length    16 section .text
 start 00000fbc end 00000feb length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)memchr0.o:
-start 0000ea4d end 0000ea5d length    16 section .text
+start 0000eaef end 0000eaff length    16 section .text
 start 00000feb end 0000101a length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)putchr.o:
-start 0000ea5d end 0000ea60 length     3 section .text
+start 0000eaff end 0000eb02 length     3 section .text
 start 0000101a end 0000108d length   115 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strcat0.o:
-start 0000ea60 end 0000ea74 length    20 section .text
+start 0000eb02 end 0000eb16 length    20 section .text
 start 0000108d end 000010bc length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strlen0.o:
-start 0000ea74 end 0000ea80 length    12 section .text
+start 0000eb16 end 0000eb22 length    12 section .text
 start 000010bc end 000010eb length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strstr.o:
-start 0000ea80 end 0000eab4 length    52 section .text
+start 0000eb22 end 0000eb56 length    52 section .text
 start 000010eb end 0000115e length   115 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)toup0.o:
-start 0000eab4 end 0000eabf length    11 section .text
+start 0000eb56 end 0000eb61 length    11 section .text
 start 0000115e end 0000118b length    45 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)cmulx.o:
-start 0000eabf end 0000ead3 length    20 section .text
+start 0000eb61 end 0000eb75 length    20 section .text
 start 0000118b end 000011bb length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ctof.o:
-start 0000ead3 end 0000eadb length     8 section .text
+start 0000eb75 end 0000eb7d length     8 section .text
 start 000011bb end 000011ea length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ldiv.o:
-start 0000eadb end 0000ebc6 length   235 section .text
+start 0000eb7d end 0000ec68 length   235 section .text
 start 000011ea end 00001219 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o:
-start 0000ebc6 end 0000eca3 length   221 section .text
+start 0000ec68 end 0000ed45 length   221 section .text
 start 00001219 end 00001248 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fcmp.o:
-start 0000eca3 end 0000ecd9 length    54 section .text
+start 0000ed45 end 0000ed7b length    54 section .text
 start 00001248 end 00001277 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fdiv.o:
-start 0000ecd9 end 0000ed5d length   132 section .text
+start 0000ed7b end 0000edff length   132 section .text
 start 00001277 end 000012a6 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgadd.o:
-start 0000ed5d end 0000ed65 length     8 section .text
+start 0000edff end 0000ee07 length     8 section .text
 start 000012a6 end 000012d6 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgdiv.o:
-start 0000ed65 end 0000ed87 length    34 section .text
+start 0000ee07 end 0000ee29 length    34 section .text
 start 000012d6 end 00001306 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgmul.o:
-start 0000ed87 end 0000ed8f length     8 section .text
+start 0000ee29 end 0000ee31 length     8 section .text
 start 00001306 end 00001336 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgneg.o:
-start 0000ed8f end 0000ed9a length    11 section .text
+start 0000ee31 end 0000ee3c length    11 section .text
 start 00001336 end 00001366 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgsub.o:
-start 0000ed9a end 0000eda5 length    11 section .text
+start 0000ee3c end 0000ee47 length    11 section .text
 start 00001366 end 00001396 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fmul.o:
-start 0000eda5 end 0000ee7a length   213 section .text
+start 0000ee47 end 0000ef1c length   213 section .text
 start 00001396 end 000013c5 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fneg.o:
-start 0000ee7a end 0000ee85 length    11 section .text
+start 0000ef1c end 0000ef27 length    11 section .text
 start 000013c5 end 000013f4 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ftol.o:
-start 0000ee85 end 0000eee7 length    98 section .text
+start 0000ef27 end 0000ef89 length    98 section .text
 start 000013f4 end 00001423 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)imul.o:
-start 0000eee7 end 0000ef08 length    33 section .text
+start 0000ef89 end 0000efaa length    33 section .text
 start 00001423 end 00001452 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)itof.o:
-start 0000ef08 end 0000ef36 length    46 section .text
+start 0000efaa end 0000efd8 length    46 section .text
 start 00001452 end 00001481 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ladc.o:
-start 0000ef36 end 0000ef47 length    17 section .text
+start 0000efd8 end 0000efe9 length    17 section .text
 start 00001481 end 000014b0 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ladd.o:
-start 0000ef47 end 0000ef5f length    24 section .text
+start 0000efe9 end 0000f001 length    24 section .text
 start 000014b0 end 000014df length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lcmp.o:
-start 0000ef5f end 0000ef7f length    32 section .text
+start 0000f001 end 0000f021 length    32 section .text
 start 000014df end 0000150e length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lsdiv.o:
-start 0000ef7f end 0000ef9e length    31 section .text
+start 0000f021 end 0000f040 length    31 section .text
 start 0000150e end 0000153e length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgadc.o:
-start 0000ef9e end 0000efae length    16 section .text
+start 0000f040 end 0000f050 length    16 section .text
 start 0000153e end 0000156e length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgadd.o:
-start 0000efae end 0000efc5 length    23 section .text
+start 0000f050 end 0000f067 length    23 section .text
 start 0000156e end 0000159e length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgneg.o:
-start 0000efc5 end 0000efd8 length    19 section .text
+start 0000f067 end 0000f07a length    19 section .text
 start 0000159e end 000015ce length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgsbc.o:
-start 0000efd8 end 0000efee length    22 section .text
+start 0000f07a end 0000f090 length    22 section .text
 start 000015ce end 000015fe length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgsub.o:
-start 0000efee end 0000f005 length    23 section .text
+start 0000f090 end 0000f0a7 length    23 section .text
 start 000015fe end 0000162e length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)llsh.o:
-start 0000f005 end 0000f014 length    15 section .text
+start 0000f0a7 end 0000f0b6 length    15 section .text
 start 0000162e end 0000165d length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lmul.o:
-start 0000f014 end 0000f09f length   139 section .text
+start 0000f0b6 end 0000f141 length   139 section .text
 start 0000165d end 0000168c length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lneg.o:
-start 0000f09f end 0000f0b4 length    21 section .text
+start 0000f141 end 0000f156 length    21 section .text
 start 0000168c end 000016bb length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lreg.o:
@@ -389,55 +389,55 @@ start 000000ad end 000000b1 length     4 section .ubsct
 start 000016bb end 000016ea length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lsub.o:
-start 0000f0b4 end 0000f0cc length    24 section .text
+start 0000f156 end 0000f16e length    24 section .text
 start 000016ea end 00001719 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ltor.o:
-start 0000f0cc end 0000f0de length    18 section .text
+start 0000f16e end 0000f180 length    18 section .text
 start 00001719 end 00001748 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ludiv.o:
-start 0000f0de end 0000f0f2 length    20 section .text
+start 0000f180 end 0000f194 length    20 section .text
 start 00001748 end 00001778 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lumod.o:
-start 0000f0f2 end 0000f10c length    26 section .text
+start 0000f194 end 0000f1ae length    26 section .text
 start 00001778 end 000017a8 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lursh.o:
-start 0000f10c end 0000f11b length    15 section .text
+start 0000f1ae end 0000f1bd length    15 section .text
 start 000017a8 end 000017d8 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lzmp.o:
-start 0000f11b end 0000f12e length    19 section .text
+start 0000f1bd end 0000f1d0 length    19 section .text
 start 000017d8 end 00001807 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)rtol.o:
-start 0000f12e end 0000f140 length    18 section .text
+start 0000f1d0 end 0000f1e2 length    18 section .text
 start 00001807 end 00001836 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)smul.o:
-start 0000f140 end 0000f17f length    63 section .text
+start 0000f1e2 end 0000f221 length    63 section .text
 start 00001836 end 00001865 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)uitof.o:
-start 0000f17f end 0000f1a3 length    36 section .text
+start 0000f221 end 0000f245 length    36 section .text
 start 00001865 end 00001895 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)utolx.o:
-start 0000f1a3 end 0000f1aa length     7 section .text
+start 0000f245 end 0000f24c length     7 section .text
 start 00001895 end 000018c5 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ultof.o:
-start 0000f1aa end 0000f1fa length    80 section .text
+start 0000f24c end 0000f29c length    80 section .text
 start 000018c5 end 000018f5 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o:
-start 0000f1fa end 0000f236 length    60 section .text
+start 0000f29c end 0000f2d8 length    60 section .text
 start 000018f5 end 00001924 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)vmul.o:
-start 0000f236 end 0000f24e length    24 section .text
+start 0000f2d8 end 0000f2f0 length    24 section .text
 start 00001924 end 00001953 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)xreg.o:
@@ -445,7 +445,7 @@ start 000000b1 end 000000b4 length     3 section .ubsct
 start 00001953 end 00001982 length    47 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)xymvx.o:
-start 0000f24e end 0000f25d length    15 section .text
+start 0000f2f0 end 0000f2ff length    15 section .text
 start 00001982 end 000019b2 length    48 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)yreg.o:
@@ -647,7 +647,7 @@ f_TIM3_UPD_OVF_BRK_IRQHandler      >    6   (6)
 f_TIM4_UPD_OVF_IRQHandler          >    6   (6)
 f_TLI_IRQHandler                   >    6   (6)
 f_TRAP_IRQHandler                  >    6   (6)
-f_UART1_RCV_IRQHandler             >  382   (17)
+f_UART1_RCV_IRQHandler             >  388   (17)
 f_UART1_RX_IRQHandler              >    6   (6)
 f_UART1_TX_IRQHandler              >    6   (6)
 f_UART3_RX_IRQHandler              >    6   (6)
@@ -822,7 +822,7 @@ _UART1_WakeUpConfig                >    2   (2)
 Debug\uart_service.o:
 _ms_send_cmd                           11   (6)
 _ms_send_cmd_TCP                   >   11   (6)
-_vHandleDataRecvUARTviaISR            365   (5)
+_vHandleDataRecvUARTviaISR            371   (5)
 _vSerialRecieveISR                      4   (2)
 
 Debug\vipe_calculation.o:
@@ -867,7 +867,7 @@ _strlen                                 2   (2)
 _strstr                                10   (10)
 _toupper                                2   (2)
 
-Stack size: 776
+Stack size: 782
 
 
                               ---------
@@ -1641,403 +1641,404 @@ Stack size: 776
  528      + _UART1_ReceiveData8 --> 162
  529      + _vHandleDataRecvUARTviaISR: (5)
  530      |    + _clearBuffer --> 328
- 531      |    + _strstr --> 234
- 532      |    + _vHandleMevris_MQTT_Recv_Data: (39)
- 533      |    |    + _strstr --> 234
- 534      |    |    + _vClearBuffer --> 264
- 535      |    |    + _vHandleMevrisRecievedData: (5)
- 536      |    |    |    + _strstr --> 234
- 537      |    |    |    + _vMevris_Send_IMEI --> 422
+ 531      |    + _sms_receive --> 450
+ 532      |    + _strstr --> 234
+ 533      |    + _vHandleMevris_MQTT_Recv_Data: (39)
+ 534      |    |    + _strstr --> 234
+ 535      |    |    + _vClearBuffer --> 264
+ 536      |    |    + _vHandleMevrisRecievedData: (5)
+ 537      |    |    |    + _strstr --> 234
+ 538      |    |    |    + _vMevris_Send_IMEI --> 422
           |    |    | 
           |    | 
           | 
- 538      + _vSerialRecieveISR: (2)
- 539      |    + _UART1_ReceiveData8 --> 162
+ 539      + _vSerialRecieveISR: (2)
+ 540      |    + _UART1_ReceiveData8 --> 162
           | 
        
- 540 > f_UART1_RX_IRQHandler: (6)
+ 541 > f_UART1_RX_IRQHandler: (6)
 
- 541 > f_UART1_TX_IRQHandler: (6)
+ 542 > f_UART1_TX_IRQHandler: (6)
 
- 542 > f_UART3_RX_IRQHandler: (6)
+ 543 > f_UART3_RX_IRQHandler: (6)
 
- 543 > f_UART3_TX_IRQHandler: (6)
+ 544 > f_UART3_TX_IRQHandler: (6)
 
- 544   L11_TI4_Config --> 384
+ 545   L11_TI4_Config --> 384
 
- 545   L11__cvtup --> 238
+ 546   L11__cvtup --> 238
 
- 546   L31__putbuf --> 240
+ 547   L31__putbuf --> 240
 
- 547   L3_TI1_Config --> 84
+ 548   L3_TI1_Config --> 84
 
- 548   L5_TI2_Config --> 85
+ 549   L5_TI2_Config --> 85
 
- 549   L7_TI3_Config --> 387
+ 550   L7_TI3_Config --> 387
 
- 550   L7__gnum --> 242
+ 551   L7__gnum --> 242
 
- 551   _ADC2_ClearFlag --> 191
+ 552   _ADC2_ClearFlag --> 191
 
- 552   _ADC2_Cmd --> 192
+ 553   _ADC2_Cmd --> 192
 
- 553   _ADC2_ConversionConfig --> 193
+ 554   _ADC2_ConversionConfig --> 193
 
- 554   _ADC2_DeInit --> 331
+ 555   _ADC2_DeInit --> 331
 
- 555   _ADC2_ExternalTriggerConfig --> 335
+ 556   _ADC2_ExternalTriggerConfig --> 335
 
- 556   _ADC2_GetConversionValue --> 194
+ 557   _ADC2_GetConversionValue --> 194
 
- 557   _ADC2_GetFlagStatus --> 195
+ 558   _ADC2_GetFlagStatus --> 195
 
- 558   _ADC2_ITConfig --> 332
+ 559   _ADC2_ITConfig --> 332
 
- 559   _ADC2_Init --> 333
+ 560   _ADC2_Init --> 333
 
- 560   _ADC2_PrescalerConfig --> 336
+ 561   _ADC2_PrescalerConfig --> 336
 
- 561   _ADC2_SchmittTriggerConfig --> 337
+ 562   _ADC2_SchmittTriggerConfig --> 337
 
- 562   _ADC2_StartConversion --> 196
+ 563   _ADC2_StartConversion --> 196
 
- 563   _ADCSetup --> 330
+ 564   _ADCSetup --> 330
 
- 564   _CLK_ClockSwitchCmd --> 361
+ 565   _CLK_ClockSwitchCmd --> 361
 
- 565   _CLK_ClockSwitchConfig --> 362
+ 566   _CLK_ClockSwitchConfig --> 362
 
- 566   _CLK_DeInit --> 363
+ 567   _CLK_DeInit --> 363
 
- 567   _CLK_GetClockFreq --> 359
+ 568   _CLK_GetClockFreq --> 359
 
- 568   _CLK_GetFlagStatus --> 364
+ 569   _CLK_GetFlagStatus --> 364
 
- 569   _CLK_HSECmd --> 365
+ 570   _CLK_HSECmd --> 365
 
- 570   _CLK_HSICmd --> 366
+ 571   _CLK_HSICmd --> 366
 
- 571   _CLK_HSIPrescalerConfig --> 367
+ 572   _CLK_HSIPrescalerConfig --> 367
 
- 572   _CLK_LSICmd --> 368
+ 573   _CLK_LSICmd --> 368
 
- 573   _CLK_PeripheralClockConfig --> 369
+ 574   _CLK_PeripheralClockConfig --> 369
 
- 574   _CLK_SYSCLKConfig --> 370
+ 575   _CLK_SYSCLKConfig --> 370
 
- 575   _EEPROMSetup --> 339
+ 576   _EEPROMSetup --> 339
 
- 576   _EXTI_DeInit --> 342
+ 577   _EXTI_DeInit --> 342
 
- 577   _EXTI_SetExtIntSensitivity --> 343
+ 578   _EXTI_SetExtIntSensitivity --> 343
 
- 578   _EXTI_SetTLISensitivity --> 344
+ 579   _EXTI_SetTLISensitivity --> 344
 
- 579   _EXTI_setup --> 341
+ 580   _EXTI_setup --> 341
 
- 580   _FLASH_DeInit --> 340
+ 581   _FLASH_DeInit --> 340
 
- 581   _FLASH_Lock --> 348
+ 582   _FLASH_Lock --> 348
 
- 582   _FLASH_ProgramByte --> 452
+ 583   _FLASH_ProgramByte --> 452
 
- 583   _FLASH_ProgramOptionByte --> 349
+ 584   _FLASH_ProgramOptionByte --> 349
 
- 584   _FLASH_ReadByte --> 372
+ 585   _FLASH_ReadByte --> 372
 
- 585   _FLASH_ReadOptionByte --> 351
+ 586   _FLASH_ReadOptionByte --> 351
 
- 586   _FLASH_Unlock --> 352
+ 587   _FLASH_Unlock --> 352
 
- 587   _FLASH_WaitForLastOperation --> 20
+ 588   _FLASH_WaitForLastOperation --> 20
 
- 588   _GPIO_DeInit --> 376
+ 589   _GPIO_DeInit --> 376
 
- 589   _GPIO_Init --> 377
+ 590   _GPIO_Init --> 377
 
- 590   _GPIO_WriteHigh --> 171
+ 591   _GPIO_WriteHigh --> 171
 
- 591   _GPIO_WriteLow --> 172
+ 592   _GPIO_WriteLow --> 172
 
- 592   _GSM_OK --> 302
+ 593   _GSM_OK --> 302
 
- 593   _ITC_DeInit --> 345
+ 594   _ITC_DeInit --> 345
 
- 594   _ITC_GetCPUCC --> 37
+ 595   _ITC_GetCPUCC --> 37
 
- 595   _ITC_SetSoftwarePriority --> 346
+ 596   _ITC_SetSoftwarePriority --> 346
 
- 596   _IWDG_Enable --> 40
+ 597   _IWDG_Enable --> 40
 
- 597   _IWDG_ReloadCounter --> 41
+ 598   _IWDG_ReloadCounter --> 41
 
- 598   _IWDG_SetPrescaler --> 42
+ 599   _IWDG_SetPrescaler --> 42
 
- 599   _IWDG_SetReload --> 43
+ 600   _IWDG_SetReload --> 43
 
- 600   _IWDG_WriteAccessCmd --> 44
+ 601   _IWDG_WriteAccessCmd --> 44
 
- 601   _ReadFlashWord --> 373
+ 602   _ReadFlashWord --> 373
 
- 602   _SIMCom_setup --> 293
+ 603   _SIMCom_setup --> 293
 
- 603   _SIMComrestart --> 294
+ 604   _SIMComrestart --> 294
 
- 604   _SetPortD7AsTim1_Ch4 --> 347
+ 605   _SetPortD7AsTim1_Ch4 --> 347
 
- 605   _TIM1_CCxCmd --> 173
+ 606   _TIM1_CCxCmd --> 173
 
- 606   _TIM1_ClearFlag --> 174
+ 607   _TIM1_ClearFlag --> 174
 
- 607   _TIM1_ClearITPendingBit --> 500
+ 608   _TIM1_ClearITPendingBit --> 500
 
- 608   _TIM1_Cmd --> 381
+ 609   _TIM1_Cmd --> 381
 
- 609   _TIM1_DeInit --> 382
+ 610   _TIM1_DeInit --> 382
 
- 610   _TIM1_ETRConfig --> 52
+ 611   _TIM1_ETRConfig --> 52
 
- 611   _TIM1_GetCapture1 --> 501
+ 612   _TIM1_GetCapture1 --> 501
 
- 612   _TIM1_GetCapture2 --> 175
+ 613   _TIM1_GetCapture2 --> 175
 
- 613   _TIM1_GetCapture3 --> 502
+ 614   _TIM1_GetCapture3 --> 502
 
- 614   _TIM1_GetCapture4 --> 176
+ 615   _TIM1_GetCapture4 --> 176
 
- 615   _TIM1_GetFlagStatus --> 177
+ 616   _TIM1_GetFlagStatus --> 177
 
- 616   _TIM1_GetITStatus --> 503
+ 617   _TIM1_GetITStatus --> 503
 
- 617   _TIM1_ICInit --> 383
+ 618   _TIM1_ICInit --> 383
 
- 618   _TIM1_ITConfig --> 392
+ 619   _TIM1_ITConfig --> 392
 
- 619   _TIM1_SelectInputTrigger --> 105
+ 620   _TIM1_SelectInputTrigger --> 105
 
- 620   _TIM1_SetIC1Prescaler --> 86
+ 621   _TIM1_SetIC1Prescaler --> 86
 
- 621   _TIM1_SetIC2Prescaler --> 87
+ 622   _TIM1_SetIC2Prescaler --> 87
 
- 622   _TIM1_SetIC3Prescaler --> 390
+ 623   _TIM1_SetIC3Prescaler --> 390
 
- 623   _TIM1_SetIC4Prescaler --> 391
+ 624   _TIM1_SetIC4Prescaler --> 391
 
- 624   _TIM1_TimeBaseInit --> 393
+ 625   _TIM1_TimeBaseInit --> 393
 
- 625   _TIM2_CCxCmd --> 178
+ 626   _TIM2_CCxCmd --> 178
 
- 626   _TIM2_ClearFlag --> 179
+ 627   _TIM2_ClearFlag --> 179
 
- 627   _TIM2_ClearITPendingBit --> 513
+ 628   _TIM2_ClearITPendingBit --> 513
 
- 628   _TIM2_Cmd --> 396
+ 629   _TIM2_Cmd --> 396
 
- 629   _TIM2_DeInit --> 397
+ 630   _TIM2_DeInit --> 397
 
- 630   _TIM2_GetCapture1 --> 514
+ 631   _TIM2_GetCapture1 --> 514
 
- 631   _TIM2_GetCapture2 --> 180
+ 632   _TIM2_GetCapture2 --> 180
 
- 632   _TIM2_GetCounter --> 189
+ 633   _TIM2_GetCounter --> 189
 
- 633   _TIM2_GetFlagStatus --> 181
+ 634   _TIM2_GetFlagStatus --> 181
 
- 634   _TIM2_GetITStatus --> 515
+ 635   _TIM2_GetITStatus --> 515
 
- 635   _TIM2_ICInit --> 398
+ 636   _TIM2_ICInit --> 398
 
- 636   _TIM2_ITConfig --> 405
+ 637   _TIM2_ITConfig --> 405
 
- 637   _TIM2_SetIC1Prescaler --> 127
+ 638   _TIM2_SetIC1Prescaler --> 127
 
- 638   _TIM2_SetIC2Prescaler --> 128
+ 639   _TIM2_SetIC2Prescaler --> 128
 
- 639   _TIM2_SetIC3Prescaler --> 404
+ 640   _TIM2_SetIC3Prescaler --> 404
 
- 640   _TIM2_TimeBaseInit --> 406
+ 641   _TIM2_TimeBaseInit --> 406
 
- 641   _UART1_Cmd --> 355
+ 642   _UART1_Cmd --> 355
 
- 642   _UART1_DeInit --> 356
+ 643   _UART1_DeInit --> 356
 
- 643   _UART1_GetFlagStatus --> 161
+ 644   _UART1_GetFlagStatus --> 161
 
- 644   _UART1_ITConfig --> 307
+ 645   _UART1_ITConfig --> 307
 
- 645   _UART1_Init --> 358
+ 646   _UART1_Init --> 358
 
- 646   _UART1_ReceiveData8 --> 162
+ 647   _UART1_ReceiveData8 --> 162
 
- 647   _UART1_SendData8 --> 165
+ 648   _UART1_SendData8 --> 165
 
- 648   _UARTSetup --> 354
+ 649   _UARTSetup --> 354
 
- 649   _WriteFlashWord --> 457
+ 650   _WriteFlashWord --> 457
 
- 650   __dtento --> 245
+ 651   __dtento --> 245
 
- 651   __dtoe --> 243
+ 652   __dtoe --> 243
 
- 652   __dtof --> 250
+ 653   __dtof --> 250
 
- 653   __dtog --> 253
+ 654   __dtog --> 253
 
- 654   __itob --> 258
+ 655   __itob --> 258
 
- 655   __ln --> 167
+ 656   __ln --> 167
 
- 656   __ltob --> 260
+ 657   __ltob --> 260
 
- 657   __norm --> 244
+ 658   __norm --> 244
 
- 658   __print --> 237
+ 659   __print --> 237
 
- 659   __round --> 248
+ 660   __round --> 248
 
- 660   __udiv --> 246
+ 661   __udiv --> 246
 
- 661   __uldiv --> 261
+ 662   __uldiv --> 261
 
- 662   __unpack --> 168
+ 663   __unpack --> 168
 
- 663   _atoi --> 461
+ 664   _atoi --> 461
 
- 664   _bSendSMS --> 463
+ 665   _bSendSMS --> 463
 
- 665   _bValidIMEIRecieved --> 309
+ 666   _bValidIMEIRecieved --> 309
 
- 666   _calcAmp1 --> 182
+ 667   _calcAmp1 --> 182
 
- 667   _calcAmp2 --> 183
+ 668   _calcAmp2 --> 183
 
- 668   _calcAmp3 --> 184
+ 669   _calcAmp3 --> 184
 
- 669   _calcVolt1 --> 185
+ 670   _calcVolt1 --> 185
 
- 670   _calcVolt2 --> 186
+ 671   _calcVolt2 --> 186
 
- 671   _calcVolt3 --> 187
+ 672   _calcVolt3 --> 187
 
- 672   _calcWatt1 --> 504
+ 673   _calcWatt1 --> 504
 
- 673   _calcWatt2 --> 505
+ 674   _calcWatt2 --> 505
 
- 674   _calcWatt3 --> 516
+ 675   _calcWatt3 --> 516
 
- 675   _calculateBatVolt --> 207
+ 676   _calculateBatVolt --> 207
 
- 676   _calculateFuelLevel --> 197
+ 677   _calculateFuelLevel --> 197
 
- 677   _calculateTemp1 --> 216
+ 678   _calculateTemp1 --> 216
 
- 678   _calculateTemp2 --> 227
+ 679   _calculateTemp2 --> 227
 
- 679   _calculateVoltCurrent --> 170
+ 680   _calculateVoltCurrent --> 170
 
- 680   _clearBuffer --> 328
+ 681   _clearBuffer --> 328
 
- 681   _clockSetup --> 360
+ 682   _clockSetup --> 360
 
- 682   _delay_ms --> 198
+ 683   _delay_ms --> 198
 
- 683   _delay_us --> 199
+ 684   _delay_us --> 199
 
- 684   _enGet_TCP_Status --> 231
+ 685   _enGet_TCP_Status --> 231
 
- 685   _getCalibration --> 371
+ 686   _getCalibration --> 371
 
- 686   _getFuelLevel --> 190
+ 687   _getFuelLevel --> 190
 
- 687   _getIMEI --> 312
+ 688   _getIMEI --> 312
 
- 688   _getTics --> 188
+ 689   _getTics --> 188
 
- 689   _getbatteryvolt --> 200
+ 690   _getbatteryvolt --> 200
 
- 690   _gettemp1 --> 209
+ 691   _gettemp1 --> 209
 
- 691   _gettemp2 --> 220
+ 692   _gettemp2 --> 220
 
- 692   _gpioSetup --> 375
+ 693   _gpioSetup --> 375
 
- 693   _isspace --> 462
+ 694   _isspace --> 462
 
- 694   _log --> 217
+ 695   _log --> 217
 
- 695   _memchr --> 257
+ 696   _memchr --> 257
 
- 696   _ms_send_cmd --> 163
+ 697   _ms_send_cmd --> 163
 
- 697   _punGet_Client_ID --> 319
+ 698   _punGet_Client_ID --> 319
 
- 698   _punGet_Command_Topic --> 322
+ 699   _punGet_Command_Topic --> 322
 
- 699   _punGet_Event_Topic --> 325
+ 700   _punGet_Event_Topic --> 325
 
- 700   _putchar --> 241
+ 701   _putchar --> 241
 
- 701   _sendDataToCloud --> 230
+ 702   _sendDataToCloud --> 230
 
- 702   _sendSMSCurrent --> 473
+ 703   _sendSMSCurrent --> 473
 
- 703   _sendSMSPower --> 478
+ 704   _sendSMSPower --> 478
 
- 704   _sendSMSVoltage --> 483
+ 705   _sendSMSVoltage --> 483
 
- 705   _sms_receive --> 450
+ 706   _sms_receive --> 450
 
- 706   _sprintf --> 236
+ 707   _sprintf --> 236
 
- 707   _strcat --> 263
+ 708   _strcat --> 263
 
- 708   _strlen --> 262
+ 709   _strlen --> 262
 
- 709   _strstr --> 234
+ 710   _strstr --> 234
 
- 710   _systemInit --> 329
+ 711   _systemInit --> 329
 
- 711   _systemSetup --> 292
+ 712   _systemSetup --> 292
 
- 712   _timer1Setup --> 379
+ 713   _timer1Setup --> 379
 
- 713   _timer2Setup --> 394
+ 714   _timer2Setup --> 394
 
- 714   _toupper --> 239
+ 715   _toupper --> 239
 
- 715   _vClearBuffer --> 264
+ 716   _vClearBuffer --> 264
 
- 716   _vHandleDataRecvUARTviaISR --> 529
+ 717   _vHandleDataRecvUARTviaISR --> 529
 
- 717   _vHandleMevrisRecievedData --> 535
+ 718   _vHandleMevrisRecievedData --> 536
 
- 718   _vHandleMevris_MQTT_Recv_Data --> 532
+ 719   _vHandleMevris_MQTT_Recv_Data --> 533
 
- 719   _vHandle_MQTT --> 407
+ 720   _vHandle_MQTT --> 407
 
- 720   _vMQTT_Connect --> 410
+ 721   _vMQTT_Connect --> 410
 
- 721   _vMQTT_Publish --> 265
+ 722   _vMQTT_Publish --> 265
 
- 722   _vMQTT_Subscribe --> 416
+ 723   _vMQTT_Subscribe --> 416
 
- 723   _vMevris_Send_BatteryVolt --> 235
+ 724   _vMevris_Send_BatteryVolt --> 235
 
- 724   _vMevris_Send_EngineTemp --> 272
+ 725   _vMevris_Send_EngineTemp --> 272
 
- 725   _vMevris_Send_FuelLevel --> 277
+ 726   _vMevris_Send_FuelLevel --> 277
 
- 726   _vMevris_Send_IMEI --> 422
+ 727   _vMevris_Send_IMEI --> 422
 
- 727   _vMevris_Send_Phase --> 282
+ 728   _vMevris_Send_Phase --> 282
 
- 728   _vMevris_Send_RadiatorTemp --> 287
+ 729   _vMevris_Send_RadiatorTemp --> 287
 
- 729   _vMevris_Send_Version --> 426
+ 730   _vMevris_Send_Version --> 426
 
- 730   _vPrintStickerInfo --> 301
+ 731   _vPrintStickerInfo --> 301
 
- 731   _vSerialRecieveISR --> 538
+ 732   _vSerialRecieveISR --> 539
 
 
 
@@ -2045,31 +2046,31 @@ Stack size: 776
                                Symbols
                                -------
 
-_ADC2_ClearFlag                     0000b5ab   defined in Debug\stm8s_adc2.o section .text
+_ADC2_ClearFlag                     0000b639   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\getadc.o
-_ADC2_ClearITPendingBit             0000b5b6   defined in Debug\stm8s_adc2.o section .text
-_ADC2_Cmd                           0000b450   defined in Debug\stm8s_adc2.o section .text
+_ADC2_ClearITPendingBit             0000b644   defined in Debug\stm8s_adc2.o section .text
+_ADC2_Cmd                           0000b4de   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\getadc.o
-_ADC2_ConversionConfig              0000b50d   defined in Debug\stm8s_adc2.o section .text
+_ADC2_ConversionConfig              0000b59b   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\getadc.o
-_ADC2_DeInit                        0000b413   defined in Debug\stm8s_adc2.o section .text
+_ADC2_DeInit                        0000b4a1   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\board.o
-_ADC2_ExternalTriggerConfig         0000b53b   defined in Debug\stm8s_adc2.o section .text
-_ADC2_GetConversionValue            0000b561   defined in Debug\stm8s_adc2.o section .text
+_ADC2_ExternalTriggerConfig         0000b5c9   defined in Debug\stm8s_adc2.o section .text
+_ADC2_GetConversionValue            0000b5ef   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\getadc.o
-_ADC2_GetFlagStatus                 0000b5a5   defined in Debug\stm8s_adc2.o section .text
+_ADC2_GetFlagStatus                 0000b633   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\getadc.o
-_ADC2_GetITStatus                   0000b5b0   defined in Debug\stm8s_adc2.o section .text
-_ADC2_ITConfig                      0000b45e   defined in Debug\stm8s_adc2.o section .text
+_ADC2_GetITStatus                   0000b63e   defined in Debug\stm8s_adc2.o section .text
+_ADC2_ITConfig                      0000b4ec   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\board.o
-_ADC2_Init                          0000b428   defined in Debug\stm8s_adc2.o section .text
+_ADC2_Init                          0000b4b6   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\board.o
-_ADC2_PrescalerConfig               0000b46c   defined in Debug\stm8s_adc2.o section .text
-_ADC2_SchmittTriggerConfig          0000b47f   defined in Debug\stm8s_adc2.o section .text
+_ADC2_PrescalerConfig               0000b4fa   defined in Debug\stm8s_adc2.o section .text
+_ADC2_SchmittTriggerConfig          0000b50d   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\board.o
-_ADC2_StartConversion               0000b55c   defined in Debug\stm8s_adc2.o section .text
+_ADC2_StartConversion               0000b5ea   defined in Debug\stm8s_adc2.o section .text
                                                used in Debug\getadc.o
-_ADCSetup                           00009d13   defined in Debug\board.o section .text
+_ADCSetup                           00009d39   defined in Debug\board.o section .text
 _Ampere_Phase1                      0000022c   defined in Debug\vipe_calculation.o section .data, initialized
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
@@ -2082,325 +2083,325 @@ _Ampere_Phase3                      00000234   defined in Debug\vipe_calculation
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\metering.o
-_CLKPrescTable                      0000879a   defined in Debug\stm8s_clk.o section .const
-_CLK_AdjustHSICalibrationValue      0000b895   defined in Debug\stm8s_clk.o section .text
-_CLK_CCOCmd                         0000b62b   defined in Debug\stm8s_clk.o section .text
-_CLK_CCOConfig                      0000b78e   defined in Debug\stm8s_clk.o section .text
-_CLK_ClearITPendingBit              0000b930   defined in Debug\stm8s_clk.o section .text
-_CLK_ClockSecuritySystemEnable      0000b818   defined in Debug\stm8s_clk.o section .text
-_CLK_ClockSwitchCmd                 0000b639   defined in Debug\stm8s_clk.o section .text
+_CLKPrescTable                      000087be   defined in Debug\stm8s_clk.o section .const
+_CLK_AdjustHSICalibrationValue      0000b923   defined in Debug\stm8s_clk.o section .text
+_CLK_CCOCmd                         0000b6b9   defined in Debug\stm8s_clk.o section .text
+_CLK_CCOConfig                      0000b81c   defined in Debug\stm8s_clk.o section .text
+_CLK_ClearITPendingBit              0000b9be   defined in Debug\stm8s_clk.o section .text
+_CLK_ClockSecuritySystemEnable      0000b8a6   defined in Debug\stm8s_clk.o section .text
+_CLK_ClockSwitchCmd                 0000b6c7   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_ClockSwitchConfig              0000b6c1   defined in Debug\stm8s_clk.o section .text
+_CLK_ClockSwitchConfig              0000b74f   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_DeInit                         0000b5bb   defined in Debug\stm8s_clk.o section .text
+_CLK_DeInit                         0000b649   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_FastHaltWakeUpCmd              0000b5f3   defined in Debug\stm8s_clk.o section .text
-_CLK_GetClockFreq                   0000b821   defined in Debug\stm8s_clk.o section .text
+_CLK_FastHaltWakeUpCmd              0000b681   defined in Debug\stm8s_clk.o section .text
+_CLK_GetClockFreq                   0000b8af   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\stm8s_uart1.o
-_CLK_GetFlagStatus                  0000b8a7   defined in Debug\stm8s_clk.o section .text
+_CLK_GetFlagStatus                  0000b935   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_GetITStatus                    0000b904   defined in Debug\stm8s_clk.o section .text
-_CLK_GetSYSCLKSource                0000b81d   defined in Debug\stm8s_clk.o section .text
-_CLK_HSECmd                         0000b601   defined in Debug\stm8s_clk.o section .text
+_CLK_GetITStatus                    0000b992   defined in Debug\stm8s_clk.o section .text
+_CLK_GetSYSCLKSource                0000b8ab   defined in Debug\stm8s_clk.o section .text
+_CLK_HSECmd                         0000b68f   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_HSICmd                         0000b60f   defined in Debug\stm8s_clk.o section .text
+_CLK_HSICmd                         0000b69d   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_HSIPrescalerConfig             0000b77b   defined in Debug\stm8s_clk.o section .text
+_CLK_HSIPrescalerConfig             0000b809   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_ITConfig                       0000b7a5   defined in Debug\stm8s_clk.o section .text
-_CLK_LSICmd                         0000b61d   defined in Debug\stm8s_clk.o section .text
+_CLK_ITConfig                       0000b833   defined in Debug\stm8s_clk.o section .text
+_CLK_LSICmd                         0000b6ab   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_PeripheralClockConfig          0000b655   defined in Debug\stm8s_clk.o section .text
+_CLK_PeripheralClockConfig          0000b6e3   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_SWIMConfig                     0000b80a   defined in Debug\stm8s_clk.o section .text
-_CLK_SYSCLKConfig                   0000b7dd   defined in Debug\stm8s_clk.o section .text
+_CLK_SWIMConfig                     0000b898   defined in Debug\stm8s_clk.o section .text
+_CLK_SYSCLKConfig                   0000b86b   defined in Debug\stm8s_clk.o section .text
                                                used in Debug\board.o
-_CLK_SYSCLKEmergencyClear           0000b8a2   defined in Debug\stm8s_clk.o section .text
-_CLK_SlowActiveHaltWakeUpCmd        0000b647   defined in Debug\stm8s_clk.o section .text
-_EEPROMSetup                        00009c04   defined in Debug\board.o section .text
-_EXTI_DeInit                        0000b99c   defined in Debug\stm8s_exti.o section .text
+_CLK_SYSCLKEmergencyClear           0000b930   defined in Debug\stm8s_clk.o section .text
+_CLK_SlowActiveHaltWakeUpCmd        0000b6d5   defined in Debug\stm8s_clk.o section .text
+_EEPROMSetup                        00009c2a   defined in Debug\board.o section .text
+_EXTI_DeInit                        0000ba2a   defined in Debug\stm8s_exti.o section .text
                                                used in Debug\board.o
-_EXTI_GetExtIntSensitivity          0000ba29   defined in Debug\stm8s_exti.o section .text
-_EXTI_GetTLISensitivity             0000ba77   defined in Debug\stm8s_exti.o section .text
-_EXTI_SetExtIntSensitivity          0000b9a5   defined in Debug\stm8s_exti.o section .text
+_EXTI_GetExtIntSensitivity          0000bab7   defined in Debug\stm8s_exti.o section .text
+_EXTI_GetTLISensitivity             0000bb05   defined in Debug\stm8s_exti.o section .text
+_EXTI_SetExtIntSensitivity          0000ba33   defined in Debug\stm8s_exti.o section .text
                                                used in Debug\board.o
-_EXTI_SetTLISensitivity             0000ba1e   defined in Debug\stm8s_exti.o section .text
+_EXTI_SetTLISensitivity             0000baac   defined in Debug\stm8s_exti.o section .text
                                                used in Debug\board.o
-_EXTI_setup                         00009bec   defined in Debug\board.o section .text
-_FLASH_DeInit                       0000baa2   defined in Debug\stm8s_flash.o section .text
+_EXTI_setup                         00009c12   defined in Debug\board.o section .text
+_FLASH_DeInit                       0000bb30   defined in Debug\stm8s_flash.o section .text
                                                used in Debug\board.o
-_FLASH_EraseBlock                   0000bca1   defined in Debug\stm8s_flash.o section .text
-_FLASH_EraseByte                    0000bac8   defined in Debug\stm8s_flash.o section .text
-_FLASH_EraseOptionByte              0000bb7c   defined in Debug\stm8s_flash.o section .text
-_FLASH_GetBootSize                  0000bc0d   defined in Debug\stm8s_flash.o section .text
-_FLASH_GetFlagStatus                0000bc44   defined in Debug\stm8s_flash.o section .text
-_FLASH_GetLowPowerMode              0000bc01   defined in Debug\stm8s_flash.o section .text
-_FLASH_GetProgrammingTime           0000bc07   defined in Debug\stm8s_flash.o section .text
-_FLASH_ITConfig                     0000baba   defined in Debug\stm8s_flash.o section .text
-_FLASH_Lock                         0000ba9b   defined in Debug\stm8s_flash.o section .text
+_FLASH_EraseBlock                   0000bd2f   defined in Debug\stm8s_flash.o section .text
+_FLASH_EraseByte                    0000bb56   defined in Debug\stm8s_flash.o section .text
+_FLASH_EraseOptionByte              0000bc0a   defined in Debug\stm8s_flash.o section .text
+_FLASH_GetBootSize                  0000bc9b   defined in Debug\stm8s_flash.o section .text
+_FLASH_GetFlagStatus                0000bcd2   defined in Debug\stm8s_flash.o section .text
+_FLASH_GetLowPowerMode              0000bc8f   defined in Debug\stm8s_flash.o section .text
+_FLASH_GetProgrammingTime           0000bc95   defined in Debug\stm8s_flash.o section .text
+_FLASH_ITConfig                     0000bb48   defined in Debug\stm8s_flash.o section .text
+_FLASH_Lock                         0000bb29   defined in Debug\stm8s_flash.o section .text
                                                used in Debug\main.o Debug\board.o
-_FLASH_ProgramBlock                 0000bd27   defined in Debug\stm8s_flash.o section .text
-_FLASH_ProgramByte                  0000bad6   defined in Debug\stm8s_flash.o section .text
+_FLASH_ProgramBlock                 0000bdb5   defined in Debug\stm8s_flash.o section .text
+_FLASH_ProgramByte                  0000bb64   defined in Debug\stm8s_flash.o section .text
                                                used in Debug\main.o Debug\board.o
-_FLASH_ProgramOptionByte            0000bb4c   defined in Debug\stm8s_flash.o section .text
+_FLASH_ProgramOptionByte            0000bbda   defined in Debug\stm8s_flash.o section .text
                                                used in Debug\board.o
-_FLASH_ProgramWord                  0000baf4   defined in Debug\stm8s_flash.o section .text
-_FLASH_ReadByte                     0000bae7   defined in Debug\stm8s_flash.o section .text
+_FLASH_ProgramWord                  0000bb82   defined in Debug\stm8s_flash.o section .text
+_FLASH_ReadByte                     0000bb75   defined in Debug\stm8s_flash.o section .text
                                                used in Debug\board.o
-_FLASH_ReadOptionByte               0000bba5   defined in Debug\stm8s_flash.o section .text
+_FLASH_ReadOptionByte               0000bc33   defined in Debug\stm8s_flash.o section .text
                                                used in Debug\board.o
-_FLASH_SetLowPowerMode              0000bbe3   defined in Debug\stm8s_flash.o section .text
-_FLASH_SetProgrammingTime           0000bbf6   defined in Debug\stm8s_flash.o section .text
-_FLASH_Unlock                       0000ba84   defined in Debug\stm8s_flash.o section .text
+_FLASH_SetLowPowerMode              0000bc71   defined in Debug\stm8s_flash.o section .text
+_FLASH_SetProgrammingTime           0000bc84   defined in Debug\stm8s_flash.o section .text
+_FLASH_Unlock                       0000bb12   defined in Debug\stm8s_flash.o section .text
                                                used in Debug\main.o Debug\board.o
-_FLASH_WaitForLastOperation         0000bc57   defined in Debug\stm8s_flash.o section .text
+_FLASH_WaitForLastOperation         0000bce5   defined in Debug\stm8s_flash.o section .text
 _Fuellevel                          00000244   defined in Debug\getadc.o section .bss
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
-_GPIO_DeInit                        0000bd95   defined in Debug\stm8s_gpio.o section .text
+_GPIO_DeInit                        0000be23   defined in Debug\stm8s_gpio.o section .text
                                                used in Debug\board.o
-_GPIO_ExternalPullUpConfig          0000be2f   defined in Debug\stm8s_gpio.o section .text
-_GPIO_Init                          0000bd9d   defined in Debug\stm8s_gpio.o section .text
+_GPIO_ExternalPullUpConfig          0000bebd   defined in Debug\stm8s_gpio.o section .text
+_GPIO_Init                          0000be2b   defined in Debug\stm8s_gpio.o section .text
                                                used in Debug\board.o
-_GPIO_ReadInputData                 0000be25   defined in Debug\stm8s_gpio.o section .text
-_GPIO_ReadInputPin                  0000be28   defined in Debug\stm8s_gpio.o section .text
-_GPIO_ReadOutputData                0000be23   defined in Debug\stm8s_gpio.o section .text
-_GPIO_Write                         0000be05   defined in Debug\stm8s_gpio.o section .text
-_GPIO_WriteHigh                     0000be0d   defined in Debug\stm8s_gpio.o section .text
+_GPIO_ReadInputData                 0000beb3   defined in Debug\stm8s_gpio.o section .text
+_GPIO_ReadInputPin                  0000beb6   defined in Debug\stm8s_gpio.o section .text
+_GPIO_ReadOutputData                0000beb1   defined in Debug\stm8s_gpio.o section .text
+_GPIO_Write                         0000be93   defined in Debug\stm8s_gpio.o section .text
+_GPIO_WriteHigh                     0000be9b   defined in Debug\stm8s_gpio.o section .text
                                                used in Debug\board.o
                                                        Debug\metering.o
                                                        Debug\simcom.o
-_GPIO_WriteLow                      0000be14   defined in Debug\stm8s_gpio.o section .text
+_GPIO_WriteLow                      0000bea2   defined in Debug\stm8s_gpio.o section .text
                                                used in Debug\metering.o
                                                        Debug\simcom.o
-_GPIO_WriteReverse                  0000be1c   defined in Debug\stm8s_gpio.o section .text
-_GSM_OK                             0000969e   defined in Debug\main.o section .text
+_GPIO_WriteReverse                  0000beaa   defined in Debug\stm8s_gpio.o section .text
+_GSM_OK                             000096c4   defined in Debug\main.o section .text
                                                used in Debug\simcom.o
-_HSIDivFactor                       00008796   defined in Debug\stm8s_clk.o section .const
+_HSIDivFactor                       000087ba   defined in Debug\stm8s_clk.o section .const
 _IMEIRecievedOKFlag                 00000012   defined in Debug\main.o section .bsct, initialized
                                                used in Debug\cloudservice.o
                                                        Debug\simcom.o
-_ITC_DeInit                         0000c2dd   defined in Debug\stm8s_itc.o section .text
+_ITC_DeInit                         0000c36b   defined in Debug\stm8s_itc.o section .text
                                                used in Debug\board.o
-_ITC_GetCPUCC                       0000c2da   defined in Debug\stm8s_itc.o section .text
-_ITC_GetSoftIntStatus               0000c2fe   defined in Debug\stm8s_itc.o section .text
-_ITC_GetSoftwarePriority            0000c303   defined in Debug\stm8s_itc.o section .text
-_ITC_SetSoftwarePriority            0000c37a   defined in Debug\stm8s_itc.o section .text
+_ITC_GetCPUCC                       0000c368   defined in Debug\stm8s_itc.o section .text
+_ITC_GetSoftIntStatus               0000c38c   defined in Debug\stm8s_itc.o section .text
+_ITC_GetSoftwarePriority            0000c391   defined in Debug\stm8s_itc.o section .text
+_ITC_SetSoftwarePriority            0000c408   defined in Debug\stm8s_itc.o section .text
                                                used in Debug\board.o
-_IWDG_Config                        00009bd6   defined in Debug\board.o section .text
-_IWDG_Enable                        0000c43f   defined in Debug\stm8s_iwdg.o section .text
+_IWDG_Config                        00009bfc   defined in Debug\board.o section .text
+_IWDG_Enable                        0000c4cd   defined in Debug\stm8s_iwdg.o section .text
                                                used in Debug\board.o
-_IWDG_ReloadCounter                 0000c43a   defined in Debug\stm8s_iwdg.o section .text
+_IWDG_ReloadCounter                 0000c4c8   defined in Debug\stm8s_iwdg.o section .text
                                                used in Debug\board.o
-_IWDG_SetPrescaler                  0000c432   defined in Debug\stm8s_iwdg.o section .text
+_IWDG_SetPrescaler                  0000c4c0   defined in Debug\stm8s_iwdg.o section .text
                                                used in Debug\board.o
-_IWDG_SetReload                     0000c436   defined in Debug\stm8s_iwdg.o section .text
+_IWDG_SetReload                     0000c4c4   defined in Debug\stm8s_iwdg.o section .text
                                                used in Debug\board.o
-_IWDG_WriteAccessCmd                0000c42e   defined in Debug\stm8s_iwdg.o section .text
+_IWDG_WriteAccessCmd                0000c4bc   defined in Debug\stm8s_iwdg.o section .text
                                                used in Debug\board.o
 _OK                                 ********   *** removed from Debug\main.o ***
 _PASS_KEY                           00000074   defined in Debug\simcom.o section .ubsct
-_ReadFlashWord                      00009c08   defined in Debug\board.o section .text
-_SIMCom_setup                       0000aed8   defined in Debug\simcom.o section .text
+_ReadFlashWord                      00009c2e   defined in Debug\board.o section .text
+_SIMCom_setup                       0000af5d   defined in Debug\simcom.o section .text
                                                used in Debug\main.o
-_SIMComrestart                      0000afa6   defined in Debug\simcom.o section .text
-_SetPortD7AsTim1_Ch4                00009d7e   defined in Debug\board.o section .text
-_TIM1_ARRPreloadConfig              0000c8e7   defined in Debug\stm8s_tim1.o section .text
-_TIM1_BDTRConfig                    0000c65c   defined in Debug\stm8s_tim1.o section .text
-_TIM1_CCPreloadControl              0000c903   defined in Debug\stm8s_tim1.o section .text
-_TIM1_CCxCmd                        0000c9e7   defined in Debug\stm8s_tim1.o section .text
+_SIMComrestart                      0000b034   defined in Debug\simcom.o section .text
+_SetPortD7AsTim1_Ch4                00009da4   defined in Debug\board.o section .text
+_TIM1_ARRPreloadConfig              0000c975   defined in Debug\stm8s_tim1.o section .text
+_TIM1_BDTRConfig                    0000c6ea   defined in Debug\stm8s_tim1.o section .text
+_TIM1_CCPreloadControl              0000c991   defined in Debug\stm8s_tim1.o section .text
+_TIM1_CCxCmd                        0000ca75   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\board.o
                                                        Debug\metering.o
-_TIM1_CCxNCmd                       0000ca38   defined in Debug\stm8s_tim1.o section .text
-_TIM1_ClearFlag                     0000cc1a   defined in Debug\stm8s_tim1.o section .text
+_TIM1_CCxNCmd                       0000cac6   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ClearFlag                     0000cca8   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\metering.o
                                                        Debug\stm8s_it.o
-_TIM1_ClearITPendingBit             0000cc4d   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ClearITPendingBit             0000ccdb   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\stm8s_it.o
-_TIM1_Cmd                           0000c747   defined in Debug\stm8s_tim1.o section .text
+_TIM1_Cmd                           0000c7d5   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\board.o
-_TIM1_CounterModeConfig             0000c8a6   defined in Debug\stm8s_tim1.o section .text
-_TIM1_CtrlPWMOutputs                0000c755   defined in Debug\stm8s_tim1.o section .text
-_TIM1_DeInit                        0000c444   defined in Debug\stm8s_tim1.o section .text
+_TIM1_CounterModeConfig             0000c934   defined in Debug\stm8s_tim1.o section .text
+_TIM1_CtrlPWMOutputs                0000c7e3   defined in Debug\stm8s_tim1.o section .text
+_TIM1_DeInit                        0000c4d2   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\board.o
-_TIM1_ETRClockMode1Config           0000c785   defined in Debug\stm8s_tim1.o section .text
-_TIM1_ETRClockMode2Config           0000c79d   defined in Debug\stm8s_tim1.o section .text
-_TIM1_ETRConfig                     0000c7af   defined in Debug\stm8s_tim1.o section .text
-_TIM1_EncoderInterfaceConfig        0000c859   defined in Debug\stm8s_tim1.o section .text
-_TIM1_ForcedOC1Config               0000c8b3   defined in Debug\stm8s_tim1.o section .text
-_TIM1_ForcedOC2Config               0000c8c0   defined in Debug\stm8s_tim1.o section .text
-_TIM1_ForcedOC3Config               0000c8cd   defined in Debug\stm8s_tim1.o section .text
-_TIM1_ForcedOC4Config               0000c8da   defined in Debug\stm8s_tim1.o section .text
-_TIM1_GenerateEvent                 0000c981   defined in Debug\stm8s_tim1.o section .text
-_TIM1_GetCapture1                   0000cb2e   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ETRClockMode1Config           0000c813   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ETRClockMode2Config           0000c82b   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ETRConfig                     0000c83d   defined in Debug\stm8s_tim1.o section .text
+_TIM1_EncoderInterfaceConfig        0000c8e7   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ForcedOC1Config               0000c941   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ForcedOC2Config               0000c94e   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ForcedOC3Config               0000c95b   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ForcedOC4Config               0000c968   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GenerateEvent                 0000ca0f   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GetCapture1                   0000cbbc   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\stm8s_it.o
-_TIM1_GetCapture2                   0000cb54   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GetCapture2                   0000cbe2   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\metering.o
-_TIM1_GetCapture3                   0000cb7a   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GetCapture3                   0000cc08   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\stm8s_it.o
-_TIM1_GetCapture4                   0000cba0   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GetCapture4                   0000cc2e   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\metering.o
-_TIM1_GetCounter                    0000cbc6   defined in Debug\stm8s_tim1.o section .text
-_TIM1_GetFlagStatus                 0000cbf8   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GetCounter                    0000cc54   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GetFlagStatus                 0000cc86   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\metering.o
-_TIM1_GetITStatus                   0000cc2a   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GetITStatus                   0000ccb8   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\stm8s_it.o
-_TIM1_GetPrescaler                  0000cbdf   defined in Debug\stm8s_tim1.o section .text
-_TIM1_ICInit                        0000c676   defined in Debug\stm8s_tim1.o section .text
+_TIM1_GetPrescaler                  0000cc6d   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ICInit                        0000c704   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\board.o
-_TIM1_ITConfig                      0000c763   defined in Debug\stm8s_tim1.o section .text
+_TIM1_ITConfig                      0000c7f1   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\board.o
-_TIM1_InternalClockConfig           0000c77c   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC1FastConfig                 0000c949   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC1Init                       0000c501   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC1NPolarityConfig            0000c993   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC1PolarityConfig             0000c985   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC1PreloadConfig              0000c911   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC2FastConfig                 0000c957   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC2Init                       0000c55e   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC2NPolarityConfig            0000c9af   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC2PolarityConfig             0000c9a1   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC2PreloadConfig              0000c91f   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC3FastConfig                 0000c965   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC3Init                       0000c5bb   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC3NPolarityConfig            0000c9cb   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC3PolarityConfig             0000c9bd   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC3PreloadConfig              0000c92d   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC4FastConfig                 0000c973   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC4Init                       0000c618   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC4PolarityConfig             0000c9d9   defined in Debug\stm8s_tim1.o section .text
-_TIM1_OC4PreloadConfig              0000c93b   defined in Debug\stm8s_tim1.o section .text
-_TIM1_PWMIConfig                    0000c6d7   defined in Debug\stm8s_tim1.o section .text
-_TIM1_PrescalerConfig               0000c896   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SelectCOM                     0000c8f5   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SelectHallSensor              0000c815   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SelectInputTrigger            0000c7ec   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SelectMasterSlaveMode         0000c84b   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SelectOCxM                    0000ca73   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SelectOnePulseMode            0000c823   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SelectOutputTrigger           0000c831   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SelectSlaveMode               0000c83e   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetAutoreload                 0000cacd   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetCompare1                   0000cad6   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetCompare2                   0000cadf   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetCompare3                   0000cae8   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetCompare4                   0000caf1   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetCounter                    0000cac4   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetIC1Prescaler               0000cafa   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetIC2Prescaler               0000cb07   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetIC3Prescaler               0000cb14   defined in Debug\stm8s_tim1.o section .text
-_TIM1_SetIC4Prescaler               0000cb21   defined in Debug\stm8s_tim1.o section .text
-_TIM1_TIxExternalClockConfig        0000c7bd   defined in Debug\stm8s_tim1.o section .text
-_TIM1_TimeBaseInit                  0000c4dd   defined in Debug\stm8s_tim1.o section .text
+_TIM1_InternalClockConfig           0000c80a   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC1FastConfig                 0000c9d7   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC1Init                       0000c58f   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC1NPolarityConfig            0000ca21   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC1PolarityConfig             0000ca13   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC1PreloadConfig              0000c99f   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC2FastConfig                 0000c9e5   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC2Init                       0000c5ec   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC2NPolarityConfig            0000ca3d   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC2PolarityConfig             0000ca2f   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC2PreloadConfig              0000c9ad   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC3FastConfig                 0000c9f3   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC3Init                       0000c649   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC3NPolarityConfig            0000ca59   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC3PolarityConfig             0000ca4b   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC3PreloadConfig              0000c9bb   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC4FastConfig                 0000ca01   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC4Init                       0000c6a6   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC4PolarityConfig             0000ca67   defined in Debug\stm8s_tim1.o section .text
+_TIM1_OC4PreloadConfig              0000c9c9   defined in Debug\stm8s_tim1.o section .text
+_TIM1_PWMIConfig                    0000c765   defined in Debug\stm8s_tim1.o section .text
+_TIM1_PrescalerConfig               0000c924   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SelectCOM                     0000c983   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SelectHallSensor              0000c8a3   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SelectInputTrigger            0000c87a   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SelectMasterSlaveMode         0000c8d9   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SelectOCxM                    0000cb01   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SelectOnePulseMode            0000c8b1   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SelectOutputTrigger           0000c8bf   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SelectSlaveMode               0000c8cc   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetAutoreload                 0000cb5b   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetCompare1                   0000cb64   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetCompare2                   0000cb6d   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetCompare3                   0000cb76   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetCompare4                   0000cb7f   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetCounter                    0000cb52   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetIC1Prescaler               0000cb88   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetIC2Prescaler               0000cb95   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetIC3Prescaler               0000cba2   defined in Debug\stm8s_tim1.o section .text
+_TIM1_SetIC4Prescaler               0000cbaf   defined in Debug\stm8s_tim1.o section .text
+_TIM1_TIxExternalClockConfig        0000c84b   defined in Debug\stm8s_tim1.o section .text
+_TIM1_TimeBaseInit                  0000c56b   defined in Debug\stm8s_tim1.o section .text
                                                used in Debug\board.o
-_TIM1_UpdateDisableConfig           0000c7f9   defined in Debug\stm8s_tim1.o section .text
-_TIM1_UpdateRequestConfig           0000c807   defined in Debug\stm8s_tim1.o section .text
-_TIM2_ARRPreloadConfig              0000cf49   defined in Debug\stm8s_tim2.o section .text
-_TIM2_CCxCmd                        0000cfaf   defined in Debug\stm8s_tim2.o section .text
+_TIM1_UpdateDisableConfig           0000c887   defined in Debug\stm8s_tim1.o section .text
+_TIM1_UpdateRequestConfig           0000c895   defined in Debug\stm8s_tim1.o section .text
+_TIM2_ARRPreloadConfig              0000cfd7   defined in Debug\stm8s_tim2.o section .text
+_TIM2_CCxCmd                        0000d03d   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\board.o
                                                        Debug\metering.o
-_TIM2_ClearFlag                     0000d12a   defined in Debug\stm8s_tim2.o section .text
+_TIM2_ClearFlag                     0000d1b8   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\metering.o
                                                        Debug\stm8s_it.o
-_TIM2_ClearITPendingBit             0000d157   defined in Debug\stm8s_tim2.o section .text
+_TIM2_ClearITPendingBit             0000d1e5   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\stm8s_it.o
-_TIM2_Cmd                           0000cec8   defined in Debug\stm8s_tim2.o section .text
+_TIM2_Cmd                           0000cf56   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\board.o
-_TIM2_DeInit                        0000cd12   defined in Debug\stm8s_tim2.o section .text
+_TIM2_DeInit                        0000cda0   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\board.o
-_TIM2_ForcedOC1Config               0000cf22   defined in Debug\stm8s_tim2.o section .text
-_TIM2_ForcedOC2Config               0000cf2f   defined in Debug\stm8s_tim2.o section .text
-_TIM2_ForcedOC3Config               0000cf3c   defined in Debug\stm8s_tim2.o section .text
-_TIM2_GenerateEvent                 0000cf81   defined in Debug\stm8s_tim2.o section .text
-_TIM2_GetCapture1                   0000d079   defined in Debug\stm8s_tim2.o section .text
+_TIM2_ForcedOC1Config               0000cfb0   defined in Debug\stm8s_tim2.o section .text
+_TIM2_ForcedOC2Config               0000cfbd   defined in Debug\stm8s_tim2.o section .text
+_TIM2_ForcedOC3Config               0000cfca   defined in Debug\stm8s_tim2.o section .text
+_TIM2_GenerateEvent                 0000d00f   defined in Debug\stm8s_tim2.o section .text
+_TIM2_GetCapture1                   0000d107   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\stm8s_it.o
-_TIM2_GetCapture2                   0000d09f   defined in Debug\stm8s_tim2.o section .text
+_TIM2_GetCapture2                   0000d12d   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\metering.o
-_TIM2_GetCapture3                   0000d0c5   defined in Debug\stm8s_tim2.o section .text
-_TIM2_GetCounter                    0000d0eb   defined in Debug\stm8s_tim2.o section .text
+_TIM2_GetCapture3                   0000d153   defined in Debug\stm8s_tim2.o section .text
+_TIM2_GetCounter                    0000d179   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\stm8s_delay.o
-_TIM2_GetFlagStatus                 0000d108   defined in Debug\stm8s_tim2.o section .text
+_TIM2_GetFlagStatus                 0000d196   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\metering.o
-_TIM2_GetITStatus                   0000d134   defined in Debug\stm8s_tim2.o section .text
+_TIM2_GetITStatus                   0000d1c2   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\stm8s_it.o
-_TIM2_GetPrescaler                  0000d104   defined in Debug\stm8s_tim2.o section .text
-_TIM2_ICInit                        0000ce11   defined in Debug\stm8s_tim2.o section .text
+_TIM2_GetPrescaler                  0000d192   defined in Debug\stm8s_tim2.o section .text
+_TIM2_ICInit                        0000ce9f   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\board.o
-_TIM2_ITConfig                      0000ced6   defined in Debug\stm8s_tim2.o section .text
+_TIM2_ITConfig                      0000cf64   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\board.o
-_TIM2_OC1Init                       0000cd7b   defined in Debug\stm8s_tim2.o section .text
-_TIM2_OC1PolarityConfig             0000cf85   defined in Debug\stm8s_tim2.o section .text
-_TIM2_OC1PreloadConfig              0000cf57   defined in Debug\stm8s_tim2.o section .text
-_TIM2_OC2Init                       0000cdad   defined in Debug\stm8s_tim2.o section .text
-_TIM2_OC2PolarityConfig             0000cf93   defined in Debug\stm8s_tim2.o section .text
-_TIM2_OC2PreloadConfig              0000cf65   defined in Debug\stm8s_tim2.o section .text
-_TIM2_OC3Init                       0000cddf   defined in Debug\stm8s_tim2.o section .text
-_TIM2_OC3PolarityConfig             0000cfa1   defined in Debug\stm8s_tim2.o section .text
-_TIM2_OC3PreloadConfig              0000cf73   defined in Debug\stm8s_tim2.o section .text
-_TIM2_PWMIConfig                    0000ce58   defined in Debug\stm8s_tim2.o section .text
-_TIM2_PrescalerConfig               0000cf19   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SelectOCxM                    0000cfea   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SelectOnePulseMode            0000cf0b   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SetAutoreload                 0000d02e   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SetCompare1                   0000d037   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SetCompare2                   0000d040   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SetCompare3                   0000d049   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SetCounter                    0000d025   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SetIC1Prescaler               0000d052   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SetIC2Prescaler               0000d05f   defined in Debug\stm8s_tim2.o section .text
-_TIM2_SetIC3Prescaler               0000d06c   defined in Debug\stm8s_tim2.o section .text
-_TIM2_TimeBaseInit                  0000cd6b   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC1Init                       0000ce09   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC1PolarityConfig             0000d013   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC1PreloadConfig              0000cfe5   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC2Init                       0000ce3b   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC2PolarityConfig             0000d021   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC2PreloadConfig              0000cff3   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC3Init                       0000ce6d   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC3PolarityConfig             0000d02f   defined in Debug\stm8s_tim2.o section .text
+_TIM2_OC3PreloadConfig              0000d001   defined in Debug\stm8s_tim2.o section .text
+_TIM2_PWMIConfig                    0000cee6   defined in Debug\stm8s_tim2.o section .text
+_TIM2_PrescalerConfig               0000cfa7   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SelectOCxM                    0000d078   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SelectOnePulseMode            0000cf99   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SetAutoreload                 0000d0bc   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SetCompare1                   0000d0c5   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SetCompare2                   0000d0ce   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SetCompare3                   0000d0d7   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SetCounter                    0000d0b3   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SetIC1Prescaler               0000d0e0   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SetIC2Prescaler               0000d0ed   defined in Debug\stm8s_tim2.o section .text
+_TIM2_SetIC3Prescaler               0000d0fa   defined in Debug\stm8s_tim2.o section .text
+_TIM2_TimeBaseInit                  0000cdf9   defined in Debug\stm8s_tim2.o section .text
                                                used in Debug\board.o
-_TIM2_UpdateDisableConfig           0000ceef   defined in Debug\stm8s_tim2.o section .text
-_TIM2_UpdateRequestConfig           0000cefd   defined in Debug\stm8s_tim2.o section .text
+_TIM2_UpdateDisableConfig           0000cf7d   defined in Debug\stm8s_tim2.o section .text
+_TIM2_UpdateRequestConfig           0000cf8b   defined in Debug\stm8s_tim2.o section .text
 _Temperature1                       00000218   defined in Debug\getadc.o section .data, initialized
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
 _Temperature2                       0000021c   defined in Debug\getadc.o section .data, initialized
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
-_UART1_ClearFlag                    0000d4f5   defined in Debug\stm8s_uart1.o section .text
-_UART1_ClearITPendingBit            0000d592   defined in Debug\stm8s_uart1.o section .text
-_UART1_Cmd                          0000d357   defined in Debug\stm8s_uart1.o section .text
+_UART1_ClearFlag                    0000d583   defined in Debug\stm8s_uart1.o section .text
+_UART1_ClearITPendingBit            0000d620   defined in Debug\stm8s_uart1.o section .text
+_UART1_Cmd                          0000d3e5   defined in Debug\stm8s_uart1.o section .text
                                                used in Debug\board.o
-_UART1_DeInit                       0000d1ec   defined in Debug\stm8s_uart1.o section .text
+_UART1_DeInit                       0000d27a   defined in Debug\stm8s_uart1.o section .text
                                                used in Debug\board.o
-_UART1_GetFlagStatus                0000d4b2   defined in Debug\stm8s_uart1.o section .text
+_UART1_GetFlagStatus                0000d540   defined in Debug\stm8s_uart1.o section .text
                                                used in Debug\main.o
                                                        Debug\simcom.o
                                                        Debug\stm8s_it.o
                                                        Debug\uart_service.o
-_UART1_GetITStatus                  0000d505   defined in Debug\stm8s_uart1.o section .text
-_UART1_HalfDuplexCmd                0000d3d6   defined in Debug\stm8s_uart1.o section .text
-_UART1_ITConfig                     0000d365   defined in Debug\stm8s_uart1.o section .text
+_UART1_GetITStatus                  0000d593   defined in Debug\stm8s_uart1.o section .text
+_UART1_HalfDuplexCmd                0000d464   defined in Debug\stm8s_uart1.o section .text
+_UART1_ITConfig                     0000d3f3   defined in Debug\stm8s_uart1.o section .text
                                                used in Debug\main.o Debug\board.o
                                                        Debug\simcom.o
-_UART1_Init                         0000d217   defined in Debug\stm8s_uart1.o section .text
+_UART1_Init                         0000d2a5   defined in Debug\stm8s_uart1.o section .text
                                                used in Debug\board.o
-_UART1_IrDACmd                      0000d3f2   defined in Debug\stm8s_uart1.o section .text
-_UART1_IrDAConfig                   0000d3e4   defined in Debug\stm8s_uart1.o section .text
-_UART1_LINBreakDetectionConfig      0000d400   defined in Debug\stm8s_uart1.o section .text
-_UART1_LINCmd                       0000d40e   defined in Debug\stm8s_uart1.o section .text
-_UART1_ReceiveData8                 0000d451   defined in Debug\stm8s_uart1.o section .text
+_UART1_IrDACmd                      0000d480   defined in Debug\stm8s_uart1.o section .text
+_UART1_IrDAConfig                   0000d472   defined in Debug\stm8s_uart1.o section .text
+_UART1_LINBreakDetectionConfig      0000d48e   defined in Debug\stm8s_uart1.o section .text
+_UART1_LINCmd                       0000d49c   defined in Debug\stm8s_uart1.o section .text
+_UART1_ReceiveData8                 0000d4df   defined in Debug\stm8s_uart1.o section .text
                                                used in Debug\main.o
                                                        Debug\simcom.o
                                                        Debug\stm8s_it.o
                                                        Debug\uart_service.o
-_UART1_ReceiveData9                 0000d455   defined in Debug\stm8s_uart1.o section .text
-_UART1_ReceiverWakeUpCmd            0000d443   defined in Debug\stm8s_uart1.o section .text
-_UART1_SendBreak                    0000d492   defined in Debug\stm8s_uart1.o section .text
-_UART1_SendData8                    0000d477   defined in Debug\stm8s_uart1.o section .text
+_UART1_ReceiveData9                 0000d4e3   defined in Debug\stm8s_uart1.o section .text
+_UART1_ReceiverWakeUpCmd            0000d4d1   defined in Debug\stm8s_uart1.o section .text
+_UART1_SendBreak                    0000d520   defined in Debug\stm8s_uart1.o section .text
+_UART1_SendData8                    0000d505   defined in Debug\stm8s_uart1.o section .text
                                                used in Debug\main.o
                                                        Debug\simcom.o
                                                        Debug\uart_service.o
-_UART1_SendData9                    0000d47b   defined in Debug\stm8s_uart1.o section .text
-_UART1_SetAddress                   0000d497   defined in Debug\stm8s_uart1.o section .text
-_UART1_SetGuardTime                 0000d4aa   defined in Debug\stm8s_uart1.o section .text
-_UART1_SetPrescaler                 0000d4ae   defined in Debug\stm8s_uart1.o section .text
-_UART1_SmartCardCmd                 0000d41c   defined in Debug\stm8s_uart1.o section .text
-_UART1_SmartCardNACKCmd             0000d42a   defined in Debug\stm8s_uart1.o section .text
-_UART1_WakeUpConfig                 0000d438   defined in Debug\stm8s_uart1.o section .text
-_UARTSetup                          00009d33   defined in Debug\board.o section .text
+_UART1_SendData9                    0000d509   defined in Debug\stm8s_uart1.o section .text
+_UART1_SetAddress                   0000d525   defined in Debug\stm8s_uart1.o section .text
+_UART1_SetGuardTime                 0000d538   defined in Debug\stm8s_uart1.o section .text
+_UART1_SetPrescaler                 0000d53c   defined in Debug\stm8s_uart1.o section .text
+_UART1_SmartCardCmd                 0000d4aa   defined in Debug\stm8s_uart1.o section .text
+_UART1_SmartCardNACKCmd             0000d4b8   defined in Debug\stm8s_uart1.o section .text
+_UART1_WakeUpConfig                 0000d4c6   defined in Debug\stm8s_uart1.o section .text
+_UARTSetup                          00009d59   defined in Debug\board.o section .text
 _Voltage_Phase1                     00000220   defined in Debug\vipe_calculation.o section .data, initialized
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
@@ -2425,71 +2426,71 @@ _Watt_Phase3                        00000240   defined in Debug\vipe_calculation
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\stm8s_it.o
-_WriteFlashWord                     00009c45   defined in Debug\board.o section .text
+_WriteFlashWord                     00009c6b   defined in Debug\board.o section .text
                                                used in Debug\main.o
-__addexp                            0000dca6   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o section .text
+__addexp                            0000dd48   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o section .text
                                                *** not used ***
-__dtens                             00008875   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cfcon.o section .const
+__dtens                             0000889b   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cfcon.o section .const
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o
-__dtento                            0000e764   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o section .text
+__dtento                            0000e806   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
-__dtoe                              0000e2e7   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtoe.o section .text
+__dtoe                              0000e389   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtoe.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtog.o
-__dtof                              0000e429   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtof.o section .text
+__dtof                              0000e4cb   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtof.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtog.o
-__dtog                              0000e519   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtog.o section .text
+__dtog                              0000e5bb   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtog.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
 __endmem                            000013ff   defined in command file
                                                *** not used ***
 __endzp                             000000b7   defined in command file section .ubsct
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
-__huge                              00008891   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cfcon.o section .const
+__huge                              000088b7   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cfcon.o section .const
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o
-__idesc__                           000088f9   defined in linker section .init
+__idesc__                           0000891f   defined in linker section .init
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
-__itob                              0000e8ab   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o section .text
+__itob                              0000e94d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
-__ln                                0000db26   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o section .text
-__ltob                              0000e925   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o section .text
+__ln                                0000dbc8   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o section .text
+__ltob                              0000e9c7   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
 __memory                            000002ac   defined in command file section .bss
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
-__norm                              0000e5fe   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o section .text
+__norm                              0000e6a0   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtoe.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtof.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtog.o
-__ntens                             00008895   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cfcon.o section .const
+__ntens                             000088bb   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cfcon.o section .const
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o
-__poly                              0000dcd2   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o section .text
+__poly                              0000dd74   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o section .text
                                                *** not used ***
-__print                             0000de0f   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o section .text
+__print                             0000deb1   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)sprnt.o
-__round                             0000e833   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)round.o section .text
+__round                             0000e8d5   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)round.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtoe.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtof.o
 __stack                             000017ff   defined in command file
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
 __startmem                          000002ac   defined in command file section .bss
                                                *** not used ***
-__stext                             00008ab0   defined in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8 section .text
+__stext                             00008ad6   defined in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8 section .text
                                                used in Debug\stm8_interrupt_vector.o
-__udiv                              0000e9bb   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)idiv0.o section .text
+__udiv                              0000ea5d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)idiv0.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtoe.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o
-__uldiv                             0000e9c6   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)ildiv0.o section .text
+__uldiv                             0000ea68   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)ildiv0.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o
-__unpack                            0000dceb   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o section .text
+__unpack                            0000dd8d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
 __vectab                            00008000   defined in Debug\stm8_interrupt_vector.o section .const
 _activation_flag                    ********   *** removed from Debug\main.o ***
 _arm_flag                           ********   *** removed from Debug\main.o ***
-_atoi                               0000e9e1   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)atoi.o section .text
+_atoi                               0000ea83   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)atoi.o section .text
                                                used in Debug\main.o
 _aunIMEI                            00000084   defined in Debug\simcom.o section .ubsct
                                                used in Debug\cloudservice.o
@@ -2502,46 +2503,46 @@ _aunPushed_Data                     00000164   defined in Debug\cloudservice.o s
 _aunRecievedData                    00000248   defined in Debug\uart_service.o section .bss
 _bCONNACK_Recieved                  00000014   defined in Debug\cloudservice.o section .bsct, initialized
 _bOkFlag                            000000ac   defined in Debug\uart_service.o section .ubsct
-_bSendSMS                           00009550   defined in Debug\main.o section .text
-_bValidIMEIRecieved                 0000b1ec   defined in Debug\simcom.o section .text
+_bSendSMS                           00009576   defined in Debug\main.o section .text
+_bValidIMEIRecieved                 0000b27a   defined in Debug\simcom.o section .text
 _batVolt                            00000016   defined in Debug\getadc.o section .bsct, initialized
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
 _bypassPulseTicsFlag                0000b7:0   defined in Debug\metering.o section .bit, initialized
-_calcAmp1                           0000d826   defined in Debug\vipe_calculation.o section .text
+_calcAmp1                           0000d8c8   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\metering.o
-_calcAmp2                           0000d8a6   defined in Debug\vipe_calculation.o section .text
+_calcAmp2                           0000d948   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\metering.o
-_calcAmp3                           0000d926   defined in Debug\vipe_calculation.o section .text
+_calcAmp3                           0000d9c8   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\metering.o
-_calcVolt1                          0000d6a6   defined in Debug\vipe_calculation.o section .text
+_calcVolt1                          0000d748   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\metering.o
-_calcVolt2                          0000d726   defined in Debug\vipe_calculation.o section .text
+_calcVolt2                          0000d7c8   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\metering.o
-_calcVolt3                          0000d7a6   defined in Debug\vipe_calculation.o section .text
+_calcVolt3                          0000d848   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\metering.o
-_calcWatt1                          0000d9a6   defined in Debug\vipe_calculation.o section .text
+_calcWatt1                          0000da48   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\stm8s_it.o
-_calcWatt2                          0000da26   defined in Debug\vipe_calculation.o section .text
+_calcWatt2                          0000dac8   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\stm8s_it.o
-_calcWatt3                          0000daa6   defined in Debug\vipe_calculation.o section .text
+_calcWatt3                          0000db48   defined in Debug\vipe_calculation.o section .text
                                                used in Debug\stm8s_it.o
-_calculateBatVolt                   0000a647   defined in Debug\getadc.o section .text
-_calculateFuelLevel                 0000a7a5   defined in Debug\getadc.o section .text
-_calculateTemp1                     0000a65f   defined in Debug\getadc.o section .text
-_calculateTemp2                     0000a702   defined in Debug\getadc.o section .text
-_calculateVoltCurrent               0000a7af   defined in Debug\metering.o section .text
+_calculateBatVolt                   0000a69f   defined in Debug\getadc.o section .text
+_calculateFuelLevel                 0000a7fd   defined in Debug\getadc.o section .text
+_calculateTemp1                     0000a6b7   defined in Debug\getadc.o section .text
+_calculateTemp2                     0000a75a   defined in Debug\getadc.o section .text
+_calculateVoltCurrent               0000a807   defined in Debug\metering.o section .text
                                                used in Debug\main.o
 _checkByte                          00000072   defined in Debug\board.o section .ubsct
                                                used in Debug\main.o
                                                        Debug\vipe_calculation.o
-_checkNum                           0000afd4   defined in Debug\simcom.o section .text
+_checkNum                           0000b062   defined in Debug\simcom.o section .text
 _checkit                            00000013   defined in Debug\board.o section .bsct, initialized
                                                used in Debug\simcom.o
                                                        Debug\stm8s_it.o
-_clearBuffer                        000096f6   defined in Debug\main.o section .text
+_clearBuffer                        0000971c   defined in Debug\main.o section .text
                                                used in Debug\uart_service.o
-_clockSetup                         000099f3   defined in Debug\board.o section .text
+_clockSetup                         00009a19   defined in Debug\board.o section .text
 _cloud_connectivity_flag            0000000e   defined in Debug\main.o section .bsct, initialized
 _cloud_gps_data_flag                0000000b   defined in Debug\main.o section .bsct, initialized
 _currentCalibrationFactor1          0000006a   defined in Debug\board.o section .ubsct
@@ -2557,49 +2558,49 @@ _currentPeriod1                     00000026   defined in Debug\metering.o secti
 _currentPeriod2                     0000002a   defined in Debug\metering.o section .bsct, initialized
 _currentPeriod3                     0000002e   defined in Debug\metering.o section .bsct, initialized
 _dataLength                         0000005f   defined in Debug\uart_service.o section .bsct, initialized
-_delay_ms                           0000b95e   defined in Debug\stm8s_delay.o section .text
+_delay_ms                           0000b9ec   defined in Debug\stm8s_delay.o section .text
                                                used in Debug\main.o Debug\board.o
                                                        Debug\getadc.o
                                                        Debug\mqtt_protocol.o
                                                        Debug\simcom.o
-_delay_us                           0000b93f   defined in Debug\stm8s_delay.o section .text
+_delay_us                           0000b9cd   defined in Debug\stm8s_delay.o section .text
 _discardPulseTics                   0000003e   defined in Debug\metering.o section .bsct, initialized
-_enGet_TCP_Status                   0000b12e   defined in Debug\simcom.o section .text
+_enGet_TCP_Status                   0000b1bc   defined in Debug\simcom.o section .text
                                                used in Debug\cloudservice.o
 _energyPhase1                       000000a8   defined in Debug\stm8s_it.o section .ubsct
 _energyPhase2                       000000a4   defined in Debug\stm8s_it.o section .ubsct
 _energyPhase3                       000000a0   defined in Debug\stm8s_it.o section .ubsct
-_exit                               00008afe   defined in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8 section .text
+_exit                               00008b24   defined in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8 section .text
 _flag2                              0000000c   defined in Debug\main.o section .bsct, initialized
-_getCalibration                     00009c7c   defined in Debug\board.o section .text
-_getFuelLevel                       0000a616   defined in Debug\getadc.o section .text
+_getCalibration                     00009ca2   defined in Debug\board.o section .text
+_getFuelLevel                       0000a66e   defined in Debug\getadc.o section .text
                                                used in Debug\main.o
-_getIMEI                            0000b013   defined in Debug\simcom.o section .text
-_getTics                            0000b973   defined in Debug\stm8s_delay.o section .text
+_getIMEI                            0000b0a1   defined in Debug\simcom.o section .text
+_getTics                            0000ba01   defined in Debug\stm8s_delay.o section .text
                                                used in Debug\metering.o
-_getbatteryvolt                     0000a584   defined in Debug\getadc.o section .text
+_getbatteryvolt                     0000a5dc   defined in Debug\getadc.o section .text
                                                used in Debug\main.o
-_gettemp1                           0000a5b5   defined in Debug\getadc.o section .text
+_gettemp1                           0000a60d   defined in Debug\getadc.o section .text
                                                used in Debug\main.o
-_gettemp2                           0000a5e5   defined in Debug\getadc.o section .text
+_gettemp2                           0000a63d   defined in Debug\getadc.o section .text
                                                used in Debug\main.o
-_gpioSetup                          00009a5a   defined in Debug\board.o section .text
+_gpioSetup                          00009a80   defined in Debug\board.o section .text
 _gprs_init_flag                     00000010   defined in Debug\main.o section .bsct, initialized
 _gprs_post_response_status          0000000f   defined in Debug\main.o section .bsct, initialized
-_isspace                            0000ea3d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)isspac0.o section .text
+_isspace                            0000eadf   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)isspac0.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)atoi.o
-_log                                0000dc7e   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o section .text
+_log                                0000dd20   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o section .text
                                                used in Debug\getadc.o
-_log10                              0000dc92   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o section .text
-_main                               00008b0a   defined in Debug\main.o section .text
+_log10                              0000dd34   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o section .text
+_main                               00008b30   defined in Debug\main.o section .text
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
-_memchr                             0000ea4d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)memchr0.o section .text
+_memchr                             0000eaef   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)memchr0.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtog.o
-_ms_send_cmd                        0000d5a2   defined in Debug\uart_service.o section .text
+_ms_send_cmd                        0000d630   defined in Debug\uart_service.o section .text
                                                used in Debug\main.o
                                                        Debug\mqtt_protocol.o
                                                        Debug\simcom.o
-_ms_send_cmd_TCP                    0000d5d9   defined in Debug\uart_service.o section .text
+_ms_send_cmd_TCP                    0000d667   defined in Debug\uart_service.o section .text
 _noEchoFlag                         00000011   defined in Debug\main.o section .bsct, initialized
 _power1OverflowCount                0000004b   defined in Debug\stm8s_it.o section .bsct, initialized
 _power1ReadFlag                     0000b7:2   defined in Debug\stm8s_it.o section .bit, initialized
@@ -2627,27 +2628,28 @@ _powerPeriod2                       00000036   defined in Debug\metering.o secti
 _powerPeriod3                       0000003a   defined in Debug\metering.o section .bsct, initialized
                                                used in Debug\stm8s_it.o
 _previousTics                       00000005   defined in Debug\main.o section .bsct, initialized
-_punGet_Client_ID                   00009f36   defined in Debug\cloudservice.o section .text
+_punGet_Client_ID                   00009f5c   defined in Debug\cloudservice.o section .text
                                                used in Debug\simcom.o
-_punGet_Command_Topic               00009f5e   defined in Debug\cloudservice.o section .text
+_punGet_Command_Topic               00009f84   defined in Debug\cloudservice.o section .text
                                                used in Debug\simcom.o
-_punGet_Event_Topic                 00009fa9   defined in Debug\cloudservice.o section .text
+_punGet_Event_Topic                 00009fcf   defined in Debug\cloudservice.o section .text
                                                used in Debug\simcom.o
-_putchar                            0000ea5d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)putchr.o section .text
+_putchar                            0000eaff   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)putchr.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
 _response_buffer                    00000100   defined in Debug\main.o section .data, initialized
                                                used in Debug\cloudservice.o
                                                        Debug\simcom.o
                                                        Debug\uart_service.o
-_sendDataToCloud                    00009db1   defined in Debug\cloudservice.o section .text
+_sendDataToCloud                    00009dd7   defined in Debug\cloudservice.o section .text
                                                used in Debug\main.o
-_sendSMSCurrent                     0000970b   defined in Debug\main.o section .text
-_sendSMSPower                       000098df   defined in Debug\main.o section .text
-_sendSMSVoltage                     000097f5   defined in Debug\main.o section .text
-_sms_receive                        00008b2d   defined in Debug\main.o section .text
+_sendSMSCurrent                     00009731   defined in Debug\main.o section .text
+_sendSMSPower                       00009905   defined in Debug\main.o section .text
+_sendSMSVoltage                     0000981b   defined in Debug\main.o section .text
+_sms_receive                        00008b53   defined in Debug\main.o section .text
                                                used in Debug\stm8s_it.o
+                                                       Debug\uart_service.o
 _sms_recev                          0000000d   defined in Debug\main.o section .bsct, initialized
-_sprintf                            0000dd02   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)sprnt.o section .text
+_sprintf                            0000dda4   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)sprnt.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\mqtt_protocol.o
@@ -2655,63 +2657,63 @@ _stmDataReceive                     00000000   defined in Debug\main.o section .
 _storeEnergyPhase1                  00000050   defined in Debug\stm8s_it.o section .bsct, initialized
 _storeEnergyPhase2                  00000054   defined in Debug\stm8s_it.o section .bsct, initialized
 _storeEnergyPhase3                  00000058   defined in Debug\stm8s_it.o section .bsct, initialized
-_strcat                             0000ea60   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strcat0.o section .text
+_strcat                             0000eb02   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strcat0.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\mqtt_protocol.o
-_strlen                             0000ea74   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strlen0.o section .text
+_strlen                             0000eb16   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strlen0.o section .text
                                                used in Debug\main.o
                                                        Debug\mqtt_protocol.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
-_strstr                             0000ea80   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strstr.o section .text
+_strstr                             0000eb22   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)strstr.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\simcom.o
                                                        Debug\uart_service.o
-_systemInit                         000099c9   defined in Debug\board.o section .text
+_systemInit                         000099ef   defined in Debug\board.o section .text
                                                used in Debug\main.o
-_systemSetup                        00008b00   defined in Debug\main.o section .text
+_systemSetup                        00008b26   defined in Debug\main.o section .text
 _ticsOverflowCounter                00000044   defined in Debug\stm8s_delay.o section .bsct, initialized
                                                used in Debug\stm8s_it.o
 _timeout                            00000009   defined in Debug\main.o section .bsct, initialized
 _timeoutForUART                     0000004e   defined in Debug\stm8s_it.o section .bsct, initialized
-_timer1Setup                        00009b67   defined in Debug\board.o section .text
-_timer2Setup                        00009b26   defined in Debug\board.o section .text
-_toupper                            0000eab4   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)toup0.o section .text
+_timer1Setup                        00009b8d   defined in Debug\board.o section .text
+_timer2Setup                        00009b4c   defined in Debug\board.o section .text
+_toupper                            0000eb56   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)toup0.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
 _uartDataReadytoRead                0000b7:5   defined in Debug\stm8s_it.o section .bit, initialized
 _unReadPtr                          0000005e   defined in Debug\uart_service.o section .bsct, initialized
 _unRecievePtr                       0000005d   defined in Debug\uart_service.o section .bsct, initialized
-_vClearBuffer                       0000b111   defined in Debug\simcom.o section .text
+_vClearBuffer                       0000b19f   defined in Debug\simcom.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\mqtt_protocol.o
-_vHandleDataRecvUARTviaISR          0000d627   defined in Debug\uart_service.o section .text
+_vHandleDataRecvUARTviaISR          0000d6b5   defined in Debug\uart_service.o section .text
                                                used in Debug\stm8s_it.o
-_vHandleMevrisRecievedData          00009f10   defined in Debug\cloudservice.o section .text
-_vHandleMevris_MQTT_Recv_Data       00009e77   defined in Debug\cloudservice.o section .text
+_vHandleMevrisRecievedData          00009f36   defined in Debug\cloudservice.o section .text
+_vHandleMevris_MQTT_Recv_Data       00009e9d   defined in Debug\cloudservice.o section .text
                                                used in Debug\uart_service.o
-_vHandle_MQTT                       0000b0b7   defined in Debug\simcom.o section .text
+_vHandle_MQTT                       0000b145   defined in Debug\simcom.o section .text
                                                used in Debug\main.o
-_vMQTT_Connect                      0000ac99   defined in Debug\mqtt_protocol.o section .text
+_vMQTT_Connect                      0000acf1   defined in Debug\mqtt_protocol.o section .text
                                                used in Debug\simcom.o
-_vMQTT_Disconnect                   0000aec8   defined in Debug\mqtt_protocol.o section .text
-_vMQTT_Publish                      0000ad8d   defined in Debug\mqtt_protocol.o section .text
+_vMQTT_Disconnect                   0000af4d   defined in Debug\mqtt_protocol.o section .text
+_vMQTT_Publish                      0000ae12   defined in Debug\mqtt_protocol.o section .text
                                                used in Debug\cloudservice.o
-_vMQTT_Subscribe                    0000ae2a   defined in Debug\mqtt_protocol.o section .text
+_vMQTT_Subscribe                    0000aeaf   defined in Debug\mqtt_protocol.o section .text
                                                used in Debug\simcom.o
-_vMQTT_UnSubscribe                  0000ae79   defined in Debug\mqtt_protocol.o section .text
-_vMevris_Send_BatteryVolt           0000a2b5   defined in Debug\cloudservice.o section .text
-_vMevris_Send_EngineTemp            0000a442   defined in Debug\cloudservice.o section .text
-_vMevris_Send_FuelLevel             0000a510   defined in Debug\cloudservice.o section .text
-_vMevris_Send_IMEI                  00009ff4   defined in Debug\cloudservice.o section .text
+_vMQTT_UnSubscribe                  0000aefe   defined in Debug\mqtt_protocol.o section .text
+_vMevris_Send_BatteryVolt           0000a2db   defined in Debug\cloudservice.o section .text
+_vMevris_Send_EngineTemp            0000a481   defined in Debug\cloudservice.o section .text
+_vMevris_Send_FuelLevel             0000a568   defined in Debug\cloudservice.o section .text
+_vMevris_Send_IMEI                  0000a01a   defined in Debug\cloudservice.o section .text
                                                used in Debug\simcom.o
-_vMevris_Send_Phase                 0000a0ae   defined in Debug\cloudservice.o section .text
-_vMevris_Send_RadiatorTemp          0000a36b   defined in Debug\cloudservice.o section .text
-_vMevris_Send_Version               0000a045   defined in Debug\cloudservice.o section .text
+_vMevris_Send_Phase                 0000a0d4   defined in Debug\cloudservice.o section .text
+_vMevris_Send_RadiatorTemp          0000a391   defined in Debug\cloudservice.o section .text
+_vMevris_Send_Version               0000a06b   defined in Debug\cloudservice.o section .text
                                                used in Debug\simcom.o
-_vPrintStickerInfo                  0000b253   defined in Debug\simcom.o section .text
-_vSerialRecieveISR                  0000d610   defined in Debug\uart_service.o section .text
+_vPrintStickerInfo                  0000b2e1   defined in Debug\simcom.o section .text
+_vSerialRecieveISR                  0000d69e   defined in Debug\uart_service.o section .text
                                                used in Debug\stm8s_it.o
 _voltCurrent1OverflowCount          00000048   defined in Debug\stm8s_it.o section .bsct, initialized
                                                used in Debug\metering.o
@@ -2732,47 +2734,47 @@ _voltageCalibrationFactor3          0000006c   defined in Debug\board.o section 
 _voltagePeriod1                     0000001a   defined in Debug\metering.o section .bsct, initialized
 _voltagePeriod2                     0000001e   defined in Debug\metering.o section .bsct, initialized
 _voltagePeriod3                     00000022   defined in Debug\metering.o section .bsct, initialized
-c_cmulx                             0000eabf   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)cmulx.o section .text
+c_cmulx                             0000eb61   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)cmulx.o section .text
                                                used in Debug\getadc.o
                                                        Debug\stm8s_flash.o
-c_ctof                              0000ead3   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ctof.o section .text
+c_ctof                              0000eb75   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ctof.o section .text
                                                used in Debug\getadc.o
-c_divsl                             0000eadb   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ldiv.o section .text
+c_divsl                             0000eb7d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ldiv.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lsdiv.o
-c_divul                             0000eaf2   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ldiv.o section .text
+c_divul                             0000eb94   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ldiv.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)ildiv0.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ludiv.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lumod.o
-c_fadd                              0000ebda   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o section .text
+c_fadd                              0000ec7c   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o section .text
                                                used in Debug\getadc.o
                                                        Debug\stm8s_it.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgadd.o
-c_fcmp                              0000eca3   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fcmp.o section .text
+c_fcmp                              0000ed45   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fcmp.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o
-c_fdiv                              0000ecd9   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fdiv.o section .text
+c_fdiv                              0000ed7b   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fdiv.o section .text
                                                used in Debug\getadc.o
                                                        Debug\stm8s_it.o
                                                        Debug\vipe_calculation.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgdiv.o
-c_fgadd                             0000ed5d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgadd.o section .text
+c_fgadd                             0000edff   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgadd.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
-c_fgdiv                             0000ed65   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgdiv.o section .text
+c_fgdiv                             0000ee07   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgdiv.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o
-c_fgmul                             0000ed87   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgmul.o section .text
+c_fgmul                             0000ee29   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgmul.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o
-c_fgneg                             0000ed8f   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgneg.o section .text
+c_fgneg                             0000ee31   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgneg.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtoe.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtof.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
-c_fgsub                             0000ed9a   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgsub.o section .text
+c_fgsub                             0000ee3c   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgsub.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
-c_fmul                              0000eda5   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fmul.o section .text
+c_fmul                              0000ee47   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fmul.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\getadc.o
@@ -2783,59 +2785,60 @@ c_fmul                              0000eda5   defined in (C:\Program Files (x86
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cffun0.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgmul.o
-c_fneg                              0000ee7a   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fneg.o section .text
+c_fneg                              0000ef1c   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fneg.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgsub.o
-c_fsub                              0000ebc6   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o section .text
+c_fsub                              0000ec68   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o section .text
                                                used in Debug\getadc.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgsub.o
-c_ftoi                              0000ee85   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ftol.o section .text
+c_ftoi                              0000ef27   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ftol.o section .text
                                                used in Debug\stm8s_delay.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
-c_ftol                              0000ee8b   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ftol.o section .text
+c_ftol                              0000ef2d   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ftol.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\stm8s_it.o
                                                        Debug\vipe_calculation.o
-c_imul                              0000eee7   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)imul.o section .text
+c_imul                              0000ef89   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)imul.o section .text
                                                used in Debug\getadc.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cprint.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)atoi.o
-c_itof                              0000ef08   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)itof.o section .text
+c_itof                              0000efaa   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)itof.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)log.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ctof.o
-c_ladc                              0000ef36   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ladc.o section .text
+c_ladc                              0000efd8   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ladc.o section .text
                                                used in Debug\board.o
-c_ladd                              0000ef47   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ladd.o section .text
+c_ladd                              0000efe9   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ladd.o section .text
                                                used in Debug\metering.o
                                                        Debug\stm8s_delay.o
                                                        Debug\stm8s_flash.o
                                                        Debug\stm8s_it.o
-c_lcmp                              0000ef5f   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lcmp.o section .text
-                                               used in Debug\metering.o
+c_lcmp                              0000f001   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lcmp.o section .text
+                                               used in Debug\cloudservice.o
+                                                       Debug\metering.o
                                                        Debug\stm8s_it.o
-c_ldiv                              0000ef7f   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lsdiv.o section .text
+c_ldiv                              0000f021   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lsdiv.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
-c_lgadc                             0000ef9e   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgadc.o section .text
+c_lgadc                             0000f040   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgadc.o section .text
                                                used in Debug\stm8s_it.o
-c_lgadd                             0000efae   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgadd.o section .text
+c_lgadd                             0000f050   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgadd.o section .text
                                                used in Debug\stm8s_flash.o
-c_lgneg                             0000efc5   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgneg.o section .text
+c_lgneg                             0000f067   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgneg.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ldiv.o
-c_lgsbc                             0000efd8   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgsbc.o section .text
+c_lgsbc                             0000f07a   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgsbc.o section .text
                                                used in Debug\main.o
-c_lgsub                             0000efee   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgsub.o section .text
+c_lgsub                             0000f090   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgsub.o section .text
                                                used in Debug\stm8s_it.o
-c_llsh                              0000f005   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)llsh.o section .text
+c_llsh                              0000f0a7   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)llsh.o section .text
                                                used in Debug\stm8s_uart1.o
-c_lmul                              0000f014   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lmul.o section .text
+c_lmul                              0000f0b6   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lmul.o section .text
                                                used in Debug\stm8s_delay.o
-c_lmulc                             0000f01c   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lmul.o section .text
+c_lmulc                             0000f0be   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lmul.o section .text
                                                *** not used ***
-c_lneg                              0000f09f   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lneg.o section .text
+c_lneg                              0000f141   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lneg.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ldiv.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lsdiv.o
@@ -2878,11 +2881,11 @@ c_lreg                              000000ad   defined in (C:\Program Files (x86
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ultof.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)vmul.o
-c_lsub                              0000f0b4   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lsub.o section .text
+c_lsub                              0000f156   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lsub.o section .text
                                                used in Debug\metering.o
                                                        Debug\stm8s_it.o
                                                        Debug\stm8s_uart1.o
-c_ltor                              0000f0cc   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ltor.o section .text
+c_ltor                              0000f16e   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ltor.o section .text
                                                used in Debug\main.o Debug\board.o
                                                        Debug\cloudservice.o
                                                        Debug\getadc.o
@@ -2898,29 +2901,29 @@ c_ltor                              0000f0cc   defined in (C:\Program Files (x86
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)dtento.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)ildiv0.o
-c_ludv                              0000f0de   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ludiv.o section .text
+c_ludv                              0000f180   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ludiv.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\stm8s_clk.o
                                                        Debug\stm8s_uart1.o
-c_lumd                              0000f0f2   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lumod.o section .text
+c_lumd                              0000f194   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lumod.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
-c_lursh                             0000f10c   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lursh.o section .text
+c_lursh                             0000f1ae   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lursh.o section .text
                                                used in Debug\getadc.o
                                                        Debug\stm8s_uart1.o
-c_lzmp                              0000f11b   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lzmp.o section .text
+c_lzmp                              0000f1bd   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lzmp.o section .text
                                                used in Debug\main.o
                                                        Debug\stm8s_it.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8)itob.o
-c_okadd                             0000ebe4   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o section .text
-c_okdiv                             0000ece9   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fdiv.o section .text
+c_okadd                             0000ec86   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o section .text
+c_okdiv                             0000ed8b   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fdiv.o section .text
                                                *** not used ***
-c_okmul                             0000edb3   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fmul.o section .text
+c_okmul                             0000ee55   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fmul.o section .text
                                                *** not used ***
-c_oksub                             0000ebd0   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o section .text
+c_oksub                             0000ec72   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fadd.o section .text
                                                *** not used ***
-c_rtol                              0000f12e   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)rtol.o section .text
+c_rtol                              0000f1d0   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)rtol.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\getadc.o
@@ -2940,27 +2943,27 @@ c_rtol                              0000f12e   defined in (C:\Program Files (x86
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgdiv.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgmul.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)fgsub.o
-c_smul                              0000f140   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)smul.o section .text
+c_smul                              0000f1e2   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)smul.o section .text
                                                used in Debug\stm8s_uart1.o
-c_uitof                             0000f17f   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)uitof.o section .text
+c_uitof                             0000f221   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)uitof.o section .text
                                                used in Debug\getadc.o
                                                        Debug\stm8s_delay.o
                                                        Debug\stm8s_it.o
                                                        Debug\vipe_calculation.o
-c_uitolx                            0000f1a3   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)utolx.o section .text
+c_uitolx                            0000f245   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)utolx.o section .text
                                                used in Debug\getadc.o
                                                        Debug\metering.o
                                                        Debug\stm8s_delay.o
                                                        Debug\stm8s_it.o
-c_ultof                             0000f1aa   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ultof.o section .text
+c_ultof                             0000f24c   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ultof.o section .text
                                                used in Debug\stm8s_it.o
                                                        Debug\vipe_calculation.o
-c_umul                              0000f1fa   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o section .text
+c_umul                              0000f29c   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o section .text
                                                used in Debug\metering.o
                                                        Debug\stm8s_flash.o
                                                        Debug\stm8s_it.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)vmul.o
-c_vmul                              0000f236   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)vmul.o section .text
+c_vmul                              0000f2d8   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)vmul.o section .text
                                                used in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libfs0.sm8)cnorm.o
 c_x                                 000000b1   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)xreg.o section .ubsct
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
@@ -2981,7 +2984,7 @@ c_x                                 000000b1   defined in (C:\Program Files (x86
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)vmul.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)xymvx.o
-c_xymvx                             0000f24e   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)xymvx.o section .text
+c_xymvx                             0000f2f0   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)xymvx.o section .text
                                                used in Debug\main.o
                                                        Debug\cloudservice.o
                                                        Debug\mqtt_protocol.o
@@ -2991,61 +2994,61 @@ c_y                                 000000b4   defined in (C:\Program Files (x86
                                                        Debug\stm8s_it.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o
                                                        (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)vmul.o
-f_ADC2_IRQHandler                   0000c2d7   defined in Debug\stm8s_it.o section .text
+f_ADC2_IRQHandler                   0000c365   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_AWU_IRQHandler                    0000c2c6   defined in Debug\stm8s_it.o section .text
+f_AWU_IRQHandler                    0000c354   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_CLK_IRQHandler                    0000c2c7   defined in Debug\stm8s_it.o section .text
+f_CLK_IRQHandler                    0000c355   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_EEPROM_EEC_IRQHandler             0000c2d9   defined in Debug\stm8s_it.o section .text
+f_EEPROM_EEC_IRQHandler             0000c367   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_EXTI_PORTB_IRQHandler             0000c2c8   defined in Debug\stm8s_it.o section .text
+f_EXTI_PORTB_IRQHandler             0000c356   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_EXTI_PORTC_IRQHandler             0000c2c9   defined in Debug\stm8s_it.o section .text
+f_EXTI_PORTC_IRQHandler             0000c357   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_EXTI_PORTD_IRQHandler             0000c28b   defined in Debug\stm8s_it.o section .text
+f_EXTI_PORTD_IRQHandler             0000c319   defined in Debug\stm8s_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI_PORTE_IRQHandler             0000c2ca   defined in Debug\stm8s_it.o section .text
+f_EXTI_PORTE_IRQHandler             0000c358   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_I2C_IRQHandler                    0000c2d4   defined in Debug\stm8s_it.o section .text
+f_I2C_IRQHandler                    0000c362   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_NonHandledInterrupt               0000c2c3   defined in Debug\stm8s_it.o section .text
+f_NonHandledInterrupt               0000c351   defined in Debug\stm8s_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_SPI_IRQHandler                    0000c2cb   defined in Debug\stm8s_it.o section .text
+f_SPI_IRQHandler                    0000c359   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TIM1_CAP_COM_IRQHandler           0000c2cd   defined in Debug\stm8s_it.o section .text
+f_TIM1_CAP_COM_IRQHandler           0000c35b   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TIM1_CCP_IRQHandler               0000c134   defined in Debug\stm8s_it.o section .text
+f_TIM1_CCP_IRQHandler               0000c1c2   defined in Debug\stm8s_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM1_IRQHandler                   0000be47   defined in Debug\stm8s_it.o section .text
+f_TIM1_IRQHandler                   0000bed5   defined in Debug\stm8s_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM1_UPD_OVF_TRG_BRK_IRQHandler   0000c2cc   defined in Debug\stm8s_it.o section .text
+f_TIM1_UPD_OVF_TRG_BRK_IRQHandler   0000c35a   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TIM2_CAP_COM_IRQHandler           0000c2cf   defined in Debug\stm8s_it.o section .text
+f_TIM2_CAP_COM_IRQHandler           0000c35d   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TIM2_CCP_IRQHandler               0000c095   defined in Debug\stm8s_it.o section .text
+f_TIM2_CCP_IRQHandler               0000c123   defined in Debug\stm8s_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM2_UPD_IRQHandler               0000c03d   defined in Debug\stm8s_it.o section .text
+f_TIM2_UPD_IRQHandler               0000c0cb   defined in Debug\stm8s_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM2_UPD_OVF_BRK_IRQHandler       0000c2ce   defined in Debug\stm8s_it.o section .text
+f_TIM2_UPD_OVF_BRK_IRQHandler       0000c35c   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TIM3_CAP_COM_IRQHandler           0000c2d1   defined in Debug\stm8s_it.o section .text
+f_TIM3_CAP_COM_IRQHandler           0000c35f   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TIM3_UPD_OVF_BRK_IRQHandler       0000c2d0   defined in Debug\stm8s_it.o section .text
+f_TIM3_UPD_OVF_BRK_IRQHandler       0000c35e   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TIM4_UPD_OVF_IRQHandler           0000c2d8   defined in Debug\stm8s_it.o section .text
+f_TIM4_UPD_OVF_IRQHandler           0000c366   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TLI_IRQHandler                    0000c2c5   defined in Debug\stm8s_it.o section .text
+f_TLI_IRQHandler                    0000c353   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_TRAP_IRQHandler                   0000c2c4   defined in Debug\stm8s_it.o section .text
+f_TRAP_IRQHandler                   0000c352   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_UART1_RCV_IRQHandler              0000c243   defined in Debug\stm8s_it.o section .text
+f_UART1_RCV_IRQHandler              0000c2d1   defined in Debug\stm8s_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_UART1_RX_IRQHandler               0000c2d3   defined in Debug\stm8s_it.o section .text
+f_UART1_RX_IRQHandler               0000c361   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_UART1_TX_IRQHandler               0000c2d2   defined in Debug\stm8s_it.o section .text
+f_UART1_TX_IRQHandler               0000c360   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_UART3_RX_IRQHandler               0000c2d6   defined in Debug\stm8s_it.o section .text
+f_UART3_RX_IRQHandler               0000c364   defined in Debug\stm8s_it.o section .text
                                                *** not used ***
-f_UART3_TX_IRQHandler               0000c2d5   defined in Debug\stm8s_it.o section .text
+f_UART3_TX_IRQHandler               0000c363   defined in Debug\stm8s_it.o section .text
                                                *** not used ***

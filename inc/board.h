@@ -72,7 +72,7 @@ extern bool checkit;
 #define timer1Prescaler 7 //divide the timer 1 fMaster clock by 8
 #define timer1Repeat 0    //do not repeat the timer1
 #define timer1Frequency 2000000.0
-#define uartBaudRate 9600
+#define uartBaudRate 115200
 #define adcSeriesResistor 2000
 #define adcMaxVal 1023
 #define ntcCoefficient 3950

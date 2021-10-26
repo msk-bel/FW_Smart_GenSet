@@ -26,9 +26,9 @@
   92  0014 cd034a        	call	_ADCSetup
   94                     ; 66 	UARTSetup(uartBaudRate, MEVRIS_UART_PARITY_NONE);
   96  0017 4b00          	push	#0
-  97  0019 ae2580        	ldw	x,#9600
+  97  0019 aec200        	ldw	x,#49664
   98  001c 89            	pushw	x
-  99  001d ae0000        	ldw	x,#0
+  99  001d ae0001        	ldw	x,#1
  100  0020 89            	pushw	x
  101  0021 cd036a        	call	_UARTSetup
  103  0024 5b05          	addw	sp,#5
