@@ -38,12 +38,16 @@ void vHandle_MQTT(void);      //Added by Saqib
 void vSend_MQTT_Ping(void);   //Added by Saqib
 void vTCP_Reconnect(void);    //Added by Saqib
 void vPrintStickerInfo(void); //Added by Saqib
+uint8_t *punGetSIM_ICCID(void);
+uint8_t *punGet_SIM_NUmber(void);
 /* Public functions ----------------------------------------------------------*/
 
 uint8_t aunIMEI[20];
 uint8_t PASS_KEY[16];
 extern @near uint8_t aunPushed_Data[100];
 extern uint8_t IMEIRecievedOKFlag;
+uint8_t aunICCID[25];
+uint8_t aunSIMNo[15];
 /*
 ==============================
 *Function: SIMCom_setup
@@ -61,6 +65,7 @@ void SIMCom_setup(void)
     delay_ms(20000);                                   //need to adjust the delay
     delay_ms(1000);
     ms_send_cmd(NOECHO, strlen((const char *)NOECHO)); /* No echo */
+    delay_ms(200);
     ms_send_cmd(MS_DELETE_ALL_SMS, strlen((const char *)MS_DELETE_ALL_SMS)); /* Delete SMS */
     delay_ms(1000);
 
@@ -138,7 +143,7 @@ void SIMCom_setup(void)
 
     ms_send_cmd(GPRS_Set, strlen((const char *)GPRS_Set)); /* OPEN BEARER */
     delay_ms(1000);
-// 
+    //
     // getIMEI();//Added by Saqib
     // vPrintStickerInfo(); //Added by Saqib
     // passkeyGenerator(); //Added by Saqib
@@ -211,6 +216,18 @@ void SIMCom_setup(void)
     delay_ms(200);
 #endif
 
+#ifdef MODULE_QUECTEL_EC200U
+    ms_send_cmd(GNSS_SET_OUTPUT_PORT, strlen((const char *)GNSS_SET_OUTPUT_PORT));
+    delay_ms(200);
+    ms_send_cmd(GNSS_GET_NMEA_VIA_CMD_OFF, strlen((const char *)GNSS_GET_NMEA_VIA_CMD_OFF));
+    delay_ms(200);
+    ms_send_cmd(GNSS_SET_MODE_GPS_ONLY, strlen((const char *)GNSS_SET_MODE_GPS_ONLY));
+    delay_ms(200);
+    ms_send_cmd(GNSS_AUTO_RUN_ON, strlen((const char *)GNSS_AUTO_RUN_ON));
+    delay_ms(200);
+
+#endif
+
     // ms_send_cmd(BT_TURN_ON, strlen((const char *)BT_TURN_ON));
     // delay_ms(1000);
 
@@ -270,20 +287,28 @@ void SIMCom_setup(void)
 void SIMComrestart()
 {
     ms_send_cmd(SIMCom_OFF, strlen((const char *)SIMCom_OFF)); /* Power down the SIMCom module */
-    delay_ms(800);
-
+    delay_ms(1000);
+#ifdef MODULE_SIMCOM_SIM868
     GPIO_WriteHigh(PWRKEY);
     delay_ms(1000);
 
     GPIO_WriteLow(PWRKEY);
     delay_ms(1000);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    GPIO_WriteLow(PWRKEY);
+    delay_ms(2000);
+    delay_ms(500);
+    GPIO_WriteHigh(PWRKEY);
+    delay_ms(1000);
+#endif
 }
-
+#ifdef MODULE_SIMCOM_SIM868
 void checkNum()
 {
     uint16_t timeout = 0;
     uint8_t s;
-    ms_send_cmd(check_num, strlen((const char *)check_num)); // SMS read
+    ms_send_cmd(check_num, strlen((const char *)check_num)); 
 
     for (s = 0; s < 75; s++)
     {
@@ -293,7 +318,56 @@ void checkNum()
         timeout = 0;
     }
 }
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+uint8_t *punGet_SIM_NUmber()
+{
+    uint8_t s = 0, i = 0;
+    uint8_t *ret;
+    vClearBuffer(aunSIMNo, 40);
+    ms_send_cmd(check_num, strlen((const char *)check_num)); 
+    delay_ms(200);
+    ret = strstr(response_buffer, "+CNUM:");
+    if(ret)
+    {
+        s = 0;
+        while(response_buffer[s] != '\"' && s < 40) s++;
+        s++;
+        while(response_buffer[s] != '\"' && s < 40) s++;
+        s++;
+        while(response_buffer[s] != '\"' && s < 40) s++;
+        s++;
+        for(i = 0; i < 13 && response_buffer[s] != '\"' ; i++, s++)
+        {
+            aunSIMNo[i] = response_buffer[s];
+        }
+    }
+    return aunSIMNo;
+}
 
+#endif
+
+#ifdef MODULE_QUECTEL_EC200U
+uint8_t *punGetSIM_ICCID(void)
+{
+    uint8_t s;
+    uint8_t *ptr;
+    vClearBuffer(aunICCID,25);
+    ms_send_cmd(MODULE_GET_SIM_ICCID, strlen((const char *)MODULE_GET_SIM_ICCID)); 
+    delay_ms(200);
+    ptr = strstr(response_buffer, "+QCCID:");
+    if(ptr)
+    {
+        s = 0;
+        ptr+=8;
+        for(s = 0; s < 22 & *(ptr + s) != 0x0D; s++)
+        {
+            aunICCID[s] = *(ptr + s);
+        }
+    }
+    return aunICCID;
+}
+#endif
 void getIMEI(void)
 {
     uint16_t ulTimout;
@@ -618,6 +692,40 @@ bool bSendDataOverTCP(uint8_t *Data, uint8_t unLength)
 }
 #endif
 #ifdef MODULE_QUECTEL_EC200U
+// void vHandle_GNSS(void)
+// {
+//     static uint8_t iteration = 0;
+//     if (iteration > 10)
+//     {
+//         ms_send_cmd(GNSS_CHECK_STATE, strlen((const char *)GNSS_CHECK_STATE)); 
+//         delay_ms(500);
+//         if (strstr(response_buffer, "+QGPS: 1"))
+//         {
+//             ms_send_cmd(GNSS_GET_LOCATION, strlen((const char *)GNSS_GET_LOCATION)); 
+//             delay_ms(500);
+//             if (strstr(response_buffer, "+QGPSLOC:"))
+//             {
+
+//             }
+
+//         }
+//         else if (strstr(response_buffer, "+QGPS: 0"))
+//         {
+//             ms_send_cmd(GNSS_TURN_GPS_ON, strlen((const char *)GNSS_TURN_GPS_ON)); 
+//             delay_ms(500);
+//         }
+//         else
+//         {
+//             ms_send_cmd(GNSS_TURN_GPS_OFF, strlen((const char *)GNSS_TURN_GPS_OFF)); 
+//             delay_ms(1000);
+//             ms_send_cmd(GNSS_TURN_GPS_ON, strlen((const char *)GNSS_TURN_GPS_ON)); 
+//             delay_ms(500);
+//         }
+//         iteration = 0;
+//     }
+//     iteration++;
+// }
+
 void vHandle_MQTT(void)
 {
     uint8_t unLength = 0;
@@ -860,6 +968,8 @@ void vPrintStickerInfo(void)
     do
     {
         // vSendATCommandOverSerial(AT, strlen((const char *)AT));
+        ms_send_cmd(NOECHO, strlen((const char *)NOECHO)); /* No echo */
+        delay_ms(200);
         ms_send_cmd(AT, strlen((const char *)AT));
         if (GSM_OK())
         {

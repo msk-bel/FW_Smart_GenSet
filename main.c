@@ -63,7 +63,6 @@ void systemSetup(void)
 void main(void)
 {
 	systemSetup();
-
 	while (1)
 	{
 		calculateVoltCurrent(maxPeriodWidth);
@@ -77,6 +76,7 @@ void main(void)
 						   // while ( getTics() - previousTics < uartTimout)
 						   //{
 						   //	IWDG_ReloadCounter();
+		gps_data();
 	}
 }
 
@@ -88,7 +88,7 @@ void sms_receive(void)
 	uint8_t temp1[10] = "";
 	uint8_t calibrationFactor[4];
 	uint16_t value;
-	uint8_t i,j,m,n,k = 0,l = 0,t = 0;
+	uint8_t i, j, m, n, k = 0, l = 0, t = 0;
 	char *ret_pin;
 	uint32_t myVar = 0;
 	UART1_ITConfig(UART1_IT_RXNE, DISABLE);
@@ -140,7 +140,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(CheckByte, 'A');//Earlier
 		FLASH_ProgramByte(CheckByte, 'B'); //Changed by Saqib
 		FLASH_Lock(FLASH_MEMTYPE_DATA);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	if (strstr(uart_buffer, "CALIBRATION DONE"))
@@ -149,7 +149,7 @@ void sms_receive(void)
 		FLASH_Unlock(FLASH_MEMTYPE_DATA);
 		FLASH_ProgramByte(CheckByte, 'A');
 		FLASH_Lock(FLASH_MEMTYPE_DATA);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	if (strstr(uart_buffer, "V1CalFac = "))
@@ -168,7 +168,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(V1CabFab_MSB, ((value >> 8) & 0xFF));
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, V1CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	else if (strstr(uart_buffer, "V2CalFac = "))
@@ -188,7 +188,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(V2CabFab_MSB, ((value >> 8) & 0xFF));
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, V2CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	else if (strstr(uart_buffer, "V3CalFac = "))
@@ -208,7 +208,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(V3CabFab_MSB, ((value >> 8) & 0xFF));
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, V3CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	else if (strstr(uart_buffer, "I1CalFac = "))
@@ -228,7 +228,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(I1CabFab_MSB, ((value >> 8) & 0xFF));
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, I1CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	else if (strstr(uart_buffer, "I2CalFac = "))
@@ -248,7 +248,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(I2CabFab_MSB, ((value >> 8) & 0xFF));
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, I2CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	else if (strstr(uart_buffer, "I3CalFac = "))
@@ -268,7 +268,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(I3CabFab_MSB, ((value >> 8) & 0xFF));
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, I3CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	else if (strstr(uart_buffer, "P1CalFac = "))
@@ -288,7 +288,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(P1CabFab_MSB, ((value >> 8) & 0xFF));
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, P1CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	else if (strstr(uart_buffer, "P2CalFac = "))
@@ -308,7 +308,7 @@ void sms_receive(void)
 		// FLASH_ProgramByte(P2CabFab_MSB, ((value >> 8) & 0xFF));
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, P2CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 
 	else if (strstr(uart_buffer, "P3CalFac = "))
@@ -329,7 +329,7 @@ void sms_receive(void)
 		// FLASH_ProgramWord()
 		// FLASH_Lock(FLASH_MEMTYPE_DATA);
 		WriteFlashWord(value, P3CabFab);
-		bSendSMS("OK",strlen((const char*)"OK"),cell_num);
+		bSendSMS("OK", strlen((const char *)"OK"), cell_num);
 	}
 	// bSendSMS("OK",strlen((const char*)"OK"),cell_num);
 	if (strstr(uart_buffer, "CURRENT1"))
@@ -371,6 +371,8 @@ void sms_receive(void)
 	else if ((strstr(uart_buffer, "RADIATOR-TEMP")))
 	{
 		myVar = (uint32_t)(Temperature1 * 100);
+		if (myVar > 100000)
+			myVar = 0;
 		vClearBuffer(uart_buffer, 85);
 		strcpy(uart_buffer, "Radiator Temperature: ");
 		sprintf(temp1, "%ld", myVar / 100);
@@ -384,6 +386,8 @@ void sms_receive(void)
 	else if ((strstr(uart_buffer, "ENGINE-TEMP")))
 	{
 		myVar = (uint32_t)(Temperature2 * 100);
+		if (myVar > 100000)
+			myVar = 0;
 		vClearBuffer(uart_buffer, 85);
 		strcpy(uart_buffer, "Engine Temperature: ");
 		sprintf(temp1, "%ld", myVar / 100);

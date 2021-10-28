@@ -311,6 +311,11 @@ Next=Root.Source Files.src\getadc.c
 [Root.Source Files.src\getadc.c]
 ElemType=File
 PathName=src\getadc.c
+Next=Root.Source Files.src\gps_service.c
+
+[Root.Source Files.src\gps_service.c]
+ElemType=File
+PathName=src\gps_service.c
 Next=Root.Source Files.src\metering.c
 
 [Root.Source Files.src\metering.c]
@@ -493,6 +498,11 @@ Next=Root.Include Files.inc\getadc.h
 [Root.Include Files.inc\getadc.h]
 ElemType=File
 PathName=inc\getadc.h
+Next=Root.Include Files.inc\gps_service.h
+
+[Root.Include Files.inc\gps_service.h]
+ElemType=File
+PathName=inc\gps_service.h
 Next=Root.Include Files.inc\main.h
 
 [Root.Include Files.inc\main.h]

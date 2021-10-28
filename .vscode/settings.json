@@ -5,6 +5,8 @@
         "bluetooth.h": "c",
         "board.h": "c",
         "cloudservice.h": "c",
-        "simcom.h": "c"
-    }
+        "simcom.h": "c",
+        "main.h": "c"
+    },
+    "C_Cpp.dimInactiveRegions": false
 }

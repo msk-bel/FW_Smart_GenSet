@@ -55,6 +55,7 @@ Debug\bluetooth.o
 Debug\board.o
 Debug\cloudservice.o
 Debug\getadc.o
+Debug\gps_service.o
 Debug\metering.o
 Debug\mqtt_protocol.o
 Debug\simcom.o

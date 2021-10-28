@@ -6,6 +6,7 @@
 #include "stdio.h"
 #include "uart_service.h"
 #include "SIMCom.h"
+#include "gps_service.h"
 
 
 #define Firmware_Version    "2.4.001"   
@@ -50,6 +51,7 @@ uint8_t *punGet_Client_ID(void);
 void vMevris_Send_sensorData(void);
 void vMevris_Send_IMEI(void);
 void vMevris_Send_Version(void);
+// void vMevris_Send_SIM_ICCID(void);
 //void sendToHTTP(uint8_t *, uint8_t);
 //uint8_t unHTTPACTION_Response(void);
 //void vTerminateHTTP( void );

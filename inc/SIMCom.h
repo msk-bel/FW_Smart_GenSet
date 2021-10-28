@@ -48,4 +48,7 @@ bool bSendDataOverTCP (uint8_t *, uint8_t);
 void vClearBuffer(char *, uint8_t);
 enum TCP_STATUS_ENUM enGet_TCP_Status(void);
 void vHandle_MQTT( void );
+uint8_t *punGetSIM_ICCID(void);
+uint8_t *punGet_SIM_NUmber(void);
+
 #endif

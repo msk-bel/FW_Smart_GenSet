@@ -41,6 +41,7 @@ void vMevris_Send_Location(void);   //Added By Saqib
 // void vMevris_Send_Phase1(void);//Added By Saqib
 // void vMevris_Send_Phase2(void);//Added By Saqib
 // void vMevris_Send_Phase3(void);//Added By Saqib
+void vMevris_Send_SIM_ICCID(void);                                                               //Added By Saqib
 void vMevris_Send_BatteryVolt(void);                                                             //Added By Saqib
 void vMevris_Send_RadiatorTemp(void);                                                            //Added By Saqib
 void vMevris_Send_EngineTemp(void);                                                              //Added By Saqib
@@ -74,21 +75,22 @@ void sendDataToCloud(void)
         {
             switch (enSendEventCounter)
             {
-            // case eCommand_Reserved:
-            //     // enSendEventCounter++;
-            //     break;
-            // case eCommand_IMEI:
-            //     // vMevris_Send_IMEI();
-            //     break;
-            // case eCommand_SIM_Number:
-            //     // vMevris_Send_SIM_Number();
-            //     break;
-            // case eCommand_Location:
-            //     // vMevris_Send_Location();
-            //     break;
-            // case eCommand_Version:
-            //     // vMevris_Send_Version();
-            //     break;
+                // case eCommand_Reserved:
+                //     // enSendEventCounter++;
+                //     break;
+                // case eCommand_IMEI:
+                //     // vMevris_Send_IMEI();
+                //     break;
+            case eCommand_SIM_Number:
+                vMevris_Send_SIM_Number();
+                break;
+            case eCommand_Location:
+                vMevris_Send_Location();
+                break;
+            case eCommand_Version:
+                // vMevris_Send_Version();
+                vMevris_Send_SIM_ICCID();
+                break;
             case eCommand_Phase1:
                 // vMevris_Send_Phase1();
                 vMevris_Send_Phase(1, Watt_Phase1, Voltage_Phase1, Ampere_Phase1);
@@ -514,38 +516,69 @@ void vMevris_Send_IMEI(void)
 #endif
 }
 
-// void vMevris_Send_SIM_Number()
-// {
-//     uint8_t localBuffer[30] = "{\"SIM\":\"+923316821907\"}";
-//     uint8_t unSendDataLength = 0;
-//     uint8_t aunTemp[14] = "+923316821907";
-//     vClearBuffer(localBuffer, 30);
-//     strcpy(localBuffer, "{\"SIM\":\"");
-//     strcat(localBuffer, aunTemp); //Concatenate SIM number
-//     strcat(localBuffer, "\"}");
-//     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
-//     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-//                                                punGet_Event_Topic(),
-//                                                localBuffer);
-//     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
-// }
+void vMevris_Send_SIM_Number()
+{
+    uint8_t localBuffer[30] = "{\"SIM\":\"+923316821907\"}";
+    uint8_t unSendDataLength = 0;
+    uint8_t aunTemp[14] = "+923316821907";
+    vClearBuffer(localBuffer, 30);
+    strcpy(localBuffer, "{\"SIM\":\"");
+    strcat(localBuffer, punGet_SIM_NUmber()); //Concatenate SIM number
+    strcat(localBuffer, "\"}");
+#ifdef MODULE_SIMCOM_SIM868
+    vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
+    unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
+                                               localBuffer);
+    bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
+}
 
-// void vMevris_Send_Location()
-// {
-//     uint8_t localBuffer[50] = "{\"Lat\":\"12345678901\",\"Long\":\"123456789012\"}";
-//     uint8_t unSendDataLength = 0;
-//     vClearBuffer(localBuffer, 50);
-//     strcpy(localBuffer, "{\"Lat\":\"");
-//     strcat(localBuffer, "12345678901" /*getGPS_Latitude()*/);
-//     strcat(localBuffer, "\",\"Long\":\"");
-//     strcat(localBuffer, "123456789012" /*getGPS_Longitude()*/);
-//     strcat(localBuffer, "\"}");
-//     vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
-//     unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
-//                                                punGet_Event_Topic(),
-//                                                localBuffer);
-//     bSendDataOverTCP(aunPushed_Data, unSendDataLength);
-// }
+void vMevris_Send_SIM_ICCID()
+{
+    uint8_t localBuffer[50] = "{\"UICCID\":\"1234567890123456789012\"}";
+    uint8_t unSendDataLength = 0;
+    vClearBuffer(localBuffer, 50);
+    strcpy(localBuffer, "{\"UICCID\":\"");
+    strcat(localBuffer, punGetSIM_ICCID());
+    strcat(localBuffer, "\"}");
+#ifdef MODULE_SIMCOM_SIM868
+    vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
+    unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
+                                               localBuffer);
+    bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
+}
+
+void vMevris_Send_Location()
+{
+    uint8_t localBuffer[50] = "{\"Lat\":\"12345678901\",\"Long\":\"123456789012\"}";
+    uint8_t unSendDataLength = 0;
+    vClearBuffer(localBuffer, 50);
+    strcpy(localBuffer, "{\"Lat\":\"");
+    strcat(localBuffer, getGPS_Latitude());
+    strcat(localBuffer, "\",\"Long\":\"");
+    strcat(localBuffer, getGPS_Longitude());
+    strcat(localBuffer, "\"}");
+#ifdef MODULE_SIMCOM_SIM868
+    vClearBuffer(aunPushed_Data, MEVRIS_SEND_DATA_MAX_SIZE);
+    unSendDataLength = (uint8_t)ulMQTT_Publish(aunPushed_Data,
+                                               aunMQTT_Publish_Topic /*punGet_Event_Topic()*/,
+                                               localBuffer);
+    bSendDataOverTCP(aunPushed_Data, unSendDataLength);
+#endif
+#ifdef MODULE_QUECTEL_EC200U
+    vMQTT_Publish(aunMQTT_Publish_Topic, localBuffer);
+#endif
+}
+
 
 void vMevris_Send_Version()
 {
@@ -760,8 +793,8 @@ void vMevris_Send_RadiatorTemp()
     vClearBuffer(localBuffer, 40);
     strcpy(localBuffer, "{\"RadiatorTemperature\":\"");
     myVar = (uint32_t)(Temperature1 * 100);
-    if(myVar > 100000)
-    myVar = 0;
+    if (myVar > 100000)
+        myVar = 0;
     sprintf(temp1, "%ld", myVar / 100);
     strcat(localBuffer, temp1);
     strcat(localBuffer, ".");
@@ -791,8 +824,8 @@ void vMevris_Send_EngineTemp()
     vClearBuffer(localBuffer, 40);
     strcpy(localBuffer, "{\"EngineTemperature\":\"");
     myVar = (uint32_t)(Temperature2 * 100);
-    if(myVar > 100000)
-    myVar = 0;
+    if (myVar > 100000)
+        myVar = 0;
     sprintf(temp1, "%ld", myVar / 100);
     strcat(localBuffer, temp1);
     strcat(localBuffer, ".");

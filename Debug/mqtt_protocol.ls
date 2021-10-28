@@ -8,471 +8,481 @@
   76  0000 89            	pushw	x
   77  0001 5232          	subw	sp,#50
   78       00000032      OFST:	set	50
-  81                     ; 322     ms_send_cmd(CHECK_REGISTRATION_STATUS_CS, strlen((const char *)CHECK_REGISTRATION_STATUS_CS));
-  83  0003 4b08          	push	#8
-  84  0005 ae0193        	ldw	x,#L33
+  81                     ; 322 	   ms_send_cmd(NOECHO, strlen((const char *)NOECHO)); /* No echo */
+  83  0003 4b04          	push	#4
+  84  0005 ae019c        	ldw	x,#L33
   85  0008 cd0000        	call	_ms_send_cmd
   87  000b 84            	pop	a
-  88                     ; 323     delay_ms(500);
-  90  000c ae01f4        	ldw	x,#500
+  88                     ; 323     delay_ms(200);
+  90  000c ae00c8        	ldw	x,#200
   91  000f cd0000        	call	_delay_ms
-  93                     ; 324     ms_send_cmd(CHECK_REGISTRATION_STATUS_PS, strlen((const char *)CHECK_REGISTRATION_STATUS_PS));
-  95  0012 4b09          	push	#9
-  96  0014 ae0189        	ldw	x,#L53
+  93                     ; 324     ms_send_cmd(CHECK_REGISTRATION_STATUS_CS, strlen((const char *)CHECK_REGISTRATION_STATUS_CS));
+  95  0012 4b08          	push	#8
+  96  0014 ae0193        	ldw	x,#L53
   97  0017 cd0000        	call	_ms_send_cmd
   99  001a 84            	pop	a
  100                     ; 325     delay_ms(500);
  102  001b ae01f4        	ldw	x,#500
  103  001e cd0000        	call	_delay_ms
- 105                     ; 326     ms_send_cmd(CHECK_REGISTRATION_STATUS_EPS, strlen((const char *)CHECK_REGISTRATION_STATUS_EPS));
+ 105                     ; 326     ms_send_cmd(CHECK_REGISTRATION_STATUS_PS, strlen((const char *)CHECK_REGISTRATION_STATUS_PS));
  107  0021 4b09          	push	#9
- 108  0023 ae017f        	ldw	x,#L73
+ 108  0023 ae0189        	ldw	x,#L73
  109  0026 cd0000        	call	_ms_send_cmd
  111  0029 84            	pop	a
  112                     ; 327     delay_ms(500);
  114  002a ae01f4        	ldw	x,#500
  115  002d cd0000        	call	_delay_ms
- 117                     ; 328     ms_send_cmd(MQTT_CLOSE_CONNECTION, strlen((const char *)MQTT_CLOSE_CONNECTION));
- 119  0030 4b0d          	push	#13
- 120  0032 ae0171        	ldw	x,#L14
+ 117                     ; 328     ms_send_cmd(CHECK_REGISTRATION_STATUS_EPS, strlen((const char *)CHECK_REGISTRATION_STATUS_EPS));
+ 119  0030 4b09          	push	#9
+ 120  0032 ae017f        	ldw	x,#L14
  121  0035 cd0000        	call	_ms_send_cmd
  123  0038 84            	pop	a
  124                     ; 329     delay_ms(500);
  126  0039 ae01f4        	ldw	x,#500
  127  003c cd0000        	call	_delay_ms
- 129                     ; 330     ms_send_cmd(MQTT_SET_VERSION, strlen((const char *)MQTT_SET_VERSION));
- 131  003f 4b17          	push	#23
- 132  0041 ae0159        	ldw	x,#L34
+ 129                     ; 330     ms_send_cmd(MQTT_CLOSE_CONNECTION, strlen((const char *)MQTT_CLOSE_CONNECTION));
+ 131  003f 4b0d          	push	#13
+ 132  0041 ae0171        	ldw	x,#L34
  133  0044 cd0000        	call	_ms_send_cmd
  135  0047 84            	pop	a
- 136                     ; 331     delay_ms(200);
- 138  0048 ae00c8        	ldw	x,#200
+ 136                     ; 331     delay_ms(500);
+ 138  0048 ae01f4        	ldw	x,#500
  139  004b cd0000        	call	_delay_ms
- 141                     ; 332     ms_send_cmd(MQTT_SET_PDP_CONTEXT, strlen((const char *)MQTT_SET_PDP_CONTEXT));
- 143  004e 4b16          	push	#22
- 144  0050 ae0142        	ldw	x,#L54
+ 141                     ; 332     ms_send_cmd(MQTT_SET_VERSION, strlen((const char *)MQTT_SET_VERSION));
+ 143  004e 4b17          	push	#23
+ 144  0050 ae0159        	ldw	x,#L54
  145  0053 cd0000        	call	_ms_send_cmd
  147  0056 84            	pop	a
  148                     ; 333     delay_ms(200);
  150  0057 ae00c8        	ldw	x,#200
  151  005a cd0000        	call	_delay_ms
- 153                     ; 334     ms_send_cmd(MQTT_SET_TCP_PROTOCOL, strlen((const char *)MQTT_SET_TCP_PROTOCOL));
- 155  005d 4b15          	push	#21
- 156  005f ae012c        	ldw	x,#L74
+ 153                     ; 334     ms_send_cmd(MQTT_SET_PDP_CONTEXT, strlen((const char *)MQTT_SET_PDP_CONTEXT));
+ 155  005d 4b16          	push	#22
+ 156  005f ae0142        	ldw	x,#L74
  157  0062 cd0000        	call	_ms_send_cmd
  159  0065 84            	pop	a
  160                     ; 335     delay_ms(200);
  162  0066 ae00c8        	ldw	x,#200
  163  0069 cd0000        	call	_delay_ms
- 165                     ; 336     ms_send_cmd(MQTT_SET_KEEPALIVE_TIME, strlen((const char *)MQTT_SET_KEEPALIVE_TIME));
- 167  006c 4b1b          	push	#27
- 168  006e ae0110        	ldw	x,#L15
+ 165                     ; 336     ms_send_cmd(MQTT_SET_TCP_PROTOCOL, strlen((const char *)MQTT_SET_TCP_PROTOCOL));
+ 167  006c 4b15          	push	#21
+ 168  006e ae012c        	ldw	x,#L15
  169  0071 cd0000        	call	_ms_send_cmd
  171  0074 84            	pop	a
  172                     ; 337     delay_ms(200);
  174  0075 ae00c8        	ldw	x,#200
  175  0078 cd0000        	call	_delay_ms
- 177                     ; 338     ms_send_cmd(MQTT_SET_SESSION_TYPE, strlen((const char *)MQTT_SET_SESSION_TYPE));
- 179  007b 4b17          	push	#23
- 180  007d ae00f8        	ldw	x,#L35
+ 177                     ; 338     ms_send_cmd(MQTT_SET_KEEPALIVE_TIME, strlen((const char *)MQTT_SET_KEEPALIVE_TIME));
+ 179  007b 4b1b          	push	#27
+ 180  007d ae0110        	ldw	x,#L35
  181  0080 cd0000        	call	_ms_send_cmd
  183  0083 84            	pop	a
  184                     ; 339     delay_ms(200);
  186  0084 ae00c8        	ldw	x,#200
  187  0087 cd0000        	call	_delay_ms
- 189                     ; 340     ms_send_cmd(MQTT_SET_URC_RESPONSE_FORMAT, strlen((const char *)MQTT_SET_URC_RESPONSE_FORMAT));
- 191  008a 4b1b          	push	#27
- 192  008c ae00dc        	ldw	x,#L55
+ 189                     ; 340     ms_send_cmd(MQTT_SET_SESSION_TYPE, strlen((const char *)MQTT_SET_SESSION_TYPE));
+ 191  008a 4b17          	push	#23
+ 192  008c ae00f8        	ldw	x,#L55
  193  008f cd0000        	call	_ms_send_cmd
  195  0092 84            	pop	a
  196                     ; 341     delay_ms(200);
  198  0093 ae00c8        	ldw	x,#200
  199  0096 cd0000        	call	_delay_ms
- 201                     ; 342     ms_send_cmd(MQTT_SET_DATA_VIEW_MODE, strlen((const char *)MQTT_SET_DATA_VIEW_MODE));
- 203  0099 4b19          	push	#25
- 204  009b ae00c2        	ldw	x,#L75
+ 201                     ; 342     ms_send_cmd(MQTT_SET_URC_RESPONSE_FORMAT, strlen((const char *)MQTT_SET_URC_RESPONSE_FORMAT));
+ 203  0099 4b1b          	push	#27
+ 204  009b ae00dc        	ldw	x,#L75
  205  009e cd0000        	call	_ms_send_cmd
  207  00a1 84            	pop	a
  208                     ; 343     delay_ms(200);
  210  00a2 ae00c8        	ldw	x,#200
  211  00a5 cd0000        	call	_delay_ms
- 213                     ; 344     ms_send_cmd(MQTT_DISABLE_EDIT_TIMEOUT, strlen((const char *)MQTT_DISABLE_EDIT_TIMEOUT));
- 215  00a8 4b1e          	push	#30
- 216  00aa ae00a3        	ldw	x,#L16
+ 213                     ; 344     ms_send_cmd(MQTT_SET_DATA_VIEW_MODE, strlen((const char *)MQTT_SET_DATA_VIEW_MODE));
+ 215  00a8 4b19          	push	#25
+ 216  00aa ae00c2        	ldw	x,#L16
  217  00ad cd0000        	call	_ms_send_cmd
  219  00b0 84            	pop	a
  220                     ; 345     delay_ms(200);
  222  00b1 ae00c8        	ldw	x,#200
  223  00b4 cd0000        	call	_delay_ms
- 225                     ; 346     ms_send_cmd(MQTT_SET_MODE_SEND_RECV, strlen((const char *)MQTT_SET_MODE_SEND_RECV));
- 227  00b7 4b1c          	push	#28
- 228  00b9 ae0086        	ldw	x,#L36
+ 225                     ; 346     ms_send_cmd(MQTT_DISABLE_EDIT_TIMEOUT, strlen((const char *)MQTT_DISABLE_EDIT_TIMEOUT));
+ 227  00b7 4b1e          	push	#30
+ 228  00b9 ae00a3        	ldw	x,#L36
  229  00bc cd0000        	call	_ms_send_cmd
  231  00bf 84            	pop	a
  232                     ; 347     delay_ms(200);
  234  00c0 ae00c8        	ldw	x,#200
  235  00c3 cd0000        	call	_delay_ms
- 237                     ; 349     ms_send_cmd(MQTT_OPEN_CONNECTION, strlen((const char *)MQTT_OPEN_CONNECTION));
- 239  00c6 4b22          	push	#34
- 240  00c8 ae0063        	ldw	x,#L56
+ 237                     ; 348     ms_send_cmd(MQTT_SET_MODE_SEND_RECV, strlen((const char *)MQTT_SET_MODE_SEND_RECV));
+ 239  00c6 4b1c          	push	#28
+ 240  00c8 ae0086        	ldw	x,#L56
  241  00cb cd0000        	call	_ms_send_cmd
  243  00ce 84            	pop	a
- 244                     ; 350     delay_ms(500);	
- 246  00cf ae01f4        	ldw	x,#500
+ 244                     ; 349     delay_ms(200);
+ 246  00cf ae00c8        	ldw	x,#200
  247  00d2 cd0000        	call	_delay_ms
- 249                     ; 352 	vClearBuffer(temp, 50);
- 251  00d5 4b32          	push	#50
- 252  00d7 96            	ldw	x,sp
- 253  00d8 1c0002        	addw	x,#OFST-48
- 254  00db cd0000        	call	_vClearBuffer
- 256  00de 84            	pop	a
- 257                     ; 353     strcpy(temp, "AT+QMTCONN=1,\"");//"AT+QMTCONN=1,\"gen867400032743266\""
- 259  00df 96            	ldw	x,sp
- 260  00e0 1c0001        	addw	x,#OFST-49
- 261  00e3 90ae0054      	ldw	y,#L76
- 262  00e7               L6:
- 263  00e7 90f6          	ld	a,(y)
- 264  00e9 905c          	incw	y
- 265  00eb f7            	ld	(x),a
- 266  00ec 5c            	incw	x
- 267  00ed 4d            	tnz	a
- 268  00ee 26f7          	jrne	L6
- 269                     ; 354 	strcat(temp,punClientIdentifier);
- 271  00f0 1e33          	ldw	x,(OFST+1,sp)
- 272  00f2 89            	pushw	x
- 273  00f3 96            	ldw	x,sp
- 274  00f4 1c0003        	addw	x,#OFST-47
- 275  00f7 cd0000        	call	_strcat
- 277  00fa 85            	popw	x
- 278                     ; 355 	strcat(temp,"\"");
- 280  00fb ae0052        	ldw	x,#L17
- 281  00fe 89            	pushw	x
- 282  00ff 96            	ldw	x,sp
- 283  0100 1c0003        	addw	x,#OFST-47
- 284  0103 cd0000        	call	_strcat
- 286  0106 85            	popw	x
- 287                     ; 356     ms_send_cmd(temp, strlen((const char *)temp));
- 289  0107 96            	ldw	x,sp
- 290  0108 1c0001        	addw	x,#OFST-49
- 291  010b cd0000        	call	_strlen
- 293  010e 9f            	ld	a,xl
- 294  010f 88            	push	a
- 295  0110 96            	ldw	x,sp
- 296  0111 1c0002        	addw	x,#OFST-48
- 297  0114 cd0000        	call	_ms_send_cmd
- 299  0117 84            	pop	a
- 300                     ; 357     delay_ms(200);	
- 302  0118 ae00c8        	ldw	x,#200
- 303  011b cd0000        	call	_delay_ms
- 305                     ; 358 }
- 308  011e 5b34          	addw	sp,#52
- 309  0120 81            	ret
- 312                     .const:	section	.text
- 313  0000               L37_temp1:
- 314  0000 00            	dc.b	0
- 315  0001 00000000      	ds.b	4
- 394                     ; 428 void vMQTT_Publish ( uint8_t *punTopic, uint8_t *punMessage )
- 394                     ; 429 {
- 395                     	switch	.text
- 396  0121               _vMQTT_Publish:
- 398  0121 89            	pushw	x
- 399  0122 526a          	subw	sp,#106
- 400       0000006a      OFST:	set	106
- 403                     ; 431 	uint8_t unLength = 0;
- 405                     ; 432 	uint8_t temp1[5] = "";
- 407  0124 96            	ldw	x,sp
- 408  0125 1c0002        	addw	x,#OFST-104
- 409  0128 90ae0000      	ldw	y,#L37_temp1
- 410  012c a605          	ld	a,#5
- 411  012e cd0000        	call	c_xymvx
- 413                     ; 433 	vClearBuffer(temp, 100);
- 415  0131 4b64          	push	#100
- 416  0133 96            	ldw	x,sp
- 417  0134 1c0008        	addw	x,#OFST-98
- 418  0137 cd0000        	call	_vClearBuffer
- 420  013a 84            	pop	a
- 421                     ; 434     strcpy(temp, "AT+QMTPUBEX=1,0,0,0,\"");	//AT+QMTPUBEX=1,0,0,0,"sc2/867400032743266/event",14
- 423  013b 96            	ldw	x,sp
- 424  013c 1c0007        	addw	x,#OFST-99
- 425  013f 90ae003c      	ldw	y,#L331
- 426  0143               L21:
- 427  0143 90f6          	ld	a,(y)
- 428  0145 905c          	incw	y
- 429  0147 f7            	ld	(x),a
- 430  0148 5c            	incw	x
- 431  0149 4d            	tnz	a
- 432  014a 26f7          	jrne	L21
- 433                     ; 435 	strcat(temp,punTopic);
- 435  014c 1e6b          	ldw	x,(OFST+1,sp)
- 436  014e 89            	pushw	x
- 437  014f 96            	ldw	x,sp
- 438  0150 1c0009        	addw	x,#OFST-97
- 439  0153 cd0000        	call	_strcat
- 441  0156 85            	popw	x
- 442                     ; 436 	strcat(temp,"\",");
- 444  0157 ae0039        	ldw	x,#L531
- 445  015a 89            	pushw	x
- 446  015b 96            	ldw	x,sp
- 447  015c 1c0009        	addw	x,#OFST-97
- 448  015f cd0000        	call	_strcat
- 450  0162 85            	popw	x
- 451                     ; 437 	unLength = strlen((const char *)punMessage);
- 453  0163 1e6f          	ldw	x,(OFST+5,sp)
- 454  0165 cd0000        	call	_strlen
- 456  0168 01            	rrwa	x,a
- 457  0169 6b01          	ld	(OFST-105,sp),a
- 458  016b 02            	rlwa	x,a
- 460                     ; 438 	vClearBuffer(temp1,5);
- 462  016c 4b05          	push	#5
- 463  016e 96            	ldw	x,sp
- 464  016f 1c0003        	addw	x,#OFST-103
- 465  0172 cd0000        	call	_vClearBuffer
- 467  0175 84            	pop	a
- 468                     ; 439     sprintf(temp1, "%d", (uint16_t)unLength);
- 470  0176 7b01          	ld	a,(OFST-105,sp)
- 471  0178 5f            	clrw	x
- 472  0179 97            	ld	xl,a
- 473  017a 89            	pushw	x
- 474  017b ae0036        	ldw	x,#L731
- 475  017e 89            	pushw	x
- 476  017f 96            	ldw	x,sp
- 477  0180 1c0006        	addw	x,#OFST-100
- 478  0183 cd0000        	call	_sprintf
- 480  0186 5b04          	addw	sp,#4
- 481                     ; 440     strcat(temp,temp1);
- 483  0188 96            	ldw	x,sp
- 484  0189 1c0002        	addw	x,#OFST-104
- 485  018c 89            	pushw	x
- 486  018d 96            	ldw	x,sp
- 487  018e 1c0009        	addw	x,#OFST-97
- 488  0191 cd0000        	call	_strcat
- 490  0194 85            	popw	x
- 491                     ; 441     ms_send_cmd(temp, strlen((const char *)temp));
- 493  0195 96            	ldw	x,sp
- 494  0196 1c0007        	addw	x,#OFST-99
- 495  0199 cd0000        	call	_strlen
- 497  019c 9f            	ld	a,xl
- 498  019d 88            	push	a
- 499  019e 96            	ldw	x,sp
- 500  019f 1c0008        	addw	x,#OFST-98
- 501  01a2 cd0000        	call	_ms_send_cmd
- 503  01a5 84            	pop	a
- 504                     ; 442 	delay_ms(10);
- 506  01a6 ae000a        	ldw	x,#10
- 507  01a9 cd0000        	call	_delay_ms
- 509                     ; 443 	ms_send_cmd(punMessage, unLength);
- 511  01ac 7b01          	ld	a,(OFST-105,sp)
- 512  01ae 88            	push	a
- 513  01af 1e70          	ldw	x,(OFST+6,sp)
- 514  01b1 cd0000        	call	_ms_send_cmd
- 516  01b4 84            	pop	a
- 517                     ; 444     delay_ms(200);	
- 519  01b5 ae00c8        	ldw	x,#200
- 520  01b8 cd0000        	call	_delay_ms
- 522                     ; 445 }
- 525  01bb 5b6c          	addw	sp,#108
- 526  01bd 81            	ret
- 577                     ; 506 void vMQTT_Subscribe ( uint8_t *punTopic )
- 577                     ; 507 {
- 578                     	switch	.text
- 579  01be               _vMQTT_Subscribe:
- 581  01be 89            	pushw	x
- 582  01bf 5232          	subw	sp,#50
- 583       00000032      OFST:	set	50
- 586                     ; 509 	vClearBuffer(temp, 50);
- 588  01c1 4b32          	push	#50
- 589  01c3 96            	ldw	x,sp
- 590  01c4 1c0002        	addw	x,#OFST-48
- 591  01c7 cd0000        	call	_vClearBuffer
- 593  01ca 84            	pop	a
- 594                     ; 510     strcpy(temp, "AT+QMTSUB=1,1,\"");	//AT+QMTSUB=1,1,"sc2/867400032743266/command",0
- 596  01cb 96            	ldw	x,sp
- 597  01cc 1c0001        	addw	x,#OFST-49
- 598  01cf 90ae0026      	ldw	y,#L361
- 599  01d3               L61:
- 600  01d3 90f6          	ld	a,(y)
- 601  01d5 905c          	incw	y
- 602  01d7 f7            	ld	(x),a
- 603  01d8 5c            	incw	x
- 604  01d9 4d            	tnz	a
- 605  01da 26f7          	jrne	L61
- 606                     ; 511 	strcat(temp,punTopic);
- 608  01dc 1e33          	ldw	x,(OFST+1,sp)
- 609  01de 89            	pushw	x
- 610  01df 96            	ldw	x,sp
- 611  01e0 1c0003        	addw	x,#OFST-47
- 612  01e3 cd0000        	call	_strcat
- 614  01e6 85            	popw	x
- 615                     ; 512 	strcat(temp,"\",0");
- 617  01e7 ae0022        	ldw	x,#L561
- 618  01ea 89            	pushw	x
- 619  01eb 96            	ldw	x,sp
- 620  01ec 1c0003        	addw	x,#OFST-47
- 621  01ef cd0000        	call	_strcat
- 623  01f2 85            	popw	x
- 624                     ; 513     ms_send_cmd(temp, strlen((const char *)temp));
- 626  01f3 96            	ldw	x,sp
- 627  01f4 1c0001        	addw	x,#OFST-49
- 628  01f7 cd0000        	call	_strlen
- 630  01fa 9f            	ld	a,xl
- 631  01fb 88            	push	a
- 632  01fc 96            	ldw	x,sp
- 633  01fd 1c0002        	addw	x,#OFST-48
- 634  0200 cd0000        	call	_ms_send_cmd
- 636  0203 84            	pop	a
- 637                     ; 514     delay_ms(200);	
- 639  0204 ae00c8        	ldw	x,#200
- 640  0207 cd0000        	call	_delay_ms
- 642                     ; 515 }
- 645  020a 5b34          	addw	sp,#52
- 646  020c 81            	ret
- 697                     ; 571 void vMQTT_UnSubscribe ( uint8_t *punTopic)
- 697                     ; 572 {
- 698                     	switch	.text
- 699  020d               _vMQTT_UnSubscribe:
- 701  020d 89            	pushw	x
- 702  020e 5232          	subw	sp,#50
- 703       00000032      OFST:	set	50
- 706                     ; 574 	vClearBuffer(temp, 50);
- 708  0210 4b32          	push	#50
- 709  0212 96            	ldw	x,sp
- 710  0213 1c0002        	addw	x,#OFST-48
- 711  0216 cd0000        	call	_vClearBuffer
- 713  0219 84            	pop	a
- 714                     ; 575     strcpy(temp, "AT+QMTUNS=1,1,\"");	//AT+QMTUNS=1,1,"sc2/867400032743266/command"
- 716  021a 96            	ldw	x,sp
- 717  021b 1c0001        	addw	x,#OFST-49
- 718  021e 90ae0012      	ldw	y,#L112
- 719  0222               L22:
- 720  0222 90f6          	ld	a,(y)
- 721  0224 905c          	incw	y
- 722  0226 f7            	ld	(x),a
- 723  0227 5c            	incw	x
- 724  0228 4d            	tnz	a
- 725  0229 26f7          	jrne	L22
- 726                     ; 576 	strcat(temp,punTopic);
- 728  022b 1e33          	ldw	x,(OFST+1,sp)
- 729  022d 89            	pushw	x
- 730  022e 96            	ldw	x,sp
- 731  022f 1c0003        	addw	x,#OFST-47
- 732  0232 cd0000        	call	_strcat
- 734  0235 85            	popw	x
- 735                     ; 577 	strcat(temp,"\"");
- 737  0236 ae0052        	ldw	x,#L17
- 738  0239 89            	pushw	x
- 739  023a 96            	ldw	x,sp
- 740  023b 1c0003        	addw	x,#OFST-47
- 741  023e cd0000        	call	_strcat
- 743  0241 85            	popw	x
- 744                     ; 578     ms_send_cmd(temp, strlen((const char *)temp));
- 746  0242 96            	ldw	x,sp
- 747  0243 1c0001        	addw	x,#OFST-49
- 748  0246 cd0000        	call	_strlen
- 750  0249 9f            	ld	a,xl
- 751  024a 88            	push	a
- 752  024b 96            	ldw	x,sp
- 753  024c 1c0002        	addw	x,#OFST-48
- 754  024f cd0000        	call	_ms_send_cmd
- 756  0252 84            	pop	a
- 757                     ; 579     delay_ms(200);
- 759  0253 ae00c8        	ldw	x,#200
- 760  0256 cd0000        	call	_delay_ms
- 762                     ; 580 }
- 765  0259 5b34          	addw	sp,#52
- 766  025b 81            	ret
- 792                     ; 618 void vMQTT_Disconnect ( void )
- 792                     ; 619 {
- 793                     	switch	.text
- 794  025c               _vMQTT_Disconnect:
- 798                     ; 620     ms_send_cmd(MQTT_DISCONNECT_BROKER, strlen((const char *)MQTT_DISCONNECT_BROKER));
- 800  025c 4b0c          	push	#12
- 801  025e ae0005        	ldw	x,#L322
- 802  0261 cd0000        	call	_ms_send_cmd
- 804  0264 84            	pop	a
- 805                     ; 621     delay_ms(200);
- 807  0265 ae00c8        	ldw	x,#200
- 808  0268 cd0000        	call	_delay_ms
- 810                     ; 622 }
- 813  026b 81            	ret
- 826                     	xdef	_vMQTT_Disconnect
- 827                     	xdef	_vMQTT_UnSubscribe
- 828                     	xdef	_vMQTT_Subscribe
- 829                     	xdef	_vMQTT_Publish
- 830                     	xdef	_vMQTT_Connect
- 831                     	xref	_ms_send_cmd
- 832                     	xref	_vClearBuffer
- 833                     	xref	_sprintf
- 834                     	xref	_strlen
- 835                     	xref	_strcat
- 836                     	xref	_delay_ms
- 837                     	switch	.const
- 838  0005               L322:
- 839  0005 41542b514d54  	dc.b	"AT+QMTDISC=1",0
- 840  0012               L112:
- 841  0012 41542b514d54  	dc.b	"AT+QMTUNS=1,1,",34,0
- 842  0022               L561:
- 843  0022 222c3000      	dc.b	34,44,48,0
- 844  0026               L361:
- 845  0026 41542b514d54  	dc.b	"AT+QMTSUB=1,1,",34,0
- 846  0036               L731:
- 847  0036 256400        	dc.b	"%d",0
- 848  0039               L531:
- 849  0039 222c00        	dc.b	34,44,0
- 850  003c               L331:
- 851  003c 41542b514d54  	dc.b	"AT+QMTPUBEX=1,0,0,"
- 852  004e 302c2200      	dc.b	"0,",34,0
- 853  0052               L17:
- 854  0052 2200          	dc.b	34,0
- 855  0054               L76:
- 856  0054 41542b514d54  	dc.b	"AT+QMTCONN=1,",34,0
- 857  0063               L56:
- 858  0063 41542b514d54  	dc.b	"AT+QMTOPEN=1,",34
- 859  0071 6d7174742e6d  	dc.b	"mqtt.mevris.io",34
- 860  0080 2c3338383100  	dc.b	",3881",0
- 861  0086               L36:
- 862  0086 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 863  0091 64617461666f  	dc.b	"dataformat",34
- 864  009c 2c312c302c30  	dc.b	",1,0,0",0
- 865  00a3               L16:
- 866  00a3 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 867  00ae 656469742f74  	dc.b	"edit/timeout",34
- 868  00bb 2c312c302c31  	dc.b	",1,0,1",0
- 869  00c2               L75:
- 870  00c2 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 871  00cd 766965772f6d  	dc.b	"view/mode",34
- 872  00d7 2c312c3000    	dc.b	",1,0",0
- 873  00dc               L55:
- 874  00dc 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 875  00e7 726563762f6d  	dc.b	"recv/mode",34
- 876  00f1 2c312c302c31  	dc.b	",1,0,1",0
- 877  00f8               L35:
- 878  00f8 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 879  0103 73657373696f  	dc.b	"session",34
- 880  010b 2c312c3100    	dc.b	",1,1",0
- 881  0110               L15:
- 882  0110 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 883  011b 6b656570616c  	dc.b	"keepalive",34
- 884  0125 2c312c313230  	dc.b	",1,120",0
- 885  012c               L74:
- 886  012c 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 887  0137 73736c22      	dc.b	"ssl",34
- 888  013b 2c312c302c30  	dc.b	",1,0,0",0
- 889  0142               L54:
- 890  0142 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 891  014d 706470636964  	dc.b	"pdpcid",34
- 892  0154 2c312c3100    	dc.b	",1,1",0
- 893  0159               L34:
- 894  0159 41542b514d54  	dc.b	"AT+QMTCFG=",34
- 895  0164 76657273696f  	dc.b	"version",34
- 896  016c 2c312c3400    	dc.b	",1,4",0
- 897  0171               L14:
- 898  0171 41542b514d54  	dc.b	"AT+QMTCLOSE=1",0
- 899  017f               L73:
- 900  017f 41542b434552  	dc.b	"AT+CEREG?",0
- 901  0189               L53:
- 902  0189 41542b434752  	dc.b	"AT+CGREG?",0
- 903  0193               L33:
- 904  0193 41542b435245  	dc.b	"AT+CREG?",0
- 905                     	xref.b	c_x
- 925                     	xref	c_xymvx
- 926                     	end
+ 249                     ; 351     ms_send_cmd(MQTT_OPEN_CONNECTION, strlen((const char *)MQTT_OPEN_CONNECTION));
+ 251  00d5 4b22          	push	#34
+ 252  00d7 ae0063        	ldw	x,#L76
+ 253  00da cd0000        	call	_ms_send_cmd
+ 255  00dd 84            	pop	a
+ 256                     ; 352     delay_ms(500);	
+ 258  00de ae01f4        	ldw	x,#500
+ 259  00e1 cd0000        	call	_delay_ms
+ 261                     ; 354 	vClearBuffer(temp, 50);
+ 263  00e4 4b32          	push	#50
+ 264  00e6 96            	ldw	x,sp
+ 265  00e7 1c0002        	addw	x,#OFST-48
+ 266  00ea cd0000        	call	_vClearBuffer
+ 268  00ed 84            	pop	a
+ 269                     ; 355     strcpy(temp, "AT+QMTCONN=1,\"");//"AT+QMTCONN=1,\"gen867400032743266\""
+ 271  00ee 96            	ldw	x,sp
+ 272  00ef 1c0001        	addw	x,#OFST-49
+ 273  00f2 90ae0054      	ldw	y,#L17
+ 274  00f6               L6:
+ 275  00f6 90f6          	ld	a,(y)
+ 276  00f8 905c          	incw	y
+ 277  00fa f7            	ld	(x),a
+ 278  00fb 5c            	incw	x
+ 279  00fc 4d            	tnz	a
+ 280  00fd 26f7          	jrne	L6
+ 281                     ; 356 	strcat(temp,punClientIdentifier);
+ 283  00ff 1e33          	ldw	x,(OFST+1,sp)
+ 284  0101 89            	pushw	x
+ 285  0102 96            	ldw	x,sp
+ 286  0103 1c0003        	addw	x,#OFST-47
+ 287  0106 cd0000        	call	_strcat
+ 289  0109 85            	popw	x
+ 290                     ; 357 	strcat(temp,"\"");
+ 292  010a ae0052        	ldw	x,#L37
+ 293  010d 89            	pushw	x
+ 294  010e 96            	ldw	x,sp
+ 295  010f 1c0003        	addw	x,#OFST-47
+ 296  0112 cd0000        	call	_strcat
+ 298  0115 85            	popw	x
+ 299                     ; 358     ms_send_cmd(temp, strlen((const char *)temp));
+ 301  0116 96            	ldw	x,sp
+ 302  0117 1c0001        	addw	x,#OFST-49
+ 303  011a cd0000        	call	_strlen
+ 305  011d 9f            	ld	a,xl
+ 306  011e 88            	push	a
+ 307  011f 96            	ldw	x,sp
+ 308  0120 1c0002        	addw	x,#OFST-48
+ 309  0123 cd0000        	call	_ms_send_cmd
+ 311  0126 84            	pop	a
+ 312                     ; 359     delay_ms(200);	
+ 314  0127 ae00c8        	ldw	x,#200
+ 315  012a cd0000        	call	_delay_ms
+ 317                     ; 360 }
+ 320  012d 5b34          	addw	sp,#52
+ 321  012f 81            	ret
+ 324                     .const:	section	.text
+ 325  0000               L57_temp1:
+ 326  0000 00            	dc.b	0
+ 327  0001 00000000      	ds.b	4
+ 406                     ; 430 void vMQTT_Publish ( uint8_t *punTopic, uint8_t *punMessage )
+ 406                     ; 431 {
+ 407                     	switch	.text
+ 408  0130               _vMQTT_Publish:
+ 410  0130 89            	pushw	x
+ 411  0131 526a          	subw	sp,#106
+ 412       0000006a      OFST:	set	106
+ 415                     ; 433 	uint8_t unLength = 0;
+ 417                     ; 434 	uint8_t temp1[5] = "";
+ 419  0133 96            	ldw	x,sp
+ 420  0134 1c0002        	addw	x,#OFST-104
+ 421  0137 90ae0000      	ldw	y,#L57_temp1
+ 422  013b a605          	ld	a,#5
+ 423  013d cd0000        	call	c_xymvx
+ 425                     ; 435 	vClearBuffer(temp, 100);
+ 427  0140 4b64          	push	#100
+ 428  0142 96            	ldw	x,sp
+ 429  0143 1c0008        	addw	x,#OFST-98
+ 430  0146 cd0000        	call	_vClearBuffer
+ 432  0149 84            	pop	a
+ 433                     ; 436     strcpy(temp, "AT+QMTPUBEX=1,0,0,0,\"");	//AT+QMTPUBEX=1,0,0,0,"sc2/867400032743266/event",14
+ 435  014a 96            	ldw	x,sp
+ 436  014b 1c0007        	addw	x,#OFST-99
+ 437  014e 90ae003c      	ldw	y,#L531
+ 438  0152               L21:
+ 439  0152 90f6          	ld	a,(y)
+ 440  0154 905c          	incw	y
+ 441  0156 f7            	ld	(x),a
+ 442  0157 5c            	incw	x
+ 443  0158 4d            	tnz	a
+ 444  0159 26f7          	jrne	L21
+ 445                     ; 437 	strcat(temp,punTopic);
+ 447  015b 1e6b          	ldw	x,(OFST+1,sp)
+ 448  015d 89            	pushw	x
+ 449  015e 96            	ldw	x,sp
+ 450  015f 1c0009        	addw	x,#OFST-97
+ 451  0162 cd0000        	call	_strcat
+ 453  0165 85            	popw	x
+ 454                     ; 438 	strcat(temp,"\",");
+ 456  0166 ae0039        	ldw	x,#L731
+ 457  0169 89            	pushw	x
+ 458  016a 96            	ldw	x,sp
+ 459  016b 1c0009        	addw	x,#OFST-97
+ 460  016e cd0000        	call	_strcat
+ 462  0171 85            	popw	x
+ 463                     ; 439 	unLength = strlen((const char *)punMessage);
+ 465  0172 1e6f          	ldw	x,(OFST+5,sp)
+ 466  0174 cd0000        	call	_strlen
+ 468  0177 01            	rrwa	x,a
+ 469  0178 6b01          	ld	(OFST-105,sp),a
+ 470  017a 02            	rlwa	x,a
+ 472                     ; 440 	vClearBuffer(temp1,5);
+ 474  017b 4b05          	push	#5
+ 475  017d 96            	ldw	x,sp
+ 476  017e 1c0003        	addw	x,#OFST-103
+ 477  0181 cd0000        	call	_vClearBuffer
+ 479  0184 84            	pop	a
+ 480                     ; 441     sprintf(temp1, "%d", (uint16_t)unLength);
+ 482  0185 7b01          	ld	a,(OFST-105,sp)
+ 483  0187 5f            	clrw	x
+ 484  0188 97            	ld	xl,a
+ 485  0189 89            	pushw	x
+ 486  018a ae0036        	ldw	x,#L141
+ 487  018d 89            	pushw	x
+ 488  018e 96            	ldw	x,sp
+ 489  018f 1c0006        	addw	x,#OFST-100
+ 490  0192 cd0000        	call	_sprintf
+ 492  0195 5b04          	addw	sp,#4
+ 493                     ; 442     strcat(temp,temp1);
+ 495  0197 96            	ldw	x,sp
+ 496  0198 1c0002        	addw	x,#OFST-104
+ 497  019b 89            	pushw	x
+ 498  019c 96            	ldw	x,sp
+ 499  019d 1c0009        	addw	x,#OFST-97
+ 500  01a0 cd0000        	call	_strcat
+ 502  01a3 85            	popw	x
+ 503                     ; 443     ms_send_cmd(temp, strlen((const char *)temp));
+ 505  01a4 96            	ldw	x,sp
+ 506  01a5 1c0007        	addw	x,#OFST-99
+ 507  01a8 cd0000        	call	_strlen
+ 509  01ab 9f            	ld	a,xl
+ 510  01ac 88            	push	a
+ 511  01ad 96            	ldw	x,sp
+ 512  01ae 1c0008        	addw	x,#OFST-98
+ 513  01b1 cd0000        	call	_ms_send_cmd
+ 515  01b4 84            	pop	a
+ 516                     ; 444 	delay_ms(10);
+ 518  01b5 ae000a        	ldw	x,#10
+ 519  01b8 cd0000        	call	_delay_ms
+ 521                     ; 445 	ms_send_cmd(punMessage, unLength);
+ 523  01bb 7b01          	ld	a,(OFST-105,sp)
+ 524  01bd 88            	push	a
+ 525  01be 1e70          	ldw	x,(OFST+6,sp)
+ 526  01c0 cd0000        	call	_ms_send_cmd
+ 528  01c3 84            	pop	a
+ 529                     ; 446     delay_ms(200);	
+ 531  01c4 ae00c8        	ldw	x,#200
+ 532  01c7 cd0000        	call	_delay_ms
+ 534                     ; 447 }
+ 537  01ca 5b6c          	addw	sp,#108
+ 538  01cc 81            	ret
+ 589                     ; 508 void vMQTT_Subscribe ( uint8_t *punTopic )
+ 589                     ; 509 {
+ 590                     	switch	.text
+ 591  01cd               _vMQTT_Subscribe:
+ 593  01cd 89            	pushw	x
+ 594  01ce 5232          	subw	sp,#50
+ 595       00000032      OFST:	set	50
+ 598                     ; 511 	vClearBuffer(temp, 50);
+ 600  01d0 4b32          	push	#50
+ 601  01d2 96            	ldw	x,sp
+ 602  01d3 1c0002        	addw	x,#OFST-48
+ 603  01d6 cd0000        	call	_vClearBuffer
+ 605  01d9 84            	pop	a
+ 606                     ; 512     strcpy(temp, "AT+QMTSUB=1,1,\"");	//AT+QMTSUB=1,1,"sc2/867400032743266/command",0
+ 608  01da 96            	ldw	x,sp
+ 609  01db 1c0001        	addw	x,#OFST-49
+ 610  01de 90ae0026      	ldw	y,#L561
+ 611  01e2               L61:
+ 612  01e2 90f6          	ld	a,(y)
+ 613  01e4 905c          	incw	y
+ 614  01e6 f7            	ld	(x),a
+ 615  01e7 5c            	incw	x
+ 616  01e8 4d            	tnz	a
+ 617  01e9 26f7          	jrne	L61
+ 618                     ; 513 	strcat(temp,punTopic);
+ 620  01eb 1e33          	ldw	x,(OFST+1,sp)
+ 621  01ed 89            	pushw	x
+ 622  01ee 96            	ldw	x,sp
+ 623  01ef 1c0003        	addw	x,#OFST-47
+ 624  01f2 cd0000        	call	_strcat
+ 626  01f5 85            	popw	x
+ 627                     ; 514 	strcat(temp,"\",0");
+ 629  01f6 ae0022        	ldw	x,#L761
+ 630  01f9 89            	pushw	x
+ 631  01fa 96            	ldw	x,sp
+ 632  01fb 1c0003        	addw	x,#OFST-47
+ 633  01fe cd0000        	call	_strcat
+ 635  0201 85            	popw	x
+ 636                     ; 515     ms_send_cmd(temp, strlen((const char *)temp));
+ 638  0202 96            	ldw	x,sp
+ 639  0203 1c0001        	addw	x,#OFST-49
+ 640  0206 cd0000        	call	_strlen
+ 642  0209 9f            	ld	a,xl
+ 643  020a 88            	push	a
+ 644  020b 96            	ldw	x,sp
+ 645  020c 1c0002        	addw	x,#OFST-48
+ 646  020f cd0000        	call	_ms_send_cmd
+ 648  0212 84            	pop	a
+ 649                     ; 516     delay_ms(200);	
+ 651  0213 ae00c8        	ldw	x,#200
+ 652  0216 cd0000        	call	_delay_ms
+ 654                     ; 517 }
+ 657  0219 5b34          	addw	sp,#52
+ 658  021b 81            	ret
+ 709                     ; 573 void vMQTT_UnSubscribe ( uint8_t *punTopic)
+ 709                     ; 574 {
+ 710                     	switch	.text
+ 711  021c               _vMQTT_UnSubscribe:
+ 713  021c 89            	pushw	x
+ 714  021d 5232          	subw	sp,#50
+ 715       00000032      OFST:	set	50
+ 718                     ; 576 	vClearBuffer(temp, 50);
+ 720  021f 4b32          	push	#50
+ 721  0221 96            	ldw	x,sp
+ 722  0222 1c0002        	addw	x,#OFST-48
+ 723  0225 cd0000        	call	_vClearBuffer
+ 725  0228 84            	pop	a
+ 726                     ; 577     strcpy(temp, "AT+QMTUNS=1,1,\"");	//AT+QMTUNS=1,1,"sc2/867400032743266/command"
+ 728  0229 96            	ldw	x,sp
+ 729  022a 1c0001        	addw	x,#OFST-49
+ 730  022d 90ae0012      	ldw	y,#L312
+ 731  0231               L22:
+ 732  0231 90f6          	ld	a,(y)
+ 733  0233 905c          	incw	y
+ 734  0235 f7            	ld	(x),a
+ 735  0236 5c            	incw	x
+ 736  0237 4d            	tnz	a
+ 737  0238 26f7          	jrne	L22
+ 738                     ; 578 	strcat(temp,punTopic);
+ 740  023a 1e33          	ldw	x,(OFST+1,sp)
+ 741  023c 89            	pushw	x
+ 742  023d 96            	ldw	x,sp
+ 743  023e 1c0003        	addw	x,#OFST-47
+ 744  0241 cd0000        	call	_strcat
+ 746  0244 85            	popw	x
+ 747                     ; 579 	strcat(temp,"\"");
+ 749  0245 ae0052        	ldw	x,#L37
+ 750  0248 89            	pushw	x
+ 751  0249 96            	ldw	x,sp
+ 752  024a 1c0003        	addw	x,#OFST-47
+ 753  024d cd0000        	call	_strcat
+ 755  0250 85            	popw	x
+ 756                     ; 580     ms_send_cmd(temp, strlen((const char *)temp));
+ 758  0251 96            	ldw	x,sp
+ 759  0252 1c0001        	addw	x,#OFST-49
+ 760  0255 cd0000        	call	_strlen
+ 762  0258 9f            	ld	a,xl
+ 763  0259 88            	push	a
+ 764  025a 96            	ldw	x,sp
+ 765  025b 1c0002        	addw	x,#OFST-48
+ 766  025e cd0000        	call	_ms_send_cmd
+ 768  0261 84            	pop	a
+ 769                     ; 581     delay_ms(200);
+ 771  0262 ae00c8        	ldw	x,#200
+ 772  0265 cd0000        	call	_delay_ms
+ 774                     ; 582 }
+ 777  0268 5b34          	addw	sp,#52
+ 778  026a 81            	ret
+ 804                     ; 620 void vMQTT_Disconnect ( void )
+ 804                     ; 621 {
+ 805                     	switch	.text
+ 806  026b               _vMQTT_Disconnect:
+ 810                     ; 622     ms_send_cmd(MQTT_DISCONNECT_BROKER, strlen((const char *)MQTT_DISCONNECT_BROKER));
+ 812  026b 4b0c          	push	#12
+ 813  026d ae0005        	ldw	x,#L522
+ 814  0270 cd0000        	call	_ms_send_cmd
+ 816  0273 84            	pop	a
+ 817                     ; 623     delay_ms(200);
+ 819  0274 ae00c8        	ldw	x,#200
+ 820  0277 cd0000        	call	_delay_ms
+ 822                     ; 624 }
+ 825  027a 81            	ret
+ 838                     	xdef	_vMQTT_Disconnect
+ 839                     	xdef	_vMQTT_UnSubscribe
+ 840                     	xdef	_vMQTT_Subscribe
+ 841                     	xdef	_vMQTT_Publish
+ 842                     	xdef	_vMQTT_Connect
+ 843                     	xref	_ms_send_cmd
+ 844                     	xref	_vClearBuffer
+ 845                     	xref	_sprintf
+ 846                     	xref	_strlen
+ 847                     	xref	_strcat
+ 848                     	xref	_delay_ms
+ 849                     	switch	.const
+ 850  0005               L522:
+ 851  0005 41542b514d54  	dc.b	"AT+QMTDISC=1",0
+ 852  0012               L312:
+ 853  0012 41542b514d54  	dc.b	"AT+QMTUNS=1,1,",34,0
+ 854  0022               L761:
+ 855  0022 222c3000      	dc.b	34,44,48,0
+ 856  0026               L561:
+ 857  0026 41542b514d54  	dc.b	"AT+QMTSUB=1,1,",34,0
+ 858  0036               L141:
+ 859  0036 256400        	dc.b	"%d",0
+ 860  0039               L731:
+ 861  0039 222c00        	dc.b	34,44,0
+ 862  003c               L531:
+ 863  003c 41542b514d54  	dc.b	"AT+QMTPUBEX=1,0,0,"
+ 864  004e 302c2200      	dc.b	"0,",34,0
+ 865  0052               L37:
+ 866  0052 2200          	dc.b	34,0
+ 867  0054               L17:
+ 868  0054 41542b514d54  	dc.b	"AT+QMTCONN=1,",34,0
+ 869  0063               L76:
+ 870  0063 41542b514d54  	dc.b	"AT+QMTOPEN=1,",34
+ 871  0071 6d7174742e6d  	dc.b	"mqtt.mevris.io",34
+ 872  0080 2c3338383100  	dc.b	",3881",0
+ 873  0086               L56:
+ 874  0086 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 875  0091 64617461666f  	dc.b	"dataformat",34
+ 876  009c 2c312c302c30  	dc.b	",1,0,0",0
+ 877  00a3               L36:
+ 878  00a3 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 879  00ae 656469742f74  	dc.b	"edit/timeout",34
+ 880  00bb 2c312c302c31  	dc.b	",1,0,1",0
+ 881  00c2               L16:
+ 882  00c2 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 883  00cd 766965772f6d  	dc.b	"view/mode",34
+ 884  00d7 2c312c3000    	dc.b	",1,0",0
+ 885  00dc               L75:
+ 886  00dc 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 887  00e7 726563762f6d  	dc.b	"recv/mode",34
+ 888  00f1 2c312c302c31  	dc.b	",1,0,1",0
+ 889  00f8               L55:
+ 890  00f8 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 891  0103 73657373696f  	dc.b	"session",34
+ 892  010b 2c312c3100    	dc.b	",1,1",0
+ 893  0110               L35:
+ 894  0110 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 895  011b 6b656570616c  	dc.b	"keepalive",34
+ 896  0125 2c312c313230  	dc.b	",1,120",0
+ 897  012c               L15:
+ 898  012c 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 899  0137 73736c22      	dc.b	"ssl",34
+ 900  013b 2c312c302c30  	dc.b	",1,0,0",0
+ 901  0142               L74:
+ 902  0142 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 903  014d 706470636964  	dc.b	"pdpcid",34
+ 904  0154 2c312c3100    	dc.b	",1,1",0
+ 905  0159               L54:
+ 906  0159 41542b514d54  	dc.b	"AT+QMTCFG=",34
+ 907  0164 76657273696f  	dc.b	"version",34
+ 908  016c 2c312c3400    	dc.b	",1,4",0
+ 909  0171               L34:
+ 910  0171 41542b514d54  	dc.b	"AT+QMTCLOSE=1",0
+ 911  017f               L14:
+ 912  017f 41542b434552  	dc.b	"AT+CEREG?",0
+ 913  0189               L73:
+ 914  0189 41542b434752  	dc.b	"AT+CGREG?",0
+ 915  0193               L53:
+ 916  0193 41542b435245  	dc.b	"AT+CREG?",0
+ 917  019c               L33:
+ 918  019c 4154453000    	dc.b	"ATE0",0
+ 919                     	xref.b	c_x
+ 939                     	xref	c_xymvx
+ 940                     	end

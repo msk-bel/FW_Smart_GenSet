@@ -319,6 +319,8 @@ uint32_t ulMQTT_Connect ( uint8_t *punBuffer, uint8_t *punClientIdentifier/*,
 void vMQTT_Connect ( uint8_t *punClientIdentifier )
 {   
 	uint8_t temp[50];
+	   ms_send_cmd(NOECHO, strlen((const char *)NOECHO)); /* No echo */
+    delay_ms(200);
     ms_send_cmd(CHECK_REGISTRATION_STATUS_CS, strlen((const char *)CHECK_REGISTRATION_STATUS_CS));
     delay_ms(500);
     ms_send_cmd(CHECK_REGISTRATION_STATUS_PS, strlen((const char *)CHECK_REGISTRATION_STATUS_PS));

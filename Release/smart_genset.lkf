@@ -55,6 +55,7 @@ Release\bluetooth.o
 Release\board.o
 Release\cloudservice.o
 Release\getadc.o
+Release\gps_service.o
 Release\metering.o
 Release\mqtt_protocol.o
 Release\simcom.o

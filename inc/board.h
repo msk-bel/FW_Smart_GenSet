@@ -213,6 +213,7 @@ extern bool checkit;
 #define MODULE_SIM_DETECT_ON                    "AT+QSIMDET=1,0" 
 #define MODULE_SIM_INSERTDELETE_STATUS_OFF      "AT+QSIMSTAT=0"  
 #define check_num                               "AT+CNUM"
+#define MODULE_GET_SIM_ICCID                    "AT+QCCID"
 
 // SMS Related Commmands
 #define MSGFT                                   "AT+CMGF=1"
@@ -304,7 +305,18 @@ extern bool checkit;
 #define MQTT_CLOSE_CONNECTION                   "AT+QMTCLOSE=1"
 
 
-
+//GPS/GNSS Related Commands
+#define GNSS_SET_OUTPUT_PORT                    "AT+QGPSCFG=\"outport\",\"none\""
+#define GNSS_GET_NMEA_VIA_CMD_ON                "AT+QGPSCFG=\"nmeasrc\",1"
+#define GNSS_GET_NMEA_VIA_CMD_OFF               "AT+QGPSCFG=\"nmeasrc\",0"
+#define GNSS_SET_MODE_GPS_ONLY                  "AT+QGPSCFG=\"gnssconfig\",0"
+#define GNSS_AUTO_RUN_ON   						"AT+QGPSCFG=\"autogps\",1"
+#define GNSS_AUTO_RUN_OFF   					"AT+QGPSCFG=\"autogps\",0"
+#define GNSS_CHECK_STATE						"AT+QGPS?"
+#define GNSS_TURN_GPS_ON						"AT+QGPS=1"
+#define GNSS_TURN_AGPS_ON						"AT+QAGPS=1"
+#define GNSS_GET_LOCATION						"AT+QGPSLOC=2"
+#define GNSS_TURN_GPS_OFF						"AT+QGPSEND"
 
 // Bluetooth Related Commands
 // #define BT_GET_ON_OFF_STATUS "AT+BTPOWER?"

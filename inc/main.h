@@ -11,7 +11,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "stm8s_flash.h"
-
+#include "gps_service.h"
 
 void _ADC_Init(void);
 void storeDataToSend(uint8_t, uint32_t);
