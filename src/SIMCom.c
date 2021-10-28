@@ -1059,6 +1059,9 @@ void vPrintStickerInfo(void)
             delay_ms(200);
             ModuleResponding = FALSE;
             NotRespondingCounter++;
+						delay_ms(100);
+						SIMComrestart(); //Restart the SIMCOMM 868 module
+						delay_ms(3000);
             // IMEIRecievedOKFlag = FALSE;
         }
         delay_ms(200);
